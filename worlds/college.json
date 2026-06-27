@@ -1,0 +1,503 @@
+{
+  "environment": {
+    "name": "College Campus",
+    "type": "Mixed (Indoor + Outdoor)",
+    "category": "Educational Institution",
+    "description": "A comprehensive university campus consisting of academic buildings, laboratories, libraries, administrative offices, student facilities, hostels, recreational areas, sports complexes, cafeterias, parking, medical facilities and green spaces. The campus represents a modern real-world engineering or university campus.",
+    "purpose": [
+      "Education",
+      "Research",
+      "Administration",
+      "Student Accommodation",
+      "Sports",
+      "Events",
+      "Healthcare",
+      "Dining",
+      "Transportation"
+    ],
+    "occupancy": {
+      "typical_people": 3000,
+      "maximum_people": 8000
+    }
+  },
+
+  "zones": [
+    {
+      "name": "Academic Zone"
+    },
+    {
+      "name": "Research Zone"
+    },
+    {
+      "name": "Administrative Zone"
+    },
+    {
+      "name": "Student Residential Zone"
+    },
+    {
+      "name": "Library Zone"
+    },
+    {
+      "name": "Dining Zone"
+    },
+    {
+      "name": "Sports Zone"
+    },
+    {
+      "name": "Medical Zone"
+    },
+    {
+      "name": "Parking Zone"
+    },
+    {
+      "name": "Green Campus Zone"
+    }
+  ],
+
+  "rooms": [
+    {
+      "id": "main_gate",
+      "name": "Main Entrance"
+    },
+    {
+      "id": "security_office",
+      "name": "Security Office"
+    },
+    {
+      "id": "administration_block",
+      "name": "Administration Block"
+    },
+    {
+      "id": "admission_office",
+      "name": "Admission Office"
+    },
+    {
+      "id": "principal_office",
+      "name": "Principal Office"
+    },
+    {
+      "id": "faculty_offices",
+      "name": "Faculty Offices"
+    },
+    {
+      "id": "lecture_halls",
+      "name": "Lecture Halls"
+    },
+    {
+      "id": "smart_classrooms",
+      "name": "Smart Classrooms"
+    },
+    {
+      "id": "seminar_hall",
+      "name": "Seminar Hall"
+    },
+    {
+      "id": "auditorium",
+      "name": "Auditorium"
+    },
+    {
+      "id": "computer_lab",
+      "name": "Computer Laboratory"
+    },
+    {
+      "id": "robotics_lab",
+      "name": "Robotics Laboratory"
+    },
+    {
+      "id": "electronics_lab",
+      "name": "Electronics Laboratory"
+    },
+    {
+      "id": "mechanical_lab",
+      "name": "Mechanical Laboratory"
+    },
+    {
+      "id": "chemistry_lab",
+      "name": "Chemistry Laboratory"
+    },
+    {
+      "id": "physics_lab",
+      "name": "Physics Laboratory"
+    },
+    {
+      "id": "research_lab",
+      "name": "Research Laboratory"
+    },
+    {
+      "id": "library",
+      "name": "Central Library"
+    },
+    {
+      "id": "reading_room",
+      "name": "Reading Room"
+    },
+    {
+      "id": "discussion_room",
+      "name": "Discussion Room"
+    },
+    {
+      "id": "cafeteria",
+      "name": "Cafeteria"
+    },
+    {
+      "id": "food_court",
+      "name": "Food Court"
+    },
+    {
+      "id": "stationery_shop",
+      "name": "Stationery Store"
+    },
+    {
+      "id": "book_store",
+      "name": "Book Store"
+    },
+    {
+      "id": "medical_center",
+      "name": "Medical Center"
+    },
+    {
+      "id": "hostel_boys",
+      "name": "Boys Hostel"
+    },
+    {
+      "id": "hostel_girls",
+      "name": "Girls Hostel"
+    },
+    {
+      "id": "guest_house",
+      "name": "Guest House"
+    },
+    {
+      "id": "gymnasium",
+      "name": "Gymnasium"
+    },
+    {
+      "id": "sports_complex",
+      "name": "Sports Complex"
+    },
+    {
+      "id": "playground",
+      "name": "Playground"
+    },
+    {
+      "id": "parking",
+      "name": "Parking Area"
+    },
+    {
+      "id": "maintenance_room",
+      "name": "Maintenance Office"
+    }
+  ],
+
+  "static_structures": [
+    "Campus Roads",
+    "Footpaths",
+    "Boundary Wall",
+    "Main Gate",
+    "Security Checkpoint",
+    "Street Lights",
+    "Sign Boards",
+    "Directional Maps",
+    "Benches",
+    "Gardens",
+    "Trees",
+    "Open Lawns",
+    "Water Fountains",
+    "Bus Stop",
+    "Cycle Stand",
+    "Parking Lots",
+    "CCTV Cameras",
+    "Fire Safety Systems",
+    "Emergency Assembly Point"
+  ],
+
+  "academic_facilities": {
+    "classrooms": [
+      "Student Desks",
+      "Teacher Desk",
+      "Whiteboard",
+      "Smart Board",
+      "Projector",
+      "Projector Screen",
+      "Computer",
+      "Podium",
+      "Audio System",
+      "Air Conditioner",
+      "Ceiling Fans"
+    ],
+
+    "laboratories": [
+      "Computers",
+      "Robots",
+      "Sensors",
+      "Embedded Boards",
+      "Oscilloscopes",
+      "Power Supplies",
+      "3D Printers",
+      "CNC Machines",
+      "Soldering Stations",
+      "Microscopes",
+      "Chemical Storage Cabinets",
+      "Safety Equipment"
+    ],
+
+    "library": [
+      "Bookshelves",
+      "Reference Books",
+      "Journals",
+      "Computers",
+      "Printers",
+      "Study Tables",
+      "Reading Chairs",
+      "Digital Catalog System"
+    ]
+  },
+
+  "administration": {
+    "equipment": [
+      "Desktop Computers",
+      "Printers",
+      "Photocopier",
+      "Servers",
+      "Telephones",
+      "Document Cabinets",
+      "Meeting Tables",
+      "Reception Desk"
+    ]
+  },
+
+  "hostel": {
+    "rooms": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "Study Table",
+      "Chair",
+      "Bookshelf",
+      "Fan",
+      "Air Conditioner",
+      "Charging Ports"
+    ],
+
+    "common_facilities": [
+      "Laundry Room",
+      "Common Room",
+      "Television",
+      "Indoor Games",
+      "Water Purifier"
+    ]
+  },
+
+  "cafeteria": {
+    "equipment": [
+      "Dining Tables",
+      "Dining Chairs",
+      "Serving Counter",
+      "Kitchen",
+      "Refrigerator",
+      "Microwave",
+      "Coffee Machine",
+      "Water Dispenser",
+      "Cash Counter"
+    ]
+  },
+
+  "medical_center": {
+    "equipment": [
+      "Examination Bed",
+      "Wheelchair",
+      "First Aid Kit",
+      "Medical Cabinet",
+      "Stretcher",
+      "Oxygen Cylinder",
+      "AED"
+    ]
+  },
+
+  "sports_facilities": {
+    "outdoor": [
+      "Football Ground",
+      "Cricket Ground",
+      "Basketball Court",
+      "Volleyball Court",
+      "Tennis Court",
+      "Athletics Track"
+    ],
+
+    "indoor": [
+      "Badminton Court",
+      "Table Tennis Hall",
+      "Chess Room",
+      "Carrom Room",
+      "Gymnasium"
+    ],
+
+    "equipment": [
+      "Football",
+      "Cricket Kit",
+      "Basketballs",
+      "Volleyballs",
+      "Badminton Rackets",
+      "Shuttlecocks",
+      "Tennis Rackets",
+      "Table Tennis Equipment",
+      "Gym Equipment"
+    ]
+  },
+
+  "utilities": [
+    "Electricity",
+    "Running Water",
+    "Campus WiFi",
+    "Internet Backbone",
+    "Backup Generator",
+    "Solar Panels",
+    "Lighting",
+    "HVAC",
+    "Public Address System",
+    "CCTV Network",
+    "Fire Alarm System"
+  ],
+
+  "safety_equipment": [
+    "Fire Extinguishers",
+    "Smoke Detectors",
+    "Emergency Exit Signs",
+    "Emergency Lights",
+    "First Aid Kits",
+    "AED",
+    "CCTV Cameras",
+    "Security Alarm",
+    "Emergency Phones"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Classroom",
+      "actions": [
+        "Enter",
+        "Exit",
+        "ConductLecture",
+        "Reserve"
+      ]
+    },
+    {
+      "object": "Laboratory",
+      "actions": [
+        "Enter",
+        "Exit",
+        "ConductExperiment",
+        "Reserve"
+      ]
+    },
+    {
+      "object": "Library",
+      "actions": [
+        "BorrowBook",
+        "ReturnBook",
+        "Read",
+        "ReserveBook"
+      ]
+    },
+    {
+      "object": "Hostel Room",
+      "actions": [
+        "Open",
+        "Close",
+        "Lock",
+        "Unlock"
+      ]
+    },
+    {
+      "object": "Cafeteria",
+      "actions": [
+        "OrderFood",
+        "ServeFood",
+        "CleanTable"
+      ]
+    },
+    {
+      "object": "Sports Equipment Room",
+      "actions": [
+        "Open",
+        "Store",
+        "Retrieve",
+        "Close"
+      ]
+    },
+    {
+      "object": "Medical Center",
+      "actions": [
+        "RegisterPatient",
+        "TreatPatient"
+      ]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Lecture Hall",
+      "relation": "LocatedIn",
+      "object": "Academic Zone"
+    },
+    {
+      "subject": "Robotics Laboratory",
+      "relation": "LocatedIn",
+      "object": "Research Zone"
+    },
+    {
+      "subject": "Faculty Offices",
+      "relation": "AdjacentTo",
+      "object": "Lecture Halls"
+    },
+    {
+      "subject": "Library",
+      "relation": "Near",
+      "object": "Academic Block"
+    },
+    {
+      "subject": "Hostels",
+      "relation": "AdjacentTo",
+      "object": "Cafeteria"
+    },
+    {
+      "subject": "Sports Complex",
+      "relation": "Near",
+      "object": "Playground"
+    },
+    {
+      "subject": "Medical Center",
+      "relation": "Supports",
+      "object": "Entire Campus"
+    },
+    {
+      "subject": "Administration Block",
+      "relation": "ConnectedTo",
+      "object": "Main Entrance"
+    },
+    {
+      "subject": "Book Store",
+      "relation": "Near",
+      "object": "Library"
+    },
+    {
+      "subject": "Parking",
+      "relation": "AdjacentTo",
+      "object": "Main Gate"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Main Entrance",
+    "Administration Block",
+    "Academic Block",
+    "Library Entrance",
+    "Robotics Laboratory",
+    "Computer Laboratory",
+    "Cafeteria",
+    "Hostel Entrance",
+    "Sports Complex",
+    "Medical Center",
+    "Parking Area"
+  ]
+}

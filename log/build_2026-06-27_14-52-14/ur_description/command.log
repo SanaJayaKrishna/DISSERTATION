@@ -1,0 +1,1 @@
+Invoking command in '/home/sjk/DISSERTATION/build/ur_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/manipulators/Universal_Robots_ROS2_Description -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/ur_description

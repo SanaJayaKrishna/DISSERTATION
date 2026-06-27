@@ -1,0 +1,39 @@
+[0.668s] Invoking command in '/home/sjk/DISSERTATION/build/husky_dual_ur_moveit_config': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/hexapods/husky_manipulation/husky_dual_ur_moveit_config -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/husky_dual_ur_moveit_config
+[2.109s] -- The C compiler identification is GNU 13.3.0
+[2.109s] -- The CXX compiler identification is GNU 13.3.0
+[2.109s] -- Detecting C compiler ABI info
+[2.110s] -- Detecting C compiler ABI info - done
+[2.110s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.110s] -- Detecting C compile features
+[2.110s] -- Detecting C compile features - done
+[2.110s] -- Detecting CXX compiler ABI info
+[2.112s] [0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[2.113s]   Compatibility with CMake < 3.5 will be removed from a future version of
+[2.114s]   CMake.
+[2.115s] 
+[2.115s]   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+[2.115s]   CMake that the project does not need compatibility with older versions.
+[2.115s] 
+[2.115s] [0m
+[2.122s] -- Detecting CXX compiler ABI info - done
+[2.163s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.164s] -- Detecting CXX compile features
+[2.166s] -- Detecting CXX compile features - done
+[2.196s] [31mCMake Error at CMakeLists.txt:4 (find_package):
+[2.197s]   By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
+[2.197s]   asked CMake to find a package configuration file provided by "catkin", but
+[2.198s]   CMake did not find one.
+[2.198s] 
+[2.198s]   Could not find a package configuration file provided by "catkin" with any
+[2.199s]   of the following names:
+[2.199s] 
+[2.199s]     catkinConfig.cmake
+[2.200s]     catkin-config.cmake
+[2.200s] 
+[2.201s]   Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
+[2.201s]   "catkin_DIR" to a directory containing one of the above files.  If "catkin"
+[2.201s]   provides a separate development package or SDK, be sure it has been
+[2.202s]   installed.
+[2.202s] 
+[2.203s] -- Configuring incomplete, errors occurred!
+[2.203s] [0m

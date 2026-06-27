@@ -1,0 +1,1 @@
+Invoking command in '/home/sjk/DISSERTATION/build/tiago_controller_configuration': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/mobile_manipulators/tiago_robot/tiago_controller_configuration -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/tiago_controller_configuration

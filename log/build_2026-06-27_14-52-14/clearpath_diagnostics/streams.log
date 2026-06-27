@@ -1,0 +1,33 @@
+[0.617s] Invoking command in '/home/sjk/DISSERTATION/build/clearpath_diagnostics': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/ROS2_WS/src/mobile/clearpath_common/clearpath_diagnostics -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/clearpath_diagnostics
+[0.763s] -- The C compiler identification is GNU 13.3.0
+[1.054s] -- The CXX compiler identification is GNU 13.3.0
+[1.115s] -- Detecting C compiler ABI info
+[1.441s] -- Detecting C compiler ABI info - done
+[1.504s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.504s] -- Detecting C compile features
+[1.509s] -- Detecting C compile features - done
+[1.578s] -- Detecting CXX compiler ABI info
+[2.067s] -- Detecting CXX compiler ABI info - done
+[2.097s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.098s] -- Detecting CXX compile features
+[2.099s] -- Detecting CXX compile features - done
+[2.106s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[2.515s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.843s] [31mCMake Error at CMakeLists.txt:10 (find_package):
+[2.843s]   By not providing "Findclearpath_platform_msgs.cmake" in CMAKE_MODULE_PATH
+[2.843s]   this project has asked CMake to find a package configuration file provided
+[2.844s]   by "clearpath_platform_msgs", but CMake did not find one.
+[2.844s] 
+[2.844s]   Could not find a package configuration file provided by
+[2.844s]   "clearpath_platform_msgs" with any of the following names:
+[2.844s] 
+[2.845s]     clearpath_platform_msgsConfig.cmake
+[2.845s]     clearpath_platform_msgs-config.cmake
+[2.845s] 
+[2.845s]   Add the installation prefix of "clearpath_platform_msgs" to
+[2.845s]   CMAKE_PREFIX_PATH or set "clearpath_platform_msgs_DIR" to a directory
+[2.846s]   containing one of the above files.  If "clearpath_platform_msgs" provides a
+[2.846s]   separate development package or SDK, be sure it has been installed.
+[2.846s] 
+[2.846s] [0m
+[2.846s] -- Configuring incomplete, errors occurred!

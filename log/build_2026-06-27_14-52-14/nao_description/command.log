@@ -1,0 +1,1 @@
+Invoking command in '/home/sjk/DISSERTATION/build/nao_description': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/humanoids/nao_robot/nao_description -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/nao_description

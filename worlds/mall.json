@@ -1,0 +1,439 @@
+{
+  "environment": {
+    "name": "Shopping Mall",
+    "type": "Indoor",
+    "category": "Commercial",
+    "description": "A modern large shopping mall containing retail stores, supermarkets, luxury brand outlets, food courts, multiplex cinema, gaming zone, children's play area, entertainment facilities, banking services, wellness centers and public amenities.",
+    "purpose": [
+      "Retail Shopping",
+      "Dining",
+      "Entertainment",
+      "Recreation",
+      "Banking",
+      "Customer Service",
+      "Events"
+    ],
+    "occupancy": {
+      "typical_people": 3000,
+      "maximum_people": 10000
+    }
+  },
+
+  "zones": [
+    { "name": "Retail Shopping Zone" },
+    { "name": "Luxury Brand Zone" },
+    { "name": "Food Court Zone" },
+    { "name": "Supermarket Zone" },
+    { "name": "Entertainment Zone" },
+    { "name": "Kids Play Zone" },
+    { "name": "Cinema Zone" },
+    { "name": "Gaming Zone" },
+    { "name": "Relaxation Zone" },
+    { "name": "Banking & Services Zone" },
+    { "name": "Administration Zone" },
+    { "name": "Maintenance Zone" },
+    { "name": "Parking Zone" }
+  ],
+
+  "rooms": [
+    { "id": "main_entrance", "name": "Main Entrance" },
+    { "id": "security", "name": "Security Checkpoint" },
+    { "id": "information_desk", "name": "Information Desk" },
+    { "id": "customer_service", "name": "Customer Service Center" },
+    { "id": "fashion_store", "name": "Fashion Store" },
+    { "id": "luxury_store", "name": "Luxury Brand Store" },
+    { "id": "electronics_store", "name": "Electronics Store" },
+    { "id": "mobile_store", "name": "Mobile Store" },
+    { "id": "computer_store", "name": "Computer Store" },
+    { "id": "book_store", "name": "Book Store" },
+    { "id": "sports_store", "name": "Sports Store" },
+    { "id": "toy_store", "name": "Toy Store" },
+    { "id": "gift_store", "name": "Gift Store" },
+    { "id": "jewellery_store", "name": "Jewellery Store" },
+    { "id": "cosmetics_store", "name": "Cosmetics Store" },
+    { "id": "supermarket", "name": "Supermarket" },
+    { "id": "food_court", "name": "Food Court" },
+    { "id": "restaurant", "name": "Restaurant" },
+    { "id": "coffee_shop", "name": "Coffee Shop" },
+    { "id": "bakery", "name": "Bakery" },
+    { "id": "icecream_shop", "name": "Ice Cream Shop" },
+    { "id": "multiplex", "name": "Multiplex Cinema" },
+    { "id": "gaming_zone", "name": "Gaming Zone" },
+    { "id": "vr_zone", "name": "Virtual Reality Zone" },
+    { "id": "kids_play_area", "name": "Kids Play Area" },
+    { "id": "arcade", "name": "Arcade" },
+    { "id": "spa", "name": "Spa & Wellness Center" },
+    { "id": "salon", "name": "Beauty Salon" },
+    { "id": "gym", "name": "Fitness Center" },
+    { "id": "bank", "name": "Bank" },
+    { "id": "atm", "name": "ATM Area" },
+    { "id": "medical_store", "name": "Medical Store" },
+    { "id": "first_aid", "name": "First Aid Room" },
+    { "id": "restrooms", "name": "Public Restrooms" },
+    { "id": "baby_care", "name": "Baby Care Room" },
+    { "id": "prayer_room", "name": "Prayer Room" },
+    { "id": "administration", "name": "Administration Office" },
+    { "id": "maintenance", "name": "Maintenance Room" },
+    { "id": "warehouse", "name": "Mall Warehouse" },
+    { "id": "loading_dock", "name": "Loading Dock" },
+    { "id": "parking", "name": "Parking Area" }
+  ],
+
+  "static_structures": [
+    "Escalators",
+    "Elevators",
+    "Moving Walkways",
+    "Emergency Exits",
+    "Corridors",
+    "Food Court Seating",
+    "Digital Signage",
+    "Information Boards",
+    "Customer Seating",
+    "Indoor Gardens",
+    "Decorative Fountains",
+    "Charging Stations",
+    "Fire Exit",
+    "Fire Alarm System",
+    "Emergency Lighting",
+    "Public Address System",
+    "CCTV Cameras",
+    "Security Gates"
+  ],
+
+  "retail_stores": {
+    "fashion_store": [
+      "Men Clothing",
+      "Women Clothing",
+      "Kids Clothing",
+      "Footwear",
+      "Accessories",
+      "Changing Rooms",
+      "Billing Counter"
+    ],
+
+    "electronics_store": [
+      "Televisions",
+      "Laptops",
+      "Desktop Computers",
+      "Gaming Consoles",
+      "Monitors",
+      "Printers",
+      "Speakers",
+      "Headphones",
+      "Smart Watches",
+      "Accessories"
+    ],
+
+    "mobile_store": [
+      "Smartphones",
+      "Tablets",
+      "Chargers",
+      "Earbuds",
+      "Phone Cases",
+      "Power Banks",
+      "SIM Cards"
+    ],
+
+    "sports_store": [
+      "Sports Clothing",
+      "Shoes",
+      "Fitness Equipment",
+      "Football",
+      "Cricket Equipment",
+      "Basketballs",
+      "Badminton Rackets",
+      "Gym Accessories"
+    ],
+
+    "book_store": [
+      "Academic Books",
+      "Novels",
+      "Magazines",
+      "Stationery",
+      "Office Supplies"
+    ],
+
+    "toy_store": [
+      "Educational Toys",
+      "Board Games",
+      "Action Figures",
+      "Building Blocks",
+      "Remote Control Toys"
+    ],
+
+    "jewellery_store": [
+      "Gold Jewellery",
+      "Silver Jewellery",
+      "Diamond Jewellery",
+      "Luxury Watches"
+    ]
+  },
+
+  "supermarket": {
+    "sections": [
+      "Fruits",
+      "Vegetables",
+      "Dairy",
+      "Bakery",
+      "Frozen Foods",
+      "Snacks",
+      "Beverages",
+      "Household Items",
+      "Cleaning Supplies",
+      "Personal Care",
+      "Baby Products",
+      "Pet Supplies"
+    ]
+  },
+
+  "food_court": {
+    "restaurants": [
+      "Indian Restaurant",
+      "Chinese Restaurant",
+      "Italian Restaurant",
+      "Fast Food",
+      "Pizza Outlet",
+      "Burger Outlet",
+      "South Indian Restaurant",
+      "Dessert Shop",
+      "Coffee Shop",
+      "Juice Bar"
+    ],
+
+    "equipment": [
+      "Dining Tables",
+      "Dining Chairs",
+      "Serving Counters",
+      "Self-Service Kiosks",
+      "Water Station",
+      "Waste Bins",
+      "Tray Collection Area"
+    ]
+  },
+
+  "multiplex": {
+    "equipment": [
+      "Movie Screens",
+      "Projectors",
+      "Luxury Seating",
+      "Snack Counter",
+      "Ticket Counter",
+      "Popcorn Machine",
+      "Soft Drink Dispensers"
+    ]
+  },
+
+  "gaming_zone": {
+    "equipment": [
+      "Arcade Machines",
+      "VR Simulators",
+      "Racing Simulators",
+      "Basketball Game",
+      "Air Hockey",
+      "Bowling",
+      "Claw Machines",
+      "Dance Machines"
+    ]
+  },
+
+  "kids_play_area": {
+    "equipment": [
+      "Slides",
+      "Swings",
+      "Ball Pool",
+      "Climbing Wall",
+      "Soft Play Area",
+      "Trampoline",
+      "Mini Carousel",
+      "Obstacle Course"
+    ]
+  },
+
+  "wellness": {
+    "spa": [
+      "Massage Rooms",
+      "Steam Room",
+      "Sauna",
+      "Spa Beds",
+      "Relaxation Chairs"
+    ],
+
+    "salon": [
+      "Hair Styling Stations",
+      "Beauty Chairs",
+      "Wash Stations",
+      "Mirror",
+      "Hair Dryers"
+    ],
+
+    "gym": [
+      "Treadmills",
+      "Exercise Bikes",
+      "Ellipticals",
+      "Weight Machines",
+      "Dumbbells",
+      "Yoga Mats"
+    ]
+  },
+
+  "banking_services": [
+    "Bank",
+    "ATM",
+    "Currency Exchange",
+    "Digital Payment Kiosk"
+  ],
+
+  "utilities": [
+    "Electricity",
+    "WiFi",
+    "Air Conditioning",
+    "Running Water",
+    "Backup Generator",
+    "Fire Alarm",
+    "Public Address System",
+    "Digital Directory",
+    "Charging Stations",
+    "CCTV",
+    "Access Control"
+  ],
+
+  "safety_equipment": [
+    "Fire Extinguishers",
+    "Smoke Detectors",
+    "Emergency Exit Signs",
+    "First Aid Kits",
+    "AED",
+    "Emergency Lighting",
+    "Security Alarm",
+    "Security Cameras"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Retail Store",
+      "actions": [
+        "Open",
+        "Close",
+        "Browse",
+        "Purchase",
+        "Restock"
+      ]
+    },
+    {
+      "object": "Restaurant",
+      "actions": [
+        "OrderFood",
+        "ServeFood",
+        "CleanTable"
+      ]
+    },
+    {
+      "object": "Cinema",
+      "actions": [
+        "BookTicket",
+        "Enter",
+        "Exit"
+      ]
+    },
+    {
+      "object": "Gaming Machine",
+      "actions": [
+        "Start",
+        "Stop",
+        "Reset"
+      ]
+    },
+    {
+      "object": "ATM",
+      "actions": [
+        "WithdrawCash",
+        "DepositCash",
+        "CheckBalance"
+      ]
+    },
+    {
+      "object": "Escalator",
+      "actions": [
+        "Ride",
+        "Inspect",
+        "Maintain"
+      ]
+    },
+    {
+      "object": "Warehouse",
+      "actions": [
+        "Store",
+        "Retrieve",
+        "InventoryCheck"
+      ]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Food Court",
+      "relation": "AdjacentTo",
+      "object": "Restaurant"
+    },
+    {
+      "subject": "Cinema",
+      "relation": "Near",
+      "object": "Gaming Zone"
+    },
+    {
+      "subject": "Kids Play Area",
+      "relation": "AdjacentTo",
+      "object": "Food Court"
+    },
+    {
+      "subject": "Supermarket",
+      "relation": "Near",
+      "object": "Parking"
+    },
+    {
+      "subject": "Warehouse",
+      "relation": "Supports",
+      "object": "Retail Stores"
+    },
+    {
+      "subject": "Information Desk",
+      "relation": "LocatedAt",
+      "object": "Main Entrance"
+    },
+    {
+      "subject": "ATM",
+      "relation": "LocatedNear",
+      "object": "Bank"
+    },
+    {
+      "subject": "Medical Store",
+      "relation": "AdjacentTo",
+      "object": "First Aid Room"
+    },
+    {
+      "subject": "Spa",
+      "relation": "AdjacentTo",
+      "object": "Fitness Center"
+    },
+    {
+      "subject": "Administration Office",
+      "relation": "Manages",
+      "object": "Entire Shopping Mall"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Main Entrance",
+    "Information Desk",
+    "Central Atrium",
+    "Food Court",
+    "Supermarket",
+    "Electronics Store",
+    "Cinema Entrance",
+    "Gaming Zone",
+    "Kids Play Area",
+    "Parking Area",
+    "Warehouse",
+    "Administration Office"
+  ]
+}

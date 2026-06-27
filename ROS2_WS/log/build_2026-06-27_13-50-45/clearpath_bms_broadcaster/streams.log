@@ -1,0 +1,32 @@
+[0.279s] Invoking command in '/home/sjk/DISSERTATION/ROS2_WS/build/clearpath_bms_broadcaster': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/ROS2_WS/src/mobile/clearpath_common/clearpath_ros2_control/clearpath_bms_broadcaster -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/ROS2_WS/install/clearpath_bms_broadcaster
+[0.346s] -- The C compiler identification is GNU 13.3.0
+[0.435s] -- The CXX compiler identification is GNU 13.3.0
+[0.459s] -- Detecting C compiler ABI info
+[0.599s] -- Detecting C compiler ABI info - done
+[0.620s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.621s] -- Detecting C compile features
+[0.622s] -- Detecting C compile features - done
+[0.640s] -- Detecting CXX compiler ABI info
+[0.807s] -- Detecting CXX compiler ABI info - done
+[0.834s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.834s] -- Detecting CXX compile features
+[0.834s] -- Detecting CXX compile features - done
+[0.856s] [31mCMake Error at CMakeLists.txt:4 (find_package):
+[0.856s]   By not providing "Findros2_control_cmake.cmake" in CMAKE_MODULE_PATH this
+[0.856s]   project has asked CMake to find a package configuration file provided by
+[0.856s]   "ros2_control_cmake", but CMake did not find one.
+[0.856s] 
+[0.856s]   Could not find a package configuration file provided by
+[0.856s]   "ros2_control_cmake" with any of the following names:
+[0.857s] 
+[0.857s]     ros2_control_cmakeConfig.cmake
+[0.857s]     ros2_control_cmake-config.cmake
+[0.857s] 
+[0.857s]   Add the installation prefix of "ros2_control_cmake" to CMAKE_PREFIX_PATH or
+[0.857s]   set "ros2_control_cmake_DIR" to a directory containing one of the above
+[0.857s]   files.  If "ros2_control_cmake" provides a separate development package or
+[0.857s]   SDK, be sure it has been installed.
+[0.857s] 
+[0.858s] [0m
+[0.858s] -- Configuring incomplete, errors occurred!
+[0.868s] Invoked command in '/home/sjk/DISSERTATION/ROS2_WS/build/clearpath_bms_broadcaster' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/ROS2_WS/src/mobile/clearpath_common/clearpath_ros2_control/clearpath_bms_broadcaster -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/ROS2_WS/install/clearpath_bms_broadcaster

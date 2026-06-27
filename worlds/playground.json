@@ -1,0 +1,565 @@
+{
+  "environment": {
+    "name": "Apartment",
+    "type": "Indoor",
+    "category": "Residential",
+    "description": "A realistic three-bedroom household apartment containing all common residential spaces, furniture, appliances, household items and utilities found in a modern home.",
+    "purpose": [
+      "Residential Living",
+      "Cooking",
+      "Dining",
+      "Sleeping",
+      "Cleaning",
+      "Laundry",
+      "Entertainment",
+      "Personal Hygiene"
+    ],
+    "occupancy": {
+      "typical_people": 4,
+      "maximum_people": 6
+    }
+  },
+
+  "rooms": [
+    {
+      "id": "living_room",
+      "name": "Living Room"
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen"
+    },
+    {
+      "id": "master_bedroom",
+      "name": "Master Bedroom"
+    },
+    {
+      "id": "bedroom_2",
+      "name": "Bedroom 2"
+    },
+    {
+      "id": "bedroom_3",
+      "name": "Bedroom 3"
+    },
+    {
+      "id": "attached_bathroom",
+      "name": "Attached Bathroom"
+    },
+    {
+      "id": "common_bathroom",
+      "name": "Common Bathroom"
+    },
+    {
+      "id": "balcony",
+      "name": "Balcony"
+    },
+    {
+      "id": "corridor",
+      "name": "Corridor"
+    }
+  ],
+
+  "zones": [
+    {
+      "name": "Living Area"
+    },
+    {
+      "name": "Dining Area"
+    },
+    {
+      "name": "Cooking Area"
+    },
+    {
+      "name": "Sleeping Area"
+    },
+    {
+      "name": "Study Area"
+    },
+    {
+      "name": "Storage Area"
+    },
+    {
+      "name": "Laundry Area"
+    },
+    {
+      "name": "Bathroom Area"
+    },
+    {
+      "name": "Balcony Area"
+    }
+  ],
+
+  "static_structures": [
+    "Walls",
+    "Doors",
+    "Windows",
+    "Floor",
+    "Ceiling",
+    "Electrical Outlets",
+    "Light Switches",
+    "Water Supply",
+    "Drainage",
+    "Ventilation",
+    "Stair Access",
+    "Main Entrance"
+  ],
+
+  "living_room": {
+    "furniture": [
+      "Sofa",
+      "Coffee Table",
+      "TV Unit",
+      "Television",
+      "Bookshelf",
+      "Side Table",
+      "Floor Lamp",
+      "Wall Clock",
+      "Carpet",
+      "Curtains",
+      "Air Conditioner",
+      "Indoor Plants",
+      "Dining Table",
+      "Dining Chairs",
+      "Shoe Rack",
+      "Coat Stand"
+    ],
+
+    "electronics": [
+      "Television",
+      "WiFi Router",
+      "Set Top Box",
+      "Smart Speaker",
+      "Remote Controls"
+    ],
+
+    "objects": [
+      "Books",
+      "Newspapers",
+      "Magazines",
+      "Laptop",
+      "Mobile Charger",
+      "Keys",
+      "Wallet",
+      "Decorative Items",
+      "Photo Frames",
+      "Flower Vase",
+      "Blanket",
+      "Cushions"
+    ]
+  },
+
+  "kitchen": {
+    "appliances": [
+      "Refrigerator",
+      "Microwave",
+      "Gas Stove",
+      "Oven",
+      "Dishwasher",
+      "Mixer Grinder",
+      "Blender",
+      "Toaster",
+      "Rice Cooker",
+      "Electric Kettle",
+      "Coffee Maker",
+      "Water Purifier",
+      "Exhaust Hood"
+    ],
+
+    "storage": [
+      "Cabinets",
+      "Drawers",
+      "Pantry",
+      "Spice Rack",
+      "Utensil Holder",
+      "Knife Block",
+      "Fruit Basket"
+    ],
+
+    "cookware": [
+      "Cooking Pot",
+      "Pressure Cooker",
+      "Saucepan",
+      "Frying Pan",
+      "Wok",
+      "Baking Tray",
+      "Steamer"
+    ],
+
+    "utensils": [
+      "Spoons",
+      "Forks",
+      "Knives",
+      "Serving Spoon",
+      "Spatula",
+      "Ladle",
+      "Whisk",
+      "Tongs",
+      "Peeler",
+      "Can Opener",
+      "Bottle Opener"
+    ],
+
+    "containers": [
+      "Plate",
+      "Bowl",
+      "Cup",
+      "Glass",
+      "Bottle",
+      "Lunch Box",
+      "Food Storage Container"
+    ],
+
+    "ingredients": [
+      "Rice",
+      "Flour",
+      "Sugar",
+      "Salt",
+      "Cooking Oil",
+      "Tea",
+      "Coffee",
+      "Milk",
+      "Butter",
+      "Cheese",
+      "Eggs",
+      "Tomato",
+      "Onion",
+      "Potato",
+      "Garlic",
+      "Carrot",
+      "Vegetables",
+      "Fruits",
+      "Spices"
+    ],
+
+    "cleaning": [
+      "Dish Soap",
+      "Sponge",
+      "Scrubber",
+      "Cleaning Cloth",
+      "Trash Bin",
+      "Garbage Bags"
+    ]
+  },
+
+  "master_bedroom": {
+    "furniture": [
+      "King Size Bed",
+      "Mattress",
+      "Pillows",
+      "Blanket",
+      "Bedsheets",
+      "Wardrobe",
+      "Bedside Tables",
+      "Study Table",
+      "Chair",
+      "Bookshelf",
+      "Dressing Table",
+      "Mirror",
+      "Air Conditioner",
+      "Curtains"
+    ],
+
+    "electronics": [
+      "Laptop",
+      "Table Lamp",
+      "Phone Charger",
+      "Television"
+    ],
+
+    "objects": [
+      "Books",
+      "Clothes",
+      "Shoes",
+      "Watch",
+      "Wallet",
+      "Jewelry Box",
+      "Backpack",
+      "Suitcase",
+      "Laundry Basket"
+    ]
+  },
+
+  "bedroom_2": {
+    "furniture": [
+      "Single Bed",
+      "Wardrobe",
+      "Study Table",
+      "Chair",
+      "Bookshelf",
+      "Bedside Table",
+      "Curtains",
+      "Ceiling Fan"
+    ],
+
+    "objects": [
+      "Books",
+      "Laptop",
+      "School Bag",
+      "Stationery",
+      "Clothes",
+      "Shoes",
+      "Laundry Basket"
+    ]
+  },
+
+  "bedroom_3": {
+    "furniture": [
+      "Single Bed",
+      "Wardrobe",
+      "Study Desk",
+      "Chair",
+      "Bookshelf",
+      "Bedside Table"
+    ],
+
+    "objects": [
+      "Books",
+      "Desktop Computer",
+      "Keyboard",
+      "Mouse",
+      "Headphones",
+      "Printer",
+      "Files",
+      "Clothes"
+    ]
+  },
+
+  "attached_bathroom": {
+    "fixtures": [
+      "Wash Basin",
+      "Toilet",
+      "Shower",
+      "Mirror",
+      "Cabinet",
+      "Exhaust Fan",
+      "Water Heater",
+      "Towel Rack"
+    ],
+
+    "objects": [
+      "Soap",
+      "Shampoo",
+      "Conditioner",
+      "Toothbrush",
+      "Toothpaste",
+      "Handwash",
+      "Towels",
+      "Bucket",
+      "Mug",
+      "Cleaning Brush",
+      "Floor Cleaner",
+      "Toilet Paper"
+    ]
+  },
+
+  "common_bathroom": {
+    "fixtures": [
+      "Wash Basin",
+      "Toilet",
+      "Shower",
+      "Mirror",
+      "Cabinet",
+      "Exhaust Fan",
+      "Water Heater"
+    ],
+
+    "objects": [
+      "Soap",
+      "Shampoo",
+      "Toothbrush",
+      "Toothpaste",
+      "Bucket",
+      "Mug",
+      "Towel",
+      "Toilet Cleaner",
+      "Floor Cleaner"
+    ]
+  },
+
+  "balcony": {
+    "objects": [
+      "Plant Pots",
+      "Garden Chair",
+      "Small Table",
+      "Drying Stand",
+      "Clothes Clips",
+      "Watering Can",
+      "Broom",
+      "Dustpan"
+    ]
+  },
+
+  "corridor": {
+    "objects": [
+      "Wall Paintings",
+      "Emergency Light",
+      "Decorative Plants",
+      "Vacuum Cleaner",
+      "Cleaning Mop"
+    ]
+  },
+
+  "utilities": [
+    "Electricity",
+    "Water Supply",
+    "Gas Supply",
+    "WiFi",
+    "Drainage",
+    "Lighting",
+    "Air Conditioning",
+    "Heating",
+    "Ventilation"
+  ],
+
+  "safety_equipment": [
+    "Fire Extinguisher",
+    "Smoke Detector",
+    "First Aid Kit",
+    "Emergency Flashlight",
+    "Gas Leak Detector"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Door",
+      "actions": [
+        "Open",
+        "Close",
+        "Lock",
+        "Unlock"
+      ]
+    },
+    {
+      "object": "Wardrobe",
+      "actions": [
+        "Open",
+        "Close",
+        "Store",
+        "Retrieve"
+      ]
+    },
+    {
+      "object": "Cabinet",
+      "actions": [
+        "Open",
+        "Close",
+        "Store",
+        "Retrieve"
+      ]
+    },
+    {
+      "object": "Refrigerator",
+      "actions": [
+        "Open",
+        "Close",
+        "Store",
+        "Retrieve"
+      ]
+    },
+    {
+      "object": "Drawer",
+      "actions": [
+        "Open",
+        "Close",
+        "Store",
+        "Retrieve"
+      ]
+    },
+    {
+      "object": "Television",
+      "actions": [
+        "TurnOn",
+        "TurnOff",
+        "AdjustVolume"
+      ]
+    },
+    {
+      "object": "Washing Machine",
+      "actions": [
+        "Open",
+        "Close",
+        "Wash"
+      ]
+    },
+    {
+      "object": "Gas Stove",
+      "actions": [
+        "TurnOn",
+        "TurnOff",
+        "Cook"
+      ]
+    },
+    {
+      "object": "Microwave",
+      "actions": [
+        "Open",
+        "Close",
+        "Heat"
+      ]
+    },
+    {
+      "object": "Bathroom Tap",
+      "actions": [
+        "TurnOn",
+        "TurnOff"
+      ]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Refrigerator",
+      "relation": "LocatedIn",
+      "object": "Kitchen"
+    },
+    {
+      "subject": "Dining Table",
+      "relation": "LocatedIn",
+      "object": "Living Room"
+    },
+    {
+      "subject": "Bed",
+      "relation": "LocatedIn",
+      "object": "Bedroom"
+    },
+    {
+      "subject": "Wardrobe",
+      "relation": "Stores",
+      "object": "Clothes"
+    },
+    {
+      "subject": "Bookshelf",
+      "relation": "Stores",
+      "object": "Books"
+    },
+    {
+      "subject": "Bathroom Cabinet",
+      "relation": "Stores",
+      "object": "Toiletries"
+    },
+    {
+      "subject": "Balcony",
+      "relation": "Contains",
+      "object": "Plants"
+    },
+    {
+      "subject": "Kitchen",
+      "relation": "Contains",
+      "object": "Cooking Appliances"
+    },
+    {
+      "subject": "Living Room",
+      "relation": "Contains",
+      "object": "Entertainment System"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Main Entrance",
+    "Living Room Center",
+    "Kitchen Entrance",
+    "Master Bedroom Entrance",
+    "Corridor",
+    "Balcony Entrance"
+  ]
+}

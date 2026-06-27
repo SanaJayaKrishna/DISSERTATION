@@ -1,0 +1,492 @@
+{
+  "environment": {
+    "name": "Kitchen",
+    "type": "Indoor",
+    "category": "Domestic",
+    "description": "A typical household kitchen equipped for daily cooking, food preparation, storage, cleaning, and dining-related activities.",
+    "purpose": [
+      "Food Preparation",
+      "Cooking",
+      "Food Storage",
+      "Cleaning",
+      "Dining Support"
+    ],
+    "occupancy": {
+      "typical_people": 1,
+      "maximum_people": 4
+    }
+  },
+
+  "rooms": [
+    {
+      "id": "room_kitchen",
+      "name": "Kitchen"
+    }
+  ],
+
+  "zones": [
+    {
+      "id": "zone_cooking",
+      "name": "Cooking Zone",
+      "description": "Area containing the stove, oven and cookware."
+    },
+    {
+      "id": "zone_preparation",
+      "name": "Preparation Zone",
+      "description": "Countertop used for food preparation."
+    },
+    {
+      "id": "zone_washing",
+      "name": "Washing Zone",
+      "description": "Sink area used for washing utensils and ingredients."
+    },
+    {
+      "id": "zone_storage",
+      "name": "Storage Zone",
+      "description": "Cabinets and pantry used for storing utensils and ingredients."
+    },
+    {
+      "id": "zone_refrigerator",
+      "name": "Refrigerator Area"
+    },
+    {
+      "id": "zone_pantry",
+      "name": "Pantry Area"
+    },
+    {
+      "id": "zone_dining",
+      "name": "Dining Counter"
+    },
+    {
+      "id": "zone_cleaning",
+      "name": "Cleaning Area"
+    }
+  ],
+
+  "static_structures": [
+    {
+      "name": "Walls",
+      "type": "Structure"
+    },
+    {
+      "name": "Floor",
+      "type": "Structure"
+    },
+    {
+      "name": "Ceiling",
+      "type": "Structure"
+    },
+    {
+      "name": "Door",
+      "type": "Structure"
+    },
+    {
+      "name": "Windows",
+      "type": "Structure"
+    },
+    {
+      "name": "Electrical Outlets",
+      "type": "Utility"
+    },
+    {
+      "name": "Water Supply",
+      "type": "Utility"
+    },
+    {
+      "name": "Drainage",
+      "type": "Utility"
+    },
+    {
+      "name": "Countertop",
+      "type": "Structure"
+    },
+    {
+      "name": "Backsplash",
+      "type": "Structure"
+    }
+  ],
+
+  "furniture": [
+    {
+      "name": "Kitchen Counter",
+      "category": "Counter"
+    },
+    {
+      "name": "Kitchen Island",
+      "category": "Counter"
+    },
+    {
+      "name": "Dining Table",
+      "category": "Furniture"
+    },
+    {
+      "name": "Chair",
+      "category": "Furniture"
+    },
+    {
+      "name": "Cabinet",
+      "category": "Storage"
+    },
+    {
+      "name": "Wall Cabinet",
+      "category": "Storage"
+    },
+    {
+      "name": "Pantry Cabinet",
+      "category": "Storage"
+    },
+    {
+      "name": "Drawer",
+      "category": "Storage"
+    },
+    {
+      "name": "Shelf",
+      "category": "Storage"
+    }
+  ],
+
+  "appliances": {
+    "major": [
+      {
+        "name": "Refrigerator",
+        "affordances": [
+          "Open",
+          "Close",
+          "Store",
+          "Retrieve"
+        ]
+      },
+      {
+        "name": "Freezer",
+        "affordances": [
+          "Open",
+          "Close",
+          "Store",
+          "Retrieve"
+        ]
+      },
+      {
+        "name": "Gas Stove",
+        "affordances": [
+          "TurnOn",
+          "TurnOff",
+          "Heat"
+        ]
+      },
+      {
+        "name": "Oven",
+        "affordances": [
+          "Open",
+          "Close",
+          "Bake"
+        ]
+      },
+      {
+        "name": "Microwave",
+        "affordances": [
+          "Open",
+          "Close",
+          "Heat"
+        ]
+      },
+      {
+        "name": "Dishwasher",
+        "affordances": [
+          "Open",
+          "Close",
+          "Wash"
+        ]
+      },
+      {
+        "name": "Chimney",
+        "affordances": [
+          "TurnOn",
+          "TurnOff"
+        ]
+      }
+    ],
+
+    "small": [
+      "Mixer Grinder",
+      "Blender",
+      "Toaster",
+      "Rice Cooker",
+      "Electric Kettle",
+      "Coffee Maker",
+      "Air Fryer",
+      "Food Processor",
+      "Water Purifier"
+    ]
+  },
+
+  "storage_units": [
+    "Cabinets",
+    "Drawers",
+    "Pantry",
+    "Spice Rack",
+    "Knife Block",
+    "Utensil Holder",
+    "Fruit Basket",
+    "Refrigerator",
+    "Freezer"
+  ],
+
+  "objects": {
+    "cookware": [
+      "Frying Pan",
+      "Saucepan",
+      "Pressure Cooker",
+      "Cooking Pot",
+      "Wok",
+      "Steamer",
+      "Baking Tray"
+    ],
+
+    "utensils": [
+      "Spoon",
+      "Fork",
+      "Knife",
+      "Serving Spoon",
+      "Spatula",
+      "Ladle",
+      "Tongs",
+      "Whisk",
+      "Peeler",
+      "Kitchen Scissors",
+      "Bottle Opener",
+      "Can Opener"
+    ],
+
+    "cutting_tools": [
+      "Chef Knife",
+      "Bread Knife",
+      "Paring Knife",
+      "Cutting Board"
+    ],
+
+    "containers": [
+      "Plate",
+      "Bowl",
+      "Cup",
+      "Glass",
+      "Bottle",
+      "Lunch Box",
+      "Food Storage Container"
+    ],
+
+    "cooking_accessories": [
+      "Measuring Cup",
+      "Measuring Spoon",
+      "Mixing Bowl",
+      "Colander",
+      "Sieve",
+      "Rolling Pin",
+      "Mortar",
+      "Pestle"
+    ],
+
+    "cleaning_items": [
+      "Dish Soap",
+      "Sponge",
+      "Scrubber",
+      "Cleaning Cloth",
+      "Trash Bin",
+      "Garbage Bag"
+    ]
+  },
+
+  "ingredients": {
+    "vegetables": [
+      "Tomato",
+      "Onion",
+      "Potato",
+      "Garlic",
+      "Carrot",
+      "Capsicum",
+      "Spinach"
+    ],
+
+    "fruits": [
+      "Apple",
+      "Banana",
+      "Orange",
+      "Lemon",
+      "Mango"
+    ],
+
+    "dairy": [
+      "Milk",
+      "Butter",
+      "Cheese",
+      "Yogurt",
+      "Eggs"
+    ],
+
+    "dry_goods": [
+      "Rice",
+      "Flour",
+      "Sugar",
+      "Salt",
+      "Tea",
+      "Coffee",
+      "Pasta"
+    ],
+
+    "oils": [
+      "Cooking Oil",
+      "Olive Oil",
+      "Ghee"
+    ],
+
+    "spices": [
+      "Turmeric",
+      "Chili Powder",
+      "Black Pepper",
+      "Cumin",
+      "Mustard Seeds",
+      "Coriander Powder",
+      "Garam Masala"
+    ]
+  },
+
+  "utilities": [
+    "Electricity",
+    "Running Water",
+    "Gas Supply",
+    "Lighting",
+    "Ventilation"
+  ],
+
+  "safety_equipment": [
+    "Fire Extinguisher",
+    "Smoke Detector",
+    "Gas Leak Sensor",
+    "First Aid Kit"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Refrigerator",
+      "actions": [
+        "Open",
+        "Close",
+        "Store",
+        "Retrieve"
+      ]
+    },
+    {
+      "object": "Cabinet",
+      "actions": [
+        "Open",
+        "Close",
+        "Store",
+        "Retrieve"
+      ]
+    },
+    {
+      "object": "Drawer",
+      "actions": [
+        "Open",
+        "Close",
+        "Store",
+        "Retrieve"
+      ]
+    },
+    {
+      "object": "Microwave",
+      "actions": [
+        "Open",
+        "Close",
+        "Heat"
+      ]
+    },
+    {
+      "object": "Gas Stove",
+      "actions": [
+        "TurnOn",
+        "TurnOff",
+        "Heat"
+      ]
+    },
+    {
+      "object": "Sink",
+      "actions": [
+        "Wash",
+        "FillContainer",
+        "Drain"
+      ]
+    },
+    {
+      "object": "Trash Bin",
+      "actions": [
+        "DisposeWaste"
+      ]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Knife",
+      "relation": "UsedFor",
+      "object": "Cutting"
+    },
+    {
+      "subject": "Cutting Board",
+      "relation": "UsedFor",
+      "object": "Food Preparation"
+    },
+    {
+      "subject": "Pan",
+      "relation": "PlacedOn",
+      "object": "Gas Stove"
+    },
+    {
+      "subject": "Pot",
+      "relation": "PlacedOn",
+      "object": "Gas Stove"
+    },
+    {
+      "subject": "Cup",
+      "relation": "StoredIn",
+      "object": "Cabinet"
+    },
+    {
+      "subject": "Plate",
+      "relation": "StoredIn",
+      "object": "Cabinet"
+    },
+    {
+      "subject": "Spices",
+      "relation": "StoredIn",
+      "object": "Spice Rack"
+    },
+    {
+      "subject": "Vegetables",
+      "relation": "StoredIn",
+      "object": "Refrigerator"
+    },
+    {
+      "subject": "Milk",
+      "relation": "StoredIn",
+      "object": "Refrigerator"
+    },
+    {
+      "subject": "Dish Soap",
+      "relation": "LocatedNear",
+      "object": "Sink"
+    },
+    {
+      "subject": "Trash Bin",
+      "relation": "LocatedNear",
+      "object": "Sink"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Kitchen Entrance",
+    "Near Kitchen Counter",
+    "Near Sink",
+    "Near Refrigerator",
+    "Center of Kitchen"
+  ]
+}

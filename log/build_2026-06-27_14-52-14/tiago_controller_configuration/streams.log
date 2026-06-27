@@ -1,0 +1,25 @@
+[0.626s] Invoking command in '/home/sjk/DISSERTATION/build/tiago_controller_configuration': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/mobile_manipulators/tiago_robot/tiago_controller_configuration -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/tiago_controller_configuration
+[0.742s] -- The C compiler identification is GNU 13.3.0
+[0.905s] -- The CXX compiler identification is GNU 13.3.0
+[0.985s] -- Detecting C compiler ABI info
+[1.352s] -- Detecting C compiler ABI info - done
+[1.414s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.415s] -- Detecting C compile features
+[1.419s] -- Detecting C compile features - done
+[1.457s] -- Detecting CXX compiler ABI info
+[1.752s] -- Detecting CXX compiler ABI info - done
+[1.798s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.808s] -- Detecting CXX compile features
+[1.811s] -- Detecting CXX compile features - done
+[1.811s] -- Found ament_cmake_auto: 2.5.6 (/opt/ros/jazzy/share/ament_cmake_auto/cmake)
+[2.304s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.919s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[2.965s] -- Added test 'copyright' to check source files copyright and LICENSE
+[2.973s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.973s] -- Configured 'flake8' exclude dirs and/or files: 
+[2.974s] -- Added test 'lint_cmake' to check CMake code style
+[2.976s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[2.980s] -- Added test 'xmllint' to check XML markup files
+[2.984s] -- Configuring done (2.4s)
+[2.991s] -- Generating done (0.0s)
+[2.996s] -- Build files have been written to: /home/sjk/DISSERTATION/build/tiago_controller_configuration

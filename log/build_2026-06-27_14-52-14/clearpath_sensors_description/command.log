@@ -1,0 +1,1 @@
+Invoking command in '/home/sjk/DISSERTATION/build/clearpath_sensors_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/ROS2_WS/src/mobile/clearpath_common/clearpath_sensors_description -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/clearpath_sensors_description

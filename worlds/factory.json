@@ -1,0 +1,440 @@
+{
+  "environment": {
+    "name": "Robot Assembly Factory",
+    "type": "Indoor",
+    "category": "Industrial Manufacturing",
+    "description": "A modern robotic manufacturing and assembly department where various types of robots such as industrial manipulators, mobile robots, humanoids, quadrupeds, drones and service robots are assembled, tested, calibrated and prepared for deployment.",
+    "purpose": [
+      "Robot Assembly",
+      "Component Manufacturing",
+      "Robot Testing",
+      "Calibration",
+      "Quality Inspection",
+      "Packaging",
+      "Inventory Management",
+      "Research & Development"
+    ],
+    "occupancy": {
+      "typical_people": 200,
+      "maximum_people": 600
+    }
+  },
+
+  "zones": [
+    { "name": "Receiving Zone" },
+    { "name": "Component Warehouse" },
+    { "name": "Mechanical Assembly Zone" },
+    { "name": "Electrical Assembly Zone" },
+    { "name": "Sensor Integration Zone" },
+    { "name": "Manipulator Assembly Zone" },
+    { "name": "Mobile Robot Assembly Zone" },
+    { "name": "Humanoid Assembly Zone" },
+    { "name": "Drone Assembly Zone" },
+    { "name": "Testing & Calibration Zone" },
+    { "name": "Quality Inspection Zone" },
+    { "name": "Packaging Zone" },
+    { "name": "Shipping Zone" },
+    { "name": "Maintenance Zone" },
+    { "name": "Engineering Office" },
+    { "name": "Research & Development Lab" }
+  ],
+
+  "rooms": [
+    { "id": "security_gate", "name": "Security Gate" },
+    { "id": "receiving_dock", "name": "Receiving Dock" },
+    { "id": "component_storage", "name": "Component Warehouse" },
+    { "id": "mechanical_assembly", "name": "Mechanical Assembly Line" },
+    { "id": "electrical_assembly", "name": "Electrical Assembly Line" },
+    { "id": "sensor_integration", "name": "Sensor Integration Lab" },
+    { "id": "robot_assembly", "name": "Robot Assembly Line" },
+    { "id": "testing_lab", "name": "Robot Testing Lab" },
+    { "id": "calibration_lab", "name": "Calibration Lab" },
+    { "id": "quality_control", "name": "Quality Control Room" },
+    { "id": "packaging", "name": "Packaging Area" },
+    { "id": "shipping", "name": "Dispatch Area" },
+    { "id": "maintenance", "name": "Maintenance Workshop" },
+    { "id": "engineering_office", "name": "Engineering Office" },
+    { "id": "rd_lab", "name": "Research & Development Lab" },
+    { "id": "server_room", "name": "Server Room" },
+    { "id": "meeting_room", "name": "Meeting Room" },
+    { "id": "employee_room", "name": "Employee Break Room" }
+  ],
+
+  "static_structures": [
+    "Assembly Conveyor",
+    "Workstations",
+    "Storage Racks",
+    "Pallet Storage",
+    "Safety Barriers",
+    "Robot Charging Stations",
+    "Overhead Crane",
+    "Compressed Air Lines",
+    "Industrial Power Supply",
+    "Emergency Exit",
+    "Fire Suppression System",
+    "CCTV Cameras",
+    "Safety Markings",
+    "Loading Dock",
+    "Dock Doors"
+  ],
+
+  "robot_components": {
+
+    "mechanical_parts": [
+      "Base Frame",
+      "Robot Chassis",
+      "Aluminium Profiles",
+      "Carbon Fiber Parts",
+      "Steel Brackets",
+      "Mounting Plates",
+      "Joint Housing",
+      "Bearing Blocks",
+      "Linear Rails",
+      "Timing Belts",
+      "Pulley",
+      "Gearbox",
+      "Planetary Gearbox",
+      "Couplings",
+      "Lead Screw",
+      "Ball Screw",
+      "Springs",
+      "Fasteners",
+      "Bolts",
+      "Nuts",
+      "Washers",
+      "Spacers"
+    ],
+
+    "actuators": [
+      "DC Motors",
+      "BLDC Motors",
+      "Servo Motors",
+      "Stepper Motors",
+      "Linear Actuators",
+      "Hydraulic Cylinders",
+      "Pneumatic Cylinders",
+      "Servo Drives",
+      "Motor Drivers"
+    ],
+
+    "robot_links": [
+      "Base Link",
+      "Shoulder Link",
+      "Upper Arm",
+      "Forearm",
+      "Wrist Link",
+      "Gripper Mount",
+      "End Effector Plate",
+      "Wheel Mount",
+      "Leg Module",
+      "Drone Arm"
+    ],
+
+    "end_effectors": [
+      "Parallel Gripper",
+      "Vacuum Gripper",
+      "Soft Gripper",
+      "Magnetic Gripper",
+      "Two Finger Gripper",
+      "Three Finger Gripper",
+      "Robotic Hand",
+      "Welding Tool",
+      "Screwdriver Tool",
+      "Suction Cup"
+    ],
+
+    "wheels": [
+      "Differential Wheels",
+      "Omni Wheels",
+      "Mecanum Wheels",
+      "Caster Wheels",
+      "Tracks"
+    ],
+
+    "drone_parts": [
+      "Propellers",
+      "Brushless Motors",
+      "ESC",
+      "Flight Controller",
+      "Drone Frame",
+      "GPS Module",
+      "Power Distribution Board"
+    ]
+  },
+
+  "electronics": {
+
+    "controllers": [
+      "Industrial PC",
+      "NVIDIA Jetson",
+      "Raspberry Pi",
+      "Arduino",
+      "STM32",
+      "ESP32",
+      "PLC",
+      "Motor Controller"
+    ],
+
+    "sensors": [
+      "RGB Camera",
+      "Depth Camera",
+      "Stereo Camera",
+      "LiDAR",
+      "IMU",
+      "GPS",
+      "Ultrasonic Sensor",
+      "Infrared Sensor",
+      "Force Torque Sensor",
+      "Touch Sensor",
+      "Temperature Sensor",
+      "Pressure Sensor",
+      "Proximity Sensor",
+      "Encoder",
+      "Current Sensor"
+    ],
+
+    "communication": [
+      "Ethernet Switch",
+      "WiFi Module",
+      "Bluetooth Module",
+      "CAN Bus",
+      "RS485 Module",
+      "USB Hub"
+    ],
+
+    "power": [
+      "Lithium Battery",
+      "Power Supply",
+      "Battery Charger",
+      "Battery Management System",
+      "Voltage Regulator",
+      "Fuse Box"
+    ]
+  },
+
+  "assembly_equipment": [
+    "Assembly Tables",
+    "Torque Wrench",
+    "Electric Screwdriver",
+    "Soldering Station",
+    "Heat Gun",
+    "Wire Stripper",
+    "Crimping Tool",
+    "Oscilloscope",
+    "Digital Multimeter",
+    "Power Supply",
+    "Logic Analyzer",
+    "Cable Tester",
+    "Laser Alignment Tool",
+    "Precision Calipers",
+    "Micrometer"
+  ],
+
+  "testing_equipment": [
+    "Robot Test Bench",
+    "Motion Capture System",
+    "Force Measurement Rig",
+    "Payload Testing Station",
+    "Joint Calibration Rig",
+    "Wheel Alignment Station",
+    "Battery Testing Station",
+    "Endurance Test Platform",
+    "Environmental Chamber"
+  ],
+
+  "quality_control": [
+    "Vision Inspection Camera",
+    "Laser Scanner",
+    "Coordinate Measuring Machine",
+    "Dimensional Inspection Tools",
+    "Surface Inspection Station",
+    "Barcode Scanner"
+  ],
+
+  "packaging": [
+    "Packaging Table",
+    "Foam Inserts",
+    "Wooden Crates",
+    "Shipping Boxes",
+    "Bubble Wrap",
+    "Shrink Wrap Machine",
+    "Label Printer",
+    "Weighing Scale"
+  ],
+
+  "warehouse": [
+    "Component Shelves",
+    "Motor Storage",
+    "Sensor Storage",
+    "Electronic Components Rack",
+    "PCB Storage",
+    "Battery Storage",
+    "Mechanical Parts Rack",
+    "Finished Robot Storage"
+  ],
+
+  "utilities": [
+    "Industrial Electricity",
+    "Compressed Air",
+    "Industrial Ethernet",
+    "WiFi",
+    "Backup Generator",
+    "Robot Fleet Network",
+    "MES Server",
+    "PLM System",
+    "HVAC",
+    "Fire Alarm",
+    "CCTV",
+    "Access Control"
+  ],
+
+  "safety_equipment": [
+    "Emergency Stop Buttons",
+    "Fire Extinguishers",
+    "Fire Suppression System",
+    "Safety Helmets",
+    "Safety Glasses",
+    "Safety Gloves",
+    "Safety Shoes",
+    "Reflective Jackets",
+    "Emergency Lights",
+    "First Aid Kit",
+    "AED"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Component Rack",
+      "actions": [
+        "Store",
+        "Retrieve",
+        "InventoryCheck"
+      ]
+    },
+    {
+      "object": "Assembly Station",
+      "actions": [
+        "Assemble",
+        "Disassemble",
+        "Inspect"
+      ]
+    },
+    {
+      "object": "Motor",
+      "actions": [
+        "Install",
+        "Remove",
+        "Calibrate"
+      ]
+    },
+    {
+      "object": "Sensor",
+      "actions": [
+        "Install",
+        "Remove",
+        "Calibrate",
+        "Test"
+      ]
+    },
+    {
+      "object": "Robot",
+      "actions": [
+        "Assemble",
+        "Program",
+        "Test",
+        "Calibrate",
+        "Inspect",
+        "Package"
+      ]
+    },
+    {
+      "object": "Testing Station",
+      "actions": [
+        "ExecuteTest",
+        "RecordResults",
+        "Approve",
+        "Reject"
+      ]
+    },
+    {
+      "object": "Packaging Station",
+      "actions": [
+        "Package",
+        "Seal",
+        "Label"
+      ]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Receiving Dock",
+      "relation": "Supplies",
+      "object": "Component Warehouse"
+    },
+    {
+      "subject": "Component Warehouse",
+      "relation": "Supplies",
+      "object": "Assembly Line"
+    },
+    {
+      "subject": "Mechanical Assembly",
+      "relation": "Feeds",
+      "object": "Electrical Assembly"
+    },
+    {
+      "subject": "Electrical Assembly",
+      "relation": "Feeds",
+      "object": "Sensor Integration"
+    },
+    {
+      "subject": "Sensor Integration",
+      "relation": "Feeds",
+      "object": "Robot Assembly"
+    },
+    {
+      "subject": "Robot Assembly",
+      "relation": "Feeds",
+      "object": "Testing Lab"
+    },
+    {
+      "subject": "Testing Lab",
+      "relation": "Feeds",
+      "object": "Quality Control"
+    },
+    {
+      "subject": "Quality Control",
+      "relation": "Feeds",
+      "object": "Packaging"
+    },
+    {
+      "subject": "Packaging",
+      "relation": "Feeds",
+      "object": "Dispatch Area"
+    },
+    {
+      "subject": "Engineering Office",
+      "relation": "Manages",
+      "object": "Assembly Department"
+    },
+    {
+      "subject": "Research & Development Lab",
+      "relation": "Supports",
+      "object": "Robot Assembly"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Receiving Dock",
+    "Component Warehouse",
+    "Mechanical Assembly Line",
+    "Electrical Assembly Line",
+    "Sensor Integration Lab",
+    "Robot Assembly Line",
+    "Testing Lab",
+    "Quality Control",
+    "Packaging Area",
+    "Engineering Office",
+    "Research & Development Lab"
+  ]
+}

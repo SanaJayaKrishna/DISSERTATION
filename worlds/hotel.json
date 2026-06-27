@@ -1,0 +1,435 @@
+{
+  "environment": {
+    "name": "Luxury Hotel & Restaurant",
+    "type": "Indoor",
+    "category": "Hospitality",
+    "description": "A luxury hospitality environment containing guest accommodation, dining facilities, wellness amenities, recreational facilities, administration, housekeeping, maintenance and service areas.",
+    "purpose": [
+      "Guest Accommodation",
+      "Dining",
+      "Hospitality",
+      "Wellness",
+      "Recreation",
+      "Events",
+      "Business Meetings"
+    ],
+    "occupancy": {
+      "typical_people": 150,
+      "maximum_people": 400
+    }
+  },
+
+  "zones": [
+    { "name": "Reception Zone" },
+    { "name": "Guest Accommodation Zone" },
+    { "name": "Restaurant Zone" },
+    { "name": "Kitchen Zone" },
+    { "name": "Swimming Pool Zone" },
+    { "name": "Spa & Wellness Zone" },
+    { "name": "Fitness Zone" },
+    { "name": "Conference Zone" },
+    { "name": "Housekeeping Zone" },
+    { "name": "Maintenance Zone" },
+    { "name": "Staff Zone" },
+    { "name": "Parking Zone" }
+  ],
+
+  "rooms": [
+    { "id": "reception", "name": "Reception Lobby" },
+    { "id": "waiting_lounge", "name": "Guest Lounge" },
+    { "id": "restaurant", "name": "Restaurant" },
+    { "id": "kitchen", "name": "Commercial Kitchen" },
+    { "id": "bakery", "name": "Bakery & Dessert Section" },
+    { "id": "pantry", "name": "Food Storage Pantry" },
+    { "id": "cold_storage", "name": "Cold Storage" },
+    { "id": "guest_room_1", "name": "Guest Room" },
+    { "id": "guest_room_2", "name": "Deluxe Room" },
+    { "id": "suite", "name": "Luxury Suite" },
+    { "id": "spa", "name": "Spa" },
+    { "id": "massage_room", "name": "Massage Room" },
+    { "id": "gym", "name": "Fitness Center" },
+    { "id": "swimming_pool", "name": "Swimming Pool" },
+    { "id": "conference_room", "name": "Conference Hall" },
+    { "id": "banquet_hall", "name": "Banquet Hall" },
+    { "id": "housekeeping", "name": "Housekeeping Room" },
+    { "id": "laundry", "name": "Laundry Room" },
+    { "id": "maintenance", "name": "Maintenance Room" },
+    { "id": "staff_room", "name": "Staff Room" },
+    { "id": "medical_room", "name": "First Aid Room" },
+    { "id": "public_restroom", "name": "Public Restroom" },
+    { "id": "parking", "name": "Parking Area" }
+  ],
+
+  "static_structures": [
+    "Main Entrance",
+    "Emergency Exit",
+    "Lobby",
+    "Hallways",
+    "Doors",
+    "Windows",
+    "Elevator Lobby",
+    "Staircase",
+    "Walls",
+    "Floor",
+    "Ceiling",
+    "Lighting",
+    "Fire Exit",
+    "Fire Alarm System",
+    "CCTV Cameras",
+    "Access Control System"
+  ],
+
+  "reception": {
+    "furniture": [
+      "Reception Desk",
+      "Reception Chairs",
+      "Lobby Sofa",
+      "Coffee Table",
+      "Decorative Plants",
+      "Luggage Cart",
+      "Information Display",
+      "Digital Kiosk"
+    ],
+    "equipment": [
+      "Desktop Computer",
+      "Printer",
+      "Telephone",
+      "POS Terminal",
+      "Card Reader"
+    ],
+    "objects": [
+      "Room Keys",
+      "Key Cards",
+      "Guest Register",
+      "Brochures",
+      "Maps",
+      "Pens"
+    ]
+  },
+
+  "restaurant": {
+    "furniture": [
+      "Dining Tables",
+      "Dining Chairs",
+      "Buffet Counter",
+      "Serving Station",
+      "Cash Counter",
+      "Decorative Plants"
+    ],
+    "objects": [
+      "Plates",
+      "Bowls",
+      "Cutlery",
+      "Glasses",
+      "Napkins",
+      "Table Mats",
+      "Water Bottles",
+      "Menu Cards",
+      "Serving Trays",
+      "Condiment Bottles"
+    ]
+  },
+
+  "kitchen": {
+    "appliances": [
+      "Commercial Gas Range",
+      "Commercial Oven",
+      "Deep Fryer",
+      "Grill",
+      "Microwave",
+      "Refrigerator",
+      "Freezer",
+      "Dishwasher",
+      "Mixer",
+      "Food Processor",
+      "Coffee Machine",
+      "Ice Machine",
+      "Exhaust Hood"
+    ],
+    "storage": [
+      "Dry Storage",
+      "Cold Storage",
+      "Spice Rack",
+      "Utensil Rack",
+      "Ingredient Shelves"
+    ],
+    "cookware": [
+      "Stock Pot",
+      "Saucepan",
+      "Frying Pan",
+      "Pressure Cooker",
+      "Baking Tray",
+      "Wok"
+    ],
+    "utensils": [
+      "Chef Knife",
+      "Cutting Board",
+      "Ladle",
+      "Spatula",
+      "Tongs",
+      "Whisk",
+      "Serving Spoon",
+      "Measuring Cups",
+      "Mixing Bowls"
+    ]
+  },
+
+  "guest_rooms": {
+    "furniture": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "Desk",
+      "Chair",
+      "Television",
+      "Mini Refrigerator",
+      "Safe Locker",
+      "Bedside Table",
+      "Mirror",
+      "Curtains",
+      "Air Conditioner"
+    ],
+    "objects": [
+      "Pillows",
+      "Blanket",
+      "Bedsheets",
+      "Towels",
+      "Toiletries",
+      "Water Bottle",
+      "Coffee Kit",
+      "Laundry Bag",
+      "Telephone",
+      "Remote Control"
+    ]
+  },
+
+  "spa": {
+    "equipment": [
+      "Massage Bed",
+      "Steam Room",
+      "Sauna",
+      "Hot Tub",
+      "Aromatherapy Kit",
+      "Spa Towels",
+      "Essential Oils",
+      "Spa Chairs"
+    ]
+  },
+
+  "gym": {
+    "equipment": [
+      "Treadmill",
+      "Exercise Bike",
+      "Elliptical",
+      "Bench Press",
+      "Smith Machine",
+      "Dumbbells",
+      "Barbells",
+      "Yoga Mats",
+      "Resistance Bands",
+      "Medicine Balls"
+    ]
+  },
+
+  "swimming_pool": {
+    "equipment": [
+      "Swimming Lanes",
+      "Life Jackets",
+      "Lifebuoys",
+      "Pool Chairs",
+      "Umbrellas",
+      "Pool Towels",
+      "Rescue Pole",
+      "Pool Cleaning Kit"
+    ]
+  },
+
+  "conference_area": {
+    "equipment": [
+      "Conference Table",
+      "Projector",
+      "Display Screen",
+      "Microphones",
+      "Speakers",
+      "Whiteboard",
+      "Presentation Podium"
+    ]
+  },
+
+  "housekeeping": {
+    "equipment": [
+      "Cleaning Cart",
+      "Vacuum Cleaner",
+      "Mop",
+      "Buckets",
+      "Cleaning Chemicals",
+      "Fresh Linen",
+      "Laundry Bags"
+    ]
+  },
+
+  "laundry": {
+    "equipment": [
+      "Industrial Washing Machine",
+      "Dryer",
+      "Ironing Station",
+      "Laundry Basket",
+      "Detergent",
+      "Fabric Softener"
+    ]
+  },
+
+  "maintenance": {
+    "equipment": [
+      "Tool Box",
+      "Ladder",
+      "Electrical Tools",
+      "Plumbing Tools",
+      "Replacement Bulbs",
+      "Power Drill"
+    ]
+  },
+
+  "medical_room": {
+    "equipment": [
+      "First Aid Kit",
+      "Wheelchair",
+      "Stretcher",
+      "Medical Cabinet",
+      "Emergency Oxygen Cylinder",
+      "AED"
+    ]
+  },
+
+  "utilities": [
+    "Electricity",
+    "Running Water",
+    "Hot Water",
+    "HVAC",
+    "WiFi",
+    "Gas Supply",
+    "Backup Generator",
+    "CCTV",
+    "Fire Alarm",
+    "Public Address System",
+    "Access Control"
+  ],
+
+  "safety_equipment": [
+    "Fire Extinguishers",
+    "Smoke Detectors",
+    "Sprinkler System",
+    "Emergency Exit Signs",
+    "Emergency Lights",
+    "First Aid Kits",
+    "AED",
+    "Gas Leak Detector",
+    "CCTV Cameras"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Guest Room Door",
+      "actions": ["Open", "Close", "Lock", "Unlock"]
+    },
+    {
+      "object": "Reception Desk",
+      "actions": ["CheckIn", "CheckOut", "AssignRoom"]
+    },
+    {
+      "object": "Restaurant Table",
+      "actions": ["Reserve", "ServeFood", "ClearTable"]
+    },
+    {
+      "object": "Kitchen Refrigerator",
+      "actions": ["Open", "Close", "Store", "Retrieve"]
+    },
+    {
+      "object": "Commercial Oven",
+      "actions": ["TurnOn", "TurnOff", "Bake"]
+    },
+    {
+      "object": "Spa Room",
+      "actions": ["Reserve", "Prepare", "Clean"]
+    },
+    {
+      "object": "Swimming Pool Gate",
+      "actions": ["Open", "Close", "Lock"]
+    },
+    {
+      "object": "Conference Room",
+      "actions": ["Reserve", "Prepare", "Clean"]
+    },
+    {
+      "object": "Laundry Machine",
+      "actions": ["Load", "Wash", "Dry", "Unload"]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Reception",
+      "relation": "AdjacentTo",
+      "object": "Guest Lounge"
+    },
+    {
+      "subject": "Restaurant",
+      "relation": "ConnectedTo",
+      "object": "Commercial Kitchen"
+    },
+    {
+      "subject": "Kitchen",
+      "relation": "Contains",
+      "object": "Cooking Appliances"
+    },
+    {
+      "subject": "Guest Room",
+      "relation": "Contains",
+      "object": "Bathroom"
+    },
+    {
+      "subject": "Spa",
+      "relation": "AdjacentTo",
+      "object": "Swimming Pool"
+    },
+    {
+      "subject": "Gym",
+      "relation": "Near",
+      "object": "Spa"
+    },
+    {
+      "subject": "Housekeeping",
+      "relation": "Supplies",
+      "object": "Guest Rooms"
+    },
+    {
+      "subject": "Laundry",
+      "relation": "Supports",
+      "object": "Housekeeping"
+    },
+    {
+      "subject": "Medical Room",
+      "relation": "Supports",
+      "object": "Entire Hotel"
+    },
+    {
+      "subject": "Parking",
+      "relation": "ConnectedTo",
+      "object": "Main Entrance"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Main Entrance",
+    "Reception Lobby",
+    "Restaurant Entrance",
+    "Kitchen Entrance",
+    "Guest Room Corridor",
+    "Swimming Pool",
+    "Spa Reception",
+    "Gym Entrance",
+    "Conference Hall",
+    "Housekeeping Room",
+    "Parking Area"
+  ]
+}

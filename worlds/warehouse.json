@@ -1,0 +1,389 @@
+{
+  "environment": {
+    "name": "E-Commerce Fulfillment & Quick Commerce Warehouse",
+    "type": "Indoor",
+    "category": "Logistics & Warehousing",
+    "description": "A modern automated fulfillment center used by e-commerce and quick-commerce companies for inventory storage, order picking, packing, sorting and last-mile dispatch.",
+    "purpose": [
+      "Inventory Storage",
+      "Order Fulfillment",
+      "Picking",
+      "Packing",
+      "Sorting",
+      "Quality Inspection",
+      "Last Mile Dispatch",
+      "Returns Processing"
+    ],
+    "occupancy": {
+      "typical_people": 150,
+      "maximum_people": 500
+    }
+  },
+
+  "zones": [
+    { "name": "Receiving Zone" },
+    { "name": "Quality Inspection Zone" },
+    { "name": "Inbound Storage Zone" },
+    { "name": "High Rack Storage Zone" },
+    { "name": "Fast Moving Inventory Zone" },
+    { "name": "Cold Storage Zone" },
+    { "name": "Picking Zone" },
+    { "name": "Packing Zone" },
+    { "name": "Sorting Zone" },
+    { "name": "Dispatch Zone" },
+    { "name": "Returns Processing Zone" },
+    { "name": "Charging Station Zone" },
+    { "name": "Maintenance Zone" },
+    { "name": "Administration Zone" },
+    { "name": "Employee Zone" }
+  ],
+
+  "rooms": [
+    { "id": "security_gate", "name": "Security Gate" },
+    { "id": "receiving_dock", "name": "Receiving Dock" },
+    { "id": "loading_dock", "name": "Loading Dock" },
+    { "id": "quality_inspection", "name": "Quality Inspection Room" },
+    { "id": "inventory_storage", "name": "Inventory Storage" },
+    { "id": "high_rack_storage", "name": "High Rack Storage" },
+    { "id": "cold_storage", "name": "Cold Storage" },
+    { "id": "fast_moving_storage", "name": "Fast Moving Inventory Area" },
+    { "id": "picking_station", "name": "Picking Station" },
+    { "id": "packing_station", "name": "Packing Station" },
+    { "id": "sorting_center", "name": "Sorting Center" },
+    { "id": "dispatch_area", "name": "Dispatch Area" },
+    { "id": "returns_center", "name": "Returns Processing Center" },
+    { "id": "robot_charging", "name": "Robot Charging Station" },
+    { "id": "maintenance_room", "name": "Maintenance Room" },
+    { "id": "warehouse_office", "name": "Warehouse Office" },
+    { "id": "meeting_room", "name": "Meeting Room" },
+    { "id": "employee_break_room", "name": "Employee Break Room" },
+    { "id": "locker_room", "name": "Locker Room" },
+    { "id": "restroom", "name": "Restroom" },
+    { "id": "server_room", "name": "Server Room" }
+  ],
+
+  "static_structures": [
+    "Warehouse Floor",
+    "High Storage Racks",
+    "Pallet Racks",
+    "Conveyor Belts",
+    "Roller Conveyors",
+    "Loading Bays",
+    "Dock Levelers",
+    "Automatic Doors",
+    "Safety Barriers",
+    "Emergency Exits",
+    "Fire Escape",
+    "Charging Stations",
+    "Navigation Markers",
+    "Barcode Sign Boards",
+    "RFID Gates",
+    "CCTV Cameras"
+  ],
+
+  "inventory": {
+    "categories": [
+      "Groceries",
+      "Fresh Produce",
+      "Frozen Foods",
+      "Beverages",
+      "Snacks",
+      "Personal Care",
+      "Health Care",
+      "Baby Products",
+      "Cleaning Supplies",
+      "Home Appliances",
+      "Kitchen Items",
+      "Stationery",
+      "Electronics",
+      "Mobile Accessories",
+      "Books",
+      "Toys",
+      "Clothing",
+      "Footwear",
+      "Pet Supplies",
+      "Sports Equipment"
+    ]
+  },
+
+  "storage_system": {
+    "equipment": [
+      "Pallets",
+      "Storage Bins",
+      "Plastic Crates",
+      "Metal Shelves",
+      "High Rack Shelves",
+      "Barcode Labels",
+      "RFID Tags",
+      "Inventory Containers",
+      "Temperature Controlled Cabinets"
+    ]
+  },
+
+  "warehouse_equipment": {
+    "material_handling": [
+      "Forklift",
+      "Electric Pallet Jack",
+      "Manual Pallet Jack",
+      "Hand Truck",
+      "Platform Trolley",
+      "Scissor Lift",
+      "Conveyor System",
+      "Sorting Conveyor",
+      "Automated Guided Vehicle (AGV)",
+      "Autonomous Mobile Robot (AMR)"
+    ],
+
+    "packing": [
+      "Packing Table",
+      "Barcode Scanner",
+      "Label Printer",
+      "Shipping Label Printer",
+      "Tape Dispenser",
+      "Carton Sealer",
+      "Shrink Wrapping Machine",
+      "Weighing Scale",
+      "Packaging Boxes",
+      "Bubble Wrap",
+      "Packing Paper",
+      "Packing Tape",
+      "Zip Bags"
+    ],
+
+    "sorting": [
+      "Sorting Conveyor",
+      "Parcel Scanner",
+      "Destination Chutes",
+      "Sorting Bins"
+    ]
+  },
+
+  "robotics_infrastructure": {
+    "robots": [
+      "Autonomous Mobile Robot",
+      "Warehouse Picking Robot",
+      "Inventory Inspection Robot",
+      "Cleaning Robot",
+      "Forklift Robot"
+    ],
+
+    "navigation": [
+      "QR Floor Markers",
+      "April Tags",
+      "RFID Navigation",
+      "Lidar Landmarks",
+      "Charging Dock"
+    ]
+  },
+
+  "office": {
+    "equipment": [
+      "Desktop Computers",
+      "Warehouse Management System",
+      "Inventory Dashboard",
+      "Printers",
+      "Barcode Printers",
+      "Telephones",
+      "Meeting Table",
+      "Projector"
+    ]
+  },
+
+  "employee_facilities": {
+    "break_room": [
+      "Dining Tables",
+      "Chairs",
+      "Coffee Machine",
+      "Microwave",
+      "Refrigerator",
+      "Water Dispenser",
+      "Lockers"
+    ]
+  },
+
+  "maintenance": {
+    "equipment": [
+      "Tool Box",
+      "Spare Parts",
+      "Battery Packs",
+      "Robot Diagnostic Station",
+      "Lubricants",
+      "Cleaning Equipment"
+    ]
+  },
+
+  "utilities": [
+    "Electricity",
+    "Industrial WiFi",
+    "Ethernet Network",
+    "Backup Generator",
+    "Compressed Air",
+    "HVAC",
+    "Fire Alarm System",
+    "Public Address System",
+    "Warehouse Management System",
+    "RFID Infrastructure",
+    "Barcode Network",
+    "Robot Fleet Management System"
+  ],
+
+  "safety_equipment": [
+    "Fire Extinguishers",
+    "Smoke Detectors",
+    "Emergency Stop Buttons",
+    "Safety Cones",
+    "Warning Lights",
+    "Emergency Exit Signs",
+    "First Aid Kit",
+    "AED",
+    "Safety Helmets",
+    "Reflective Jackets",
+    "Safety Gloves",
+    "Forklift Warning System"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Storage Rack",
+      "actions": [
+        "Store",
+        "Retrieve",
+        "Inspect"
+      ]
+    },
+    {
+      "object": "Picking Station",
+      "actions": [
+        "PickItem",
+        "PlaceItem",
+        "ScanItem"
+      ]
+    },
+    {
+      "object": "Packing Station",
+      "actions": [
+        "Pack",
+        "Seal",
+        "Label"
+      ]
+    },
+    {
+      "object": "Sorting Conveyor",
+      "actions": [
+        "Sort",
+        "Route",
+        "Inspect"
+      ]
+    },
+    {
+      "object": "Loading Dock",
+      "actions": [
+        "Load",
+        "Unload"
+      ]
+    },
+    {
+      "object": "Barcode Scanner",
+      "actions": [
+        "Scan"
+      ]
+    },
+    {
+      "object": "Robot Charging Dock",
+      "actions": [
+        "Charge",
+        "Dock",
+        "Undock"
+      ]
+    },
+    {
+      "object": "Quality Inspection Station",
+      "actions": [
+        "Inspect",
+        "Approve",
+        "Reject"
+      ]
+    },
+    {
+      "object": "Returns Center",
+      "actions": [
+        "Receive",
+        "Inspect",
+        "Restock",
+        "Discard"
+      ]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Receiving Dock",
+      "relation": "ConnectedTo",
+      "object": "Quality Inspection"
+    },
+    {
+      "subject": "Quality Inspection",
+      "relation": "Supplies",
+      "object": "Inventory Storage"
+    },
+    {
+      "subject": "Inventory Storage",
+      "relation": "Supports",
+      "object": "Picking Station"
+    },
+    {
+      "subject": "Picking Station",
+      "relation": "Feeds",
+      "object": "Packing Station"
+    },
+    {
+      "subject": "Packing Station",
+      "relation": "Feeds",
+      "object": "Sorting Center"
+    },
+    {
+      "subject": "Sorting Center",
+      "relation": "RoutesTo",
+      "object": "Dispatch Area"
+    },
+    {
+      "subject": "Returns Center",
+      "relation": "ConnectedTo",
+      "object": "Inventory Storage"
+    },
+    {
+      "subject": "Cold Storage",
+      "relation": "Contains",
+      "object": "Perishable Inventory"
+    },
+    {
+      "subject": "Fast Moving Inventory",
+      "relation": "Contains",
+      "object": "High Demand Products"
+    },
+    {
+      "subject": "Robot Charging Station",
+      "relation": "Supports",
+      "object": "Warehouse Robots"
+    },
+    {
+      "subject": "Warehouse Office",
+      "relation": "Manages",
+      "object": "Entire Warehouse"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Receiving Dock",
+    "Inventory Storage",
+    "High Rack Storage",
+    "Picking Station",
+    "Packing Station",
+    "Sorting Center",
+    "Dispatch Area",
+    "Cold Storage",
+    "Returns Center",
+    "Robot Charging Station",
+    "Warehouse Office"
+  ]
+}

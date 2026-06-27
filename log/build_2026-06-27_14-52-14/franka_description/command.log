@@ -1,0 +1,1 @@
+Invoking command in '/home/sjk/DISSERTATION/build/franka_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/manipulators/franka_description -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/franka_description

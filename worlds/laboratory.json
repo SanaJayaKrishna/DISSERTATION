@@ -1,0 +1,471 @@
+{
+  "environment": {
+    "name": "Chemistry Laboratory",
+    "type": "Indoor",
+    "category": "Scientific Research Laboratory",
+    "description": "A modern chemistry laboratory used for academic research, industrial R&D, chemical synthesis, analytical chemistry, quality control, and educational experiments. The laboratory contains workbenches, analytical instruments, chemical storage, preparation rooms, waste disposal systems, safety equipment, and administrative facilities.",
+    "purpose": [
+      "Chemical Research",
+      "Chemical Analysis",
+      "Chemical Synthesis",
+      "Academic Experiments",
+      "Quality Control",
+      "Sample Preparation",
+      "Material Characterization"
+    ],
+    "occupancy": {
+      "typical_people": 40,
+      "maximum_people": 120
+    }
+  },
+
+  "zones": [
+    {
+      "name": "Sample Receiving Zone"
+    },
+    {
+      "name": "Chemical Storage Zone"
+    },
+    {
+      "name": "Wet Laboratory"
+    },
+    {
+      "name": "Analytical Laboratory"
+    },
+    {
+      "name": "Instrument Room"
+    },
+    {
+      "name": "Sample Preparation Zone"
+    },
+    {
+      "name": "Research Laboratory"
+    },
+    {
+      "name": "Quality Control Laboratory"
+    },
+    {
+      "name": "Glassware Cleaning Area"
+    },
+    {
+      "name": "Chemical Waste Disposal Zone"
+    },
+    {
+      "name": "Safety Zone"
+    },
+    {
+      "name": "Office & Documentation Zone"
+    }
+  ],
+
+  "rooms": [
+    {
+      "id": "main_entrance",
+      "name": "Main Entrance"
+    },
+    {
+      "id": "sample_receiving",
+      "name": "Sample Receiving Room"
+    },
+    {
+      "id": "chemical_storage",
+      "name": "Chemical Storage Room"
+    },
+    {
+      "id": "wet_lab",
+      "name": "Wet Chemistry Laboratory"
+    },
+    {
+      "id": "analytical_lab",
+      "name": "Analytical Laboratory"
+    },
+    {
+      "id": "instrument_room",
+      "name": "Instrument Room"
+    },
+    {
+      "id": "sample_preparation",
+      "name": "Sample Preparation Room"
+    },
+    {
+      "id": "research_lab",
+      "name": "Research Laboratory"
+    },
+    {
+      "id": "quality_control",
+      "name": "Quality Control Laboratory"
+    },
+    {
+      "id": "glassware_cleaning",
+      "name": "Glassware Cleaning Room"
+    },
+    {
+      "id": "chemical_waste",
+      "name": "Chemical Waste Disposal Room"
+    },
+    {
+      "id": "safety_room",
+      "name": "Safety Equipment Room"
+    },
+    {
+      "id": "office",
+      "name": "Laboratory Office"
+    },
+    {
+      "id": "meeting_room",
+      "name": "Meeting Room"
+    },
+    {
+      "id": "server_room",
+      "name": "Data Acquisition Room"
+    }
+  ],
+
+  "static_structures": [
+    "Laboratory Benches",
+    "Chemical Resistant Worktops",
+    "Fume Hoods",
+    "Laminar Flow Hood",
+    "Chemical Cabinets",
+    "Gas Supply Lines",
+    "Compressed Air Lines",
+    "Vacuum Lines",
+    "Emergency Exit",
+    "Fire Doors",
+    "Safety Shower",
+    "Eye Wash Station",
+    "Chemical Spill Station",
+    "Ventilation System",
+    "Drainage System",
+    "Emergency Alarm",
+    "CCTV Cameras"
+  ],
+
+  "chemicals": {
+
+    "acids": [
+      "Hydrochloric Acid",
+      "Sulfuric Acid",
+      "Nitric Acid",
+      "Acetic Acid",
+      "Phosphoric Acid",
+      "Hydrofluoric Acid"
+    ],
+
+    "bases": [
+      "Sodium Hydroxide",
+      "Potassium Hydroxide",
+      "Ammonium Hydroxide",
+      "Calcium Hydroxide"
+    ],
+
+    "organic_solvents": [
+      "Ethanol",
+      "Methanol",
+      "Acetone",
+      "Isopropyl Alcohol",
+      "Toluene",
+      "Hexane",
+      "Benzene",
+      "Chloroform",
+      "Diethyl Ether",
+      "Dimethyl Sulfoxide"
+    ],
+
+    "salts": [
+      "Sodium Chloride",
+      "Potassium Chloride",
+      "Copper Sulfate",
+      "Silver Nitrate",
+      "Calcium Carbonate"
+    ],
+
+    "buffers": [
+      "Phosphate Buffer",
+      "Acetate Buffer",
+      "Borate Buffer"
+    ],
+
+    "indicators": [
+      "Phenolphthalein",
+      "Methyl Orange",
+      "Litmus",
+      "Bromothymol Blue",
+      "Universal Indicator"
+    ],
+
+    "gases": [
+      "Nitrogen",
+      "Oxygen",
+      "Hydrogen",
+      "Argon",
+      "Helium",
+      "Carbon Dioxide"
+    ]
+  },
+
+  "glassware": [
+    "Beaker",
+    "Conical Flask",
+    "Round Bottom Flask",
+    "Volumetric Flask",
+    "Graduated Cylinder",
+    "Test Tube",
+    "Burette",
+    "Pipette",
+    "Micropipette",
+    "Glass Funnel",
+    "Separatory Funnel",
+    "Watch Glass",
+    "Petri Dish",
+    "Glass Stir Rod",
+    "Reagent Bottle",
+    "Dropping Bottle",
+    "Volumetric Pipette"
+  ],
+
+  "laboratory_equipment": [
+    "Analytical Balance",
+    "Top Loading Balance",
+    "Magnetic Stirrer",
+    "Hot Plate",
+    "Heating Mantle",
+    "Centrifuge",
+    "Vacuum Pump",
+    "Water Bath",
+    "Oil Bath",
+    "Ultrasonic Cleaner",
+    "pH Meter",
+    "Conductivity Meter",
+    "Orbital Shaker",
+    "Vortex Mixer",
+    "Drying Oven",
+    "Muffle Furnace",
+    "Autoclave",
+    "Distillation Unit",
+    "Rotary Evaporator",
+    "Freeze Dryer"
+  ],
+
+  "analytical_instruments": [
+    "UV-Visible Spectrophotometer",
+    "FTIR Spectrometer",
+    "Raman Spectrometer",
+    "Gas Chromatograph",
+    "High Performance Liquid Chromatography",
+    "Gas Chromatography Mass Spectrometer",
+    "Liquid Chromatography Mass Spectrometer",
+    "Atomic Absorption Spectrometer",
+    "ICP-OES",
+    "ICP-MS",
+    "NMR Spectrometer",
+    "X-Ray Diffraction",
+    "Differential Scanning Calorimeter",
+    "Thermogravimetric Analyzer"
+  ],
+
+  "consumables": [
+    "Filter Paper",
+    "Syringe Filters",
+    "Disposable Pipette Tips",
+    "Gloves",
+    "Laboratory Tissue",
+    "Labels",
+    "Parafilm",
+    "Aluminium Foil",
+    "Sample Vials",
+    "Cryogenic Tubes"
+  ],
+
+  "sample_types": [
+    "Water Samples",
+    "Soil Samples",
+    "Powder Samples",
+    "Liquid Samples",
+    "Biological Samples",
+    "Industrial Samples",
+    "Food Samples",
+    "Pharmaceutical Samples",
+    "Polymer Samples"
+  ],
+
+  "utilities": [
+    "Electricity",
+    "UPS Backup",
+    "Distilled Water",
+    "Deionized Water",
+    "Compressed Air",
+    "Nitrogen Supply",
+    "Vacuum Supply",
+    "Internet",
+    "Laboratory Information Management System",
+    "HVAC",
+    "Ventilation",
+    "Fire Alarm",
+    "Access Control"
+  ],
+
+  "safety_equipment": [
+    "Fire Extinguishers",
+    "Safety Shower",
+    "Eye Wash Station",
+    "Chemical Spill Kit",
+    "First Aid Kit",
+    "Emergency Alarm",
+    "Gas Leak Detector",
+    "Smoke Detector",
+    "Respirators",
+    "Safety Goggles",
+    "Lab Coats",
+    "Chemical Resistant Gloves",
+    "Face Shields",
+    "Fume Hood",
+    "Emergency Exit Lighting"
+  ],
+
+  "waste_management": [
+    "Organic Waste Container",
+    "Acid Waste Container",
+    "Base Waste Container",
+    "Heavy Metal Waste",
+    "Glass Waste",
+    "Sharps Container",
+    "Biological Waste",
+    "General Waste",
+    "Recycling Bin"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Chemical Cabinet",
+      "actions": [
+        "Open",
+        "Close",
+        "StoreChemical",
+        "RetrieveChemical",
+        "InventoryCheck"
+      ]
+    },
+    {
+      "object": "Fume Hood",
+      "actions": [
+        "TurnOn",
+        "TurnOff",
+        "PerformExperiment"
+      ]
+    },
+    {
+      "object": "Analytical Balance",
+      "actions": [
+        "Calibrate",
+        "WeighSample"
+      ]
+    },
+    {
+      "object": "Spectrophotometer",
+      "actions": [
+        "Calibrate",
+        "AnalyzeSample",
+        "ExportResults"
+      ]
+    },
+    {
+      "object": "pH Meter",
+      "actions": [
+        "Calibrate",
+        "MeasurePH"
+      ]
+    },
+    {
+      "object": "Centrifuge",
+      "actions": [
+        "LoadSample",
+        "Run",
+        "UnloadSample"
+      ]
+    },
+    {
+      "object": "Waste Container",
+      "actions": [
+        "DisposeWaste",
+        "Seal",
+        "Replace"
+      ]
+    },
+    {
+      "object": "Sample Storage",
+      "actions": [
+        "StoreSample",
+        "RetrieveSample",
+        "LabelSample"
+      ]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Sample Receiving",
+      "relation": "Supplies",
+      "object": "Sample Preparation"
+    },
+    {
+      "subject": "Sample Preparation",
+      "relation": "Supplies",
+      "object": "Wet Laboratory"
+    },
+    {
+      "subject": "Wet Laboratory",
+      "relation": "Supports",
+      "object": "Analytical Laboratory"
+    },
+    {
+      "subject": "Analytical Laboratory",
+      "relation": "Uses",
+      "object": "Instrument Room"
+    },
+    {
+      "subject": "Chemical Storage",
+      "relation": "Supplies",
+      "object": "Entire Laboratory"
+    },
+    {
+      "subject": "Glassware Cleaning",
+      "relation": "Supports",
+      "object": "Wet Laboratory"
+    },
+    {
+      "subject": "Chemical Waste Disposal",
+      "relation": "Receives",
+      "object": "Laboratory Waste"
+    },
+    {
+      "subject": "Quality Control Laboratory",
+      "relation": "Validates",
+      "object": "Experimental Results"
+    },
+    {
+      "subject": "Research Laboratory",
+      "relation": "Uses",
+      "object": "Analytical Instruments"
+    },
+    {
+      "subject": "Safety Room",
+      "relation": "Supports",
+      "object": "Entire Laboratory"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Main Entrance",
+    "Sample Receiving Room",
+    "Chemical Storage Room",
+    "Wet Chemistry Laboratory",
+    "Analytical Laboratory",
+    "Instrument Room",
+    "Sample Preparation Room",
+    "Research Laboratory",
+    "Quality Control Laboratory",
+    "Glassware Cleaning Room",
+    "Chemical Waste Disposal Room"
+  ]
+}

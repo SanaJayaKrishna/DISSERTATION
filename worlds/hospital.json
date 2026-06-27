@@ -1,0 +1,392 @@
+{
+  "environment": {
+    "name": "Multi-Speciality Hospital",
+    "type": "Indoor",
+    "category": "Healthcare",
+    "description": "A comprehensive multi-speciality hospital representing a real-world healthcare facility with patient care, emergency services, diagnostics, surgical units, pharmacies, laboratories, administrative offices, rehabilitation, and support services.",
+    "purpose": [
+      "Patient Care",
+      "Emergency Treatment",
+      "Diagnosis",
+      "Surgery",
+      "Pharmacy Services",
+      "Medical Research",
+      "Rehabilitation",
+      "Hospital Administration"
+    ],
+    "occupancy": {
+      "typical_people": 800,
+      "maximum_people": 2000
+    }
+  },
+
+  "zones": [
+    { "name": "Emergency Zone" },
+    { "name": "Outpatient Zone" },
+    { "name": "Inpatient Zone" },
+    { "name": "Critical Care Zone" },
+    { "name": "Surgical Zone" },
+    { "name": "Diagnostic Zone" },
+    { "name": "Pharmacy Zone" },
+    { "name": "Laboratory Zone" },
+    { "name": "Rehabilitation Zone" },
+    { "name": "Administration Zone" },
+    { "name": "Maintenance Zone" },
+    { "name": "Visitor Zone" }
+  ],
+
+  "rooms": [
+    { "id": "main_entrance", "name": "Main Entrance" },
+    { "id": "reception", "name": "Reception" },
+    { "id": "waiting_area", "name": "Waiting Area" },
+    { "id": "triage", "name": "Triage" },
+    { "id": "emergency", "name": "Emergency Department" },
+    { "id": "icu", "name": "Intensive Care Unit" },
+    { "id": "nicu", "name": "Neonatal ICU" },
+    { "id": "ccu", "name": "Cardiac Care Unit" },
+    { "id": "general_ward", "name": "General Ward" },
+    { "id": "private_rooms", "name": "Private Patient Rooms" },
+    { "id": "operation_theatre_1", "name": "Operation Theatre 1" },
+    { "id": "operation_theatre_2", "name": "Operation Theatre 2" },
+    { "id": "pre_op", "name": "Pre-Operation Room" },
+    { "id": "post_op", "name": "Recovery Room" },
+    { "id": "radiology", "name": "Radiology Department" },
+    { "id": "ct_scan", "name": "CT Scan Room" },
+    { "id": "mri", "name": "MRI Room" },
+    { "id": "xray", "name": "X-Ray Room" },
+    { "id": "ultrasound", "name": "Ultrasound Room" },
+    { "id": "pathology", "name": "Pathology Laboratory" },
+    { "id": "blood_bank", "name": "Blood Bank" },
+    { "id": "pharmacy", "name": "Pharmacy" },
+    { "id": "physiotherapy", "name": "Physiotherapy Center" },
+    { "id": "dentistry", "name": "Dental Clinic" },
+    { "id": "consultation_rooms", "name": "Consultation Rooms" },
+    { "id": "cafeteria", "name": "Hospital Cafeteria" },
+    { "id": "medical_store", "name": "Medical Supply Store" },
+    { "id": "housekeeping", "name": "Housekeeping" },
+    { "id": "laundry", "name": "Laundry" },
+    { "id": "mortuary", "name": "Mortuary" },
+    { "id": "maintenance", "name": "Maintenance Room" },
+    { "id": "administration", "name": "Administration Office" },
+    { "id": "conference_room", "name": "Conference Room" },
+    { "id": "staff_room", "name": "Staff Lounge" }
+  ],
+
+  "static_structures": [
+    "Hospital Corridors",
+    "Elevators",
+    "Emergency Exits",
+    "Fire Escapes",
+    "Staircases",
+    "Automatic Doors",
+    "Patient Waiting Benches",
+    "Information Kiosks",
+    "Sign Boards",
+    "Wheelchair Ramps",
+    "Medical Gas Lines",
+    "Oxygen Supply",
+    "Water Supply",
+    "Drainage",
+    "HVAC System",
+    "Fire Alarm System",
+    "CCTV Cameras",
+    "Access Control System"
+  ],
+
+  "patient_care": {
+    "general_ward": [
+      "Hospital Beds",
+      "Bedside Tables",
+      "Patient Chairs",
+      "Privacy Curtains",
+      "Oxygen Outlet",
+      "IV Stand",
+      "Nurse Call Button"
+    ],
+    "private_rooms": [
+      "Hospital Bed",
+      "Visitor Sofa",
+      "Television",
+      "Wardrobe",
+      "Bathroom",
+      "Refrigerator",
+      "Medical Monitor"
+    ]
+  },
+
+  "operation_theatre": {
+    "equipment": [
+      "Operating Table",
+      "Surgical Lights",
+      "Anesthesia Machine",
+      "Patient Monitor",
+      "Ventilator",
+      "Electrosurgical Unit",
+      "Infusion Pumps",
+      "Defibrillator",
+      "Suction Machine",
+      "Surgical Instrument Table",
+      "Sterilization Equipment"
+    ],
+
+    "surgical_instruments": [
+      "Scalpels",
+      "Forceps",
+      "Scissors",
+      "Needle Holders",
+      "Retractors",
+      "Surgical Drapes",
+      "Sutures",
+      "Clamps"
+    ]
+  },
+
+  "diagnostics": {
+    "radiology": [
+      "MRI Scanner",
+      "CT Scanner",
+      "X-Ray Machine",
+      "Ultrasound Machine",
+      "Mammography Unit"
+    ],
+
+    "pathology": [
+      "Microscope",
+      "Blood Analyzer",
+      "Urine Analyzer",
+      "Sample Storage Refrigerator",
+      "Centrifuge",
+      "Incubator"
+    ]
+  },
+
+  "pharmacy": {
+    "storage": [
+      "Medicine Shelves",
+      "Cold Storage Refrigerator",
+      "Controlled Drug Cabinet",
+      "Prescription Counter"
+    ],
+
+    "medications": [
+      "Tablets",
+      "Capsules",
+      "Injectables",
+      "Vaccines",
+      "IV Fluids",
+      "Antibiotics",
+      "Pain Killers",
+      "Emergency Drugs",
+      "Insulin",
+      "Medical Consumables"
+    ]
+  },
+
+  "medical_equipment": [
+    "Wheelchairs",
+    "Stretchers",
+    "Patient Trolleys",
+    "Hospital Beds",
+    "Infusion Pumps",
+    "Syringe Pumps",
+    "ECG Machine",
+    "Blood Pressure Monitor",
+    "Pulse Oximeter",
+    "Glucometer",
+    "Portable Ultrasound",
+    "Portable X-Ray",
+    "Oxygen Cylinders"
+  ],
+
+  "rehabilitation": {
+    "equipment": [
+      "Parallel Bars",
+      "Exercise Bicycle",
+      "Treadmill",
+      "Resistance Bands",
+      "Therapy Balls",
+      "Walking Frames",
+      "Balance Boards"
+    ]
+  },
+
+  "cafeteria": {
+    "equipment": [
+      "Dining Tables",
+      "Dining Chairs",
+      "Serving Counter",
+      "Coffee Machine",
+      "Water Dispenser",
+      "Microwave",
+      "Refrigerator"
+    ]
+  },
+
+  "housekeeping": {
+    "equipment": [
+      "Cleaning Cart",
+      "Vacuum Cleaner",
+      "Mop",
+      "Buckets",
+      "Disinfectants",
+      "Medical Waste Bins",
+      "Laundry Bags"
+    ]
+  },
+
+  "utilities": [
+    "Electricity",
+    "Running Water",
+    "Medical Gas Supply",
+    "Oxygen Pipeline",
+    "HVAC",
+    "Hospital WiFi",
+    "Backup Generator",
+    "Fire Alarm",
+    "Public Address System",
+    "CCTV",
+    "Nurse Call System"
+  ],
+
+  "safety_equipment": [
+    "Fire Extinguishers",
+    "Smoke Detectors",
+    "Emergency Exit Signs",
+    "AED",
+    "Crash Cart",
+    "First Aid Kits",
+    "Biohazard Disposal Units",
+    "Isolation Equipment",
+    "Emergency Lighting"
+  ],
+
+  "interaction_rules": [
+    {
+      "object": "Patient Room",
+      "actions": [
+        "Enter",
+        "Exit",
+        "DeliverMedicine",
+        "AssistPatient",
+        "Clean"
+      ]
+    },
+    {
+      "object": "Operation Theatre",
+      "actions": [
+        "Prepare",
+        "Sterilize",
+        "Operate",
+        "Clean"
+      ]
+    },
+    {
+      "object": "Pharmacy",
+      "actions": [
+        "RetrieveMedicine",
+        "StoreMedicine",
+        "DispenseMedicine",
+        "UpdateInventory"
+      ]
+    },
+    {
+      "object": "Blood Bank",
+      "actions": [
+        "StoreBlood",
+        "RetrieveBlood",
+        "UpdateInventory"
+      ]
+    },
+    {
+      "object": "Medical Equipment",
+      "actions": [
+        "Inspect",
+        "Move",
+        "Calibrate",
+        "Maintain"
+      ]
+    },
+    {
+      "object": "Elevator",
+      "actions": [
+        "Call",
+        "Enter",
+        "Exit"
+      ]
+    },
+    {
+      "object": "Wheelchair",
+      "actions": [
+        "MovePatient",
+        "Park"
+      ]
+    }
+  ],
+
+  "semantic_relations": [
+    {
+      "subject": "Emergency Department",
+      "relation": "AdjacentTo",
+      "object": "Triage"
+    },
+    {
+      "subject": "Operation Theatre",
+      "relation": "AdjacentTo",
+      "object": "Recovery Room"
+    },
+    {
+      "subject": "ICU",
+      "relation": "Near",
+      "object": "Operation Theatre"
+    },
+    {
+      "subject": "Pharmacy",
+      "relation": "Supplies",
+      "object": "Entire Hospital"
+    },
+    {
+      "subject": "Blood Bank",
+      "relation": "Supports",
+      "object": "Operation Theatre"
+    },
+    {
+      "subject": "Radiology",
+      "relation": "Supports",
+      "object": "Consultation Rooms"
+    },
+    {
+      "subject": "Pathology",
+      "relation": "Supports",
+      "object": "Entire Hospital"
+    },
+    {
+      "subject": "Housekeeping",
+      "relation": "Maintains",
+      "object": "Entire Hospital"
+    },
+    {
+      "subject": "Medical Store",
+      "relation": "Supplies",
+      "object": "Pharmacy"
+    },
+    {
+      "subject": "Medical Center",
+      "relation": "ConnectedTo",
+      "object": "Reception"
+    }
+  ],
+
+  "default_robot_spawn_locations": [
+    "Main Entrance",
+    "Reception",
+    "Emergency Department",
+    "General Ward",
+    "ICU",
+    "Operation Theatre Corridor",
+    "Pharmacy",
+    "Radiology Department",
+    "Medical Store",
+    "Housekeeping",
+    "Administration Office"
+  ]
+}

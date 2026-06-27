@@ -1,0 +1,2667 @@
+{
+  "version": "1.0",
+  "description": "Universal Robot Skill Ontology",
+  "ontology_id": "robot_skill_ontology",
+  "metadata": {
+    "name": "Robot Skill Ontology",
+    "abbreviation": "RSO",
+    "total_skills": 145,
+    "design_principle": "Plan over abstract skills first, verify robot capabilities second, and ground to ROS 2 implementations only after capability verification.",
+    "category_counts": {
+      "Navigation": 15,
+      "Manipulation": 30,
+      "Perception": 30,
+      "Mobility": 15,
+      "Communication": 10,
+      "Inspection": 15,
+      "Environment Interaction": 15,
+      "System Operations": 15
+    },
+    "reasoning_stages": [
+      {
+        "stage": "planning",
+        "fields": ["abstract_skill", "description", "goal", "aliases", "required_capabilities"]
+      },
+      {
+        "stage": "capability_verification",
+        "fields": ["required_capabilities", "required_components", "preconditions"]
+      },
+      {
+        "stage": "grounding",
+        "fields": ["inputs", "outputs", "implementations", "postconditions", "failure_conditions"]
+      }
+    ]
+  },
+  "skill_schema": {
+    "skill_id": "Stable unique identifier such as NAV_001.",
+    "abstract_skill": "Unique robot-independent canonical skill name.",
+    "category": "High-level skill family.",
+    "description": "Human-readable semantic meaning.",
+    "goal": "Planner-level intent achieved by the skill.",
+    "aliases": "Natural language phrases that should map to this skill.",
+    "required_capabilities": "Capability keys expected in Robot Capability JSON.",
+    "required_components": "Physical or software components usually required.",
+    "inputs": "Named inputs with semantic or ROS-compatible types.",
+    "outputs": "Named outputs with semantic or ROS-compatible types.",
+    "preconditions": "Conditions that should hold before execution.",
+    "postconditions": "Expected state after successful execution.",
+    "failure_conditions": "Common causes of execution failure.",
+    "implementations": "Known ROS 2 or library interfaces that may ground the abstract skill."
+  },
+  "skills": [
+    {
+      "skill_id": "NAV_001",
+      "abstract_skill": "navigate_to_pose",
+      "category": "Navigation",
+      "description": "Navigate autonomously to a specified target pose while avoiding obstacles.",
+      "goal": "Move the robot from its current location to a destination pose.",
+      "aliases": ["go", "move", "travel", "reach", "drive", "proceed", "navigate"],
+      "required_capabilities": ["can_navigate", "supports_localization", "supports_obstacle_avoidance"],
+      "required_components": ["mobile_base", "localization", "navigation_stack"],
+      "inputs": [{"name": "target_pose", "type": "geometry_msgs/msg/PoseStamped", "required": true}],
+      "outputs": [{"name": "navigation_result", "type": "bool"}],
+      "preconditions": ["Localization active", "Goal reachable", "Navigation stack available"],
+      "postconditions": ["Robot reached target pose"],
+      "failure_conditions": ["Localization failure", "Goal blocked", "Navigation timeout"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/navigate_to_pose", "message_type": "nav2_msgs/action/NavigateToPose"},
+        {"framework": "MoveBase", "ros2_interface_type": "Action", "interface_name": "/move_base", "message_type": "move_base_msgs/MoveBaseAction"}
+      ]
+    },
+    {
+      "skill_id": "NAV_002",
+      "abstract_skill": "follow_path",
+      "category": "Navigation",
+      "description": "Follow a supplied path made of ordered poses.",
+      "goal": "Track a path from the current pose to the final path pose.",
+      "aliases": ["follow route", "track path", "drive path", "execute path"],
+      "required_capabilities": ["can_follow_path", "can_navigate"],
+      "required_components": ["mobile_base", "local_planner", "controller"],
+      "inputs": [{"name": "path", "type": "nav_msgs/msg/Path", "required": true}],
+      "outputs": [{"name": "path_result", "type": "bool"}],
+      "preconditions": ["Path valid", "Controller active", "Robot localized"],
+      "postconditions": ["Robot reached the end of the path"],
+      "failure_conditions": ["Path blocked", "Controller failure", "Robot deviated from path"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/follow_path", "message_type": "nav2_msgs/action/FollowPath"}
+      ]
+    },
+    {
+      "skill_id": "NAV_003",
+      "abstract_skill": "navigate_through_waypoints",
+      "category": "Navigation",
+      "description": "Navigate through a sequence of waypoint poses.",
+      "goal": "Visit ordered waypoints in the requested sequence.",
+      "aliases": ["visit waypoints", "go through points", "waypoint navigation", "tour points"],
+      "required_capabilities": ["can_follow_waypoints", "can_navigate"],
+      "required_components": ["mobile_base", "waypoint_follower", "localization"],
+      "inputs": [{"name": "waypoints", "type": "geometry_msgs/msg/PoseStamped[]", "required": true}],
+      "outputs": [{"name": "missed_waypoints", "type": "int32[]"}],
+      "preconditions": ["Waypoints valid", "Localization active", "Navigation stack available"],
+      "postconditions": ["Requested waypoints visited or reported as missed"],
+      "failure_conditions": ["Waypoint unreachable", "Route blocked", "Localization failure"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/navigate_through_poses", "message_type": "nav2_msgs/action/NavigateThroughPoses"},
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/follow_waypoints", "message_type": "nav2_msgs/action/FollowWaypoints"}
+      ]
+    },
+    {
+      "skill_id": "NAV_004",
+      "abstract_skill": "return_home",
+      "category": "Navigation",
+      "description": "Navigate back to a predefined home pose or origin location.",
+      "goal": "Return the robot to its home location.",
+      "aliases": ["go home", "return to base", "come back", "go to origin"],
+      "required_capabilities": ["can_navigate", "supports_localization"],
+      "required_components": ["mobile_base", "stored_home_pose", "navigation_stack"],
+      "inputs": [{"name": "home_pose", "type": "geometry_msgs/msg/PoseStamped", "required": false}],
+      "outputs": [{"name": "return_result", "type": "bool"}],
+      "preconditions": ["Home pose known", "Localization active", "Home route available"],
+      "postconditions": ["Robot reached home pose"],
+      "failure_conditions": ["Home pose unknown", "Path blocked", "Navigation timeout"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/navigate_to_pose", "message_type": "nav2_msgs/action/NavigateToPose"}
+      ]
+    },
+    {
+      "skill_id": "NAV_005",
+      "abstract_skill": "dock",
+      "category": "Navigation",
+      "description": "Approach and connect to a charging or service dock.",
+      "goal": "Place the robot in a docked state.",
+      "aliases": ["charge", "dock robot", "connect to charger", "go to dock"],
+      "required_capabilities": ["docking_capable", "can_navigate"],
+      "required_components": ["mobile_base", "dock_detector", "charging_dock"],
+      "inputs": [{"name": "dock_id", "type": "string", "required": false}],
+      "outputs": [{"name": "dock_result", "type": "bool"}],
+      "preconditions": ["Dock known or detectable", "Dock approach area clear", "Docking controller active"],
+      "postconditions": ["Robot docked"],
+      "failure_conditions": ["Dock not detected", "Alignment failed", "Dock occupied"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/dock_robot", "message_type": "nav2_msgs/action/DockRobot"}
+      ]
+    },
+    {
+      "skill_id": "NAV_006",
+      "abstract_skill": "undock",
+      "category": "Navigation",
+      "description": "Disconnect from a dock and move into a ready navigation pose.",
+      "goal": "Place the robot in an undocked state ready for motion.",
+      "aliases": ["leave dock", "undock robot", "disconnect from charger", "back out"],
+      "required_capabilities": ["docking_capable", "can_move"],
+      "required_components": ["mobile_base", "charging_dock", "docking_controller"],
+      "inputs": [{"name": "clearance_distance", "type": "float32", "required": false}],
+      "outputs": [{"name": "undock_result", "type": "bool"}],
+      "preconditions": ["Robot docked", "Undock path clear", "Motion controller active"],
+      "postconditions": ["Robot undocked"],
+      "failure_conditions": ["Dock latch failed", "Undock path blocked", "Controller failure"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/undock_robot", "message_type": "nav2_msgs/action/UndockRobot"}
+      ]
+    },
+    {
+      "skill_id": "NAV_007",
+      "abstract_skill": "cancel_navigation",
+      "category": "Navigation",
+      "description": "Cancel the currently executing navigation goal.",
+      "goal": "Stop the active navigation task cleanly.",
+      "aliases": ["cancel goal", "abort navigation", "stop navigating", "cancel route"],
+      "required_capabilities": ["can_navigate"],
+      "required_components": ["navigation_stack", "action_client"],
+      "inputs": [{"name": "goal_id", "type": "unique_identifier_msgs/msg/UUID", "required": false}],
+      "outputs": [{"name": "cancel_result", "type": "bool"}],
+      "preconditions": ["Navigation goal may be active"],
+      "postconditions": ["Navigation goal canceled or no active goal remains"],
+      "failure_conditions": ["Action server unavailable", "Goal already terminal", "Cancel rejected"],
+      "implementations": [
+        {"framework": "ROS2 Action", "ros2_interface_type": "ActionCancel", "interface_name": "/navigate_to_pose/_action/cancel_goal", "message_type": "action_msgs/srv/CancelGoal"}
+      ]
+    },
+    {
+      "skill_id": "NAV_008",
+      "abstract_skill": "pause_navigation",
+      "category": "Navigation",
+      "description": "Temporarily pause navigation execution while preserving the goal.",
+      "goal": "Hold the active navigation task without discarding it.",
+      "aliases": ["pause route", "hold navigation", "wait on path", "pause moving"],
+      "required_capabilities": ["can_navigate"],
+      "required_components": ["navigation_stack", "behavior_tree_controller"],
+      "inputs": [{"name": "pause", "type": "bool", "required": true}],
+      "outputs": [{"name": "pause_result", "type": "bool"}],
+      "preconditions": ["Navigation goal active", "Pause behavior supported"],
+      "postconditions": ["Navigation execution paused"],
+      "failure_conditions": ["Pause unsupported", "Navigation inactive", "Controller unavailable"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Service", "interface_name": "/pause_navigation", "message_type": "std_srvs/srv/SetBool"}
+      ]
+    },
+    {
+      "skill_id": "NAV_009",
+      "abstract_skill": "resume_navigation",
+      "category": "Navigation",
+      "description": "Resume a previously paused navigation task.",
+      "goal": "Continue navigation toward the existing target.",
+      "aliases": ["continue route", "resume route", "keep going", "continue navigation"],
+      "required_capabilities": ["can_navigate"],
+      "required_components": ["navigation_stack", "behavior_tree_controller"],
+      "inputs": [{"name": "resume", "type": "bool", "required": true}],
+      "outputs": [{"name": "resume_result", "type": "bool"}],
+      "preconditions": ["Navigation goal paused", "Resume behavior supported"],
+      "postconditions": ["Navigation execution resumed"],
+      "failure_conditions": ["No paused goal", "Resume unsupported", "Controller unavailable"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Service", "interface_name": "/resume_navigation", "message_type": "std_srvs/srv/Trigger"}
+      ]
+    },
+    {
+      "skill_id": "NAV_010",
+      "abstract_skill": "patrol_area",
+      "category": "Navigation",
+      "description": "Repeatedly navigate through patrol points or an assigned area.",
+      "goal": "Cover an area or route for monitoring.",
+      "aliases": ["patrol", "make rounds", "guard route", "monitor area"],
+      "required_capabilities": ["can_navigate", "can_execute_mission"],
+      "required_components": ["mobile_base", "mission_executor", "navigation_stack"],
+      "inputs": [{"name": "patrol_route", "type": "geometry_msgs/msg/PoseStamped[]", "required": true}],
+      "outputs": [{"name": "patrol_result", "type": "bool"}],
+      "preconditions": ["Patrol route available", "Robot localized", "Mission executor active"],
+      "postconditions": ["Patrol route completed or mission remains active"],
+      "failure_conditions": ["Route blocked", "Battery low", "Mission aborted"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/follow_waypoints", "message_type": "nav2_msgs/action/FollowWaypoints"}
+      ]
+    },
+    {
+      "skill_id": "NAV_011",
+      "abstract_skill": "follow_person",
+      "category": "Navigation",
+      "description": "Track and follow a person while maintaining safe motion.",
+      "goal": "Move with a target person at an appropriate following distance.",
+      "aliases": ["follow me", "follow the person", "track human", "come with me"],
+      "required_capabilities": ["can_follow_person", "can_detect_humans", "can_navigate"],
+      "required_components": ["mobile_base", "person_detector", "tracking_controller"],
+      "inputs": [{"name": "person_id", "type": "string", "required": false}],
+      "outputs": [{"name": "follow_result", "type": "bool"}],
+      "preconditions": ["Person visible or selected", "Safe following distance configured", "Motion controller active"],
+      "postconditions": ["Robot followed the person until stopped or target lost"],
+      "failure_conditions": ["Person lost", "Crowded scene ambiguity", "Path blocked"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/follow_person", "message_type": "custom_msgs/action/FollowPerson"}
+      ]
+    },
+    {
+      "skill_id": "NAV_012",
+      "abstract_skill": "maintain_distance",
+      "category": "Navigation",
+      "description": "Maintain a target distance from an object, person, or reference pose.",
+      "goal": "Keep separation within configured distance limits.",
+      "aliases": ["keep distance", "stay back", "maintain gap", "hold distance"],
+      "required_capabilities": ["can_move", "can_estimate_range"],
+      "required_components": ["range_sensor", "motion_controller", "target_tracker"],
+      "inputs": [{"name": "target", "type": "string", "required": true}, {"name": "distance_m", "type": "float32", "required": true}],
+      "outputs": [{"name": "distance_error_m", "type": "float32"}],
+      "preconditions": ["Target detectable", "Range estimate available", "Controller active"],
+      "postconditions": ["Robot maintained requested distance while task remained active"],
+      "failure_conditions": ["Target lost", "Range sensor failure", "Obstacle interference"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "NAV_013",
+      "abstract_skill": "explore_environment",
+      "category": "Navigation",
+      "description": "Autonomously explore an unknown or partially known environment.",
+      "goal": "Increase mapped or observed coverage of the environment.",
+      "aliases": ["explore", "map area", "look around", "discover space"],
+      "required_capabilities": ["can_navigate", "supports_slam", "supports_map_building"],
+      "required_components": ["mobile_base", "slam", "frontier_explorer"],
+      "inputs": [{"name": "bounds", "type": "geometry_msgs/msg/PolygonStamped", "required": false}],
+      "outputs": [{"name": "coverage_ratio", "type": "float32"}],
+      "preconditions": ["SLAM active", "Exploration area safe", "Obstacle sensing active"],
+      "postconditions": ["Environment coverage increased"],
+      "failure_conditions": ["No frontiers", "Robot stuck", "SLAM failure"],
+      "implementations": [
+        {"framework": "Explore Lite", "ros2_interface_type": "Action", "interface_name": "/explore", "message_type": "custom_msgs/action/Explore"}
+      ]
+    },
+    {
+      "skill_id": "NAV_014",
+      "abstract_skill": "navigate_to_object",
+      "category": "Navigation",
+      "description": "Navigate to the pose of a detected or named object.",
+      "goal": "Reach a navigation pose near the target object.",
+      "aliases": ["go to object", "approach object", "move to item", "drive to target"],
+      "required_capabilities": ["can_navigate", "can_detect_objects"],
+      "required_components": ["mobile_base", "object_detector", "navigation_stack"],
+      "inputs": [{"name": "object_label", "type": "string", "required": true}],
+      "outputs": [{"name": "approach_pose", "type": "geometry_msgs/msg/PoseStamped"}],
+      "preconditions": ["Object detected or locatable", "Approach pose computable", "Robot localized"],
+      "postconditions": ["Robot reached an approach pose near the object"],
+      "failure_conditions": ["Object not found", "No reachable approach pose", "Navigation failed"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/navigate_to_pose", "message_type": "nav2_msgs/action/NavigateToPose"}
+      ]
+    },
+    {
+      "skill_id": "NAV_015",
+      "abstract_skill": "navigate_to_room",
+      "category": "Navigation",
+      "description": "Navigate to a named room or semantic place in an indoor map.",
+      "goal": "Move the robot to the requested room.",
+      "aliases": ["go to room", "enter room", "move to kitchen", "go to lab"],
+      "required_capabilities": ["can_navigate", "supports_indoor_navigation"],
+      "required_components": ["mobile_base", "semantic_map", "navigation_stack"],
+      "inputs": [{"name": "room_name", "type": "string", "required": true}],
+      "outputs": [{"name": "room_pose", "type": "geometry_msgs/msg/PoseStamped"}],
+      "preconditions": ["Room exists in semantic map", "Robot localized", "Room reachable"],
+      "postconditions": ["Robot reached the room or its doorway"],
+      "failure_conditions": ["Unknown room", "Doorway blocked", "Navigation failed"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/navigate_to_pose", "message_type": "nav2_msgs/action/NavigateToPose"}
+      ]
+    },
+    {
+      "skill_id": "MAN_001",
+      "abstract_skill": "pick_object",
+      "category": "Manipulation",
+      "description": "Pick up an object using an end effector.",
+      "goal": "Secure the target object in the robot gripper or end effector.",
+      "aliases": ["pick", "pick up", "grab", "take", "collect"],
+      "required_capabilities": ["can_pick", "can_grasp", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "object_perception"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}, {"name": "grasp_pose", "type": "geometry_msgs/msg/PoseStamped", "required": false}],
+      "outputs": [{"name": "pick_result", "type": "bool"}],
+      "preconditions": ["Object reachable", "End effector open", "Collision scene valid"],
+      "postconditions": ["Object held by robot"],
+      "failure_conditions": ["Object not reachable", "Grasp failed", "Collision risk"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"},
+        {"framework": "ROS2 Control", "ros2_interface_type": "Action", "interface_name": "/gripper_controller/gripper_cmd", "message_type": "control_msgs/action/GripperCommand"}
+      ]
+    },
+    {
+      "skill_id": "MAN_002",
+      "abstract_skill": "place_object",
+      "category": "Manipulation",
+      "description": "Place a held object at a target pose or support surface.",
+      "goal": "Release the held object at the requested location.",
+      "aliases": ["place", "put", "set down", "drop off", "deposit"],
+      "required_capabilities": ["can_place", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "motion_planner"],
+      "inputs": [{"name": "target_pose", "type": "geometry_msgs/msg/PoseStamped", "required": true}],
+      "outputs": [{"name": "place_result", "type": "bool"}],
+      "preconditions": ["Object held", "Placement pose reachable", "Support surface valid"],
+      "postconditions": ["Object released at target"],
+      "failure_conditions": ["Placement pose unreachable", "Object slipped", "Surface occupied"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_003",
+      "abstract_skill": "grasp_object",
+      "category": "Manipulation",
+      "description": "Close the end effector around an object to establish a grasp.",
+      "goal": "Create a stable grasp on the object.",
+      "aliases": ["grasp", "hold", "clamp", "grip"],
+      "required_capabilities": ["can_grasp", "can_manipulate"],
+      "required_components": ["end_effector", "gripper_controller"],
+      "inputs": [{"name": "grasp_width", "type": "float32", "required": false}, {"name": "force", "type": "float32", "required": false}],
+      "outputs": [{"name": "grasp_result", "type": "bool"}],
+      "preconditions": ["End effector aligned", "Object within gripper", "Gripper ready"],
+      "postconditions": ["Object grasped"],
+      "failure_conditions": ["Insufficient force", "Object slipped", "Gripper fault"],
+      "implementations": [
+        {"framework": "ROS2 Control", "ros2_interface_type": "Action", "interface_name": "/gripper_controller/gripper_cmd", "message_type": "control_msgs/action/GripperCommand"}
+      ]
+    },
+    {
+      "skill_id": "MAN_004",
+      "abstract_skill": "release_object",
+      "category": "Manipulation",
+      "description": "Open or deactivate the end effector to release a held object.",
+      "goal": "Let go of the currently held object.",
+      "aliases": ["release", "let go", "drop", "ungrip"],
+      "required_capabilities": ["can_grasp", "can_manipulate"],
+      "required_components": ["end_effector", "gripper_controller"],
+      "inputs": [{"name": "release_width", "type": "float32", "required": false}],
+      "outputs": [{"name": "release_result", "type": "bool"}],
+      "preconditions": ["Object may be held", "Release area safe"],
+      "postconditions": ["End effector open or object released"],
+      "failure_conditions": ["Gripper jammed", "Object stuck", "Unsafe release pose"],
+      "implementations": [
+        {"framework": "ROS2 Control", "ros2_interface_type": "Action", "interface_name": "/gripper_controller/gripper_cmd", "message_type": "control_msgs/action/GripperCommand"}
+      ]
+    },
+    {
+      "skill_id": "MAN_005",
+      "abstract_skill": "move_arm",
+      "category": "Manipulation",
+      "description": "Move the robot arm to a named, joint, or Cartesian target.",
+      "goal": "Position the manipulator for a task.",
+      "aliases": ["move arm", "position arm", "arm motion", "arm move"],
+      "required_capabilities": ["can_manipulate"],
+      "required_components": ["manipulator", "joint_controller", "motion_planner"],
+      "inputs": [{"name": "target", "type": "trajectory_msgs/msg/JointTrajectory|geometry_msgs/msg/PoseStamped", "required": true}],
+      "outputs": [{"name": "motion_result", "type": "bool"}],
+      "preconditions": ["Arm enabled", "Target reachable", "Collision scene valid"],
+      "postconditions": ["Arm reached target tolerance"],
+      "failure_conditions": ["IK failure", "Controller fault", "Collision risk"],
+      "implementations": [
+        {"framework": "ROS2 Control", "ros2_interface_type": "Action", "interface_name": "/joint_trajectory_controller/follow_joint_trajectory", "message_type": "control_msgs/action/FollowJointTrajectory"},
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_006",
+      "abstract_skill": "move_joint",
+      "category": "Manipulation",
+      "description": "Command one or more manipulator joints to target positions.",
+      "goal": "Reach specified joint values.",
+      "aliases": ["move joint", "set joint", "joint command", "rotate joint"],
+      "required_capabilities": ["can_manipulate"],
+      "required_components": ["joint_controller", "manipulator"],
+      "inputs": [{"name": "joint_targets", "type": "trajectory_msgs/msg/JointTrajectory", "required": true}],
+      "outputs": [{"name": "joint_motion_result", "type": "bool"}],
+      "preconditions": ["Joint names valid", "Targets within limits", "Controller active"],
+      "postconditions": ["Joints reached target tolerance"],
+      "failure_conditions": ["Joint limit violation", "Controller timeout", "Hardware fault"],
+      "implementations": [
+        {"framework": "ROS2 Control", "ros2_interface_type": "Action", "interface_name": "/joint_trajectory_controller/follow_joint_trajectory", "message_type": "control_msgs/action/FollowJointTrajectory"}
+      ]
+    },
+    {
+      "skill_id": "MAN_007",
+      "abstract_skill": "move_end_effector",
+      "category": "Manipulation",
+      "description": "Move the end effector to a Cartesian pose.",
+      "goal": "Place the tool center point at the requested pose.",
+      "aliases": ["move gripper", "move hand", "move tool", "cartesian move"],
+      "required_capabilities": ["can_manipulate"],
+      "required_components": ["manipulator", "kinematics_solver", "motion_planner"],
+      "inputs": [{"name": "target_pose", "type": "geometry_msgs/msg/PoseStamped", "required": true}],
+      "outputs": [{"name": "cartesian_motion_result", "type": "bool"}],
+      "preconditions": ["Target pose reachable", "IK solution available", "Collision scene valid"],
+      "postconditions": ["End effector reached pose tolerance"],
+      "failure_conditions": ["IK failure", "Singularity", "Collision risk"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_008",
+      "abstract_skill": "reach_pose",
+      "category": "Manipulation",
+      "description": "Reach toward a pose without necessarily grasping an object.",
+      "goal": "Move the manipulator into reach position for interaction.",
+      "aliases": ["reach", "reach out", "extend arm", "approach pose"],
+      "required_capabilities": ["can_manipulate"],
+      "required_components": ["manipulator", "motion_planner"],
+      "inputs": [{"name": "reach_pose", "type": "geometry_msgs/msg/PoseStamped", "required": true}],
+      "outputs": [{"name": "reach_result", "type": "bool"}],
+      "preconditions": ["Pose reachable", "Workspace clear"],
+      "postconditions": ["Manipulator positioned near pose"],
+      "failure_conditions": ["Pose unreachable", "Collision risk", "Planner failure"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_009",
+      "abstract_skill": "push_object",
+      "category": "Manipulation",
+      "description": "Apply force to move an object away or along a direction.",
+      "goal": "Displace the target object by pushing.",
+      "aliases": ["push", "shove", "nudge", "press forward"],
+      "required_capabilities": ["can_push", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "force_control"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}, {"name": "push_vector", "type": "geometry_msgs/msg/Vector3", "required": true}],
+      "outputs": [{"name": "push_result", "type": "bool"}],
+      "preconditions": ["Object contact pose reachable", "Push direction safe", "Force limit configured"],
+      "postconditions": ["Object displaced or push completed"],
+      "failure_conditions": ["Object immovable", "Loss of contact", "Excessive force"],
+      "implementations": [
+        {"framework": "MoveIt Servo", "ros2_interface_type": "Topic", "interface_name": "/servo_node/delta_twist_cmds", "message_type": "geometry_msgs/msg/TwistStamped"}
+      ]
+    },
+    {
+      "skill_id": "MAN_010",
+      "abstract_skill": "pull_object",
+      "category": "Manipulation",
+      "description": "Apply force to move an object toward the robot or along a pull direction.",
+      "goal": "Displace the target object by pulling.",
+      "aliases": ["pull", "drag", "draw", "tug"],
+      "required_capabilities": ["can_pull", "can_grasp", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "force_control"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}, {"name": "pull_vector", "type": "geometry_msgs/msg/Vector3", "required": true}],
+      "outputs": [{"name": "pull_result", "type": "bool"}],
+      "preconditions": ["Object grasped or hooked", "Pull path clear", "Force limit configured"],
+      "postconditions": ["Object displaced or pull completed"],
+      "failure_conditions": ["Grip lost", "Object stuck", "Excessive force"],
+      "implementations": [
+        {"framework": "MoveIt Servo", "ros2_interface_type": "Topic", "interface_name": "/servo_node/delta_twist_cmds", "message_type": "geometry_msgs/msg/TwistStamped"}
+      ]
+    },
+    {
+      "skill_id": "MAN_011",
+      "abstract_skill": "open_drawer_with_manipulator",
+      "category": "Manipulation",
+      "description": "Open a drawer by grasping or hooking its handle and pulling.",
+      "goal": "Move the drawer to an open state.",
+      "aliases": ["open drawer", "pull drawer", "slide drawer open"],
+      "required_capabilities": ["can_open_drawer", "can_pull", "can_grasp"],
+      "required_components": ["manipulator", "end_effector", "force_control"],
+      "inputs": [{"name": "drawer_id", "type": "string", "required": true}],
+      "outputs": [{"name": "drawer_open_result", "type": "bool"}],
+      "preconditions": ["Drawer handle detected", "Handle reachable", "Pull trajectory clear"],
+      "postconditions": ["Drawer open"],
+      "failure_conditions": ["Handle not grasped", "Drawer stuck", "Collision with furniture"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_012",
+      "abstract_skill": "close_drawer_with_manipulator",
+      "category": "Manipulation",
+      "description": "Close an open drawer by pushing it inward.",
+      "goal": "Move the drawer to a closed state.",
+      "aliases": ["close drawer", "push drawer", "shut drawer"],
+      "required_capabilities": ["can_open_drawer", "can_push", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "force_control"],
+      "inputs": [{"name": "drawer_id", "type": "string", "required": true}],
+      "outputs": [{"name": "drawer_close_result", "type": "bool"}],
+      "preconditions": ["Drawer open", "Push pose reachable", "Path clear"],
+      "postconditions": ["Drawer closed"],
+      "failure_conditions": ["Drawer blocked", "Excessive force", "Contact lost"],
+      "implementations": [
+        {"framework": "MoveIt Servo", "ros2_interface_type": "Topic", "interface_name": "/servo_node/delta_twist_cmds", "message_type": "geometry_msgs/msg/TwistStamped"}
+      ]
+    },
+    {
+      "skill_id": "MAN_013",
+      "abstract_skill": "open_door_with_manipulator",
+      "category": "Manipulation",
+      "description": "Open a hinged or sliding door using manipulation and optional navigation.",
+      "goal": "Move the door to an open state.",
+      "aliases": ["open door", "pull door", "push door open", "open gate"],
+      "required_capabilities": ["can_open_door", "can_manipulate"],
+      "required_components": ["manipulator", "door_detector", "force_control"],
+      "inputs": [{"name": "door_id", "type": "string", "required": true}],
+      "outputs": [{"name": "door_open_result", "type": "bool"}],
+      "preconditions": ["Door handle or surface reachable", "Door unlocked", "Motion path clear"],
+      "postconditions": ["Door open"],
+      "failure_conditions": ["Door locked", "Handle not grasped", "Door blocked"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/open_door", "message_type": "custom_msgs/action/OpenDoor"}
+      ]
+    },
+    {
+      "skill_id": "MAN_014",
+      "abstract_skill": "close_door_with_manipulator",
+      "category": "Manipulation",
+      "description": "Close a hinged or sliding door.",
+      "goal": "Move the door to a closed state.",
+      "aliases": ["close door", "shut door", "push door closed", "close gate"],
+      "required_capabilities": ["can_open_door", "can_manipulate"],
+      "required_components": ["manipulator", "door_detector", "force_control"],
+      "inputs": [{"name": "door_id", "type": "string", "required": true}],
+      "outputs": [{"name": "door_close_result", "type": "bool"}],
+      "preconditions": ["Door open", "Door reachable", "Closing path clear"],
+      "postconditions": ["Door closed"],
+      "failure_conditions": ["Door obstructed", "Contact lost", "Excessive force"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/close_door", "message_type": "custom_msgs/action/CloseDoor"}
+      ]
+    },
+    {
+      "skill_id": "MAN_015",
+      "abstract_skill": "rotate_object",
+      "category": "Manipulation",
+      "description": "Rotate a grasped or contacted object around a specified axis.",
+      "goal": "Change the orientation of the target object.",
+      "aliases": ["rotate object", "turn object", "twist object", "orient object"],
+      "required_capabilities": ["can_manipulate", "can_grasp"],
+      "required_components": ["manipulator", "end_effector", "orientation_controller"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}, {"name": "target_orientation", "type": "geometry_msgs/msg/Quaternion", "required": true}],
+      "outputs": [{"name": "rotate_result", "type": "bool"}],
+      "preconditions": ["Object grasped or constrained", "Orientation target reachable"],
+      "postconditions": ["Object orientation changed"],
+      "failure_conditions": ["Object slipped", "Wrist limit reached", "Collision risk"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_016",
+      "abstract_skill": "lift_object",
+      "category": "Manipulation",
+      "description": "Lift a held or grasped object upward.",
+      "goal": "Increase the object's height while maintaining control.",
+      "aliases": ["lift", "raise object", "pick higher", "hoist"],
+      "required_capabilities": ["can_manipulate", "can_hold"],
+      "required_components": ["manipulator", "end_effector", "motion_planner"],
+      "inputs": [{"name": "height_delta_m", "type": "float32", "required": true}],
+      "outputs": [{"name": "lift_result", "type": "bool"}],
+      "preconditions": ["Object held", "Vertical path clear", "Payload within limit"],
+      "postconditions": ["Object lifted"],
+      "failure_conditions": ["Object too heavy", "Grip lost", "Vertical collision"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_017",
+      "abstract_skill": "lower_object",
+      "category": "Manipulation",
+      "description": "Lower a held or grasped object downward.",
+      "goal": "Decrease the object's height while maintaining control.",
+      "aliases": ["lower", "lower object", "bring down", "descend object"],
+      "required_capabilities": ["can_manipulate", "can_hold"],
+      "required_components": ["manipulator", "end_effector", "motion_planner"],
+      "inputs": [{"name": "height_delta_m", "type": "float32", "required": true}],
+      "outputs": [{"name": "lower_result", "type": "bool"}],
+      "preconditions": ["Object held", "Lowering path clear", "Target height safe"],
+      "postconditions": ["Object lowered"],
+      "failure_conditions": ["Grip lost", "Surface collision", "Joint limit reached"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_018",
+      "abstract_skill": "pass_object",
+      "category": "Manipulation",
+      "description": "Move a held object toward another agent for transfer.",
+      "goal": "Present an object so another agent can take it.",
+      "aliases": ["pass", "pass object", "give over", "present item"],
+      "required_capabilities": ["can_handover", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "handover_detector"],
+      "inputs": [{"name": "recipient_id", "type": "string", "required": false}],
+      "outputs": [{"name": "pass_result", "type": "bool"}],
+      "preconditions": ["Object held", "Recipient reachable or detected", "Handover pose safe"],
+      "postconditions": ["Object offered for transfer"],
+      "failure_conditions": ["Recipient absent", "Unsafe handover pose", "Object dropped"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/handover", "message_type": "custom_msgs/action/Handover"}
+      ]
+    },
+    {
+      "skill_id": "MAN_019",
+      "abstract_skill": "receive_object",
+      "category": "Manipulation",
+      "description": "Receive an object from a human or another robot.",
+      "goal": "Secure an externally offered object.",
+      "aliases": ["receive", "take from user", "accept object", "take handoff"],
+      "required_capabilities": ["can_handover", "can_grasp", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "force_or_touch_sensing"],
+      "inputs": [{"name": "giver_id", "type": "string", "required": false}],
+      "outputs": [{"name": "receive_result", "type": "bool"}],
+      "preconditions": ["Object offered", "End effector ready", "Transfer pose safe"],
+      "postconditions": ["Object held by robot"],
+      "failure_conditions": ["Object not detected", "Grip failed", "Human withdrew object"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/receive_object", "message_type": "custom_msgs/action/ReceiveObject"}
+      ]
+    },
+    {
+      "skill_id": "MAN_020",
+      "abstract_skill": "hand_over_object",
+      "category": "Manipulation",
+      "description": "Perform a complete handover protocol with another agent.",
+      "goal": "Transfer object ownership safely.",
+      "aliases": ["hand over", "handover", "give to person", "transfer object"],
+      "required_capabilities": ["can_handover", "human_robot_interaction"],
+      "required_components": ["manipulator", "end_effector", "handover_policy"],
+      "inputs": [{"name": "recipient_id", "type": "string", "required": false}, {"name": "object_id", "type": "string", "required": false}],
+      "outputs": [{"name": "handover_result", "type": "bool"}],
+      "preconditions": ["Object held", "Recipient ready", "Safe handover posture"],
+      "postconditions": ["Object transferred or transfer aborted safely"],
+      "failure_conditions": ["Recipient not ready", "Force threshold not met", "Object dropped"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/handover", "message_type": "custom_msgs/action/Handover"}
+      ]
+    },
+    {
+      "skill_id": "MAN_021",
+      "abstract_skill": "pick_from_shelf",
+      "category": "Manipulation",
+      "description": "Pick an object from a shelf or storage location.",
+      "goal": "Remove a target object from a shelf and hold it.",
+      "aliases": ["pick from shelf", "take from shelf", "retrieve from shelf"],
+      "required_capabilities": ["can_pick", "can_grasp", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "shelf_perception"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}, {"name": "shelf_id", "type": "string", "required": false}],
+      "outputs": [{"name": "shelf_pick_result", "type": "bool"}],
+      "preconditions": ["Object visible on shelf", "Shelf reach path clear", "Grasp pose available"],
+      "postconditions": ["Object removed from shelf"],
+      "failure_conditions": ["Object occluded", "Shelf collision risk", "Grasp failed"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_022",
+      "abstract_skill": "place_on_shelf",
+      "category": "Manipulation",
+      "description": "Place a held object onto a shelf or storage surface.",
+      "goal": "Store the object on a shelf.",
+      "aliases": ["place on shelf", "put on shelf", "store on shelf"],
+      "required_capabilities": ["can_place", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "shelf_perception"],
+      "inputs": [{"name": "shelf_pose", "type": "geometry_msgs/msg/PoseStamped", "required": true}],
+      "outputs": [{"name": "shelf_place_result", "type": "bool"}],
+      "preconditions": ["Object held", "Shelf surface available", "Placement pose reachable"],
+      "postconditions": ["Object placed on shelf"],
+      "failure_conditions": ["Shelf occupied", "Placement pose unreachable", "Object unstable"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_023",
+      "abstract_skill": "stack_objects",
+      "category": "Manipulation",
+      "description": "Place one object on top of another in a stable stack.",
+      "goal": "Create or extend a stack of objects.",
+      "aliases": ["stack", "pile", "put on top", "stack items"],
+      "required_capabilities": ["can_pick", "can_place", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "object_perception"],
+      "inputs": [{"name": "top_object_id", "type": "string", "required": true}, {"name": "base_object_id", "type": "string", "required": true}],
+      "outputs": [{"name": "stack_result", "type": "bool"}],
+      "preconditions": ["Objects detected", "Base object stable", "Top object graspable"],
+      "postconditions": ["Top object placed on base object"],
+      "failure_conditions": ["Stack unstable", "Object slipped", "Pose estimation error"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_024",
+      "abstract_skill": "unstack_objects",
+      "category": "Manipulation",
+      "description": "Remove an object from the top of a stack.",
+      "goal": "Separate stacked objects safely.",
+      "aliases": ["unstack", "remove from stack", "take off top", "separate stack"],
+      "required_capabilities": ["can_pick", "can_place", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "object_perception"],
+      "inputs": [{"name": "top_object_id", "type": "string", "required": true}, {"name": "place_pose", "type": "geometry_msgs/msg/PoseStamped", "required": false}],
+      "outputs": [{"name": "unstack_result", "type": "bool"}],
+      "preconditions": ["Top object detected", "Object graspable", "Separation path clear"],
+      "postconditions": ["Top object removed from stack"],
+      "failure_conditions": ["Top object jammed", "Stack collapsed", "Grasp failed"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_025",
+      "abstract_skill": "insert_object",
+      "category": "Manipulation",
+      "description": "Insert an object into a slot, container, fixture, or assembly.",
+      "goal": "Place an object into a constrained target.",
+      "aliases": ["insert", "put into", "plug in", "fit into"],
+      "required_capabilities": ["can_assemble", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "force_control"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}, {"name": "target_id", "type": "string", "required": true}],
+      "outputs": [{"name": "insert_result", "type": "bool"}],
+      "preconditions": ["Object held", "Insertion target localized", "Compliance or force limits configured"],
+      "postconditions": ["Object inserted"],
+      "failure_conditions": ["Misalignment", "Excessive insertion force", "Object rejected by fixture"],
+      "implementations": [
+        {"framework": "MoveIt Servo", "ros2_interface_type": "Topic", "interface_name": "/servo_node/delta_twist_cmds", "message_type": "geometry_msgs/msg/TwistStamped"}
+      ]
+    },
+    {
+      "skill_id": "MAN_026",
+      "abstract_skill": "remove_object",
+      "category": "Manipulation",
+      "description": "Remove an object from a container, slot, fixture, or assembly.",
+      "goal": "Extract a target object from a constrained location.",
+      "aliases": ["remove", "take out", "extract", "pull out"],
+      "required_capabilities": ["can_disassemble", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "force_control"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}, {"name": "source_id", "type": "string", "required": false}],
+      "outputs": [{"name": "remove_result", "type": "bool"}],
+      "preconditions": ["Object reachable", "Extraction path clear", "Object graspable"],
+      "postconditions": ["Object removed"],
+      "failure_conditions": ["Object stuck", "Grip failed", "Fixture collision"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_027",
+      "abstract_skill": "press_button_with_manipulator",
+      "category": "Manipulation",
+      "description": "Press a physical button or touch target.",
+      "goal": "Actuate a button by contact.",
+      "aliases": ["press", "push button", "tap button", "activate button"],
+      "required_capabilities": ["can_press_button", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "button_detector"],
+      "inputs": [{"name": "button_id", "type": "string", "required": true}],
+      "outputs": [{"name": "press_result", "type": "bool"}],
+      "preconditions": ["Button detected", "Button reachable", "Contact force safe"],
+      "postconditions": ["Button pressed"],
+      "failure_conditions": ["Button missed", "Button not actuated", "Excessive force"],
+      "implementations": [
+        {"framework": "MoveIt Servo", "ros2_interface_type": "Topic", "interface_name": "/servo_node/delta_twist_cmds", "message_type": "geometry_msgs/msg/TwistStamped"}
+      ]
+    },
+    {
+      "skill_id": "MAN_028",
+      "abstract_skill": "turn_knob",
+      "category": "Manipulation",
+      "description": "Grasp and rotate a knob, dial, or similar control.",
+      "goal": "Rotate the control to a target angle or state.",
+      "aliases": ["turn knob", "twist knob", "rotate dial", "turn dial"],
+      "required_capabilities": ["can_grasp", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "wrist_control"],
+      "inputs": [{"name": "knob_id", "type": "string", "required": true}, {"name": "angle_rad", "type": "float32", "required": false}],
+      "outputs": [{"name": "turn_result", "type": "bool"}],
+      "preconditions": ["Knob detected", "Knob graspable", "Wrist range sufficient"],
+      "postconditions": ["Knob rotated"],
+      "failure_conditions": ["Grip lost", "Knob stuck", "Angle limit reached"],
+      "implementations": [
+        {"framework": "MoveIt2", "ros2_interface_type": "Action", "interface_name": "/move_action", "message_type": "moveit_msgs/action/MoveGroup"}
+      ]
+    },
+    {
+      "skill_id": "MAN_029",
+      "abstract_skill": "flip_switch_with_manipulator",
+      "category": "Manipulation",
+      "description": "Flip or toggle a physical switch.",
+      "goal": "Change a switch state.",
+      "aliases": ["flip switch", "toggle switch", "turn switch", "switch on"],
+      "required_capabilities": ["can_press_button", "can_manipulate"],
+      "required_components": ["manipulator", "end_effector", "switch_detector"],
+      "inputs": [{"name": "switch_id", "type": "string", "required": true}, {"name": "target_state", "type": "bool", "required": false}],
+      "outputs": [{"name": "switch_result", "type": "bool"}],
+      "preconditions": ["Switch detected", "Switch reachable", "Direction known"],
+      "postconditions": ["Switch state changed"],
+      "failure_conditions": ["Switch missed", "Switch jammed", "State not verified"],
+      "implementations": [
+        {"framework": "MoveIt Servo", "ros2_interface_type": "Topic", "interface_name": "/servo_node/delta_twist_cmds", "message_type": "geometry_msgs/msg/TwistStamped"}
+      ]
+    },
+    {
+      "skill_id": "MAN_030",
+      "abstract_skill": "operate_tool",
+      "category": "Manipulation",
+      "description": "Use an attached or grasped tool to perform a tool-specific operation.",
+      "goal": "Execute an operation with a tool.",
+      "aliases": ["use tool", "operate tool", "run tool", "activate tool"],
+      "required_capabilities": ["can_exchange_tools", "can_manipulate"],
+      "required_components": ["manipulator", "tool_mount", "tool_controller"],
+      "inputs": [{"name": "tool_id", "type": "string", "required": true}, {"name": "operation", "type": "string", "required": true}],
+      "outputs": [{"name": "tool_result", "type": "bool"}],
+      "preconditions": ["Tool attached or grasped", "Tool operation configured", "Workspace safe"],
+      "postconditions": ["Tool operation completed"],
+      "failure_conditions": ["Tool unavailable", "Tool fault", "Unsafe operation"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/operate_tool", "message_type": "custom_msgs/action/OperateTool"}
+      ]
+    },
+    {
+      "skill_id": "PER_001",
+      "abstract_skill": "detect_object",
+      "category": "Perception",
+      "description": "Detect objects in sensor data.",
+      "goal": "Return object detections with labels and confidence.",
+      "aliases": ["detect object", "find object", "see object", "object detection"],
+      "required_capabilities": ["can_detect_objects", "has_visual_perception"],
+      "required_components": ["camera_or_depth_sensor", "object_detector"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "detections", "type": "vision_msgs/msg/Detection2DArray"}],
+      "preconditions": ["Perception sensor active", "Detector model loaded"],
+      "postconditions": ["Object detections published or returned"],
+      "failure_conditions": ["Poor visibility", "Model unavailable", "Sensor failure"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/detections", "message_type": "vision_msgs/msg/Detection2DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_002",
+      "abstract_skill": "detect_person",
+      "category": "Perception",
+      "description": "Detect people in sensor data.",
+      "goal": "Return human detections with confidence.",
+      "aliases": ["detect person", "find person", "see human", "human detection"],
+      "required_capabilities": ["can_detect_humans", "has_visual_perception"],
+      "required_components": ["camera_or_depth_sensor", "person_detector"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "people", "type": "vision_msgs/msg/Detection2DArray"}],
+      "preconditions": ["Sensor active", "Person detector loaded"],
+      "postconditions": ["Person detections available"],
+      "failure_conditions": ["Occlusion", "Poor lighting", "Detector unavailable"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/people/detections", "message_type": "vision_msgs/msg/Detection2DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_003",
+      "abstract_skill": "detect_face",
+      "category": "Perception",
+      "description": "Detect human faces in images.",
+      "goal": "Return face bounding boxes or landmarks.",
+      "aliases": ["detect face", "find face", "face detection", "see face"],
+      "required_capabilities": ["can_detect_humans", "has_visual_perception"],
+      "required_components": ["camera", "face_detector"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "faces", "type": "vision_msgs/msg/Detection2DArray"}],
+      "preconditions": ["Camera active", "Face detector loaded"],
+      "postconditions": ["Face detections available"],
+      "failure_conditions": ["Face occluded", "Poor lighting", "Image blur"],
+      "implementations": [
+        {"framework": "OpenCV ROS2", "ros2_interface_type": "Topic", "interface_name": "/faces", "message_type": "vision_msgs/msg/Detection2DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_004",
+      "abstract_skill": "detect_marker",
+      "category": "Perception",
+      "description": "Detect fiducial markers such as AprilTag or ArUco.",
+      "goal": "Return marker IDs and poses.",
+      "aliases": ["detect marker", "find tag", "read marker", "fiducial detection"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera", "fiducial_detector"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "markers", "type": "vision_msgs/msg/Detection3DArray"}],
+      "preconditions": ["Camera calibrated", "Marker detector active"],
+      "postconditions": ["Marker IDs or poses available"],
+      "failure_conditions": ["Marker not visible", "Calibration missing", "Motion blur"],
+      "implementations": [
+        {"framework": "AprilTag ROS", "ros2_interface_type": "Topic", "interface_name": "/tag_detections", "message_type": "apriltag_msgs/msg/AprilTagDetectionArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_005",
+      "abstract_skill": "recognize_object",
+      "category": "Perception",
+      "description": "Identify the class or identity of an observed object.",
+      "goal": "Assign semantic identity to a detected object.",
+      "aliases": ["recognize object", "identify object", "classify item", "what object"],
+      "required_capabilities": ["can_detect_objects", "has_visual_perception"],
+      "required_components": ["camera", "object_recognizer"],
+      "inputs": [{"name": "object_crop", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "object_label", "type": "string"}],
+      "preconditions": ["Object visible", "Recognition model loaded"],
+      "postconditions": ["Object identity estimated"],
+      "failure_conditions": ["Unknown object", "Low confidence", "Occlusion"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/recognized_objects", "message_type": "vision_msgs/msg/Detection2DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_006",
+      "abstract_skill": "recognize_person",
+      "category": "Perception",
+      "description": "Identify or re-identify a person.",
+      "goal": "Associate a detected person with an identity or track ID.",
+      "aliases": ["recognize person", "identify person", "who is this", "person id"],
+      "required_capabilities": ["can_detect_humans", "has_visual_perception"],
+      "required_components": ["camera", "person_recognizer"],
+      "inputs": [{"name": "person_detection", "type": "vision_msgs/msg/Detection2D", "required": false}],
+      "outputs": [{"name": "person_identity", "type": "string"}],
+      "preconditions": ["Person visible", "Recognition enrollment available if identity required"],
+      "postconditions": ["Person identity or track ID available"],
+      "failure_conditions": ["Unknown person", "Occlusion", "Low confidence"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/person_identity", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "PER_007",
+      "abstract_skill": "segment_scene",
+      "category": "Perception",
+      "description": "Segment an image or point cloud into semantic regions or object masks.",
+      "goal": "Produce regions, masks, or clusters for scene elements.",
+      "aliases": ["segment scene", "segment image", "separate objects", "make masks"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera_or_depth_sensor", "segmentation_model"],
+      "inputs": [{"name": "sensor_data", "type": "sensor_msgs/msg/Image|sensor_msgs/msg/PointCloud2", "required": false}],
+      "outputs": [{"name": "segments", "type": "vision_msgs/msg/Detection2DArray"}],
+      "preconditions": ["Sensor active", "Segmentation model loaded"],
+      "postconditions": ["Scene segments available"],
+      "failure_conditions": ["Low contrast", "Model unavailable", "Sensor noise"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/segmentation", "message_type": "vision_msgs/msg/Detection2DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_008",
+      "abstract_skill": "estimate_pose",
+      "category": "Perception",
+      "description": "Estimate the robot, sensor, or target pose.",
+      "goal": "Provide a pose estimate in a known frame.",
+      "aliases": ["estimate pose", "where is it", "localize pose", "pose estimation"],
+      "required_capabilities": ["supports_state_estimation"],
+      "required_components": ["state_estimator", "tf_tree"],
+      "inputs": [{"name": "frame_id", "type": "string", "required": false}],
+      "outputs": [{"name": "pose", "type": "geometry_msgs/msg/PoseWithCovarianceStamped"}],
+      "preconditions": ["Relevant sensors active", "Transforms available"],
+      "postconditions": ["Pose estimate available"],
+      "failure_conditions": ["Transform unavailable", "Estimator diverged", "Sensor dropout"],
+      "implementations": [
+        {"framework": "robot_localization", "ros2_interface_type": "Topic", "interface_name": "/odometry/filtered", "message_type": "nav_msgs/msg/Odometry"}
+      ]
+    },
+    {
+      "skill_id": "PER_009",
+      "abstract_skill": "estimate_object_pose",
+      "category": "Perception",
+      "description": "Estimate a target object's 3D pose.",
+      "goal": "Return object position and orientation in a known frame.",
+      "aliases": ["object pose", "locate object pose", "estimate item pose", "where is object"],
+      "required_capabilities": ["can_detect_objects", "can_estimate_range"],
+      "required_components": ["camera_or_depth_sensor", "object_pose_estimator"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}],
+      "outputs": [{"name": "object_pose", "type": "geometry_msgs/msg/PoseStamped"}],
+      "preconditions": ["Object detected", "Depth or geometry available", "Camera calibrated"],
+      "postconditions": ["Object pose estimated"],
+      "failure_conditions": ["Object occluded", "Depth unavailable", "Pose ambiguity"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/object_poses", "message_type": "vision_msgs/msg/Detection3DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_010",
+      "abstract_skill": "read_qr",
+      "category": "Perception",
+      "description": "Decode a QR code from image data.",
+      "goal": "Return QR payload text.",
+      "aliases": ["read qr", "scan qr", "decode qr", "qr code"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera", "qr_decoder"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "qr_text", "type": "string"}],
+      "preconditions": ["QR code visible", "Camera focused"],
+      "postconditions": ["QR content decoded"],
+      "failure_conditions": ["QR not visible", "Blurred image", "Decode failed"],
+      "implementations": [
+        {"framework": "zbar_ros", "ros2_interface_type": "Topic", "interface_name": "/barcode", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "PER_011",
+      "abstract_skill": "read_barcode",
+      "category": "Perception",
+      "description": "Decode a barcode from image data.",
+      "goal": "Return barcode payload text.",
+      "aliases": ["read barcode", "scan barcode", "decode barcode", "barcode"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera", "barcode_decoder"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "barcode_text", "type": "string"}],
+      "preconditions": ["Barcode visible", "Camera focused"],
+      "postconditions": ["Barcode content decoded"],
+      "failure_conditions": ["Barcode not visible", "Blurred image", "Decode failed"],
+      "implementations": [
+        {"framework": "zbar_ros", "ros2_interface_type": "Topic", "interface_name": "/barcode", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "PER_012",
+      "abstract_skill": "optical_character_recognition",
+      "category": "Perception",
+      "description": "Read text from image data.",
+      "goal": "Convert visible text into machine-readable text.",
+      "aliases": ["ocr", "read text", "read label", "read sign"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera", "ocr_engine"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "recognized_text", "type": "string"}],
+      "preconditions": ["Text visible", "OCR engine available"],
+      "postconditions": ["Text recognized"],
+      "failure_conditions": ["Text too small", "Poor lighting", "OCR confidence low"],
+      "implementations": [
+        {"framework": "Generic ROS2 OCR", "ros2_interface_type": "Topic", "interface_name": "/ocr/text", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "PER_013",
+      "abstract_skill": "classify_object",
+      "category": "Perception",
+      "description": "Assign an observed object to a semantic class.",
+      "goal": "Produce an object class label and confidence.",
+      "aliases": ["classify object", "label object", "what class", "object class"],
+      "required_capabilities": ["can_detect_objects", "has_visual_perception"],
+      "required_components": ["camera", "classifier_model"],
+      "inputs": [{"name": "object_crop", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "class_label", "type": "string"}],
+      "preconditions": ["Object crop or detection available", "Classifier loaded"],
+      "postconditions": ["Object class estimated"],
+      "failure_conditions": ["Unknown class", "Low confidence", "Model unavailable"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/classification", "message_type": "vision_msgs/msg/Classification2D"}
+      ]
+    },
+    {
+      "skill_id": "PER_014",
+      "abstract_skill": "count_objects",
+      "category": "Perception",
+      "description": "Count objects matching a query or class.",
+      "goal": "Return the number of detected objects.",
+      "aliases": ["count objects", "how many", "count items", "object count"],
+      "required_capabilities": ["can_detect_objects"],
+      "required_components": ["object_detector", "counting_logic"],
+      "inputs": [{"name": "object_class", "type": "string", "required": false}],
+      "outputs": [{"name": "count", "type": "int32"}],
+      "preconditions": ["Scene visible", "Detector active"],
+      "postconditions": ["Object count returned"],
+      "failure_conditions": ["Occlusion", "Duplicate detections", "Detector failure"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Service", "interface_name": "/count_objects", "message_type": "custom_srvs/srv/CountObjects"}
+      ]
+    },
+    {
+      "skill_id": "PER_015",
+      "abstract_skill": "locate_object",
+      "category": "Perception",
+      "description": "Find the location of a named or described object.",
+      "goal": "Return a map, image, or 3D location for the object.",
+      "aliases": ["locate object", "find item", "where is item", "search object"],
+      "required_capabilities": ["can_detect_objects"],
+      "required_components": ["object_detector", "semantic_memory"],
+      "inputs": [{"name": "object_label", "type": "string", "required": true}],
+      "outputs": [{"name": "object_location", "type": "geometry_msgs/msg/PoseStamped"}],
+      "preconditions": ["Object query provided", "Perception or semantic map available"],
+      "postconditions": ["Object location returned if found"],
+      "failure_conditions": ["Object not found", "Ambiguous query", "Pose unavailable"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Service", "interface_name": "/locate_object", "message_type": "custom_srvs/srv/LocateObject"}
+      ]
+    },
+    {
+      "skill_id": "PER_016",
+      "abstract_skill": "track_object",
+      "category": "Perception",
+      "description": "Track an object's position across time.",
+      "goal": "Maintain a target object track.",
+      "aliases": ["track object", "follow object visually", "keep object tracked", "object tracking"],
+      "required_capabilities": ["can_detect_objects"],
+      "required_components": ["object_detector", "tracker"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}],
+      "outputs": [{"name": "track", "type": "geometry_msgs/msg/PoseStamped"}],
+      "preconditions": ["Object initialized", "Sensor stream active"],
+      "postconditions": ["Object track maintained while visible"],
+      "failure_conditions": ["Object lost", "Occlusion", "Tracker drift"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/object_tracks", "message_type": "vision_msgs/msg/Detection3DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_017",
+      "abstract_skill": "track_person",
+      "category": "Perception",
+      "description": "Track a person's position across time.",
+      "goal": "Maintain a target person track.",
+      "aliases": ["track person", "follow human visually", "keep person tracked", "person tracking"],
+      "required_capabilities": ["can_detect_humans"],
+      "required_components": ["person_detector", "tracker"],
+      "inputs": [{"name": "person_id", "type": "string", "required": false}],
+      "outputs": [{"name": "person_track", "type": "geometry_msgs/msg/PoseStamped"}],
+      "preconditions": ["Person visible", "Sensor stream active"],
+      "postconditions": ["Person track maintained while visible"],
+      "failure_conditions": ["Person lost", "Occlusion", "Identity switch"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/people/tracks", "message_type": "vision_msgs/msg/Detection3DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_018",
+      "abstract_skill": "estimate_distance",
+      "category": "Perception",
+      "description": "Estimate distance to a target object, surface, or obstacle.",
+      "goal": "Return range from the robot or sensor to a target.",
+      "aliases": ["estimate distance", "measure range", "how far", "range to target"],
+      "required_capabilities": ["can_estimate_range"],
+      "required_components": ["range_sensor", "range_estimator"],
+      "inputs": [{"name": "target", "type": "string", "required": false}],
+      "outputs": [{"name": "distance_m", "type": "float32"}],
+      "preconditions": ["Target or ray specified", "Range data available"],
+      "postconditions": ["Distance estimate returned"],
+      "failure_conditions": ["Target not visible", "Range out of bounds", "Sensor noise"],
+      "implementations": [
+        {"framework": "ROS2 Sensors", "ros2_interface_type": "Topic", "interface_name": "/scan", "message_type": "sensor_msgs/msg/LaserScan"}
+      ]
+    },
+    {
+      "skill_id": "PER_019",
+      "abstract_skill": "detect_obstacle",
+      "category": "Perception",
+      "description": "Detect obstacles in the robot's operating space.",
+      "goal": "Identify obstacles relevant to safe motion.",
+      "aliases": ["detect obstacle", "find obstacle", "obstacle check", "is path blocked"],
+      "required_capabilities": ["can_detect_obstacles"],
+      "required_components": ["range_sensor", "obstacle_detector"],
+      "inputs": [{"name": "region", "type": "geometry_msgs/msg/PolygonStamped", "required": false}],
+      "outputs": [{"name": "obstacles", "type": "vision_msgs/msg/Detection3DArray"}],
+      "preconditions": ["Obstacle sensor active", "Region frame known"],
+      "postconditions": ["Obstacle detections available"],
+      "failure_conditions": ["Sensor blind spot", "Reflective surface", "Sensor failure"],
+      "implementations": [
+        {"framework": "Nav2 Costmap", "ros2_interface_type": "Topic", "interface_name": "/local_costmap/costmap", "message_type": "nav_msgs/msg/OccupancyGrid"}
+      ]
+    },
+    {
+      "skill_id": "PER_020",
+      "abstract_skill": "detect_free_space",
+      "category": "Perception",
+      "description": "Detect navigable free space in sensor data or a costmap.",
+      "goal": "Identify areas safe for motion or placement.",
+      "aliases": ["free space", "open space", "clear area", "where can move"],
+      "required_capabilities": ["can_detect_obstacles", "can_estimate_range"],
+      "required_components": ["range_sensor", "costmap_or_grid"],
+      "inputs": [{"name": "region", "type": "geometry_msgs/msg/PolygonStamped", "required": false}],
+      "outputs": [{"name": "free_space", "type": "nav_msgs/msg/OccupancyGrid"}],
+      "preconditions": ["Range data available", "Occupancy representation available"],
+      "postconditions": ["Free space estimated"],
+      "failure_conditions": ["Sparse data", "Dynamic obstacles", "Frame mismatch"],
+      "implementations": [
+        {"framework": "Nav2 Costmap", "ros2_interface_type": "Topic", "interface_name": "/local_costmap/costmap", "message_type": "nav_msgs/msg/OccupancyGrid"}
+      ]
+    },
+    {
+      "skill_id": "PER_021",
+      "abstract_skill": "detect_table",
+      "category": "Perception",
+      "description": "Detect tables or horizontal support surfaces.",
+      "goal": "Return table detections or surface planes.",
+      "aliases": ["detect table", "find table", "table detection", "find surface"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera_or_depth_sensor", "surface_detector"],
+      "inputs": [{"name": "sensor_data", "type": "sensor_msgs/msg/Image|sensor_msgs/msg/PointCloud2", "required": false}],
+      "outputs": [{"name": "table_poses", "type": "geometry_msgs/msg/PoseStamped[]"}],
+      "preconditions": ["Surface visible", "Sensor calibrated"],
+      "postconditions": ["Table or support surface detected"],
+      "failure_conditions": ["Surface occluded", "Plane fit failed", "Sensor noise"],
+      "implementations": [
+        {"framework": "PCL ROS", "ros2_interface_type": "Topic", "interface_name": "/planes", "message_type": "shape_msgs/msg/Plane"}
+      ]
+    },
+    {
+      "skill_id": "PER_022",
+      "abstract_skill": "detect_shelf",
+      "category": "Perception",
+      "description": "Detect shelves or shelf compartments.",
+      "goal": "Return shelf pose, bounds, or compartment locations.",
+      "aliases": ["detect shelf", "find shelf", "shelf detection", "locate shelf"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera_or_depth_sensor", "shelf_detector"],
+      "inputs": [{"name": "sensor_data", "type": "sensor_msgs/msg/Image|sensor_msgs/msg/PointCloud2", "required": false}],
+      "outputs": [{"name": "shelf_detections", "type": "vision_msgs/msg/Detection3DArray"}],
+      "preconditions": ["Shelf visible", "Detector configured"],
+      "postconditions": ["Shelf detection available"],
+      "failure_conditions": ["Shelf occluded", "Poor geometry", "Detector unavailable"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/shelves", "message_type": "vision_msgs/msg/Detection3DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_023",
+      "abstract_skill": "detect_door",
+      "category": "Perception",
+      "description": "Detect doors, doorways, handles, or door state.",
+      "goal": "Return door location and state.",
+      "aliases": ["detect door", "find door", "door detection", "doorway"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera_or_depth_sensor", "door_detector"],
+      "inputs": [{"name": "sensor_data", "type": "sensor_msgs/msg/Image|sensor_msgs/msg/PointCloud2", "required": false}],
+      "outputs": [{"name": "door_detections", "type": "vision_msgs/msg/Detection3DArray"}],
+      "preconditions": ["Door area visible", "Detector configured"],
+      "postconditions": ["Door pose or state available"],
+      "failure_conditions": ["Door occluded", "Handle not visible", "Ambiguous state"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/doors", "message_type": "vision_msgs/msg/Detection3DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_024",
+      "abstract_skill": "detect_liquid",
+      "category": "Perception",
+      "description": "Detect visible liquid, spill, or fluid level.",
+      "goal": "Return liquid presence, region, or level estimate.",
+      "aliases": ["detect liquid", "find spill", "liquid detection", "fluid level"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera_or_specialized_sensor", "liquid_detector"],
+      "inputs": [{"name": "sensor_data", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "liquid_detection", "type": "vision_msgs/msg/Detection2DArray"}],
+      "preconditions": ["Target area visible", "Liquid detector configured"],
+      "postconditions": ["Liquid presence or region estimated"],
+      "failure_conditions": ["Transparent liquid", "Reflective surface", "Low confidence"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/liquid_detections", "message_type": "vision_msgs/msg/Detection2DArray"}
+      ]
+    },
+    {
+      "skill_id": "PER_025",
+      "abstract_skill": "detect_human_gesture",
+      "category": "Perception",
+      "description": "Detect a human gesture from visual or body-pose data.",
+      "goal": "Return a recognized gesture label.",
+      "aliases": ["detect gesture", "recognize gesture", "hand gesture", "human gesture"],
+      "required_capabilities": ["can_detect_humans", "has_visual_perception"],
+      "required_components": ["camera", "pose_estimator", "gesture_classifier"],
+      "inputs": [{"name": "person_id", "type": "string", "required": false}],
+      "outputs": [{"name": "gesture_label", "type": "string"}],
+      "preconditions": ["Person visible", "Gesture model loaded"],
+      "postconditions": ["Gesture label estimated"],
+      "failure_conditions": ["Gesture occluded", "Ambiguous motion", "Low confidence"],
+      "implementations": [
+        {"framework": "ROS2 Perception", "ros2_interface_type": "Topic", "interface_name": "/gestures", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "PER_026",
+      "abstract_skill": "recognize_speech",
+      "category": "Perception",
+      "description": "Transcribe spoken language from audio input.",
+      "goal": "Convert speech audio into text.",
+      "aliases": ["recognize speech", "speech to text", "listen", "hear command"],
+      "required_capabilities": ["has_audio_input", "supports_voice_interaction"],
+      "required_components": ["microphone", "speech_recognizer"],
+      "inputs": [{"name": "audio", "type": "audio_common_msgs/msg/AudioData", "required": false}],
+      "outputs": [{"name": "transcript", "type": "string"}],
+      "preconditions": ["Microphone active", "Speech recognizer ready"],
+      "postconditions": ["Speech transcript available"],
+      "failure_conditions": ["Background noise", "No speech detected", "Recognizer unavailable"],
+      "implementations": [
+        {"framework": "ROS2 Speech", "ros2_interface_type": "Topic", "interface_name": "/speech_recognition/text", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "PER_027",
+      "abstract_skill": "recognize_sound",
+      "category": "Perception",
+      "description": "Classify or identify non-speech sounds.",
+      "goal": "Return a sound event label.",
+      "aliases": ["recognize sound", "detect sound", "audio event", "what sound"],
+      "required_capabilities": ["has_audio_input"],
+      "required_components": ["microphone", "sound_classifier"],
+      "inputs": [{"name": "audio", "type": "audio_common_msgs/msg/AudioData", "required": false}],
+      "outputs": [{"name": "sound_label", "type": "string"}],
+      "preconditions": ["Microphone active", "Sound classifier ready"],
+      "postconditions": ["Sound event label available"],
+      "failure_conditions": ["Noise", "Unknown sound", "Audio clipping"],
+      "implementations": [
+        {"framework": "ROS2 Audio", "ros2_interface_type": "Topic", "interface_name": "/sound_events", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "PER_028",
+      "abstract_skill": "estimate_lighting",
+      "category": "Perception",
+      "description": "Estimate illumination level or lighting quality.",
+      "goal": "Determine whether lighting is sufficient for task execution.",
+      "aliases": ["estimate lighting", "check light", "brightness", "lighting level"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera_or_light_sensor", "lighting_estimator"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": false}],
+      "outputs": [{"name": "lighting_level", "type": "float32"}],
+      "preconditions": ["Sensor active", "Exposure data available if required"],
+      "postconditions": ["Lighting estimate returned"],
+      "failure_conditions": ["Sensor saturated", "Exposure unstable", "Estimator unavailable"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Topic", "interface_name": "/lighting_level", "message_type": "std_msgs/msg/Float32"}
+      ]
+    },
+    {
+      "skill_id": "PER_029",
+      "abstract_skill": "semantic_mapping",
+      "category": "Perception",
+      "description": "Build or update a map with semantic labels.",
+      "goal": "Maintain spatial knowledge of places, objects, or regions.",
+      "aliases": ["semantic map", "map objects", "label map", "build semantic map"],
+      "required_capabilities": ["supports_slam", "supports_map_building"],
+      "required_components": ["slam", "object_detector", "semantic_map_store"],
+      "inputs": [{"name": "observations", "type": "vision_msgs/msg/Detection3DArray", "required": false}],
+      "outputs": [{"name": "semantic_map", "type": "nav_msgs/msg/OccupancyGrid"}],
+      "preconditions": ["SLAM active", "Perception active", "Map frame available"],
+      "postconditions": ["Semantic map updated"],
+      "failure_conditions": ["SLAM drift", "Object association failure", "Storage failure"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Topic", "interface_name": "/semantic_map", "message_type": "nav_msgs/msg/OccupancyGrid"}
+      ]
+    },
+    {
+      "skill_id": "PER_030",
+      "abstract_skill": "understand_scene",
+      "category": "Perception",
+      "description": "Produce a high-level semantic interpretation of the current scene.",
+      "goal": "Summarize relevant objects, agents, places, and relations.",
+      "aliases": ["scene understanding", "understand scene", "describe scene", "what is happening"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera", "scene_understanding_model"],
+      "inputs": [{"name": "sensor_data", "type": "sensor_msgs/msg/Image|sensor_msgs/msg/PointCloud2", "required": false}],
+      "outputs": [{"name": "scene_graph", "type": "string"}],
+      "preconditions": ["Sensor data available", "Scene model loaded"],
+      "postconditions": ["Scene summary or graph available"],
+      "failure_conditions": ["Scene too complex", "Low confidence", "Model unavailable"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Topic", "interface_name": "/scene_understanding", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "MOB_001",
+      "abstract_skill": "move_forward",
+      "category": "Mobility",
+      "description": "Move the robot forward for a distance or duration.",
+      "goal": "Translate forward under local control.",
+      "aliases": ["move forward", "go forward", "drive forward", "advance"],
+      "required_capabilities": ["can_move"],
+      "required_components": ["locomotion_base", "velocity_controller"],
+      "inputs": [{"name": "distance_m", "type": "float32", "required": false}, {"name": "speed_mps", "type": "float32", "required": false}],
+      "outputs": [{"name": "motion_result", "type": "bool"}],
+      "preconditions": ["Controller active", "Forward path safe"],
+      "postconditions": ["Robot moved forward or command completed"],
+      "failure_conditions": ["Obstacle ahead", "Controller fault", "Slip or stall"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "MOB_002",
+      "abstract_skill": "move_backward",
+      "category": "Mobility",
+      "description": "Move the robot backward for a distance or duration.",
+      "goal": "Translate backward under local control.",
+      "aliases": ["move backward", "reverse", "back up", "drive backward"],
+      "required_capabilities": ["can_move"],
+      "required_components": ["locomotion_base", "velocity_controller"],
+      "inputs": [{"name": "distance_m", "type": "float32", "required": false}, {"name": "speed_mps", "type": "float32", "required": false}],
+      "outputs": [{"name": "motion_result", "type": "bool"}],
+      "preconditions": ["Controller active", "Rear path safe"],
+      "postconditions": ["Robot moved backward or command completed"],
+      "failure_conditions": ["Obstacle behind", "Controller fault", "Slip or stall"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "MOB_003",
+      "abstract_skill": "rotate_left",
+      "category": "Mobility",
+      "description": "Rotate the robot left about its vertical axis.",
+      "goal": "Change heading counterclockwise.",
+      "aliases": ["rotate left", "turn left", "spin left", "yaw left"],
+      "required_capabilities": ["can_rotate"],
+      "required_components": ["locomotion_base", "velocity_controller"],
+      "inputs": [{"name": "angle_rad", "type": "float32", "required": false}, {"name": "angular_speed", "type": "float32", "required": false}],
+      "outputs": [{"name": "rotation_result", "type": "bool"}],
+      "preconditions": ["Controller active", "Rotation area safe"],
+      "postconditions": ["Robot heading changed left"],
+      "failure_conditions": ["Obstacle too close", "Controller fault", "Localization drift"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "MOB_004",
+      "abstract_skill": "rotate_right",
+      "category": "Mobility",
+      "description": "Rotate the robot right about its vertical axis.",
+      "goal": "Change heading clockwise.",
+      "aliases": ["rotate right", "turn right", "spin right", "yaw right"],
+      "required_capabilities": ["can_rotate"],
+      "required_components": ["locomotion_base", "velocity_controller"],
+      "inputs": [{"name": "angle_rad", "type": "float32", "required": false}, {"name": "angular_speed", "type": "float32", "required": false}],
+      "outputs": [{"name": "rotation_result", "type": "bool"}],
+      "preconditions": ["Controller active", "Rotation area safe"],
+      "postconditions": ["Robot heading changed right"],
+      "failure_conditions": ["Obstacle too close", "Controller fault", "Localization drift"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "MOB_005",
+      "abstract_skill": "strafe_left",
+      "category": "Mobility",
+      "description": "Move laterally to the robot's left without changing heading.",
+      "goal": "Translate left under local control.",
+      "aliases": ["strafe left", "slide left", "move sideways left", "shift left"],
+      "required_capabilities": ["can_strafe"],
+      "required_components": ["holonomic_base", "velocity_controller"],
+      "inputs": [{"name": "distance_m", "type": "float32", "required": false}, {"name": "speed_mps", "type": "float32", "required": false}],
+      "outputs": [{"name": "strafe_result", "type": "bool"}],
+      "preconditions": ["Holonomic motion supported", "Left path safe"],
+      "postconditions": ["Robot translated left"],
+      "failure_conditions": ["Obstacle left", "Controller fault", "Wheel slip"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "MOB_006",
+      "abstract_skill": "strafe_right",
+      "category": "Mobility",
+      "description": "Move laterally to the robot's right without changing heading.",
+      "goal": "Translate right under local control.",
+      "aliases": ["strafe right", "slide right", "move sideways right", "shift right"],
+      "required_capabilities": ["can_strafe"],
+      "required_components": ["holonomic_base", "velocity_controller"],
+      "inputs": [{"name": "distance_m", "type": "float32", "required": false}, {"name": "speed_mps", "type": "float32", "required": false}],
+      "outputs": [{"name": "strafe_result", "type": "bool"}],
+      "preconditions": ["Holonomic motion supported", "Right path safe"],
+      "postconditions": ["Robot translated right"],
+      "failure_conditions": ["Obstacle right", "Controller fault", "Wheel slip"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "MOB_007",
+      "abstract_skill": "stop_motion",
+      "category": "Mobility",
+      "description": "Command the robot to stop ordinary motion.",
+      "goal": "Bring commanded velocity to zero.",
+      "aliases": ["stop", "halt", "stop moving", "freeze"],
+      "required_capabilities": ["can_move"],
+      "required_components": ["velocity_controller"],
+      "inputs": [{"name": "stop", "type": "bool", "required": true}],
+      "outputs": [{"name": "stop_result", "type": "bool"}],
+      "preconditions": ["Motion controller available"],
+      "postconditions": ["Commanded motion stopped"],
+      "failure_conditions": ["Controller unavailable", "Robot coasting", "Hardware fault"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "MOB_008",
+      "abstract_skill": "emergency_stop",
+      "category": "Mobility",
+      "description": "Trigger emergency stop or safety halt.",
+      "goal": "Immediately stop unsafe robot motion.",
+      "aliases": ["emergency stop", "e stop", "hard stop", "safety stop"],
+      "required_capabilities": ["can_move"],
+      "required_components": ["safety_controller", "motor_controller"],
+      "inputs": [{"name": "engage", "type": "bool", "required": true}],
+      "outputs": [{"name": "estop_result", "type": "bool"}],
+      "preconditions": ["Safety interface available"],
+      "postconditions": ["Robot motion halted by safety system"],
+      "failure_conditions": ["Safety interface unavailable", "Brake failure", "Command rejected"],
+      "implementations": [
+        {"framework": "Generic ROS2 Safety", "ros2_interface_type": "Service", "interface_name": "/emergency_stop", "message_type": "std_srvs/srv/SetBool"}
+      ]
+    },
+    {
+      "skill_id": "MOB_009",
+      "abstract_skill": "adjust_speed",
+      "category": "Mobility",
+      "description": "Change maximum or commanded motion speed.",
+      "goal": "Set a desired speed limit or velocity.",
+      "aliases": ["adjust speed", "speed up", "slow down", "set speed"],
+      "required_capabilities": ["can_move"],
+      "required_components": ["velocity_controller", "parameter_interface"],
+      "inputs": [{"name": "speed_mps", "type": "float32", "required": true}],
+      "outputs": [{"name": "speed_result", "type": "bool"}],
+      "preconditions": ["Speed within allowed limits", "Controller active"],
+      "postconditions": ["Speed limit or command updated"],
+      "failure_conditions": ["Speed out of range", "Controller unavailable", "Parameter rejected"],
+      "implementations": [
+        {"framework": "ROS2 Parameters", "ros2_interface_type": "Service", "interface_name": "/controller_server/set_parameters", "message_type": "rcl_interfaces/srv/SetParameters"}
+      ]
+    },
+    {
+      "skill_id": "MOB_010",
+      "abstract_skill": "adjust_acceleration",
+      "category": "Mobility",
+      "description": "Change acceleration or deceleration limits.",
+      "goal": "Set motion acceleration behavior.",
+      "aliases": ["adjust acceleration", "set acceleration", "accelerate slower", "acceleration limit"],
+      "required_capabilities": ["can_move"],
+      "required_components": ["motion_controller", "parameter_interface"],
+      "inputs": [{"name": "acceleration_mps2", "type": "float32", "required": true}],
+      "outputs": [{"name": "acceleration_result", "type": "bool"}],
+      "preconditions": ["Acceleration within allowed limits", "Controller supports parameter update"],
+      "postconditions": ["Acceleration limit updated"],
+      "failure_conditions": ["Parameter rejected", "Controller unavailable", "Unsafe value"],
+      "implementations": [
+        {"framework": "ROS2 Parameters", "ros2_interface_type": "Service", "interface_name": "/controller_server/set_parameters", "message_type": "rcl_interfaces/srv/SetParameters"}
+      ]
+    },
+    {
+      "skill_id": "MOB_011",
+      "abstract_skill": "change_locomotion_mode",
+      "category": "Mobility",
+      "description": "Switch between supported locomotion modes or controller modes.",
+      "goal": "Use the requested mobility mode.",
+      "aliases": ["change mode", "switch mode", "locomotion mode", "drive mode"],
+      "required_capabilities": ["can_move"],
+      "required_components": ["mode_manager", "locomotion_controller"],
+      "inputs": [{"name": "mode", "type": "string", "required": true}],
+      "outputs": [{"name": "mode_result", "type": "bool"}],
+      "preconditions": ["Requested mode supported", "Robot in safe transition state"],
+      "postconditions": ["Locomotion mode changed"],
+      "failure_conditions": ["Unsupported mode", "Transition unsafe", "Controller error"],
+      "implementations": [
+        {"framework": "controller_manager", "ros2_interface_type": "Service", "interface_name": "/controller_manager/switch_controller", "message_type": "controller_manager_msgs/srv/SwitchController"}
+      ]
+    },
+    {
+      "skill_id": "MOB_012",
+      "abstract_skill": "stabilize",
+      "category": "Mobility",
+      "description": "Actively stabilize the robot body or base.",
+      "goal": "Maintain stable posture or base state.",
+      "aliases": ["stabilize", "steady", "hold posture", "keep stable"],
+      "required_capabilities": ["can_move", "supports_state_estimation"],
+      "required_components": ["state_estimator", "stabilization_controller"],
+      "inputs": [{"name": "duration_s", "type": "float32", "required": false}],
+      "outputs": [{"name": "stabilize_result", "type": "bool"}],
+      "preconditions": ["State estimator active", "Stabilization controller active"],
+      "postconditions": ["Robot stabilized within tolerance"],
+      "failure_conditions": ["Estimator failure", "Surface unstable", "Actuator limit reached"],
+      "implementations": [
+        {"framework": "Generic ROS2 Control", "ros2_interface_type": "Service", "interface_name": "/stabilize", "message_type": "std_srvs/srv/Trigger"}
+      ]
+    },
+    {
+      "skill_id": "MOB_013",
+      "abstract_skill": "balance",
+      "category": "Mobility",
+      "description": "Maintain or recover balance for legged or unstable robots.",
+      "goal": "Keep the robot balanced.",
+      "aliases": ["balance", "keep balance", "recover balance", "stand steady"],
+      "required_capabilities": ["can_walk", "supports_state_estimation"],
+      "required_components": ["leg_controller", "imu", "balance_controller"],
+      "inputs": [{"name": "posture", "type": "string", "required": false}],
+      "outputs": [{"name": "balance_result", "type": "bool"}],
+      "preconditions": ["Balance controller active", "State estimate valid"],
+      "postconditions": ["Robot balanced or recovery attempted"],
+      "failure_conditions": ["Large disturbance", "Foot slip", "Estimator failure"],
+      "implementations": [
+        {"framework": "Generic Legged Control", "ros2_interface_type": "Service", "interface_name": "/balance", "message_type": "std_srvs/srv/Trigger"}
+      ]
+    },
+    {
+      "skill_id": "MOB_014",
+      "abstract_skill": "climb_ramp",
+      "category": "Mobility",
+      "description": "Move upward along an inclined ramp.",
+      "goal": "Ascend a ramp safely.",
+      "aliases": ["climb ramp", "go up ramp", "ascend ramp", "drive uphill"],
+      "required_capabilities": ["can_climb", "can_move"],
+      "required_components": ["locomotion_base", "incline_estimator", "traction_control"],
+      "inputs": [{"name": "ramp_pose", "type": "geometry_msgs/msg/PoseStamped", "required": false}],
+      "outputs": [{"name": "climb_result", "type": "bool"}],
+      "preconditions": ["Ramp detected or aligned", "Incline within limits", "Path clear"],
+      "postconditions": ["Robot reached top or target ramp pose"],
+      "failure_conditions": ["Ramp too steep", "Loss of traction", "Obstacle on ramp"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "MOB_015",
+      "abstract_skill": "descend_ramp",
+      "category": "Mobility",
+      "description": "Move downward along an inclined ramp.",
+      "goal": "Descend a ramp safely.",
+      "aliases": ["descend ramp", "go down ramp", "drive downhill", "come down ramp"],
+      "required_capabilities": ["can_climb", "can_move"],
+      "required_components": ["locomotion_base", "incline_estimator", "traction_control"],
+      "inputs": [{"name": "ramp_pose", "type": "geometry_msgs/msg/PoseStamped", "required": false}],
+      "outputs": [{"name": "descend_result", "type": "bool"}],
+      "preconditions": ["Ramp detected or aligned", "Incline within limits", "Descent path clear"],
+      "postconditions": ["Robot reached bottom or target ramp pose"],
+      "failure_conditions": ["Ramp too steep", "Loss of traction", "Runaway speed"],
+      "implementations": [
+        {"framework": "ROS2 Base Control", "ros2_interface_type": "Topic", "interface_name": "/cmd_vel", "message_type": "geometry_msgs/msg/Twist"}
+      ]
+    },
+    {
+      "skill_id": "COM_001",
+      "abstract_skill": "speak",
+      "category": "Communication",
+      "description": "Generate spoken output from text.",
+      "goal": "Communicate a message audibly.",
+      "aliases": ["speak", "say", "tell", "announce"],
+      "required_capabilities": ["supports_speech_output"],
+      "required_components": ["speaker", "text_to_speech"],
+      "inputs": [{"name": "text", "type": "string", "required": true}],
+      "outputs": [{"name": "speech_result", "type": "bool"}],
+      "preconditions": ["Speaker available", "Text-to-speech engine ready"],
+      "postconditions": ["Message spoken"],
+      "failure_conditions": ["Speaker muted", "TTS failure", "Audio output unavailable"],
+      "implementations": [
+        {"framework": "ROS2 TTS", "ros2_interface_type": "Topic", "interface_name": "/tts", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "COM_002",
+      "abstract_skill": "display_text",
+      "category": "Communication",
+      "description": "Show text on a screen or user interface.",
+      "goal": "Communicate text visually.",
+      "aliases": ["display text", "show text", "print message", "write on screen"],
+      "required_capabilities": ["supports_human_robot_communication"],
+      "required_components": ["display", "ui_renderer"],
+      "inputs": [{"name": "text", "type": "string", "required": true}],
+      "outputs": [{"name": "display_result", "type": "bool"}],
+      "preconditions": ["Display available", "UI renderer active"],
+      "postconditions": ["Text displayed"],
+      "failure_conditions": ["Display unavailable", "Renderer error", "Text too long"],
+      "implementations": [
+        {"framework": "Generic ROS2 UI", "ros2_interface_type": "Topic", "interface_name": "/display/text", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "COM_003",
+      "abstract_skill": "display_image",
+      "category": "Communication",
+      "description": "Show an image on a screen or user interface.",
+      "goal": "Communicate image content visually.",
+      "aliases": ["display image", "show image", "show picture", "display picture"],
+      "required_capabilities": ["supports_human_robot_communication"],
+      "required_components": ["display", "ui_renderer"],
+      "inputs": [{"name": "image", "type": "sensor_msgs/msg/Image", "required": true}],
+      "outputs": [{"name": "display_result", "type": "bool"}],
+      "preconditions": ["Display available", "Image valid"],
+      "postconditions": ["Image displayed"],
+      "failure_conditions": ["Display unavailable", "Unsupported image format", "Renderer error"],
+      "implementations": [
+        {"framework": "Generic ROS2 UI", "ros2_interface_type": "Topic", "interface_name": "/display/image", "message_type": "sensor_msgs/msg/Image"}
+      ]
+    },
+    {
+      "skill_id": "COM_004",
+      "abstract_skill": "led_feedback",
+      "category": "Communication",
+      "description": "Use LEDs or lights to express status.",
+      "goal": "Communicate state through light patterns.",
+      "aliases": ["led feedback", "blink lights", "set lights", "show status light"],
+      "required_capabilities": ["supports_human_robot_communication"],
+      "required_components": ["led_controller"],
+      "inputs": [{"name": "color", "type": "std_msgs/msg/ColorRGBA", "required": false}, {"name": "pattern", "type": "string", "required": false}],
+      "outputs": [{"name": "led_result", "type": "bool"}],
+      "preconditions": ["LED controller available"],
+      "postconditions": ["LED pattern set"],
+      "failure_conditions": ["LED controller unavailable", "Unsupported pattern", "Hardware fault"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Topic", "interface_name": "/leds", "message_type": "std_msgs/msg/ColorRGBA"}
+      ]
+    },
+    {
+      "skill_id": "COM_005",
+      "abstract_skill": "play_sound",
+      "category": "Communication",
+      "description": "Play a sound, tone, or audio file.",
+      "goal": "Communicate or alert through audio output.",
+      "aliases": ["play sound", "beep", "play audio", "sound alert"],
+      "required_capabilities": ["supports_speech_output"],
+      "required_components": ["speaker", "audio_player"],
+      "inputs": [{"name": "sound_id", "type": "string", "required": true}],
+      "outputs": [{"name": "sound_result", "type": "bool"}],
+      "preconditions": ["Speaker available", "Sound resource available"],
+      "postconditions": ["Sound played"],
+      "failure_conditions": ["Audio file missing", "Speaker unavailable", "Playback error"],
+      "implementations": [
+        {"framework": "audio_common", "ros2_interface_type": "Topic", "interface_name": "/robotsound", "message_type": "sound_play/msg/SoundRequest"}
+      ]
+    },
+    {
+      "skill_id": "COM_006",
+      "abstract_skill": "receive_speech",
+      "category": "Communication",
+      "description": "Receive and interpret spoken input.",
+      "goal": "Capture a user's spoken message.",
+      "aliases": ["receive speech", "listen to user", "hear me", "voice input"],
+      "required_capabilities": ["has_audio_input", "supports_voice_interaction"],
+      "required_components": ["microphone", "speech_recognizer"],
+      "inputs": [{"name": "timeout_s", "type": "float32", "required": false}],
+      "outputs": [{"name": "transcript", "type": "string"}],
+      "preconditions": ["Microphone active", "Recognizer ready"],
+      "postconditions": ["Speech input transcribed or timeout reported"],
+      "failure_conditions": ["No speech", "Noise", "Recognizer failure"],
+      "implementations": [
+        {"framework": "ROS2 Speech", "ros2_interface_type": "Topic", "interface_name": "/speech_recognition/text", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "COM_007",
+      "abstract_skill": "receive_text",
+      "category": "Communication",
+      "description": "Receive text input from a user or external system.",
+      "goal": "Capture a textual message.",
+      "aliases": ["receive text", "read message", "text input", "get command text"],
+      "required_capabilities": ["supports_human_robot_communication"],
+      "required_components": ["ui_input", "message_bridge"],
+      "inputs": [{"name": "channel", "type": "string", "required": false}],
+      "outputs": [{"name": "text", "type": "string"}],
+      "preconditions": ["Input channel available"],
+      "postconditions": ["Text message received"],
+      "failure_conditions": ["Channel unavailable", "Timeout", "Invalid encoding"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Topic", "interface_name": "/user/text", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "COM_008",
+      "abstract_skill": "request_confirmation",
+      "category": "Communication",
+      "description": "Ask a user or external agent for confirmation.",
+      "goal": "Obtain approval before executing a risky or ambiguous action.",
+      "aliases": ["confirm", "ask confirmation", "request approval", "ask user"],
+      "required_capabilities": ["human_robot_interaction"],
+      "required_components": ["communication_interface", "confirmation_policy"],
+      "inputs": [{"name": "prompt", "type": "string", "required": true}],
+      "outputs": [{"name": "confirmed", "type": "bool"}],
+      "preconditions": ["User communication channel available"],
+      "postconditions": ["Confirmation response received or timeout handled"],
+      "failure_conditions": ["No response", "Ambiguous response", "Channel unavailable"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Service", "interface_name": "/request_confirmation", "message_type": "custom_srvs/srv/RequestConfirmation"}
+      ]
+    },
+    {
+      "skill_id": "COM_009",
+      "abstract_skill": "notify_user",
+      "category": "Communication",
+      "description": "Notify a user of an event, state, or result.",
+      "goal": "Deliver a user-facing notification.",
+      "aliases": ["notify", "alert user", "send notification", "inform user"],
+      "required_capabilities": ["supports_human_robot_communication"],
+      "required_components": ["notification_channel"],
+      "inputs": [{"name": "message", "type": "string", "required": true}, {"name": "severity", "type": "string", "required": false}],
+      "outputs": [{"name": "notify_result", "type": "bool"}],
+      "preconditions": ["Notification channel available"],
+      "postconditions": ["Notification sent"],
+      "failure_conditions": ["Channel unavailable", "Delivery failed", "Message invalid"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Topic", "interface_name": "/notifications", "message_type": "diagnostic_msgs/msg/DiagnosticStatus"}
+      ]
+    },
+    {
+      "skill_id": "COM_010",
+      "abstract_skill": "report_status",
+      "category": "Communication",
+      "description": "Report robot, task, or mission status.",
+      "goal": "Expose current state to users or coordinating systems.",
+      "aliases": ["report status", "status update", "what is your status", "send status"],
+      "required_capabilities": ["supports_human_robot_communication"],
+      "required_components": ["status_monitor", "communication_interface"],
+      "inputs": [{"name": "status_scope", "type": "string", "required": false}],
+      "outputs": [{"name": "status", "type": "diagnostic_msgs/msg/DiagnosticArray"}],
+      "preconditions": ["Status monitor active"],
+      "postconditions": ["Status reported"],
+      "failure_conditions": ["Monitor unavailable", "Communication failure", "Stale state"],
+      "implementations": [
+        {"framework": "ROS2 Diagnostics", "ros2_interface_type": "Topic", "interface_name": "/diagnostics", "message_type": "diagnostic_msgs/msg/DiagnosticArray"}
+      ]
+    },
+    {
+      "skill_id": "INS_001",
+      "abstract_skill": "capture_image",
+      "category": "Inspection",
+      "description": "Capture a still image from a camera.",
+      "goal": "Acquire an image for inspection or documentation.",
+      "aliases": ["capture image", "take image", "take photo", "photograph"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera"],
+      "inputs": [{"name": "camera_id", "type": "string", "required": false}],
+      "outputs": [{"name": "image", "type": "sensor_msgs/msg/Image"}],
+      "preconditions": ["Camera active", "Image stream available"],
+      "postconditions": ["Image captured"],
+      "failure_conditions": ["Camera unavailable", "Exposure failure", "Image timeout"],
+      "implementations": [
+        {"framework": "image_pipeline", "ros2_interface_type": "Topic", "interface_name": "/camera/image_raw", "message_type": "sensor_msgs/msg/Image"}
+      ]
+    },
+    {
+      "skill_id": "INS_002",
+      "abstract_skill": "capture_video",
+      "category": "Inspection",
+      "description": "Capture video from a camera for a duration or stream.",
+      "goal": "Acquire video evidence or inspection footage.",
+      "aliases": ["capture video", "record video", "film", "video stream"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera", "video_recorder"],
+      "inputs": [{"name": "duration_s", "type": "float32", "required": false}],
+      "outputs": [{"name": "video_uri", "type": "string"}],
+      "preconditions": ["Camera active", "Storage available"],
+      "postconditions": ["Video captured or stream active"],
+      "failure_conditions": ["Camera unavailable", "Storage full", "Encoding failure"],
+      "implementations": [
+        {"framework": "rosbag2", "ros2_interface_type": "Command", "interface_name": "ros2 bag record /camera/image_raw", "message_type": "sensor_msgs/msg/Image"}
+      ]
+    },
+    {
+      "skill_id": "INS_003",
+      "abstract_skill": "scan_area",
+      "category": "Inspection",
+      "description": "Scan an area using available perception sensors.",
+      "goal": "Collect sensor coverage over a target area.",
+      "aliases": ["scan area", "sweep area", "look over area", "area scan"],
+      "required_capabilities": ["can_inspect"],
+      "required_components": ["sensor_suite", "scan_controller"],
+      "inputs": [{"name": "area", "type": "geometry_msgs/msg/PolygonStamped", "required": false}],
+      "outputs": [{"name": "scan_result", "type": "bool"}],
+      "preconditions": ["Sensors active", "Area accessible or visible"],
+      "postconditions": ["Area scan data collected"],
+      "failure_conditions": ["Sensor coverage incomplete", "Area occluded", "Sensor failure"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/scan_area", "message_type": "custom_msgs/action/ScanArea"}
+      ]
+    },
+    {
+      "skill_id": "INS_004",
+      "abstract_skill": "inspect_equipment",
+      "category": "Inspection",
+      "description": "Inspect equipment for state, damage, readings, or anomalies.",
+      "goal": "Assess equipment condition.",
+      "aliases": ["inspect equipment", "check machine", "examine equipment", "monitor equipment"],
+      "required_capabilities": ["can_inspect", "can_monitor_equipment"],
+      "required_components": ["sensor_suite", "inspection_model"],
+      "inputs": [{"name": "equipment_id", "type": "string", "required": true}],
+      "outputs": [{"name": "inspection_status", "type": "string"}],
+      "preconditions": ["Equipment reachable or visible", "Inspection criteria available"],
+      "postconditions": ["Equipment status assessed"],
+      "failure_conditions": ["Equipment not found", "Sensor data insufficient", "Criteria missing"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/inspect_equipment", "message_type": "custom_msgs/action/InspectEquipment"}
+      ]
+    },
+    {
+      "skill_id": "INS_005",
+      "abstract_skill": "inspect_surface",
+      "category": "Inspection",
+      "description": "Inspect a surface for defects, contamination, or condition.",
+      "goal": "Assess the target surface.",
+      "aliases": ["inspect surface", "check surface", "examine surface", "surface inspection"],
+      "required_capabilities": ["can_inspect", "has_visual_perception"],
+      "required_components": ["camera_or_probe", "surface_inspection_model"],
+      "inputs": [{"name": "surface_id", "type": "string", "required": true}],
+      "outputs": [{"name": "surface_report", "type": "string"}],
+      "preconditions": ["Surface visible or reachable", "Inspection model available"],
+      "postconditions": ["Surface condition estimated"],
+      "failure_conditions": ["Surface occluded", "Resolution insufficient", "Model unavailable"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Topic", "interface_name": "/surface_inspection", "message_type": "std_msgs/msg/String"}
+      ]
+    },
+    {
+      "skill_id": "INS_006",
+      "abstract_skill": "thermal_scan",
+      "category": "Inspection",
+      "description": "Scan using thermal sensing.",
+      "goal": "Measure or map thermal patterns.",
+      "aliases": ["thermal scan", "heat scan", "infrared scan", "temperature image"],
+      "required_capabilities": ["can_thermal_inspect"],
+      "required_components": ["thermal_camera", "thermal_processor"],
+      "inputs": [{"name": "target_area", "type": "geometry_msgs/msg/PolygonStamped", "required": false}],
+      "outputs": [{"name": "thermal_image", "type": "sensor_msgs/msg/Image"}],
+      "preconditions": ["Thermal sensor active", "Target in range"],
+      "postconditions": ["Thermal data collected"],
+      "failure_conditions": ["Thermal sensor unavailable", "Target out of range", "Calibration error"],
+      "implementations": [
+        {"framework": "ROS2 Sensors", "ros2_interface_type": "Topic", "interface_name": "/thermal/image_raw", "message_type": "sensor_msgs/msg/Image"}
+      ]
+    },
+    {
+      "skill_id": "INS_007",
+      "abstract_skill": "gas_scan",
+      "category": "Inspection",
+      "description": "Measure gas concentration or detect gas presence.",
+      "goal": "Assess gas-related safety or environment conditions.",
+      "aliases": ["gas scan", "detect gas", "gas reading", "air quality scan"],
+      "required_capabilities": ["can_inspect", "environmental_sensing"],
+      "required_components": ["gas_sensor", "environment_monitor"],
+      "inputs": [{"name": "gas_type", "type": "string", "required": false}],
+      "outputs": [{"name": "gas_concentration", "type": "float32"}],
+      "preconditions": ["Gas sensor active", "Sensor warmed up if required"],
+      "postconditions": ["Gas reading collected"],
+      "failure_conditions": ["Sensor unavailable", "Calibration expired", "Out of measurement range"],
+      "implementations": [
+        {"framework": "Generic ROS2 Sensors", "ros2_interface_type": "Topic", "interface_name": "/gas/concentration", "message_type": "sensor_msgs/msg/FluidPressure"}
+      ]
+    },
+    {
+      "skill_id": "INS_008",
+      "abstract_skill": "radiation_scan",
+      "category": "Inspection",
+      "description": "Measure radiation level or detect radioactive sources.",
+      "goal": "Assess radiation-related safety conditions.",
+      "aliases": ["radiation scan", "measure radiation", "radiation reading", "geiger scan"],
+      "required_capabilities": ["can_inspect", "environmental_sensing"],
+      "required_components": ["radiation_sensor", "environment_monitor"],
+      "inputs": [{"name": "scan_area", "type": "geometry_msgs/msg/PolygonStamped", "required": false}],
+      "outputs": [{"name": "radiation_level", "type": "float32"}],
+      "preconditions": ["Radiation sensor active", "Measurement interval configured"],
+      "postconditions": ["Radiation reading collected"],
+      "failure_conditions": ["Sensor unavailable", "Calibration expired", "Out of measurement range"],
+      "implementations": [
+        {"framework": "Generic ROS2 Sensors", "ros2_interface_type": "Topic", "interface_name": "/radiation/level", "message_type": "std_msgs/msg/Float32"}
+      ]
+    },
+    {
+      "skill_id": "INS_009",
+      "abstract_skill": "measure_distance",
+      "category": "Inspection",
+      "description": "Measure distance to a target, surface, or obstacle.",
+      "goal": "Return a range measurement.",
+      "aliases": ["measure distance", "range measurement", "distance reading", "how far"],
+      "required_capabilities": ["can_estimate_range"],
+      "required_components": ["range_sensor"],
+      "inputs": [{"name": "target", "type": "string", "required": false}],
+      "outputs": [{"name": "distance_m", "type": "float32"}],
+      "preconditions": ["Range sensor active", "Target in range"],
+      "postconditions": ["Distance measured"],
+      "failure_conditions": ["Target not visible", "Sensor saturated", "Out of range"],
+      "implementations": [
+        {"framework": "ROS2 Sensors", "ros2_interface_type": "Topic", "interface_name": "/range", "message_type": "sensor_msgs/msg/Range"}
+      ]
+    },
+    {
+      "skill_id": "INS_010",
+      "abstract_skill": "measure_temperature",
+      "category": "Inspection",
+      "description": "Measure temperature from a sensor or thermal image.",
+      "goal": "Return a temperature value.",
+      "aliases": ["measure temperature", "temperature reading", "check temperature", "how hot"],
+      "required_capabilities": ["can_thermal_inspect"],
+      "required_components": ["temperature_sensor_or_thermal_camera"],
+      "inputs": [{"name": "target", "type": "string", "required": false}],
+      "outputs": [{"name": "temperature_c", "type": "float32"}],
+      "preconditions": ["Temperature sensor active", "Sensor calibrated"],
+      "postconditions": ["Temperature measured"],
+      "failure_conditions": ["Sensor unavailable", "Out of range", "Calibration error"],
+      "implementations": [
+        {"framework": "ROS2 Sensors", "ros2_interface_type": "Topic", "interface_name": "/temperature", "message_type": "sensor_msgs/msg/Temperature"}
+      ]
+    },
+    {
+      "skill_id": "INS_011",
+      "abstract_skill": "measure_humidity",
+      "category": "Inspection",
+      "description": "Measure humidity level.",
+      "goal": "Return relative humidity or moisture reading.",
+      "aliases": ["measure humidity", "humidity reading", "check humidity", "moisture level"],
+      "required_capabilities": ["environmental_sensing"],
+      "required_components": ["humidity_sensor"],
+      "inputs": [{"name": "sensor_id", "type": "string", "required": false}],
+      "outputs": [{"name": "relative_humidity", "type": "float32"}],
+      "preconditions": ["Humidity sensor active", "Sensor calibrated"],
+      "postconditions": ["Humidity measured"],
+      "failure_conditions": ["Sensor unavailable", "Out of range", "Calibration error"],
+      "implementations": [
+        {"framework": "ROS2 Sensors", "ros2_interface_type": "Topic", "interface_name": "/relative_humidity", "message_type": "sensor_msgs/msg/RelativeHumidity"}
+      ]
+    },
+    {
+      "skill_id": "INS_012",
+      "abstract_skill": "record_sensor_data",
+      "category": "Inspection",
+      "description": "Record selected sensor topics or data streams.",
+      "goal": "Persist sensor data for later analysis.",
+      "aliases": ["record sensor data", "log sensors", "record data", "save sensor stream"],
+      "required_capabilities": ["can_inspect"],
+      "required_components": ["sensor_suite", "data_recorder"],
+      "inputs": [{"name": "topics", "type": "string[]", "required": true}, {"name": "duration_s", "type": "float32", "required": false}],
+      "outputs": [{"name": "recording_uri", "type": "string"}],
+      "preconditions": ["Topics available", "Storage available"],
+      "postconditions": ["Sensor data recorded"],
+      "failure_conditions": ["Storage full", "Topic unavailable", "Recorder failure"],
+      "implementations": [
+        {"framework": "rosbag2", "ros2_interface_type": "Command", "interface_name": "ros2 bag record", "message_type": "rosbag2"}
+      ]
+    },
+    {
+      "skill_id": "INS_013",
+      "abstract_skill": "generate_inspection_report",
+      "category": "Inspection",
+      "description": "Generate a structured inspection report from observations.",
+      "goal": "Produce a report summarizing inspection findings.",
+      "aliases": ["generate report", "inspection report", "write report", "summarize inspection"],
+      "required_capabilities": ["can_inspect"],
+      "required_components": ["inspection_data_store", "report_generator"],
+      "inputs": [{"name": "inspection_id", "type": "string", "required": true}],
+      "outputs": [{"name": "report_uri", "type": "string"}],
+      "preconditions": ["Inspection data available", "Report template available"],
+      "postconditions": ["Inspection report generated"],
+      "failure_conditions": ["Missing data", "Template unavailable", "Storage failure"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Service", "interface_name": "/generate_inspection_report", "message_type": "custom_srvs/srv/GenerateReport"}
+      ]
+    },
+    {
+      "skill_id": "INS_014",
+      "abstract_skill": "take_snapshot",
+      "category": "Inspection",
+      "description": "Take a timestamped snapshot from a sensor or scene.",
+      "goal": "Capture a quick inspection snapshot.",
+      "aliases": ["take snapshot", "snapshot", "quick photo", "capture snapshot"],
+      "required_capabilities": ["has_visual_perception"],
+      "required_components": ["camera", "snapshot_store"],
+      "inputs": [{"name": "camera_id", "type": "string", "required": false}],
+      "outputs": [{"name": "snapshot_uri", "type": "string"}],
+      "preconditions": ["Camera active", "Storage available"],
+      "postconditions": ["Snapshot stored"],
+      "failure_conditions": ["Camera unavailable", "Storage failure", "Image timeout"],
+      "implementations": [
+        {"framework": "image_view", "ros2_interface_type": "Service", "interface_name": "/snapshot", "message_type": "std_srvs/srv/Trigger"}
+      ]
+    },
+    {
+      "skill_id": "INS_015",
+      "abstract_skill": "survey_environment",
+      "category": "Inspection",
+      "description": "Survey an environment by navigating and collecting observations.",
+      "goal": "Produce broad situational or inspection coverage.",
+      "aliases": ["survey environment", "survey area", "inspect environment", "environment survey"],
+      "required_capabilities": ["can_inspect", "can_navigate"],
+      "required_components": ["mobile_base", "sensor_suite", "mission_executor"],
+      "inputs": [{"name": "survey_area", "type": "geometry_msgs/msg/PolygonStamped", "required": false}],
+      "outputs": [{"name": "survey_result", "type": "bool"}],
+      "preconditions": ["Survey area defined", "Sensors active", "Navigation available"],
+      "postconditions": ["Survey observations collected"],
+      "failure_conditions": ["Area unreachable", "Coverage incomplete", "Sensor failure"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/follow_waypoints", "message_type": "nav2_msgs/action/FollowWaypoints"}
+      ]
+    },
+    {
+      "skill_id": "ENV_001",
+      "abstract_skill": "open_door",
+      "category": "Environment Interaction",
+      "description": "Open an environmental door as part of interaction with the environment.",
+      "goal": "Make a passage available by opening the door.",
+      "aliases": ["open door", "open the door", "open passage", "open entrance"],
+      "required_capabilities": ["can_open_door"],
+      "required_components": ["manipulator_or_door_actuator", "door_perception"],
+      "inputs": [{"name": "door_id", "type": "string", "required": true}],
+      "outputs": [{"name": "door_open_result", "type": "bool"}],
+      "preconditions": ["Door located", "Door unlocked or openable", "Interaction pose reachable"],
+      "postconditions": ["Door open"],
+      "failure_conditions": ["Door locked", "Handle unreachable", "Door blocked"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/open_door", "message_type": "custom_msgs/action/OpenDoor"}
+      ]
+    },
+    {
+      "skill_id": "ENV_002",
+      "abstract_skill": "close_door",
+      "category": "Environment Interaction",
+      "description": "Close an environmental door.",
+      "goal": "Return a door to a closed state.",
+      "aliases": ["close door", "shut door", "close passage", "close entrance"],
+      "required_capabilities": ["can_open_door"],
+      "required_components": ["manipulator_or_door_actuator", "door_perception"],
+      "inputs": [{"name": "door_id", "type": "string", "required": true}],
+      "outputs": [{"name": "door_close_result", "type": "bool"}],
+      "preconditions": ["Door open", "Door reachable", "Closing path clear"],
+      "postconditions": ["Door closed"],
+      "failure_conditions": ["Door blocked", "Latch failure", "Contact lost"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/close_door", "message_type": "custom_msgs/action/CloseDoor"}
+      ]
+    },
+    {
+      "skill_id": "ENV_003",
+      "abstract_skill": "open_drawer",
+      "category": "Environment Interaction",
+      "description": "Open a drawer in the environment.",
+      "goal": "Expose drawer contents.",
+      "aliases": ["open drawer", "pull drawer open", "open cabinet drawer"],
+      "required_capabilities": ["can_open_drawer"],
+      "required_components": ["manipulator", "drawer_perception"],
+      "inputs": [{"name": "drawer_id", "type": "string", "required": true}],
+      "outputs": [{"name": "drawer_open_result", "type": "bool"}],
+      "preconditions": ["Drawer located", "Handle reachable", "Pull path clear"],
+      "postconditions": ["Drawer open"],
+      "failure_conditions": ["Drawer stuck", "Handle missed", "Collision risk"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/open_drawer", "message_type": "custom_msgs/action/OpenDrawer"}
+      ]
+    },
+    {
+      "skill_id": "ENV_004",
+      "abstract_skill": "close_drawer",
+      "category": "Environment Interaction",
+      "description": "Close an open drawer in the environment.",
+      "goal": "Return drawer to a closed state.",
+      "aliases": ["close drawer", "shut drawer", "push drawer closed"],
+      "required_capabilities": ["can_open_drawer"],
+      "required_components": ["manipulator", "drawer_perception"],
+      "inputs": [{"name": "drawer_id", "type": "string", "required": true}],
+      "outputs": [{"name": "drawer_close_result", "type": "bool"}],
+      "preconditions": ["Drawer open", "Drawer reachable", "Closing path clear"],
+      "postconditions": ["Drawer closed"],
+      "failure_conditions": ["Drawer blocked", "Contact lost", "Excessive force"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/close_drawer", "message_type": "custom_msgs/action/CloseDrawer"}
+      ]
+    },
+    {
+      "skill_id": "ENV_005",
+      "abstract_skill": "press_button",
+      "category": "Environment Interaction",
+      "description": "Press a button in the environment.",
+      "goal": "Activate the button-controlled function.",
+      "aliases": ["press button", "push button", "tap button", "activate button"],
+      "required_capabilities": ["can_press_button"],
+      "required_components": ["manipulator_or_contact_actuator", "button_perception"],
+      "inputs": [{"name": "button_id", "type": "string", "required": true}],
+      "outputs": [{"name": "button_press_result", "type": "bool"}],
+      "preconditions": ["Button located", "Button reachable", "Contact force safe"],
+      "postconditions": ["Button pressed"],
+      "failure_conditions": ["Button missed", "Button not actuated", "Excessive force"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/press_button", "message_type": "custom_msgs/action/PressButton"}
+      ]
+    },
+    {
+      "skill_id": "ENV_006",
+      "abstract_skill": "flip_switch",
+      "category": "Environment Interaction",
+      "description": "Flip or toggle a switch in the environment.",
+      "goal": "Change a switch-controlled state.",
+      "aliases": ["flip switch", "toggle switch", "turn switch on", "turn switch off"],
+      "required_capabilities": ["can_press_button", "can_manipulate"],
+      "required_components": ["manipulator", "switch_perception"],
+      "inputs": [{"name": "switch_id", "type": "string", "required": true}, {"name": "target_state", "type": "bool", "required": false}],
+      "outputs": [{"name": "switch_result", "type": "bool"}],
+      "preconditions": ["Switch located", "Switch reachable", "Switch direction known"],
+      "postconditions": ["Switch state changed"],
+      "failure_conditions": ["Switch jammed", "State not verified", "Switch missed"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/flip_switch", "message_type": "custom_msgs/action/FlipSwitch"}
+      ]
+    },
+    {
+      "skill_id": "ENV_007",
+      "abstract_skill": "turn_valve",
+      "category": "Environment Interaction",
+      "description": "Turn a valve wheel, handle, or lever.",
+      "goal": "Change valve state or opening angle.",
+      "aliases": ["turn valve", "open valve", "close valve", "rotate valve"],
+      "required_capabilities": ["can_grasp", "can_manipulate"],
+      "required_components": ["manipulator", "valve_perception", "force_control"],
+      "inputs": [{"name": "valve_id", "type": "string", "required": true}, {"name": "target_angle_rad", "type": "float32", "required": false}],
+      "outputs": [{"name": "valve_result", "type": "bool"}],
+      "preconditions": ["Valve located", "Valve reachable", "Torque limits configured"],
+      "postconditions": ["Valve turned"],
+      "failure_conditions": ["Valve stuck", "Grip lost", "Torque limit exceeded"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/turn_valve", "message_type": "custom_msgs/action/TurnValve"}
+      ]
+    },
+    {
+      "skill_id": "ENV_008",
+      "abstract_skill": "operate_elevator",
+      "category": "Environment Interaction",
+      "description": "Call, enter, select floor, or operate an elevator.",
+      "goal": "Use an elevator to support navigation between floors.",
+      "aliases": ["operate elevator", "use elevator", "call lift", "select floor"],
+      "required_capabilities": ["can_use_elevator"],
+      "required_components": ["navigation_stack", "button_interaction_or_elevator_api"],
+      "inputs": [{"name": "target_floor", "type": "string", "required": true}],
+      "outputs": [{"name": "elevator_result", "type": "bool"}],
+      "preconditions": ["Elevator available", "Call panel reachable or API available", "Robot can enter safely"],
+      "postconditions": ["Robot requested or completed elevator transition"],
+      "failure_conditions": ["Elevator unavailable", "Door timeout", "Button inaccessible"],
+      "implementations": [
+        {"framework": "RMF", "ros2_interface_type": "Service", "interface_name": "/lift_requests", "message_type": "rmf_lift_msgs/msg/LiftRequest"}
+      ]
+    },
+    {
+      "skill_id": "ENV_009",
+      "abstract_skill": "use_conveyor",
+      "category": "Environment Interaction",
+      "description": "Interact with a conveyor for loading, unloading, or triggering motion.",
+      "goal": "Use a conveyor as part of a material flow task.",
+      "aliases": ["use conveyor", "operate conveyor", "load conveyor", "unload conveyor"],
+      "required_capabilities": ["can_transport", "can_manipulate"],
+      "required_components": ["manipulator_or_payload_interface", "conveyor_interface"],
+      "inputs": [{"name": "conveyor_id", "type": "string", "required": true}, {"name": "operation", "type": "string", "required": true}],
+      "outputs": [{"name": "conveyor_result", "type": "bool"}],
+      "preconditions": ["Conveyor reachable or connected", "Operation permitted", "Safety interlock satisfied"],
+      "postconditions": ["Conveyor interaction completed"],
+      "failure_conditions": ["Conveyor unavailable", "Item jam", "Interlock fault"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Service", "interface_name": "/conveyor/control", "message_type": "std_srvs/srv/SetBool"}
+      ]
+    },
+    {
+      "skill_id": "ENV_010",
+      "abstract_skill": "use_charging_dock",
+      "category": "Environment Interaction",
+      "description": "Use a charging dock for power replenishment.",
+      "goal": "Dock, charge, or manage charging behavior.",
+      "aliases": ["use charging dock", "charge robot", "go charge", "connect charger"],
+      "required_capabilities": ["docking_capable"],
+      "required_components": ["charging_dock", "battery_monitor", "docking_controller"],
+      "inputs": [{"name": "dock_id", "type": "string", "required": false}],
+      "outputs": [{"name": "charging_result", "type": "bool"}],
+      "preconditions": ["Dock available", "Battery charging interface available"],
+      "postconditions": ["Robot docked or charging managed"],
+      "failure_conditions": ["Dock unavailable", "Charging failed", "Alignment failed"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Action", "interface_name": "/dock_robot", "message_type": "nav2_msgs/action/DockRobot"}
+      ]
+    },
+    {
+      "skill_id": "ENV_011",
+      "abstract_skill": "dispose_object",
+      "category": "Environment Interaction",
+      "description": "Place or drop an object into a disposal location.",
+      "goal": "Dispose of the target object.",
+      "aliases": ["dispose object", "throw away", "put in bin", "discard item"],
+      "required_capabilities": ["can_place", "can_transport"],
+      "required_components": ["manipulator_or_payload_holder", "disposal_location"],
+      "inputs": [{"name": "object_id", "type": "string", "required": true}, {"name": "bin_id", "type": "string", "required": false}],
+      "outputs": [{"name": "dispose_result", "type": "bool"}],
+      "preconditions": ["Object held or carried", "Disposal location reachable"],
+      "postconditions": ["Object placed in disposal location"],
+      "failure_conditions": ["Bin not found", "Object dropped outside bin", "Placement failed"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/dispose_object", "message_type": "custom_msgs/action/DisposeObject"}
+      ]
+    },
+    {
+      "skill_id": "ENV_012",
+      "abstract_skill": "pick_waste",
+      "category": "Environment Interaction",
+      "description": "Pick up waste or debris from the environment.",
+      "goal": "Collect waste for disposal.",
+      "aliases": ["pick waste", "pick trash", "collect waste", "clean up trash"],
+      "required_capabilities": ["can_pick", "can_grasp"],
+      "required_components": ["manipulator", "waste_detector", "end_effector"],
+      "inputs": [{"name": "waste_id", "type": "string", "required": false}],
+      "outputs": [{"name": "waste_pick_result", "type": "bool"}],
+      "preconditions": ["Waste detected", "Waste reachable", "End effector suitable"],
+      "postconditions": ["Waste held or collected"],
+      "failure_conditions": ["Waste not graspable", "Object contaminated beyond policy", "Grip failed"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/pick_waste", "message_type": "custom_msgs/action/PickWaste"}
+      ]
+    },
+    {
+      "skill_id": "ENV_013",
+      "abstract_skill": "clean_surface",
+      "category": "Environment Interaction",
+      "description": "Clean a surface using a tool, brush, cloth, spray, or similar mechanism.",
+      "goal": "Improve the cleanliness of a target surface.",
+      "aliases": ["clean surface", "wipe surface", "scrub", "clean table"],
+      "required_capabilities": ["can_manipulate"],
+      "required_components": ["cleaning_tool", "manipulator_or_cleaning_base"],
+      "inputs": [{"name": "surface_id", "type": "string", "required": true}],
+      "outputs": [{"name": "clean_result", "type": "bool"}],
+      "preconditions": ["Surface reachable", "Cleaning tool available", "Cleaning path safe"],
+      "postconditions": ["Surface cleaning action completed"],
+      "failure_conditions": ["Tool unavailable", "Surface unreachable", "Insufficient contact"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/clean_surface", "message_type": "custom_msgs/action/CleanSurface"}
+      ]
+    },
+    {
+      "skill_id": "ENV_014",
+      "abstract_skill": "arrange_objects",
+      "category": "Environment Interaction",
+      "description": "Arrange objects into target positions or an ordered layout.",
+      "goal": "Bring objects into the requested spatial arrangement.",
+      "aliases": ["arrange objects", "organize items", "tidy objects", "set layout"],
+      "required_capabilities": ["can_pick", "can_place"],
+      "required_components": ["manipulator", "object_perception", "task_planner"],
+      "inputs": [{"name": "arrangement", "type": "string", "required": true}],
+      "outputs": [{"name": "arrangement_result", "type": "bool"}],
+      "preconditions": ["Objects detected", "Target layout feasible", "Manipulation workspace clear"],
+      "postconditions": ["Objects arranged according to target layout"],
+      "failure_conditions": ["Object missing", "Layout infeasible", "Manipulation failure"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/arrange_objects", "message_type": "custom_msgs/action/ArrangeObjects"}
+      ]
+    },
+    {
+      "skill_id": "ENV_015",
+      "abstract_skill": "interact_with_appliance",
+      "category": "Environment Interaction",
+      "description": "Interact with an appliance through buttons, doors, handles, or interfaces.",
+      "goal": "Operate or query an appliance.",
+      "aliases": ["use appliance", "operate appliance", "interact with appliance", "control appliance"],
+      "required_capabilities": ["can_press_button", "can_manipulate"],
+      "required_components": ["appliance_perception", "manipulator_or_api_bridge"],
+      "inputs": [{"name": "appliance_id", "type": "string", "required": true}, {"name": "operation", "type": "string", "required": true}],
+      "outputs": [{"name": "appliance_result", "type": "bool"}],
+      "preconditions": ["Appliance located or connected", "Operation supported", "Interaction method available"],
+      "postconditions": ["Appliance operation requested or completed"],
+      "failure_conditions": ["Appliance unavailable", "Control inaccessible", "Operation failed"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Action", "interface_name": "/interact_with_appliance", "message_type": "custom_msgs/action/InteractWithAppliance"}
+      ]
+    },
+    {
+      "skill_id": "SYS_001",
+      "abstract_skill": "initialize",
+      "category": "System Operations",
+      "description": "Initialize robot software, hardware, or task context.",
+      "goal": "Bring the robot or subsystem into a ready state.",
+      "aliases": ["initialize", "start up", "prepare robot", "boot system"],
+      "required_capabilities": [],
+      "required_components": ["system_manager"],
+      "inputs": [{"name": "subsystem", "type": "string", "required": false}],
+      "outputs": [{"name": "initialize_result", "type": "bool"}],
+      "preconditions": ["Power available", "Required software installed"],
+      "postconditions": ["Subsystem initialized"],
+      "failure_conditions": ["Hardware fault", "Missing dependency", "Startup timeout"],
+      "implementations": [
+        {"framework": "ROS2 Lifecycle", "ros2_interface_type": "Service", "interface_name": "/lifecycle_manager/manage_nodes", "message_type": "nav2_msgs/srv/ManageLifecycleNodes"}
+      ]
+    },
+    {
+      "skill_id": "SYS_002",
+      "abstract_skill": "shutdown",
+      "category": "System Operations",
+      "description": "Shut down robot software, hardware, or a subsystem.",
+      "goal": "Bring the robot or subsystem to a safe stopped state.",
+      "aliases": ["shutdown", "power down", "turn off", "stop system"],
+      "required_capabilities": [],
+      "required_components": ["system_manager"],
+      "inputs": [{"name": "subsystem", "type": "string", "required": false}],
+      "outputs": [{"name": "shutdown_result", "type": "bool"}],
+      "preconditions": ["Shutdown permitted", "Active tasks can be stopped"],
+      "postconditions": ["Subsystem shut down safely"],
+      "failure_conditions": ["Task cannot stop", "Shutdown rejected", "Hardware fault"],
+      "implementations": [
+        {"framework": "ROS2 Lifecycle", "ros2_interface_type": "Service", "interface_name": "/lifecycle_manager/manage_nodes", "message_type": "nav2_msgs/srv/ManageLifecycleNodes"}
+      ]
+    },
+    {
+      "skill_id": "SYS_003",
+      "abstract_skill": "restart",
+      "category": "System Operations",
+      "description": "Restart robot software or a subsystem.",
+      "goal": "Stop and reinitialize a subsystem.",
+      "aliases": ["restart", "reboot", "cycle system", "restart node"],
+      "required_capabilities": [],
+      "required_components": ["system_manager"],
+      "inputs": [{"name": "subsystem", "type": "string", "required": false}],
+      "outputs": [{"name": "restart_result", "type": "bool"}],
+      "preconditions": ["Restart permitted", "Subsystem identifiable"],
+      "postconditions": ["Subsystem restarted"],
+      "failure_conditions": ["Shutdown failed", "Startup failed", "Dependency unavailable"],
+      "implementations": [
+        {"framework": "ROS2 Lifecycle", "ros2_interface_type": "Service", "interface_name": "/lifecycle_manager/manage_nodes", "message_type": "nav2_msgs/srv/ManageLifecycleNodes"}
+      ]
+    },
+    {
+      "skill_id": "SYS_004",
+      "abstract_skill": "reset",
+      "category": "System Operations",
+      "description": "Reset a subsystem, error state, or task context.",
+      "goal": "Return a component to a known baseline state.",
+      "aliases": ["reset", "clear error", "reset state", "clear fault"],
+      "required_capabilities": [],
+      "required_components": ["system_manager"],
+      "inputs": [{"name": "target", "type": "string", "required": false}],
+      "outputs": [{"name": "reset_result", "type": "bool"}],
+      "preconditions": ["Reset target known", "Reset permitted"],
+      "postconditions": ["Target reset or error cleared"],
+      "failure_conditions": ["Reset rejected", "Fault persists", "Target unavailable"],
+      "implementations": [
+        {"framework": "Generic ROS2", "ros2_interface_type": "Service", "interface_name": "/reset", "message_type": "std_srvs/srv/Trigger"}
+      ]
+    },
+    {
+      "skill_id": "SYS_005",
+      "abstract_skill": "self_check",
+      "category": "System Operations",
+      "description": "Run internal health checks and diagnostics.",
+      "goal": "Assess whether the robot is healthy enough for operation.",
+      "aliases": ["self check", "diagnostics", "health check", "system check"],
+      "required_capabilities": [],
+      "required_components": ["diagnostics", "system_monitor"],
+      "inputs": [{"name": "check_scope", "type": "string", "required": false}],
+      "outputs": [{"name": "diagnostics", "type": "diagnostic_msgs/msg/DiagnosticArray"}],
+      "preconditions": ["Diagnostics available"],
+      "postconditions": ["Health status reported"],
+      "failure_conditions": ["Diagnostic timeout", "Monitor unavailable", "Critical fault detected"],
+      "implementations": [
+        {"framework": "ROS2 Diagnostics", "ros2_interface_type": "Topic", "interface_name": "/diagnostics", "message_type": "diagnostic_msgs/msg/DiagnosticArray"}
+      ]
+    },
+    {
+      "skill_id": "SYS_006",
+      "abstract_skill": "calibrate_sensors",
+      "category": "System Operations",
+      "description": "Calibrate one or more sensors.",
+      "goal": "Improve sensor accuracy or update calibration parameters.",
+      "aliases": ["calibrate sensors", "sensor calibration", "calibrate camera", "calibrate imu"],
+      "required_capabilities": [],
+      "required_components": ["sensor_suite", "calibration_tool"],
+      "inputs": [{"name": "sensor_id", "type": "string", "required": false}],
+      "outputs": [{"name": "calibration_result", "type": "bool"}],
+      "preconditions": ["Sensor available", "Calibration target or procedure available"],
+      "postconditions": ["Sensor calibration completed or updated"],
+      "failure_conditions": ["Sensor unavailable", "Calibration target not detected", "Calibration error too high"],
+      "implementations": [
+        {"framework": "camera_calibration", "ros2_interface_type": "Service", "interface_name": "/calibrate_sensor", "message_type": "std_srvs/srv/Trigger"}
+      ]
+    },
+    {
+      "skill_id": "SYS_007",
+      "abstract_skill": "calibrate_arm",
+      "category": "System Operations",
+      "description": "Calibrate manipulator joints, tool frames, or home positions.",
+      "goal": "Bring manipulator calibration into a valid state.",
+      "aliases": ["calibrate arm", "arm calibration", "home arm", "calibrate manipulator"],
+      "required_capabilities": ["can_manipulate"],
+      "required_components": ["manipulator", "joint_controller", "calibration_tool"],
+      "inputs": [{"name": "calibration_mode", "type": "string", "required": false}],
+      "outputs": [{"name": "arm_calibration_result", "type": "bool"}],
+      "preconditions": ["Arm enabled", "Workspace safe", "Calibration procedure available"],
+      "postconditions": ["Arm calibrated or homed"],
+      "failure_conditions": ["Joint fault", "Calibration limit reached", "Procedure failed"],
+      "implementations": [
+        {"framework": "ROS2 Control", "ros2_interface_type": "Service", "interface_name": "/calibrate_arm", "message_type": "std_srvs/srv/Trigger"}
+      ]
+    },
+    {
+      "skill_id": "SYS_008",
+      "abstract_skill": "load_map",
+      "category": "System Operations",
+      "description": "Load a map for localization, navigation, or planning.",
+      "goal": "Make a stored map active.",
+      "aliases": ["load map", "open map", "use map", "set map"],
+      "required_capabilities": ["supports_localization"],
+      "required_components": ["map_server", "storage"],
+      "inputs": [{"name": "map_uri", "type": "string", "required": true}],
+      "outputs": [{"name": "load_map_result", "type": "bool"}],
+      "preconditions": ["Map file available", "Map server active"],
+      "postconditions": ["Map loaded"],
+      "failure_conditions": ["Map file missing", "Invalid map", "Map server error"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Service", "interface_name": "/map_server/load_map", "message_type": "nav2_msgs/srv/LoadMap"}
+      ]
+    },
+    {
+      "skill_id": "SYS_009",
+      "abstract_skill": "save_map",
+      "category": "System Operations",
+      "description": "Save the current map to storage.",
+      "goal": "Persist mapping results.",
+      "aliases": ["save map", "store map", "write map", "export map"],
+      "required_capabilities": ["supports_map_building"],
+      "required_components": ["map_server", "storage"],
+      "inputs": [{"name": "map_uri", "type": "string", "required": true}],
+      "outputs": [{"name": "save_map_result", "type": "bool"}],
+      "preconditions": ["Current map available", "Storage writable"],
+      "postconditions": ["Map saved"],
+      "failure_conditions": ["Storage full", "Map unavailable", "Save failed"],
+      "implementations": [
+        {"framework": "Nav2", "ros2_interface_type": "Service", "interface_name": "/map_saver/save_map", "message_type": "nav2_msgs/srv/SaveMap"}
+      ]
+    },
+    {
+      "skill_id": "SYS_010",
+      "abstract_skill": "localization",
+      "category": "System Operations",
+      "description": "Start, reset, or update robot localization.",
+      "goal": "Maintain a valid robot pose estimate.",
+      "aliases": ["localize", "start localization", "set pose", "where am i"],
+      "required_capabilities": ["supports_localization"],
+      "required_components": ["localization_node", "map_or_state_estimator"],
+      "inputs": [{"name": "initial_pose", "type": "geometry_msgs/msg/PoseWithCovarianceStamped", "required": false}],
+      "outputs": [{"name": "localized_pose", "type": "geometry_msgs/msg/PoseWithCovarianceStamped"}],
+      "preconditions": ["Localization sensors active", "Map or estimator available"],
+      "postconditions": ["Localization active or pose updated"],
+      "failure_conditions": ["Pose ambiguity", "Map mismatch", "Sensor failure"],
+      "implementations": [
+        {"framework": "Nav2 AMCL", "ros2_interface_type": "Topic", "interface_name": "/initialpose", "message_type": "geometry_msgs/msg/PoseWithCovarianceStamped"}
+      ]
+    },
+    {
+      "skill_id": "SYS_011",
+      "abstract_skill": "start_recording",
+      "category": "System Operations",
+      "description": "Start recording selected robot data.",
+      "goal": "Begin persistent data recording.",
+      "aliases": ["start recording", "begin recording", "record now", "start rosbag"],
+      "required_capabilities": [],
+      "required_components": ["data_recorder", "storage"],
+      "inputs": [{"name": "topics", "type": "string[]", "required": false}],
+      "outputs": [{"name": "recording_id", "type": "string"}],
+      "preconditions": ["Recorder available", "Storage available"],
+      "postconditions": ["Recording active"],
+      "failure_conditions": ["Storage full", "Recorder unavailable", "Topic unavailable"],
+      "implementations": [
+        {"framework": "rosbag2", "ros2_interface_type": "Command", "interface_name": "ros2 bag record", "message_type": "rosbag2"}
+      ]
+    },
+    {
+      "skill_id": "SYS_012",
+      "abstract_skill": "stop_recording",
+      "category": "System Operations",
+      "description": "Stop active data recording.",
+      "goal": "Finalize persistent data recording.",
+      "aliases": ["stop recording", "end recording", "finish recording", "stop rosbag"],
+      "required_capabilities": [],
+      "required_components": ["data_recorder", "storage"],
+      "inputs": [{"name": "recording_id", "type": "string", "required": false}],
+      "outputs": [{"name": "recording_uri", "type": "string"}],
+      "preconditions": ["Recording active"],
+      "postconditions": ["Recording stopped and finalized"],
+      "failure_conditions": ["No active recording", "Finalize failed", "Storage error"],
+      "implementations": [
+        {"framework": "rosbag2", "ros2_interface_type": "Command", "interface_name": "ros2 bag record termination", "message_type": "rosbag2"}
+      ]
+    },
+    {
+      "skill_id": "SYS_013",
+      "abstract_skill": "start_logging",
+      "category": "System Operations",
+      "description": "Start application or mission logging.",
+      "goal": "Begin logging events, diagnostics, or task state.",
+      "aliases": ["start logging", "enable logs", "begin logs", "log data"],
+      "required_capabilities": [],
+      "required_components": ["logger", "storage"],
+      "inputs": [{"name": "log_level", "type": "string", "required": false}],
+      "outputs": [{"name": "logging_result", "type": "bool"}],
+      "preconditions": ["Logger available", "Storage available"],
+      "postconditions": ["Logging active"],
+      "failure_conditions": ["Logger unavailable", "Storage full", "Invalid log level"],
+      "implementations": [
+        {"framework": "rcl_logging", "ros2_interface_type": "Parameter", "interface_name": "/**/logger_level", "message_type": "rcl_interfaces/srv/SetParameters"}
+      ]
+    },
+    {
+      "skill_id": "SYS_014",
+      "abstract_skill": "stop_logging",
+      "category": "System Operations",
+      "description": "Stop or reduce application or mission logging.",
+      "goal": "End logging or return logging to default behavior.",
+      "aliases": ["stop logging", "disable logs", "end logs", "quiet logs"],
+      "required_capabilities": [],
+      "required_components": ["logger", "storage"],
+      "inputs": [{"name": "log_scope", "type": "string", "required": false}],
+      "outputs": [{"name": "logging_result", "type": "bool"}],
+      "preconditions": ["Logger available"],
+      "postconditions": ["Logging stopped or reduced"],
+      "failure_conditions": ["Logger unavailable", "Invalid scope", "Parameter rejected"],
+      "implementations": [
+        {"framework": "rcl_logging", "ros2_interface_type": "Parameter", "interface_name": "/**/logger_level", "message_type": "rcl_interfaces/srv/SetParameters"}
+      ]
+    },
+    {
+      "skill_id": "SYS_015",
+      "abstract_skill": "update_parameters",
+      "category": "System Operations",
+      "description": "Update runtime parameters for a node or subsystem.",
+      "goal": "Change configurable behavior without changing the ontology.",
+      "aliases": ["update parameters", "set parameter", "configure", "change setting"],
+      "required_capabilities": ["supports_remote_operation"],
+      "required_components": ["parameter_server", "target_node"],
+      "inputs": [{"name": "node_name", "type": "string", "required": true}, {"name": "parameters", "type": "rcl_interfaces/msg/Parameter[]", "required": true}],
+      "outputs": [{"name": "parameter_update_result", "type": "bool"}],
+      "preconditions": ["Target node available", "Parameters valid", "Update authorized"],
+      "postconditions": ["Parameters updated or rejected with reason"],
+      "failure_conditions": ["Node unavailable", "Invalid parameter", "Parameter callback rejected update"],
+      "implementations": [
+        {"framework": "ROS2 Parameters", "ros2_interface_type": "Service", "interface_name": "/<node>/set_parameters", "message_type": "rcl_interfaces/srv/SetParameters"}
+      ]
+    }
+  ]
+}

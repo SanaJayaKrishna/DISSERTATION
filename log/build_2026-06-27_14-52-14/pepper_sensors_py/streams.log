@@ -1,0 +1,44 @@
+[0.618s] Invoking command in '/home/sjk/DISSERTATION/build/pepper_sensors_py': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/humanoids/pepper_robot/pepper_sensors_py -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/pepper_sensors_py
+[0.677s] [0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[0.677s]   Compatibility with CMake < 3.5 will be removed from a future version of
+[0.677s]   CMake.
+[0.677s] 
+[0.677s]   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+[0.678s]   CMake that the project does not need compatibility with older versions.
+[0.678s] 
+[0.678s] [0m
+[0.783s] -- The C compiler identification is GNU 13.3.0
+[0.974s] -- The CXX compiler identification is GNU 13.3.0
+[1.061s] -- Detecting C compiler ABI info
+[1.356s] -- Detecting C compiler ABI info - done
+[1.427s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.428s] -- Detecting C compile features
+[1.429s] -- Detecting C compile features - done
+[1.473s] -- Detecting CXX compiler ABI info
+[1.887s] -- Detecting CXX compiler ABI info - done
+[1.923s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.924s] -- Detecting CXX compile features
+[1.926s] -- Detecting CXX compile features - done
+[1.961s] -- Configuring incomplete, errors occurred!
+[1.961s] [33mCMake Warning at CMakeLists.txt:7 (find_package):
+[1.962s]   By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
+[1.965s]   asked CMake to find a package configuration file provided by "catkin", but
+[1.965s]   CMake did not find one.
+[1.966s] 
+[1.966s]   Could not find a package configuration file provided by "catkin" with any
+[1.966s]   of the following names:
+[1.966s] 
+[1.967s]     catkinConfig.cmake
+[1.967s]     catkin-config.cmake
+[1.967s] 
+[1.967s]   Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
+[1.967s]   "catkin_DIR" to a directory containing one of the above files.  If "catkin"
+[1.968s]   provides a separate development package or SDK, be sure it has been
+[1.968s]   installed.
+[1.968s] 
+[1.968s] [0m
+[1.968s] [31mCMake Error at CMakeLists.txt:12 (catkin_python_setup):
+[1.969s]   Unknown CMake command "catkin_python_setup".
+[1.971s] 
+[1.974s] [0m
+[1.981s] Invoked command in '/home/sjk/DISSERTATION/build/pepper_sensors_py' returned '1': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/humanoids/pepper_robot/pepper_sensors_py -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/pepper_sensors_py

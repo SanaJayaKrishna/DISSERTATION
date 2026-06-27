@@ -1,0 +1,18 @@
+[0.265s] Invoking command in '/home/sjk/DISSERTATION/build/clearpath_mounts_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/ROS2_WS/src/mobile/clearpath_common/clearpath_mounts_description -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/clearpath_mounts_description
+[0.684s] -- The C compiler identification is GNU 13.3.0
+[0.685s] -- The CXX compiler identification is GNU 13.3.0
+[0.685s] -- Detecting C compiler ABI info
+[0.685s] -- Detecting C compiler ABI info - done
+[0.685s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.685s] -- Detecting C compile features
+[0.686s] -- Detecting C compile features - done
+[0.688s] -- Detecting CXX compiler ABI info
+[0.765s] -- Detecting CXX compiler ABI info - done
+[0.795s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.795s] -- Detecting CXX compile features
+[0.805s] -- Detecting CXX compile features - done
+[0.822s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.374s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.149s] -- Configuring done (1.9s)
+[2.150s] -- Generating done (0.0s)
+[2.151s] -- Build files have been written to: /home/sjk/DISSERTATION/build/clearpath_mounts_description

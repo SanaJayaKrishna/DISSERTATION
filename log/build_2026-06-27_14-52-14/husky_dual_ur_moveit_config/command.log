@@ -1,0 +1,1 @@
+Invoking command in '/home/sjk/DISSERTATION/build/husky_dual_ur_moveit_config': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/robot_dataset/hexapods/husky_manipulation/husky_dual_ur_moveit_config -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/install/husky_dual_ur_moveit_config

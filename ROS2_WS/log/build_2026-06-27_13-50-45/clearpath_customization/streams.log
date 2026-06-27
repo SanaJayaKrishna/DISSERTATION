@@ -1,0 +1,25 @@
+[0.289s] Invoking command in '/home/sjk/DISSERTATION/ROS2_WS/build/clearpath_customization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/ROS2_WS/src/mobile/clearpath_common/clearpath_customization -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/ROS2_WS/install/clearpath_customization
+[0.359s] -- The C compiler identification is GNU 13.3.0
+[0.446s] -- The CXX compiler identification is GNU 13.3.0
+[0.471s] -- Detecting C compiler ABI info
+[0.606s] -- Detecting C compiler ABI info - done
+[0.629s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.630s] -- Detecting C compile features
+[0.631s] -- Detecting C compile features - done
+[0.647s] -- Detecting CXX compiler ABI info
+[0.848s] -- Detecting CXX compiler ABI info - done
+[0.868s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.869s] -- Detecting CXX compile features
+[0.869s] -- Detecting CXX compile features - done
+[0.869s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.179s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.374s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.433s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[1.714s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.714s] -- Configured 'flake8' exclude dirs and/or files: 
+[1.716s] -- Added test 'lint_cmake' to check CMake code style
+[1.718s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.723s] -- Added test 'xmllint' to check XML markup files
+[1.726s] -- Configuring done (1.4s)
+[1.733s] -- Generating done (0.0s)
+[1.736s] -- Build files have been written to: /home/sjk/DISSERTATION/ROS2_WS/build/clearpath_customization

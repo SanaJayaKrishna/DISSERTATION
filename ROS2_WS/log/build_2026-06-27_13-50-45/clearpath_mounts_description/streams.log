@@ -1,0 +1,19 @@
+[0.281s] Invoking command in '/home/sjk/DISSERTATION/ROS2_WS/build/clearpath_mounts_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/sjk/DISSERTATION/ROS2_WS/src/mobile/clearpath_common/clearpath_mounts_description -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/sjk/DISSERTATION/ROS2_WS/install/clearpath_mounts_description
+[0.362s] -- The C compiler identification is GNU 13.3.0
+[0.452s] -- The CXX compiler identification is GNU 13.3.0
+[0.476s] -- Detecting C compiler ABI info
+[0.622s] -- Detecting C compiler ABI info - done
+[0.654s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.655s] -- Detecting C compile features
+[0.656s] -- Detecting C compile features - done
+[0.670s] -- Detecting CXX compiler ABI info
+[0.830s] -- Detecting CXX compiler ABI info - done
+[0.854s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.854s] -- Detecting CXX compile features
+[0.856s] -- Detecting CXX compile features - done
+[0.861s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.166s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.370s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.647s] -- Configuring done (1.4s)
+[1.654s] -- Generating done (0.0s)
+[1.657s] -- Build files have been written to: /home/sjk/DISSERTATION/ROS2_WS/build/clearpath_mounts_description
