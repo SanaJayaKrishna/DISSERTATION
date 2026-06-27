@@ -1,0 +1,24 @@
+/* Remove excess padding */
+
+.block-container{
+    padding-top:1rem;
+    padding-bottom:1rem;
+}
+
+/* Footer buttons */
+
+.stLinkButton{
+    width:100%;
+}
+
+/* Chat input */
+
+.stChatInput{
+    margin-top:0.5rem;
+}
+
+/* JSON output */
+
+pre{
+    font-size:14px;
+}
