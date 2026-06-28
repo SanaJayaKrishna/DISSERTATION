@@ -1,4 +1,7 @@
 import streamlit as st
+from pathlib import Path
+
+# from model_manager import search_models
 
 # --------------------------------------------------
 # Page Configuration
@@ -20,25 +23,22 @@ with open("style.css") as f:
 # (Later these will come from JSON files)
 # --------------------------------------------------
 
-ROBOTS = [
-    "TIAGo",
-    "TurtleBot3",
-    "Panda",
-    "UR5",
-]
+def get_json_files(folder_path: str):
+    """
+    Returns all JSON filenames in a folder without the .json extension.
+    """
 
-WORLDS = [
-    "Hospital",
-    "Restaurant",
-    "Warehouse",
-    "Kitchen",
-]
+    folder = Path(folder_path)
+    # print(folder_path)
 
-WORKSPACES = [
-    "Default Workspace",
-    "Simulation Workspace",
-]
+    if not folder.exists():
+        # print("NONE")
+        return []
 
+    return sorted(
+        file.stem
+        for file in folder.glob("*.json")
+    )
 # --------------------------------------------------
 # Header
 # --------------------------------------------------
@@ -53,28 +53,54 @@ st.divider()
 # INPUT SECTION (Fixed)
 # --------------------------------------------------
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    robot = st.selectbox(
-        "Robot",
-        ROBOTS
+    # search = st.text_input(
+    #     "Search Model",
+    #     placeholder="Search Hugging Face models...", 
+    # )
+
+    # filtered_models = search_models(search)
+
+    selected_model = st.selectbox(
+        "Available Models",
+        ["Pick a model", "Meta-Llama-3.1-8B-Instruct", "Meta-Llama-3.2-3B-Instruct", "Gemma 3 4B Instruct", "Gemma 4 E4B", "Gemma 4 12B", "Qwen 3 8B Instruct" ],
+        label_visibility="collapsed"
     )
+Robots = get_json_files("./outputs")
+Robots.insert(0, "Pick a Robot")
 
 with col2:
-    world = st.selectbox(
-        "World",
-        WORLDS
+    robot = st.selectbox(
+        "Robot",
+        Robots,
+        label_visibility="collapsed"
     )
+
+
+Worlds = get_json_files("./worlds")
+Worlds.insert(0, "Pick an Environment ")
 
 with col3:
-    workspace = st.selectbox(
-        "Workspace",
-        WORKSPACES
+    world = st.selectbox(
+        "World",
+        Worlds,
+        label_visibility="collapsed"
     )
 
-task = st.chat_input(
-    "Enter natural language instruction..."
+with col4:
+    workspace = st.selectbox(
+        "Workspace",
+        ["DEFAULT WORKSPACE"],
+        label_visibility="collapsed"
+
+    )
+
+task = st.text_area(
+    "Natural Language Task",
+    placeholder="Enter a natural language instruction...",
+    height=120,
 )
 
 # Generate Button
@@ -90,7 +116,7 @@ st.divider()
 # RESPONSE SECTION
 # --------------------------------------------------
 
-st.subheader("LLM Response")
+# st.subheader("LLM Response")
 
 response_container = st.container(height=450)
 
