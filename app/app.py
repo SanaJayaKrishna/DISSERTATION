@@ -1,6 +1,8 @@
 import streamlit as st
 from pathlib import Path
 
+from model_infer import generate_plan
+
 # from model_manager import search_models
 
 # --------------------------------------------------
@@ -65,9 +67,10 @@ with col1:
 
     selected_model = st.selectbox(
         "Available Models",
-        ["Pick a model", "Meta-Llama-3.1-8B-Instruct", "Meta-Llama-3.2-3B-Instruct", "Gemma 3 4B Instruct", "Gemma 4 E4B", "Gemma 4 12B", "Qwen 3 8B Instruct" ],
+        ["Pick a model", "Qwen/Qwen3.5-4B", "Meta-Llama-3.1-8B-Instruct", "Meta-Llama-3.2-3B-Instruct", "Gemma 3 4B Instruct", "Gemma 4 E4B", "Gemma 4 12B", "Qwen 3 8B Instruct", "Ornith1.0 9B" ],
         label_visibility="collapsed"
     )
+
 Robots = get_json_files("./outputs")
 Robots.insert(0, "Pick a Robot")
 
@@ -122,24 +125,23 @@ response_container = st.container(height=450)
 
 with response_container:
 
+    # validate other inouts also
+    
     if generate and task:
-
-        st.info("🚧 LLM integration coming soon...")
+        response = generate_plan(
+            model_name=selected_model,
+            robot_name=robot,
+            world_name=world,
+            workspace_name=workspace,
+            task=task,
+        )
 
         st.code(
-"""
-{
-    "metadata": {},
-    "goal": "",
-    "reasoning": "",
-    "abstract_plan": [],
-    "grounded_skills": [],
-    "constraints": [],
-    "execution_summary": {}
-}
-""",
-            language="json",
+            response,
+            language="text",
         )
+    elif generate:
+        st.markdown("NO TASK DEFINED")
 
     else:
 
