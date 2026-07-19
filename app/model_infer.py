@@ -354,16 +354,51 @@ Return exactly one valid JSON object.
         "temperature": 0.3
     }
 
-    COLAB_URL = "https://baguette-dismount-diocese.ngrok-free.dev"
-
     print(f"******** CALLING LLM API: {payload}")
+
+
+
+
+    # COLAB_URL = "https://baguette-dismount-diocese.ngrok-free.dev"
+
     
-    response = requests.post(
-        COLAB_URL + "/plan",
-        json=payload,
-        # timeout=600
-    )
+    # response = requests.post(
+    #     COLAB_URL + "/plan",
+    #     json=payload,
+    #     timeout=600
+    # )
 
-    result = response.json()
+    # result = response.json()
 
-    return result["response"]
+    # print("========== RESPONSE: \n" + str(result))
+
+    # return result["response"]
+
+    # response = requests.post(
+    #     COLAB_URL + "/plan",
+    #     json=payload,
+    #     timeout=600
+    # )
+
+    # print("Status Code:", response.status_code)
+    # print("Content-Type:", response.headers.get("Content-Type"))
+    # print("Response Text:")
+    # print(response.text)
+
+    # response.raise_for_status()   # Raises an exception for HTTP errors (4xx/5xx)
+
+    # try:
+    #     result = response.json()
+    # except ValueError:
+    #     raise RuntimeError(
+    #         f"Server did not return valid JSON.\n\n"
+    #         f"Status Code: {response.status_code}\n"
+    #         f"Response:\n{response.text}"
+    #     )
+    
+
+    # print("========== RESULT: \n" + str(result))
+
+    # return result["response"]
+    
+    return prompt

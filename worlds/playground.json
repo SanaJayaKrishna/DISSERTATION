@@ -1,565 +1,311 @@
 {
   "environment": {
-    "name": "Apartment",
-    "type": "Indoor",
-    "category": "Residential",
-    "description": "A realistic three-bedroom household apartment containing all common residential spaces, furniture, appliances, household items and utilities found in a modern home.",
+    "name": "Community Playground",
+    "type": "Outdoor",
+    "category": "Recreational",
+    "description": "A public community playground with age-appropriate play equipment, sports courts, walking paths, shaded seating, sanitation facilities and safety infrastructure for children, families and visitors.",
     "purpose": [
-      "Residential Living",
-      "Cooking",
-      "Dining",
-      "Sleeping",
-      "Cleaning",
-      "Laundry",
-      "Entertainment",
-      "Personal Hygiene"
+      "Children's Play",
+      "Physical Recreation",
+      "Sports",
+      "Community Gathering",
+      "Outdoor Exercise",
+      "Family Leisure"
     ],
     "occupancy": {
-      "typical_people": 4,
-      "maximum_people": 6
+      "typical_people": 80,
+      "maximum_people": 250
     }
   },
 
-  "rooms": [
-    {
-      "id": "living_room",
-      "name": "Living Room"
-    },
-    {
-      "id": "kitchen",
-      "name": "Kitchen"
-    },
-    {
-      "id": "master_bedroom",
-      "name": "Master Bedroom"
-    },
-    {
-      "id": "bedroom_2",
-      "name": "Bedroom 2"
-    },
-    {
-      "id": "bedroom_3",
-      "name": "Bedroom 3"
-    },
-    {
-      "id": "attached_bathroom",
-      "name": "Attached Bathroom"
-    },
-    {
-      "id": "common_bathroom",
-      "name": "Common Bathroom"
-    },
-    {
-      "id": "balcony",
-      "name": "Balcony"
-    },
-    {
-      "id": "corridor",
-      "name": "Corridor"
-    }
+  "zones": [
+    { "name": "Entrance Zone" },
+    { "name": "Toddler Play Zone" },
+    { "name": "Children's Play Zone" },
+    { "name": "Adventure Play Zone" },
+    { "name": "Swing Zone" },
+    { "name": "Sports Zone" },
+    { "name": "Open Lawn Zone" },
+    { "name": "Walking Path Zone" },
+    { "name": "Picnic and Seating Zone" },
+    { "name": "Fitness Zone" },
+    { "name": "Service Zone" }
   ],
 
-  "zones": [
-    {
-      "name": "Living Area"
-    },
-    {
-      "name": "Dining Area"
-    },
-    {
-      "name": "Cooking Area"
-    },
-    {
-      "name": "Sleeping Area"
-    },
-    {
-      "name": "Study Area"
-    },
-    {
-      "name": "Storage Area"
-    },
-    {
-      "name": "Laundry Area"
-    },
-    {
-      "name": "Bathroom Area"
-    },
-    {
-      "name": "Balcony Area"
-    }
+  "rooms": [
+    { "id": "main_gate", "name": "Main Entrance Gate" },
+    { "id": "information_board", "name": "Information Board Area" },
+    { "id": "toddler_play_area", "name": "Toddler Play Area" },
+    { "id": "play_structure", "name": "Children's Play Structure" },
+    { "id": "swing_area", "name": "Swing Area" },
+    { "id": "sandpit", "name": "Sand Play Area" },
+    { "id": "climbing_area", "name": "Climbing Area" },
+    { "id": "sports_court", "name": "Multi-Sport Court" },
+    { "id": "open_lawn", "name": "Open Lawn" },
+    { "id": "outdoor_gym", "name": "Outdoor Fitness Area" },
+    { "id": "walking_track", "name": "Walking Track" },
+    { "id": "picnic_area", "name": "Picnic Area" },
+    { "id": "gazebo", "name": "Gazebo" },
+    { "id": "restroom", "name": "Public Restroom" },
+    { "id": "first_aid", "name": "First Aid Station" },
+    { "id": "maintenance_store", "name": "Maintenance Store" }
   ],
 
   "static_structures": [
-    "Walls",
-    "Doors",
-    "Windows",
-    "Floor",
-    "Ceiling",
-    "Electrical Outlets",
-    "Light Switches",
-    "Water Supply",
-    "Drainage",
-    "Ventilation",
-    "Stair Access",
-    "Main Entrance"
+    "Perimeter Fence",
+    "Entrance Gates",
+    "Accessible Pathways",
+    "Rubber Safety Surface",
+    "Sand Safety Surface",
+    "Concrete Sports Court",
+    "Walking Track",
+    "Drainage Channels",
+    "Shade Sails",
+    "Gazebo",
+    "Benches",
+    "Picnic Tables",
+    "Drinking Water Fountain",
+    "Restroom Building",
+    "Waste Bins",
+    "Park Lighting",
+    "CCTV Cameras",
+    "Signage"
   ],
 
-  "living_room": {
-    "furniture": [
-      "Sofa",
-      "Coffee Table",
-      "TV Unit",
-      "Television",
-      "Bookshelf",
-      "Side Table",
-      "Floor Lamp",
-      "Wall Clock",
-      "Carpet",
-      "Curtains",
-      "Air Conditioner",
-      "Indoor Plants",
-      "Dining Table",
-      "Dining Chairs",
-      "Shoe Rack",
-      "Coat Stand"
+  "play_equipment": {
+    "toddler_play_area": [
+      "Toddler Slide",
+      "Spring Rider",
+      "Playhouse",
+      "Activity Panel",
+      "Mini Climber",
+      "Toddler Swing",
+      "Soft Play Blocks"
     ],
-
-    "electronics": [
-      "Television",
-      "WiFi Router",
-      "Set Top Box",
-      "Smart Speaker",
-      "Remote Controls"
+    "children_play_structure": [
+      "Slide",
+      "Spiral Slide",
+      "Monkey Bars",
+      "Climbing Net",
+      "Balance Beam",
+      "Tunnel",
+      "Fireman's Pole",
+      "Play Bridge",
+      "Stepping Stones"
     ],
-
-    "objects": [
-      "Books",
-      "Newspapers",
-      "Magazines",
-      "Laptop",
-      "Mobile Charger",
-      "Keys",
-      "Wallet",
-      "Decorative Items",
-      "Photo Frames",
-      "Flower Vase",
-      "Blanket",
-      "Cushions"
+    "swing_area": [
+      "Belt Swings",
+      "Bucket Swings",
+      "Inclusive Swing",
+      "Tire Swing",
+      "Swing Frame"
+    ],
+    "sand_play_area": [
+      "Sandpit",
+      "Sand Table",
+      "Sand Shovels",
+      "Buckets",
+      "Sand Moulds"
+    ],
+    "adventure_play_area": [
+      "Climbing Wall",
+      "Rope Pyramid",
+      "Zip Line",
+      "Cargo Net",
+      "Obstacle Course",
+      "Rope Bridge"
     ]
   },
 
-  "kitchen": {
-    "appliances": [
-      "Refrigerator",
-      "Microwave",
-      "Gas Stove",
-      "Oven",
-      "Dishwasher",
-      "Mixer Grinder",
-      "Blender",
-      "Toaster",
-      "Rice Cooker",
-      "Electric Kettle",
-      "Coffee Maker",
-      "Water Purifier",
-      "Exhaust Hood"
+  "sports_facilities": {
+    "court_equipment": [
+      "Basketball Hoops",
+      "Football Goals",
+      "Badminton Net",
+      "Volleyball Net",
+      "Court Markings",
+      "Scoreboard"
     ],
-
-    "storage": [
-      "Cabinets",
-      "Drawers",
-      "Pantry",
-      "Spice Rack",
-      "Utensil Holder",
-      "Knife Block",
-      "Fruit Basket"
+    "sports_equipment": [
+      "Football",
+      "Basketball",
+      "Volleyball",
+      "Badminton Rackets",
+      "Shuttlecocks",
+      "Cones",
+      "Jump Ropes",
+      "Frisbee"
     ],
-
-    "cookware": [
-      "Cooking Pot",
-      "Pressure Cooker",
-      "Saucepan",
-      "Frying Pan",
-      "Wok",
-      "Baking Tray",
-      "Steamer"
-    ],
-
-    "utensils": [
-      "Spoons",
-      "Forks",
-      "Knives",
-      "Serving Spoon",
-      "Spatula",
-      "Ladle",
-      "Whisk",
-      "Tongs",
-      "Peeler",
-      "Can Opener",
-      "Bottle Opener"
-    ],
-
-    "containers": [
-      "Plate",
-      "Bowl",
-      "Cup",
-      "Glass",
-      "Bottle",
-      "Lunch Box",
-      "Food Storage Container"
-    ],
-
-    "ingredients": [
-      "Rice",
-      "Flour",
-      "Sugar",
-      "Salt",
-      "Cooking Oil",
-      "Tea",
-      "Coffee",
-      "Milk",
-      "Butter",
-      "Cheese",
-      "Eggs",
-      "Tomato",
-      "Onion",
-      "Potato",
-      "Garlic",
-      "Carrot",
-      "Vegetables",
-      "Fruits",
-      "Spices"
-    ],
-
-    "cleaning": [
-      "Dish Soap",
-      "Sponge",
-      "Scrubber",
-      "Cleaning Cloth",
-      "Trash Bin",
-      "Garbage Bags"
+    "fitness_equipment": [
+      "Pull-Up Bars",
+      "Parallel Bars",
+      "Elliptical Trainer",
+      "Air Walker",
+      "Stationary Cycle",
+      "Sit-Up Bench",
+      "Stretching Station"
     ]
   },
 
-  "master_bedroom": {
-    "furniture": [
-      "King Size Bed",
-      "Mattress",
-      "Pillows",
-      "Blanket",
-      "Bedsheets",
-      "Wardrobe",
-      "Bedside Tables",
-      "Study Table",
-      "Chair",
-      "Bookshelf",
-      "Dressing Table",
-      "Mirror",
-      "Air Conditioner",
-      "Curtains"
+  "amenities": {
+    "seating": [
+      "Park Benches",
+      "Picnic Tables",
+      "Gazebo Seating",
+      "Accessible Seating"
     ],
-
-    "electronics": [
-      "Laptop",
-      "Table Lamp",
-      "Phone Charger",
-      "Television"
+    "visitor_services": [
+      "Information Board",
+      "Rules Sign",
+      "Drinking Water Fountain",
+      "Bottle Refill Station",
+      "Public Restrooms",
+      "Baby Changing Station",
+      "Bicycle Rack",
+      "Lost and Found Box"
     ],
-
-    "objects": [
-      "Books",
-      "Clothes",
-      "Shoes",
-      "Watch",
-      "Wallet",
-      "Jewelry Box",
-      "Backpack",
-      "Suitcase",
-      "Laundry Basket"
-    ]
-  },
-
-  "bedroom_2": {
-    "furniture": [
-      "Single Bed",
-      "Wardrobe",
-      "Study Table",
-      "Chair",
-      "Bookshelf",
-      "Bedside Table",
-      "Curtains",
-      "Ceiling Fan"
-    ],
-
-    "objects": [
-      "Books",
-      "Laptop",
-      "School Bag",
-      "Stationery",
-      "Clothes",
-      "Shoes",
-      "Laundry Basket"
-    ]
-  },
-
-  "bedroom_3": {
-    "furniture": [
-      "Single Bed",
-      "Wardrobe",
-      "Study Desk",
-      "Chair",
-      "Bookshelf",
-      "Bedside Table"
-    ],
-
-    "objects": [
-      "Books",
-      "Desktop Computer",
-      "Keyboard",
-      "Mouse",
-      "Headphones",
-      "Printer",
-      "Files",
-      "Clothes"
-    ]
-  },
-
-  "attached_bathroom": {
-    "fixtures": [
-      "Wash Basin",
-      "Toilet",
-      "Shower",
-      "Mirror",
-      "Cabinet",
-      "Exhaust Fan",
-      "Water Heater",
-      "Towel Rack"
-    ],
-
-    "objects": [
-      "Soap",
-      "Shampoo",
-      "Conditioner",
-      "Toothbrush",
-      "Toothpaste",
-      "Handwash",
-      "Towels",
-      "Bucket",
-      "Mug",
-      "Cleaning Brush",
-      "Floor Cleaner",
-      "Toilet Paper"
-    ]
-  },
-
-  "common_bathroom": {
-    "fixtures": [
-      "Wash Basin",
-      "Toilet",
-      "Shower",
-      "Mirror",
-      "Cabinet",
-      "Exhaust Fan",
-      "Water Heater"
-    ],
-
-    "objects": [
-      "Soap",
-      "Shampoo",
-      "Toothbrush",
-      "Toothpaste",
-      "Bucket",
-      "Mug",
-      "Towel",
-      "Toilet Cleaner",
-      "Floor Cleaner"
-    ]
-  },
-
-  "balcony": {
-    "objects": [
-      "Plant Pots",
-      "Garden Chair",
-      "Small Table",
-      "Drying Stand",
-      "Clothes Clips",
-      "Watering Can",
+    "maintenance": [
+      "Maintenance Cart",
+      "Leaf Rake",
       "Broom",
-      "Dustpan"
+      "Litter Picker",
+      "Hose Pipe",
+      "Lawn Mower",
+      "Tool Cabinet"
     ]
   },
 
-  "corridor": {
-    "objects": [
-      "Wall Paintings",
-      "Emergency Light",
-      "Decorative Plants",
-      "Vacuum Cleaner",
-      "Cleaning Mop"
-    ]
-  },
+  "natural_features": [
+    "Shade Trees",
+    "Grass Lawn",
+    "Flower Beds",
+    "Shrubs",
+    "Native Plants",
+    "Butterfly Garden"
+  ],
 
   "utilities": [
     "Electricity",
-    "Water Supply",
-    "Gas Supply",
-    "WiFi",
+    "Outdoor Lighting",
+    "Running Water",
     "Drainage",
-    "Lighting",
-    "Air Conditioning",
-    "Heating",
-    "Ventilation"
+    "Public Address System",
+    "CCTV Monitoring",
+    "WiFi Hotspot",
+    "Irrigation System"
   ],
 
   "safety_equipment": [
-    "Fire Extinguisher",
-    "Smoke Detector",
     "First Aid Kit",
-    "Emergency Flashlight",
-    "Gas Leak Detector"
+    "AED",
+    "Fire Extinguisher",
+    "Emergency Contact Sign",
+    "Emergency Exit Gate",
+    "CCTV Cameras",
+    "Safety Surfacing",
+    "Playground Rules Sign",
+    "Hand Sanitizer Station",
+    "Lost Child Meeting Point"
   ],
 
   "interaction_rules": [
     {
-      "object": "Door",
-      "actions": [
-        "Open",
-        "Close",
-        "Lock",
-        "Unlock"
-      ]
+      "object": "Entrance Gate",
+      "actions": ["Open", "Close", "Lock", "Unlock"]
     },
     {
-      "object": "Wardrobe",
-      "actions": [
-        "Open",
-        "Close",
-        "Store",
-        "Retrieve"
-      ]
+      "object": "Play Equipment",
+      "actions": ["Inspect", "Clean", "Repair", "MarkOutOfService"]
     },
     {
-      "object": "Cabinet",
-      "actions": [
-        "Open",
-        "Close",
-        "Store",
-        "Retrieve"
-      ]
+      "object": "Swing",
+      "actions": ["Inspect", "Clean", "Repair"]
     },
     {
-      "object": "Refrigerator",
-      "actions": [
-        "Open",
-        "Close",
-        "Store",
-        "Retrieve"
-      ]
+      "object": "Sports Equipment",
+      "actions": ["Retrieve", "Distribute", "Collect", "Store"]
     },
     {
-      "object": "Drawer",
-      "actions": [
-        "Open",
-        "Close",
-        "Store",
-        "Retrieve"
-      ]
+      "object": "Waste Bin",
+      "actions": ["DisposeWaste", "Empty", "Clean"]
     },
     {
-      "object": "Television",
-      "actions": [
-        "TurnOn",
-        "TurnOff",
-        "AdjustVolume"
-      ]
+      "object": "Drinking Water Fountain",
+      "actions": ["DispenseWater", "Clean", "Inspect"]
     },
     {
-      "object": "Washing Machine",
-      "actions": [
-        "Open",
-        "Close",
-        "Wash"
-      ]
+      "object": "First Aid Kit",
+      "actions": ["Retrieve", "Restock", "Inspect"]
     },
     {
-      "object": "Gas Stove",
-      "actions": [
-        "TurnOn",
-        "TurnOff",
-        "Cook"
-      ]
-    },
-    {
-      "object": "Microwave",
-      "actions": [
-        "Open",
-        "Close",
-        "Heat"
-      ]
-    },
-    {
-      "object": "Bathroom Tap",
-      "actions": [
-        "TurnOn",
-        "TurnOff"
-      ]
+      "object": "Maintenance Store",
+      "actions": ["Open", "Close", "Store", "Retrieve", "Lock"]
     }
   ],
 
   "semantic_relations": [
     {
-      "subject": "Refrigerator",
-      "relation": "LocatedIn",
-      "object": "Kitchen"
-    },
-    {
-      "subject": "Dining Table",
-      "relation": "LocatedIn",
-      "object": "Living Room"
-    },
-    {
-      "subject": "Bed",
-      "relation": "LocatedIn",
-      "object": "Bedroom"
-    },
-    {
-      "subject": "Wardrobe",
-      "relation": "Stores",
-      "object": "Clothes"
-    },
-    {
-      "subject": "Bookshelf",
-      "relation": "Stores",
-      "object": "Books"
-    },
-    {
-      "subject": "Bathroom Cabinet",
-      "relation": "Stores",
-      "object": "Toiletries"
-    },
-    {
-      "subject": "Balcony",
+      "subject": "Toddler Play Area",
       "relation": "Contains",
-      "object": "Plants"
+      "object": "Toddler Slide"
     },
     {
-      "subject": "Kitchen",
+      "subject": "Swing Area",
       "relation": "Contains",
-      "object": "Cooking Appliances"
+      "object": "Belt Swings"
     },
     {
-      "subject": "Living Room",
+      "subject": "Sandpit",
+      "relation": "LocatedIn",
+      "object": "Sand Play Area"
+    },
+    {
+      "subject": "Climbing Wall",
+      "relation": "LocatedIn",
+      "object": "Adventure Play Zone"
+    },
+    {
+      "subject": "Basketball Hoops",
+      "relation": "LocatedIn",
+      "object": "Multi-Sport Court"
+    },
+    {
+      "subject": "Outdoor Fitness Area",
       "relation": "Contains",
-      "object": "Entertainment System"
+      "object": "Fitness Equipment"
+    },
+    {
+      "subject": "Park Benches",
+      "relation": "LocatedNear",
+      "object": "Play Areas"
+    },
+    {
+      "subject": "Drinking Water Fountain",
+      "relation": "LocatedNear",
+      "object": "Picnic Area"
+    },
+    {
+      "subject": "First Aid Station",
+      "relation": "LocatedNear",
+      "object": "Main Entrance Gate"
+    },
+    {
+      "subject": "Maintenance Store",
+      "relation": "Stores",
+      "object": "Maintenance Equipment"
     }
   ],
 
   "default_robot_spawn_locations": [
-    "Main Entrance",
-    "Living Room Center",
-    "Kitchen Entrance",
-    "Master Bedroom Entrance",
-    "Corridor",
-    "Balcony Entrance"
+    "Main Entrance Gate",
+    "Information Board Area",
+    "Toddler Play Area",
+    "Children's Play Structure",
+    "Swing Area",
+    "Multi-Sport Court",
+    "Outdoor Fitness Area",
+    "Picnic Area",
+    "First Aid Station",
+    "Maintenance Store"
   ]
 }
