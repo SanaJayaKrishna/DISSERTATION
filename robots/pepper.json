@@ -1,0 +1,6413 @@
+{
+  "Robot": {
+    "Capabilities": {
+      "Autonomy": {
+        "autonomy_modes": [
+          "teleoperation",
+          "semi_autonomous",
+          "fully_autonomous",
+          "shared_autonomy"
+        ],
+        "can_execute_mission": true,
+        "fleet_capable": true
+      },
+      "BinaryCapabilities": {
+        "battery_powered": false,
+        "can_assemble": false,
+        "can_carry": false,
+        "can_climb": false,
+        "can_collaborative_manipulate": false,
+        "can_contact_interact": true,
+        "can_crawl": false,
+        "can_cut": false,
+        "can_detect_humans": true,
+        "can_detect_objects": true,
+        "can_detect_obstacles": true,
+        "can_dexterous_manipulate": true,
+        "can_disassemble": false,
+        "can_drill": false,
+        "can_estimate_range": true,
+        "can_exchange_tools": false,
+        "can_execute_mission": true,
+        "can_fly": false,
+        "can_follow_path": true,
+        "can_follow_person": true,
+        "can_follow_waypoints": true,
+        "can_grasp": true,
+        "can_handover": true,
+        "can_hold": false,
+        "can_hop": false,
+        "can_hover": false,
+        "can_inspect": true,
+        "can_manipulate": true,
+        "can_monitor_equipment": true,
+        "can_move": true,
+        "can_navigate": true,
+        "can_open_door": true,
+        "can_open_drawer": true,
+        "can_paint": false,
+        "can_pick": true,
+        "can_place": true,
+        "can_press_button": true,
+        "can_pull": false,
+        "can_push": false,
+        "can_rotate": true,
+        "can_run": false,
+        "can_screw": false,
+        "can_spray": false,
+        "can_strafe": false,
+        "can_swim": false,
+        "can_thermal_inspect": false,
+        "can_transport": true,
+        "can_use_elevator": true,
+        "can_use_two_hands": false,
+        "can_walk": false,
+        "can_weld": false,
+        "docking_capable": false,
+        "environmental_sensing": false,
+        "fleet_capable": true,
+        "has_audio_input": true,
+        "has_depth_perception": true,
+        "has_force_feedback": true,
+        "has_touch_sensing": true,
+        "has_visual_perception": true,
+        "human_robot_interaction": true,
+        "human_safe_interaction_support": false,
+        "limited_payload": true,
+        "rechargeable": false,
+        "single_arm_only": true,
+        "supports_autonomous_navigation": true,
+        "supports_fleet_communication": true,
+        "supports_human_robot_communication": true,
+        "supports_indoor_navigation": true,
+        "supports_localization": true,
+        "supports_map_building": true,
+        "supports_obstacle_avoidance": true,
+        "supports_outdoor_navigation": true,
+        "supports_remote_operation": true,
+        "supports_slam": true,
+        "supports_speech_output": true,
+        "supports_state_estimation": true,
+        "supports_voice_interaction": true,
+        "tethered_candidate": false
+      },
+      "DerivedCapabilities": [
+        "delivery",
+        "object_transportation",
+        "inspection",
+        "monitoring",
+        "patrolling",
+        "surveillance",
+        "material_handling",
+        "warehouse_logistics",
+        "human_assistance",
+        "exploration",
+        "search_and_rescue",
+        "remote_operation"
+      ],
+      "Evidence": {
+        "arm_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 1
+          }
+        ],
+        "arm_length": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.857303
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_dimensions",
+            "value": 0.857303
+          }
+        ],
+        "autonomy_modes": [
+          {
+            "confidence": 0.7,
+            "group": "autonomy_rules",
+            "priority": 60,
+            "rule_id": "auto_teleop",
+            "value": [
+              "teleoperation"
+            ]
+          },
+          {
+            "confidence": 0.76,
+            "group": "autonomy_rules",
+            "priority": 76,
+            "rule_id": "auto_semi",
+            "value": [
+              "semi_autonomous"
+            ]
+          },
+          {
+            "confidence": 0.82,
+            "group": "autonomy_rules",
+            "priority": 84,
+            "rule_id": "auto_full",
+            "value": [
+              "fully_autonomous"
+            ]
+          },
+          {
+            "confidence": 0.72,
+            "group": "autonomy_rules",
+            "priority": 78,
+            "rule_id": "auto_shared",
+            "value": [
+              "shared_autonomy"
+            ]
+          }
+        ],
+        "battery_capacity": [
+          {
+            "source": "quantitative_engine",
+            "value": 0
+          }
+        ],
+        "camera_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 13
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_counts",
+            "value": 13
+          }
+        ],
+        "can_climb": [
+          {
+            "confidence": 0.9,
+            "group": "constraint_rules",
+            "priority": 170,
+            "reason": "cannot_climb",
+            "rule_id": "con_no_walking",
+            "value": false
+          }
+        ],
+        "can_contact_interact": [
+          {
+            "confidence": 0.9,
+            "group": "perception_rules",
+            "priority": 90,
+            "rule_id": "perc_force_touch",
+            "value": true
+          }
+        ],
+        "can_detect_humans": [
+          {
+            "confidence": 0.85,
+            "group": "perception_rules",
+            "priority": 85,
+            "rule_id": "perc_2d_vision",
+            "value": true
+          }
+        ],
+        "can_detect_objects": [
+          {
+            "confidence": 0.85,
+            "group": "perception_rules",
+            "priority": 85,
+            "rule_id": "perc_2d_vision",
+            "value": true
+          }
+        ],
+        "can_detect_obstacles": [
+          {
+            "confidence": 0.94,
+            "group": "perception_rules",
+            "priority": 93,
+            "rule_id": "perc_depth_camera",
+            "value": true
+          },
+          {
+            "confidence": 0.95,
+            "group": "perception_rules",
+            "priority": 94,
+            "rule_id": "perc_lidar",
+            "value": true
+          },
+          {
+            "confidence": 0.84,
+            "group": "perception_rules",
+            "priority": 82,
+            "rule_id": "perc_sonar_ultrasonic",
+            "value": true
+          }
+        ],
+        "can_dexterous_manipulate": [
+          {
+            "confidence": 0.95,
+            "group": "manipulation_rules",
+            "priority": 96,
+            "rule_id": "manip_dexterous_hand",
+            "value": true
+          }
+        ],
+        "can_estimate_range": [
+          {
+            "confidence": 0.94,
+            "group": "perception_rules",
+            "priority": 93,
+            "rule_id": "perc_depth_camera",
+            "value": true
+          },
+          {
+            "confidence": 0.95,
+            "group": "perception_rules",
+            "priority": 94,
+            "rule_id": "perc_lidar",
+            "value": true
+          },
+          {
+            "confidence": 0.84,
+            "group": "perception_rules",
+            "priority": 82,
+            "rule_id": "perc_sonar_ultrasonic",
+            "value": true
+          }
+        ],
+        "can_execute_mission": [
+          {
+            "confidence": 0.82,
+            "group": "autonomy_rules",
+            "priority": 84,
+            "rule_id": "auto_full",
+            "value": true
+          }
+        ],
+        "can_fly": [
+          {
+            "confidence": 0.98,
+            "group": "constraint_rules",
+            "priority": 180,
+            "reason": "cannot_fly",
+            "rule_id": "con_no_flight",
+            "value": false
+          }
+        ],
+        "can_follow_path": [
+          {
+            "confidence": 0.75,
+            "group": "navigation_rules",
+            "priority": 75,
+            "rule_id": "nav_basic",
+            "value": true
+          }
+        ],
+        "can_follow_person": [
+          {
+            "confidence": 0.78,
+            "group": "interaction_rules",
+            "priority": 80,
+            "rule_id": "int_person_follow",
+            "value": true
+          }
+        ],
+        "can_follow_waypoints": [
+          {
+            "confidence": 0.84,
+            "group": "navigation_rules",
+            "priority": 80,
+            "rule_id": "nav_indoor",
+            "value": true
+          },
+          {
+            "confidence": 0.84,
+            "group": "navigation_rules",
+            "priority": 82,
+            "rule_id": "nav_outdoor",
+            "value": true
+          },
+          {
+            "confidence": 0.83,
+            "group": "navigation_rules",
+            "priority": 82,
+            "rule_id": "nav_waypoints",
+            "value": true
+          }
+        ],
+        "can_grasp": [
+          {
+            "confidence": 0.96,
+            "group": "manipulation_rules",
+            "priority": 94,
+            "rule_id": "manip_parallel_gripper",
+            "value": true
+          },
+          {
+            "confidence": 0.95,
+            "group": "manipulation_rules",
+            "priority": 96,
+            "rule_id": "manip_dexterous_hand",
+            "value": true
+          }
+        ],
+        "can_handover": [
+          {
+            "confidence": 0.95,
+            "group": "manipulation_rules",
+            "priority": 96,
+            "rule_id": "manip_dexterous_hand",
+            "value": true
+          },
+          {
+            "confidence": 0.82,
+            "group": "interaction_rules",
+            "priority": 86,
+            "rule_id": "int_handover",
+            "value": true
+          }
+        ],
+        "can_inspect": [
+          {
+            "confidence": 0.86,
+            "group": "inspection_rules",
+            "priority": 85,
+            "rule_id": "insp_visual",
+            "value": true
+          }
+        ],
+        "can_manipulate": [
+          {
+            "confidence": 0.96,
+            "group": "manipulation_rules",
+            "priority": 94,
+            "rule_id": "manip_parallel_gripper",
+            "value": true
+          },
+          {
+            "confidence": 0.95,
+            "group": "manipulation_rules",
+            "priority": 96,
+            "rule_id": "manip_dexterous_hand",
+            "value": true
+          }
+        ],
+        "can_monitor_equipment": [
+          {
+            "confidence": 0.78,
+            "group": "inspection_rules",
+            "priority": 78,
+            "rule_id": "insp_equipment_monitoring",
+            "value": true
+          }
+        ],
+        "can_move": [
+          {
+            "confidence": 0.9,
+            "group": "locomotion_rules",
+            "priority": 80,
+            "rule_id": "loc_wheeled",
+            "value": true
+          },
+          {
+            "confidence": 0.98,
+            "group": "locomotion_rules",
+            "priority": 95,
+            "rule_id": "loc_diff_drive",
+            "value": true
+          }
+        ],
+        "can_navigate": [
+          {
+            "confidence": 0.9,
+            "group": "locomotion_rules",
+            "priority": 80,
+            "rule_id": "loc_wheeled",
+            "value": true
+          },
+          {
+            "confidence": 0.98,
+            "group": "locomotion_rules",
+            "priority": 95,
+            "rule_id": "loc_diff_drive",
+            "value": true
+          },
+          {
+            "confidence": 0.75,
+            "group": "navigation_rules",
+            "priority": 75,
+            "rule_id": "nav_basic",
+            "value": true
+          }
+        ],
+        "can_open_door": [
+          {
+            "confidence": 0.78,
+            "group": "interaction_rules",
+            "priority": 86,
+            "rule_id": "int_door_opening",
+            "value": true
+          }
+        ],
+        "can_open_drawer": [
+          {
+            "confidence": 0.78,
+            "group": "interaction_rules",
+            "priority": 86,
+            "rule_id": "int_door_opening",
+            "value": true
+          }
+        ],
+        "can_pick": [
+          {
+            "confidence": 0.96,
+            "group": "manipulation_rules",
+            "priority": 94,
+            "rule_id": "manip_parallel_gripper",
+            "value": true
+          },
+          {
+            "confidence": 0.95,
+            "group": "manipulation_rules",
+            "priority": 96,
+            "rule_id": "manip_dexterous_hand",
+            "value": true
+          }
+        ],
+        "can_place": [
+          {
+            "confidence": 0.96,
+            "group": "manipulation_rules",
+            "priority": 94,
+            "rule_id": "manip_parallel_gripper",
+            "value": true
+          },
+          {
+            "confidence": 0.95,
+            "group": "manipulation_rules",
+            "priority": 96,
+            "rule_id": "manip_dexterous_hand",
+            "value": true
+          }
+        ],
+        "can_press_button": [
+          {
+            "confidence": 0.76,
+            "group": "interaction_rules",
+            "priority": 80,
+            "rule_id": "int_button_press",
+            "value": true
+          }
+        ],
+        "can_rotate": [
+          {
+            "confidence": 0.98,
+            "group": "locomotion_rules",
+            "priority": 95,
+            "rule_id": "loc_diff_drive",
+            "value": true
+          }
+        ],
+        "can_swim": [
+          {
+            "confidence": 0.98,
+            "group": "constraint_rules",
+            "priority": 180,
+            "reason": "cannot_swim",
+            "rule_id": "con_no_swim",
+            "value": false
+          }
+        ],
+        "can_transport": [
+          {
+            "confidence": 0.86,
+            "group": "locomotion_rules",
+            "priority": 89,
+            "rule_id": "loc_hybrid_mobile_manipulator",
+            "value": true
+          }
+        ],
+        "can_use_elevator": [
+          {
+            "confidence": 0.68,
+            "group": "interaction_rules",
+            "priority": 72,
+            "rule_id": "int_elevator",
+            "value": true
+          }
+        ],
+        "can_use_two_hands": [
+          {
+            "confidence": 0.85,
+            "group": "constraint_rules",
+            "priority": 160,
+            "reason": "cannot_use_two_hands",
+            "rule_id": "con_single_arm",
+            "value": false
+          }
+        ],
+        "can_walk": [
+          {
+            "confidence": 0.9,
+            "group": "constraint_rules",
+            "priority": 170,
+            "reason": "cannot_walk",
+            "rule_id": "con_no_walking",
+            "value": false
+          }
+        ],
+        "cannot_climb": [
+          {
+            "confidence": 0.9,
+            "group": "constraint_rules",
+            "priority": 170,
+            "rule_id": "con_no_walking",
+            "value": true
+          }
+        ],
+        "cannot_fly": [
+          {
+            "confidence": 0.98,
+            "group": "constraint_rules",
+            "priority": 180,
+            "rule_id": "con_no_flight",
+            "value": true
+          }
+        ],
+        "cannot_swim": [
+          {
+            "confidence": 0.98,
+            "group": "constraint_rules",
+            "priority": 180,
+            "rule_id": "con_no_swim",
+            "value": true
+          }
+        ],
+        "cannot_use_two_hands": [
+          {
+            "confidence": 0.85,
+            "group": "constraint_rules",
+            "priority": 160,
+            "rule_id": "con_single_arm",
+            "value": true
+          }
+        ],
+        "cannot_walk": [
+          {
+            "confidence": 0.9,
+            "group": "constraint_rules",
+            "priority": 170,
+            "rule_id": "con_no_walking",
+            "value": true
+          }
+        ],
+        "communication_modes": [
+          {
+            "confidence": 0.84,
+            "group": "communication_rules",
+            "priority": 82,
+            "rule_id": "comm_audio_in",
+            "value": [
+              "speech_input"
+            ]
+          },
+          {
+            "confidence": 0.84,
+            "group": "communication_rules",
+            "priority": 82,
+            "rule_id": "comm_audio_out",
+            "value": [
+              "speech_output"
+            ]
+          },
+          {
+            "confidence": 0.68,
+            "group": "communication_rules",
+            "priority": 72,
+            "rule_id": "comm_remote_operation",
+            "value": [
+              "telemetry"
+            ]
+          }
+        ],
+        "degrees_of_freedom": [
+          {
+            "source": "quantitative_engine",
+            "value": 48
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_degrees_of_freedom",
+            "value": 48
+          }
+        ],
+        "drive_type": [
+          {
+            "confidence": 0.98,
+            "group": "locomotion_rules",
+            "priority": 95,
+            "rule_id": "loc_diff_drive",
+            "value": "differential_drive"
+          }
+        ],
+        "effort_limits": [
+          {
+            "source": "quantitative_engine",
+            "value": {
+              "HeadPitch": 2.666,
+              "HeadYaw": 5.428,
+              "HipPitch": 19.787,
+              "HipRoll": 10.1884,
+              "KneePitch": 27.702,
+              "LElbowRoll": 2.666,
+              "LElbowYaw": 5.428,
+              "LHand": 0.144,
+              "LShoulderPitch": 5.428,
+              "LShoulderRoll": 2.666,
+              "LWristYaw": 0.2014,
+              "RElbowRoll": 2.666,
+              "RElbowYaw": 5.428,
+              "RHand": 0.144,
+              "RShoulderPitch": 5.428,
+              "RShoulderRoll": 2.666,
+              "RWristYaw": 0.2014,
+              "WheelB": 3.25,
+              "WheelFL": 3.25,
+              "WheelFR": 3.25
+            }
+          }
+        ],
+        "end_effector_types": [
+          {
+            "confidence": 0.96,
+            "group": "manipulation_rules",
+            "priority": 94,
+            "rule_id": "manip_parallel_gripper",
+            "value": [
+              "parallel_gripper"
+            ]
+          },
+          {
+            "confidence": 0.95,
+            "group": "manipulation_rules",
+            "priority": 96,
+            "rule_id": "manip_dexterous_hand",
+            "value": [
+              "robot_hand"
+            ]
+          }
+        ],
+        "fleet_capable": [
+          {
+            "confidence": 0.62,
+            "group": "autonomy_rules",
+            "priority": 70,
+            "rule_id": "auto_fleet",
+            "value": true
+          }
+        ],
+        "has_audio_input": [
+          {
+            "confidence": 0.86,
+            "group": "perception_rules",
+            "priority": 82,
+            "rule_id": "perc_audio",
+            "value": true
+          }
+        ],
+        "has_depth_perception": [
+          {
+            "confidence": 0.94,
+            "group": "perception_rules",
+            "priority": 93,
+            "rule_id": "perc_depth_camera",
+            "value": true
+          }
+        ],
+        "has_force_feedback": [
+          {
+            "confidence": 0.9,
+            "group": "perception_rules",
+            "priority": 90,
+            "rule_id": "perc_force_touch",
+            "value": true
+          }
+        ],
+        "has_touch_sensing": [
+          {
+            "confidence": 0.9,
+            "group": "perception_rules",
+            "priority": 90,
+            "rule_id": "perc_force_touch",
+            "value": true
+          }
+        ],
+        "has_visual_perception": [
+          {
+            "confidence": 0.85,
+            "group": "perception_rules",
+            "priority": 85,
+            "rule_id": "perc_2d_vision",
+            "value": true
+          },
+          {
+            "confidence": 0.94,
+            "group": "perception_rules",
+            "priority": 93,
+            "rule_id": "perc_depth_camera",
+            "value": true
+          }
+        ],
+        "height": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.1
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_dimensions",
+            "value": 0.1
+          }
+        ],
+        "high_level_capabilities": [
+          {
+            "confidence": 0.82,
+            "group": "inference_rules",
+            "priority": 82,
+            "rule_id": "inf_delivery",
+            "value": [
+              "delivery",
+              "object_transportation"
+            ]
+          },
+          {
+            "confidence": 0.84,
+            "group": "inference_rules",
+            "priority": 84,
+            "rule_id": "inf_inspection",
+            "value": [
+              "inspection",
+              "monitoring"
+            ]
+          },
+          {
+            "confidence": 0.78,
+            "group": "inference_rules",
+            "priority": 78,
+            "rule_id": "inf_patrolling",
+            "value": [
+              "patrolling",
+              "surveillance"
+            ]
+          },
+          {
+            "confidence": 0.84,
+            "group": "inference_rules",
+            "priority": 84,
+            "rule_id": "inf_material_handling",
+            "value": [
+              "material_handling",
+              "warehouse_logistics"
+            ]
+          },
+          {
+            "confidence": 0.8,
+            "group": "inference_rules",
+            "priority": 82,
+            "rule_id": "inf_human_assistance",
+            "value": [
+              "human_assistance"
+            ]
+          },
+          {
+            "confidence": 0.82,
+            "group": "inference_rules",
+            "priority": 82,
+            "rule_id": "inf_exploration",
+            "value": [
+              "exploration"
+            ]
+          },
+          {
+            "confidence": 0.76,
+            "group": "inference_rules",
+            "priority": 78,
+            "rule_id": "inf_search_rescue",
+            "value": [
+              "search_and_rescue"
+            ]
+          },
+          {
+            "confidence": 0.76,
+            "group": "inference_rules",
+            "priority": 76,
+            "rule_id": "inf_remote_operation",
+            "value": [
+              "remote_operation"
+            ]
+          }
+        ],
+        "human_robot_interaction": [
+          {
+            "confidence": 0.82,
+            "group": "interaction_rules",
+            "priority": 86,
+            "rule_id": "int_handover",
+            "value": true
+          },
+          {
+            "confidence": 0.84,
+            "group": "interaction_rules",
+            "priority": 86,
+            "rule_id": "int_voice",
+            "value": true
+          },
+          {
+            "confidence": 0.83,
+            "group": "interaction_rules",
+            "priority": 82,
+            "rule_id": "int_speech_output",
+            "value": true
+          }
+        ],
+        "inspection_types": [
+          {
+            "confidence": 0.86,
+            "group": "inspection_rules",
+            "priority": 85,
+            "rule_id": "insp_visual",
+            "value": [
+              "visual"
+            ]
+          },
+          {
+            "confidence": 0.78,
+            "group": "inspection_rules",
+            "priority": 80,
+            "rule_id": "insp_infrastructure",
+            "value": [
+              "infrastructure",
+              "remote"
+            ]
+          },
+          {
+            "confidence": 0.78,
+            "group": "inspection_rules",
+            "priority": 78,
+            "rule_id": "insp_equipment_monitoring",
+            "value": [
+              "equipment_monitoring"
+            ]
+          }
+        ],
+        "joint_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 82
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_joint_count",
+            "value": 82
+          }
+        ],
+        "joint_limits": [
+          {
+            "source": "quantitative_engine",
+            "value": {
+              "HeadPitch": {
+                "effort": 2.666,
+                "lower": -0.706858,
+                "upper": 0.637045,
+                "velocity": 9.22756
+              },
+              "HeadYaw": {
+                "effort": 5.428,
+                "lower": -2.08567,
+                "upper": 2.08567,
+                "velocity": 7.33998
+              },
+              "HipPitch": {
+                "effort": 19.787,
+                "lower": -1.03847,
+                "upper": 1.03847,
+                "velocity": 2.93276
+              },
+              "HipRoll": {
+                "effort": 10.1884,
+                "lower": -0.514872,
+                "upper": 0.514872,
+                "velocity": 2.27032
+              },
+              "KneePitch": {
+                "effort": 27.702,
+                "lower": -0.514872,
+                "upper": 0.514872,
+                "velocity": 2.93276
+              },
+              "LElbowRoll": {
+                "effort": 2.666,
+                "lower": -1.56207,
+                "upper": -0.00872665,
+                "velocity": 9.22756
+              },
+              "LElbowYaw": {
+                "effort": 5.428,
+                "lower": -2.08567,
+                "upper": 2.08567,
+                "velocity": 7.33998
+              },
+              "LHand": {
+                "effort": 0.144,
+                "lower": 0.02,
+                "upper": 0.98,
+                "velocity": 12.56
+              },
+              "LShoulderPitch": {
+                "effort": 5.428,
+                "lower": -2.08567,
+                "upper": 2.08567,
+                "velocity": 7.33998
+              },
+              "LShoulderRoll": {
+                "effort": 2.666,
+                "lower": 0.00872665,
+                "upper": 1.56207,
+                "velocity": 9.22756
+              },
+              "LWristYaw": {
+                "effort": 0.2014,
+                "lower": -1.82387,
+                "upper": 1.82387,
+                "velocity": 17.3835
+              },
+              "RElbowRoll": {
+                "effort": 2.666,
+                "lower": 0.00872665,
+                "upper": 1.56207,
+                "velocity": 9.22756
+              },
+              "RElbowYaw": {
+                "effort": 5.428,
+                "lower": -2.08567,
+                "upper": 2.08567,
+                "velocity": 7.33998
+              },
+              "RHand": {
+                "effort": 0.144,
+                "lower": 0.02,
+                "upper": 0.98,
+                "velocity": 12.56
+              },
+              "RShoulderPitch": {
+                "effort": 5.428,
+                "lower": -2.08567,
+                "upper": 2.08567,
+                "velocity": 7.33998
+              },
+              "RShoulderRoll": {
+                "effort": 2.666,
+                "lower": -1.56207,
+                "upper": -0.00872665,
+                "velocity": 9.22756
+              },
+              "RWristYaw": {
+                "effort": 0.2014,
+                "lower": -1.82387,
+                "upper": 1.82387,
+                "velocity": 17.3835
+              },
+              "WheelB": {
+                "effort": 3.25,
+                "lower": 0.0,
+                "upper": 0.0,
+                "velocity": 6.28319
+              },
+              "WheelFL": {
+                "effort": 3.25,
+                "lower": 0.0,
+                "upper": 0.0,
+                "velocity": 6.28319
+              },
+              "WheelFR": {
+                "effort": 3.25,
+                "lower": 0.0,
+                "upper": 0.0,
+                "velocity": 6.28319
+              }
+            }
+          }
+        ],
+        "leg_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 1
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_counts",
+            "value": 1
+          }
+        ],
+        "length": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.1
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_dimensions",
+            "value": 0.1
+          }
+        ],
+        "lidar_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 9
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_counts",
+            "value": 9
+          }
+        ],
+        "limited_payload": [
+          {
+            "confidence": 0.6,
+            "group": "constraint_rules",
+            "priority": 120,
+            "rule_id": "con_limited_payload",
+            "value": true
+          }
+        ],
+        "link_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 83
+          }
+        ],
+        "manipulator_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 1
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_manipulator_count",
+            "value": 1
+          }
+        ],
+        "manipulator_reach": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.857303
+          }
+        ],
+        "maximum_speed": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.0
+          }
+        ],
+        "morphology": [
+          {
+            "confidence": 0.9,
+            "group": "morphology_rules",
+            "priority": 80,
+            "rule_id": "morph_mobile_wheeled",
+            "value": "wheeled_mobile_base"
+          },
+          {
+            "confidence": 0.98,
+            "group": "morphology_rules",
+            "priority": 95,
+            "rule_id": "morph_diff_drive",
+            "value": "differential_drive_base"
+          },
+          {
+            "confidence": 0.96,
+            "group": "morphology_rules",
+            "priority": 100,
+            "rule_id": "morph_humanoid",
+            "value": "humanoid"
+          }
+        ],
+        "movement_type": [
+          {
+            "confidence": 0.9,
+            "group": "locomotion_rules",
+            "priority": 80,
+            "rule_id": "loc_wheeled",
+            "value": [
+              "rolling"
+            ]
+          },
+          {
+            "confidence": 0.98,
+            "group": "locomotion_rules",
+            "priority": 95,
+            "rule_id": "loc_diff_drive",
+            "value": [
+              "rolling"
+            ]
+          },
+          {
+            "confidence": 0.86,
+            "group": "locomotion_rules",
+            "priority": 89,
+            "rule_id": "loc_hybrid_mobile_manipulator",
+            "value": [
+              "hybrid_mobile_manipulation"
+            ]
+          }
+        ],
+        "number_of_joints": [
+          {
+            "source": "quantitative_engine",
+            "value": 82
+          }
+        ],
+        "number_of_links": [
+          {
+            "source": "quantitative_engine",
+            "value": 83
+          }
+        ],
+        "payload": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.0
+          }
+        ],
+        "perception_modalities": [
+          {
+            "confidence": 0.85,
+            "group": "perception_rules",
+            "priority": 85,
+            "rule_id": "perc_2d_vision",
+            "value": [
+              "2d_vision"
+            ]
+          },
+          {
+            "confidence": 0.94,
+            "group": "perception_rules",
+            "priority": 93,
+            "rule_id": "perc_depth_camera",
+            "value": [
+              "depth_perception",
+              "3d_vision"
+            ]
+          },
+          {
+            "confidence": 0.95,
+            "group": "perception_rules",
+            "priority": 94,
+            "rule_id": "perc_lidar",
+            "value": [
+              "lidar"
+            ]
+          },
+          {
+            "confidence": 0.84,
+            "group": "perception_rules",
+            "priority": 82,
+            "rule_id": "perc_sonar_ultrasonic",
+            "value": [
+              "sonar"
+            ]
+          },
+          {
+            "confidence": 0.88,
+            "group": "perception_rules",
+            "priority": 80,
+            "rule_id": "perc_imu",
+            "value": [
+              "inertial"
+            ]
+          },
+          {
+            "confidence": 0.9,
+            "group": "perception_rules",
+            "priority": 90,
+            "rule_id": "perc_force_touch",
+            "value": [
+              "force_touch"
+            ]
+          },
+          {
+            "confidence": 0.86,
+            "group": "perception_rules",
+            "priority": 82,
+            "rule_id": "perc_audio",
+            "value": [
+              "audio"
+            ]
+          }
+        ],
+        "power_source_candidate": [
+          {
+            "confidence": 0.3,
+            "group": "power_rules",
+            "priority": 50,
+            "rule_id": "power_hybrid_mobile_manipulator",
+            "value": "hybrid"
+          }
+        ],
+        "propeller_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 0
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_counts",
+            "value": 0
+          }
+        ],
+        "robot_types": [
+          {
+            "confidence": 0.9,
+            "group": "morphology_rules",
+            "priority": 80,
+            "rule_id": "morph_mobile_wheeled",
+            "value": [
+              "mobile"
+            ]
+          },
+          {
+            "confidence": 0.98,
+            "group": "morphology_rules",
+            "priority": 95,
+            "rule_id": "morph_diff_drive",
+            "value": [
+              "mobile",
+              "differential_drive"
+            ]
+          },
+          {
+            "confidence": 0.96,
+            "group": "morphology_rules",
+            "priority": 100,
+            "rule_id": "morph_humanoid",
+            "value": [
+              "humanoid"
+            ]
+          },
+          {
+            "confidence": 0.7,
+            "group": "morphology_rules",
+            "priority": 72,
+            "rule_id": "morph_inspection",
+            "value": [
+              "inspection"
+            ]
+          },
+          {
+            "confidence": 0.75,
+            "group": "morphology_rules",
+            "priority": 70,
+            "rule_id": "morph_service",
+            "value": [
+              "service"
+            ]
+          }
+        ],
+        "sensor_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 67
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_counts",
+            "value": 67
+          }
+        ],
+        "single_arm_only": [
+          {
+            "confidence": 0.85,
+            "group": "constraint_rules",
+            "priority": 160,
+            "rule_id": "con_single_arm",
+            "value": true
+          }
+        ],
+        "supported_environments": [
+          {
+            "confidence": 0.84,
+            "group": "navigation_rules",
+            "priority": 80,
+            "rule_id": "nav_indoor",
+            "value": [
+              "indoor"
+            ]
+          },
+          {
+            "confidence": 0.84,
+            "group": "navigation_rules",
+            "priority": 82,
+            "rule_id": "nav_outdoor",
+            "value": [
+              "outdoor"
+            ]
+          },
+          {
+            "confidence": 0.76,
+            "group": "environment_rules",
+            "priority": 75,
+            "rule_id": "env_indoor",
+            "value": [
+              "indoor",
+              "office",
+              "home",
+              "hospital",
+              "factory",
+              "warehouse"
+            ]
+          },
+          {
+            "confidence": 0.76,
+            "group": "environment_rules",
+            "priority": 76,
+            "rule_id": "env_outdoor",
+            "value": [
+              "outdoor",
+              "construction",
+              "agriculture"
+            ]
+          },
+          {
+            "confidence": 0.82,
+            "group": "environment_rules",
+            "priority": 82,
+            "rule_id": "env_warehouse",
+            "value": [
+              "warehouse"
+            ]
+          }
+        ],
+        "supported_locomotion": [
+          {
+            "confidence": 0.9,
+            "group": "locomotion_rules",
+            "priority": 80,
+            "rule_id": "loc_wheeled",
+            "value": [
+              "wheeled"
+            ]
+          }
+        ],
+        "supports_autonomous_navigation": [
+          {
+            "confidence": 0.86,
+            "group": "navigation_rules",
+            "priority": 90,
+            "rule_id": "nav_slam",
+            "value": true
+          }
+        ],
+        "supports_fleet_communication": [
+          {
+            "confidence": 0.55,
+            "group": "communication_rules",
+            "priority": 65,
+            "rule_id": "comm_fleet",
+            "value": true
+          }
+        ],
+        "supports_human_robot_communication": [
+          {
+            "confidence": 0.84,
+            "group": "communication_rules",
+            "priority": 82,
+            "rule_id": "comm_audio_in",
+            "value": true
+          },
+          {
+            "confidence": 0.84,
+            "group": "communication_rules",
+            "priority": 82,
+            "rule_id": "comm_audio_out",
+            "value": true
+          }
+        ],
+        "supports_indoor_navigation": [
+          {
+            "confidence": 0.84,
+            "group": "navigation_rules",
+            "priority": 80,
+            "rule_id": "nav_indoor",
+            "value": true
+          }
+        ],
+        "supports_localization": [
+          {
+            "confidence": 0.95,
+            "group": "perception_rules",
+            "priority": 94,
+            "rule_id": "perc_lidar",
+            "value": true
+          },
+          {
+            "confidence": 0.88,
+            "group": "perception_rules",
+            "priority": 80,
+            "rule_id": "perc_imu",
+            "value": true
+          }
+        ],
+        "supports_map_building": [
+          {
+            "confidence": 0.86,
+            "group": "navigation_rules",
+            "priority": 90,
+            "rule_id": "nav_slam",
+            "value": true
+          }
+        ],
+        "supports_obstacle_avoidance": [
+          {
+            "confidence": 0.88,
+            "group": "navigation_rules",
+            "priority": 88,
+            "rule_id": "nav_obstacle_avoidance",
+            "value": true
+          }
+        ],
+        "supports_outdoor_navigation": [
+          {
+            "confidence": 0.84,
+            "group": "navigation_rules",
+            "priority": 82,
+            "rule_id": "nav_outdoor",
+            "value": true
+          }
+        ],
+        "supports_remote_operation": [
+          {
+            "confidence": 0.68,
+            "group": "communication_rules",
+            "priority": 72,
+            "rule_id": "comm_remote_operation",
+            "value": true
+          }
+        ],
+        "supports_slam": [
+          {
+            "confidence": 0.95,
+            "group": "perception_rules",
+            "priority": 94,
+            "rule_id": "perc_lidar",
+            "value": true
+          }
+        ],
+        "supports_speech_output": [
+          {
+            "confidence": 0.83,
+            "group": "interaction_rules",
+            "priority": 82,
+            "rule_id": "int_speech_output",
+            "value": true
+          }
+        ],
+        "supports_state_estimation": [
+          {
+            "confidence": 0.88,
+            "group": "perception_rules",
+            "priority": 80,
+            "rule_id": "perc_imu",
+            "value": true
+          }
+        ],
+        "supports_voice_interaction": [
+          {
+            "confidence": 0.86,
+            "group": "perception_rules",
+            "priority": 82,
+            "rule_id": "perc_audio",
+            "value": true
+          },
+          {
+            "confidence": 0.84,
+            "group": "interaction_rules",
+            "priority": 86,
+            "rule_id": "int_voice",
+            "value": true
+          }
+        ],
+        "thruster_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 0
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_counts",
+            "value": 0
+          }
+        ],
+        "track_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 0
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_counts",
+            "value": 0
+          }
+        ],
+        "track_width": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.31
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_dimensions",
+            "value": 0.31
+          }
+        ],
+        "turning_radius": [
+          {
+            "source": "quantitative_engine",
+            "value": 0
+          }
+        ],
+        "velocity_limits": [
+          {
+            "source": "quantitative_engine",
+            "value": {
+              "HeadPitch": 9.22756,
+              "HeadYaw": 7.33998,
+              "HipPitch": 2.93276,
+              "HipRoll": 2.27032,
+              "KneePitch": 2.93276,
+              "LElbowRoll": 9.22756,
+              "LElbowYaw": 7.33998,
+              "LHand": 12.56,
+              "LShoulderPitch": 7.33998,
+              "LShoulderRoll": 9.22756,
+              "LWristYaw": 17.3835,
+              "RElbowRoll": 9.22756,
+              "RElbowYaw": 7.33998,
+              "RHand": 12.56,
+              "RShoulderPitch": 7.33998,
+              "RShoulderRoll": 9.22756,
+              "RWristYaw": 17.3835,
+              "WheelB": 6.28319,
+              "WheelFL": 6.28319,
+              "WheelFR": 6.28319
+            }
+          }
+        ],
+        "weight": [
+          {
+            "source": "quantitative_engine",
+            "value": 28.68124
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_dimensions",
+            "value": 28.68124
+          }
+        ],
+        "wheel_count": [
+          {
+            "source": "quantitative_engine",
+            "value": 3
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_counts",
+            "value": 3
+          }
+        ],
+        "wheel_diameter": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.0
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_dimensions",
+            "value": 0.0
+          }
+        ],
+        "width": [
+          {
+            "source": "quantitative_engine",
+            "value": 0.1
+          },
+          {
+            "group": "quantitative_rules",
+            "rule_id": "quant_dimensions",
+            "value": 0.1
+          }
+        ]
+      },
+      "Power": {
+        "battery_powered": false,
+        "docking_capable": false,
+        "power_source": "unknown",
+        "power_source_candidate": "hybrid",
+        "rechargeable": false,
+        "tethered_candidate": false
+      },
+      "QualitativeCapabilities": {
+        "autonomy_modes": [
+          "teleoperation",
+          "semi_autonomous",
+          "fully_autonomous",
+          "shared_autonomy"
+        ],
+        "communication_modes": [
+          "speech_input",
+          "speech_output",
+          "telemetry"
+        ],
+        "drive_type": "differential_drive",
+        "end_effector_types": [
+          "parallel_gripper",
+          "robot_hand"
+        ],
+        "high_level_capabilities": [
+          "delivery",
+          "object_transportation",
+          "inspection",
+          "monitoring",
+          "patrolling",
+          "surveillance",
+          "material_handling",
+          "warehouse_logistics",
+          "human_assistance",
+          "exploration",
+          "search_and_rescue",
+          "remote_operation"
+        ],
+        "industrial_processes": [],
+        "inspection_types": [
+          "visual",
+          "infrastructure",
+          "remote",
+          "equipment_monitoring"
+        ],
+        "manipulator_count_min": 0,
+        "morphology": "humanoid",
+        "movement_type": [
+          "rolling",
+          "hybrid_mobile_manipulation"
+        ],
+        "object_material_constraints": [],
+        "perception_modalities": [
+          "2d_vision",
+          "depth_perception",
+          "3d_vision",
+          "lidar",
+          "sonar",
+          "inertial",
+          "force_touch",
+          "audio"
+        ],
+        "power_source": "unknown",
+        "power_source_candidate": "hybrid",
+        "robot_types": [
+          "mobile",
+          "differential_drive",
+          "humanoid",
+          "inspection",
+          "service"
+        ],
+        "supported_environments": [
+          "indoor",
+          "outdoor",
+          "office",
+          "home",
+          "hospital",
+          "factory",
+          "warehouse",
+          "construction",
+          "agriculture"
+        ],
+        "supported_environments_candidate": [],
+        "supported_locomotion": [
+          "wheeled"
+        ]
+      },
+      "QuantitativeCapabilities": {
+        "arm_count": 1,
+        "arm_length": 0.857303,
+        "battery_capacity": 0,
+        "camera_count": 13,
+        "degrees_of_freedom": 48,
+        "effort_limits": {
+          "HeadPitch": 2.666,
+          "HeadYaw": 5.428,
+          "HipPitch": 19.787,
+          "HipRoll": 10.1884,
+          "KneePitch": 27.702,
+          "LElbowRoll": 2.666,
+          "LElbowYaw": 5.428,
+          "LHand": 0.144,
+          "LShoulderPitch": 5.428,
+          "LShoulderRoll": 2.666,
+          "LWristYaw": 0.2014,
+          "RElbowRoll": 2.666,
+          "RElbowYaw": 5.428,
+          "RHand": 0.144,
+          "RShoulderPitch": 5.428,
+          "RShoulderRoll": 2.666,
+          "RWristYaw": 0.2014,
+          "WheelB": 3.25,
+          "WheelFL": 3.25,
+          "WheelFR": 3.25
+        },
+        "height": 0.1,
+        "joint_count": 82,
+        "joint_limits": {
+          "HeadPitch": {
+            "effort": 2.666,
+            "lower": -0.706858,
+            "upper": 0.637045,
+            "velocity": 9.22756
+          },
+          "HeadYaw": {
+            "effort": 5.428,
+            "lower": -2.08567,
+            "upper": 2.08567,
+            "velocity": 7.33998
+          },
+          "HipPitch": {
+            "effort": 19.787,
+            "lower": -1.03847,
+            "upper": 1.03847,
+            "velocity": 2.93276
+          },
+          "HipRoll": {
+            "effort": 10.1884,
+            "lower": -0.514872,
+            "upper": 0.514872,
+            "velocity": 2.27032
+          },
+          "KneePitch": {
+            "effort": 27.702,
+            "lower": -0.514872,
+            "upper": 0.514872,
+            "velocity": 2.93276
+          },
+          "LElbowRoll": {
+            "effort": 2.666,
+            "lower": -1.56207,
+            "upper": -0.00872665,
+            "velocity": 9.22756
+          },
+          "LElbowYaw": {
+            "effort": 5.428,
+            "lower": -2.08567,
+            "upper": 2.08567,
+            "velocity": 7.33998
+          },
+          "LHand": {
+            "effort": 0.144,
+            "lower": 0.02,
+            "upper": 0.98,
+            "velocity": 12.56
+          },
+          "LShoulderPitch": {
+            "effort": 5.428,
+            "lower": -2.08567,
+            "upper": 2.08567,
+            "velocity": 7.33998
+          },
+          "LShoulderRoll": {
+            "effort": 2.666,
+            "lower": 0.00872665,
+            "upper": 1.56207,
+            "velocity": 9.22756
+          },
+          "LWristYaw": {
+            "effort": 0.2014,
+            "lower": -1.82387,
+            "upper": 1.82387,
+            "velocity": 17.3835
+          },
+          "RElbowRoll": {
+            "effort": 2.666,
+            "lower": 0.00872665,
+            "upper": 1.56207,
+            "velocity": 9.22756
+          },
+          "RElbowYaw": {
+            "effort": 5.428,
+            "lower": -2.08567,
+            "upper": 2.08567,
+            "velocity": 7.33998
+          },
+          "RHand": {
+            "effort": 0.144,
+            "lower": 0.02,
+            "upper": 0.98,
+            "velocity": 12.56
+          },
+          "RShoulderPitch": {
+            "effort": 5.428,
+            "lower": -2.08567,
+            "upper": 2.08567,
+            "velocity": 7.33998
+          },
+          "RShoulderRoll": {
+            "effort": 2.666,
+            "lower": -1.56207,
+            "upper": -0.00872665,
+            "velocity": 9.22756
+          },
+          "RWristYaw": {
+            "effort": 0.2014,
+            "lower": -1.82387,
+            "upper": 1.82387,
+            "velocity": 17.3835
+          },
+          "WheelB": {
+            "effort": 3.25,
+            "lower": 0.0,
+            "upper": 0.0,
+            "velocity": 6.28319
+          },
+          "WheelFL": {
+            "effort": 3.25,
+            "lower": 0.0,
+            "upper": 0.0,
+            "velocity": 6.28319
+          },
+          "WheelFR": {
+            "effort": 3.25,
+            "lower": 0.0,
+            "upper": 0.0,
+            "velocity": 6.28319
+          }
+        },
+        "leg_count": 1,
+        "length": 0.1,
+        "lidar_count": 9,
+        "link_count": 83,
+        "manipulator_count": 1,
+        "manipulator_reach": 0.857303,
+        "maximum_speed": 0.0,
+        "number_of_joints": 82,
+        "number_of_links": 83,
+        "payload": 0.0,
+        "propeller_count": 0,
+        "sensor_count": 67,
+        "thruster_count": 0,
+        "track_count": 0,
+        "track_width": 0.31,
+        "turning_radius": 0,
+        "velocity_limits": {
+          "HeadPitch": 9.22756,
+          "HeadYaw": 7.33998,
+          "HipPitch": 2.93276,
+          "HipRoll": 2.27032,
+          "KneePitch": 2.93276,
+          "LElbowRoll": 9.22756,
+          "LElbowYaw": 7.33998,
+          "LHand": 12.56,
+          "LShoulderPitch": 7.33998,
+          "LShoulderRoll": 9.22756,
+          "LWristYaw": 17.3835,
+          "RElbowRoll": 9.22756,
+          "RElbowYaw": 7.33998,
+          "RHand": 12.56,
+          "RShoulderPitch": 7.33998,
+          "RShoulderRoll": 9.22756,
+          "RWristYaw": 17.3835,
+          "WheelB": 6.28319,
+          "WheelFL": 6.28319,
+          "WheelFR": 6.28319
+        },
+        "weight": 28.68124,
+        "wheel_count": 3,
+        "wheel_diameter": 0.0,
+        "width": 0.1
+      },
+      "RuleTrace": [
+        {
+          "confidence": 1.0,
+          "evidence": {
+            "exists.joints": true
+          },
+          "group": "quantitative_rules",
+          "matched": true,
+          "outputs": {
+            "default": 0,
+            "metric": "joint_count",
+            "source": "count_non_fixed_joints"
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "quant_joint_count"
+        },
+        {
+          "confidence": 0.95,
+          "evidence": {
+            "exists.joints": true
+          },
+          "group": "quantitative_rules",
+          "matched": true,
+          "outputs": {
+            "default": 0,
+            "metric": "degrees_of_freedom",
+            "source": "sum_movable_joint_dof"
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "quant_degrees_of_freedom"
+        },
+        {
+          "confidence": 0.8,
+          "evidence": {
+            "link_keywords.arm": {
+              "count": 2,
+              "matches": [
+                "LForeArm",
+                "RForeArm"
+              ]
+            }
+          },
+          "group": "quantitative_rules",
+          "matched": true,
+          "outputs": {
+            "default": 0,
+            "metric": "manipulator_count",
+            "source": "count_arm_roots_or_tool_chains"
+          },
+          "priority": 78,
+          "rejected_conditions": [],
+          "rule_id": "quant_manipulator_count"
+        },
+        {
+          "confidence": 0.7,
+          "evidence": {
+            "capability.can_manipulate": false
+          },
+          "group": "quantitative_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 74,
+          "rejected_conditions": [
+            "quant_reach.capability_true: can_manipulate is False, expected True"
+          ],
+          "rule_id": "quant_reach"
+        },
+        {
+          "confidence": 0.65,
+          "evidence": {
+            "link_keywords.payload": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "quantitative_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 74,
+          "rejected_conditions": [
+            "quant_payload.any_link_keyword: no payload matches in link"
+          ],
+          "rule_id": "quant_payload"
+        },
+        {
+          "confidence": 0.62,
+          "evidence": {
+            "capability.can_move": false
+          },
+          "group": "quantitative_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 72,
+          "rejected_conditions": [
+            "quant_speed.capability_true: can_move is False, expected True"
+          ],
+          "rule_id": "quant_speed"
+        },
+        {
+          "confidence": 0.7,
+          "evidence": {
+            "equals.drive_type": "unknown"
+          },
+          "group": "quantitative_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 72,
+          "rejected_conditions": [
+            "quant_turning_radius.equals: drive_type='unknown' does not equals 'ackermann'"
+          ],
+          "rule_id": "quant_turning_radius"
+        },
+        {
+          "confidence": 0.95,
+          "evidence": {
+            "exists.links": true
+          },
+          "group": "quantitative_rules",
+          "matched": true,
+          "outputs": {
+            "default": 0,
+            "metrics": [
+              "sensor_count",
+              "camera_count",
+              "lidar_count",
+              "wheel_count",
+              "track_count",
+              "leg_count",
+              "propeller_count",
+              "thruster_count"
+            ],
+            "source": "keyword_counts"
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "quant_counts"
+        },
+        {
+          "confidence": 0.72,
+          "evidence": {
+            "exists.geometry": true
+          },
+          "group": "quantitative_rules",
+          "matched": true,
+          "outputs": {
+            "default": 0,
+            "metrics": [
+              "weight",
+              "height",
+              "width",
+              "length",
+              "wheel_diameter",
+              "track_width",
+              "arm_length"
+            ],
+            "source": "geometry_and_inertial_bounds"
+          },
+          "priority": 70,
+          "rejected_conditions": [],
+          "rule_id": "quant_dimensions"
+        },
+        {
+          "confidence": 0.85,
+          "evidence": {
+            "exists.metadata.battery": false
+          },
+          "group": "quantitative_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 65,
+          "rejected_conditions": [
+            "quant_battery.exists: metadata.battery exists=False, expected True"
+          ],
+          "rule_id": "quant_battery"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "link_keywords.wheel": {
+              "count": 3,
+              "matches": [
+                "WheelB_link",
+                "WheelFL_link",
+                "WheelFR_link"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": true,
+          "outputs": {
+            "morphology": "wheeled_mobile_base",
+            "robot_types": [
+              "mobile"
+            ]
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "morph_mobile_wheeled"
+        },
+        {
+          "confidence": 0.98,
+          "evidence": {
+            "controller_keywords.diff_drive": {
+              "count": 1,
+              "matches": [
+                "differential_drive_controller libgazebo_ros_diff_drive.so"
+              ]
+            },
+            "link_keywords.wheel": {
+              "count": 3,
+              "matches": [
+                "WheelB_link",
+                "WheelFL_link",
+                "WheelFR_link"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": true,
+          "outputs": {
+            "morphology": "differential_drive_base",
+            "robot_types": [
+              "mobile",
+              "differential_drive"
+            ]
+          },
+          "priority": 95,
+          "rejected_conditions": [],
+          "rule_id": "morph_diff_drive"
+        },
+        {
+          "confidence": 0.96,
+          "evidence": {
+            "controller_keywords.ackermann": {
+              "count": 0,
+              "matches": []
+            },
+            "joint_keywords.steering": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 95,
+          "rejected_conditions": [
+            "morph_ackermann.any_controller_keyword: no ackermann matches in controller",
+            "morph_ackermann.any_joint_keyword: no steering matches in joint"
+          ],
+          "rule_id": "morph_ackermann"
+        },
+        {
+          "confidence": 0.95,
+          "evidence": {
+            "controller_keywords.mecanum": {
+              "count": 0,
+              "matches": []
+            },
+            "controller_keywords.omni_drive": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 92,
+          "rejected_conditions": [
+            "morph_omni.any_controller_keyword: no omni_drive matches in controller",
+            "morph_omni.any_controller_keyword: no mecanum matches in controller"
+          ],
+          "rule_id": "morph_omni"
+        },
+        {
+          "confidence": 0.93,
+          "evidence": {
+            "link_keywords.track": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 92,
+          "rejected_conditions": [
+            "morph_tracked.min_link_keyword_count: track count 0 < 1"
+          ],
+          "rule_id": "morph_tracked"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "joint_keywords.revolute": {
+              "count": 17,
+              "matches": [
+                "HeadPitch revolute",
+                "HeadYaw revolute",
+                "HipPitch revolute",
+                "HipRoll revolute",
+                "KneePitch revolute",
+                "LElbowRoll revolute",
+                "LElbowYaw revolute",
+                "LHand revolute",
+                "LShoulderPitch revolute",
+                "LShoulderRoll revolute",
+                "LWristYaw revolute",
+                "RElbowRoll revolute",
+                "RElbowYaw revolute",
+                "RHand revolute",
+                "RShoulderPitch revolute",
+                "RShoulderRoll revolute",
+                "RWristYaw revolute"
+              ]
+            },
+            "link_keywords.arm": {
+              "count": 2,
+              "matches": [
+                "LForeArm",
+                "RForeArm"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 90,
+          "rejected_conditions": [
+            "morph_manipulator.min_link_keyword_count: arm count 2 < 3"
+          ],
+          "rule_id": "morph_manipulator"
+        },
+        {
+          "confidence": 0.94,
+          "evidence": {
+            "joint_keywords.wrist": {
+              "count": 2,
+              "matches": [
+                "LWristYaw revolute",
+                "RWristYaw revolute"
+              ]
+            },
+            "link_keywords.arm": {
+              "count": 2,
+              "matches": [
+                "LForeArm",
+                "RForeArm"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 96,
+          "rejected_conditions": [
+            "morph_industrial_arm.min_link_keyword_count: arm count 2 < 5"
+          ],
+          "rule_id": "morph_industrial_arm"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "link_keywords.arm": {
+              "count": 2,
+              "matches": [
+                "LForeArm",
+                "RForeArm"
+              ]
+            },
+            "sensor_keywords.force_torque": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 88,
+          "rejected_conditions": [
+            "morph_cobot.all[0].min_link_keyword_count: arm count 2 < 4",
+            "morph_cobot.all[1].any_sensor_keyword: no force_torque matches in sensor"
+          ],
+          "rule_id": "morph_cobot"
+        },
+        {
+          "confidence": 0.96,
+          "evidence": {
+            "link_keywords.arm": {
+              "count": 2,
+              "matches": [
+                "LForeArm",
+                "RForeArm"
+              ]
+            },
+            "link_keywords.head": {
+              "count": 4,
+              "matches": [
+                "Head",
+                "HeadTouchFront_frame",
+                "HeadTouchMiddle_frame",
+                "HeadTouchRear_frame"
+              ]
+            },
+            "link_keywords.leg": {
+              "count": 1,
+              "matches": [
+                "base_footprint"
+              ]
+            },
+            "link_keywords.torso": {
+              "count": 5,
+              "matches": [
+                "ChestButton_frame",
+                "ImuTorsoAccelerometer_frame",
+                "ImuTorsoGyrometer_frame",
+                "Pelvis",
+                "torso"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": true,
+          "outputs": {
+            "morphology": "humanoid",
+            "robot_types": [
+              "humanoid"
+            ]
+          },
+          "priority": 100,
+          "rejected_conditions": [],
+          "rule_id": "morph_humanoid"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "count.leg": {
+              "count": 1,
+              "matches": []
+            },
+            "link_keywords.leg": {
+              "count": 1,
+              "matches": [
+                "base_footprint"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 90,
+          "rejected_conditions": [
+            "morph_biped.min_link_keyword_count: leg count 1 < 2"
+          ],
+          "rule_id": "morph_biped"
+        },
+        {
+          "confidence": 0.92,
+          "evidence": {
+            "count.leg": {
+              "count": 1,
+              "matches": []
+            },
+            "link_keywords.leg": {
+              "count": 1,
+              "matches": [
+                "base_footprint"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 92,
+          "rejected_conditions": [
+            "morph_quadruped.min_link_keyword_count: leg count 1 < 4"
+          ],
+          "rule_id": "morph_quadruped"
+        },
+        {
+          "confidence": 0.92,
+          "evidence": {
+            "count.leg": {
+              "count": 1,
+              "matches": []
+            },
+            "link_keywords.leg": {
+              "count": 1,
+              "matches": [
+                "base_footprint"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 92,
+          "rejected_conditions": [
+            "morph_hexapod.min_link_keyword_count: leg count 1 < 6"
+          ],
+          "rule_id": "morph_hexapod"
+        },
+        {
+          "confidence": 0.96,
+          "evidence": {
+            "link_keywords.propeller": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 98,
+          "rejected_conditions": [
+            "morph_multirotor.min_link_keyword_count: propeller count 0 < 3"
+          ],
+          "rule_id": "morph_multirotor"
+        },
+        {
+          "confidence": 0.94,
+          "evidence": {
+            "link_keywords.propeller": {
+              "count": 0,
+              "matches": []
+            },
+            "link_keywords.wing": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 98,
+          "rejected_conditions": [
+            "morph_fixed_wing.all[0].any_link_keyword: no wing matches in link",
+            "morph_fixed_wing.all[1].any_link_keyword: no propeller matches in link"
+          ],
+          "rule_id": "morph_fixed_wing"
+        },
+        {
+          "confidence": 0.92,
+          "evidence": {
+            "link_keywords.thruster": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 98,
+          "rejected_conditions": [
+            "morph_underwater.min_link_keyword_count: thruster count 0 < 1"
+          ],
+          "rule_id": "morph_underwater"
+        },
+        {
+          "confidence": 0.75,
+          "evidence": {
+            "capability.can_navigate": false,
+            "sensor_keywords.depth_camera": {
+              "count": 5,
+              "matches": [
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame"
+              ]
+            },
+            "sensor_keywords.microphone": {
+              "count": 28,
+              "matches": [
+                "LThumb1 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "LThumb2 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "RThumb1 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "RThumb2 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger11 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger12 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger13 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger21 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger22 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger23 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger31 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger32 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger33 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger41 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger42 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger43 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger11 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger12 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger13 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger21 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger22 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger23 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger31 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger32 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger33 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger41 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger42 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger43 libroboticsgroup_gazebo_mimic_joint_plugin.so"
+              ]
+            },
+            "sensor_keywords.rgb_camera": {
+              "count": 13,
+              "matches": [
+                "CameraBottom camera sensor_element",
+                "CameraBottom_frame",
+                "CameraBottom_optical_frame",
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame",
+                "CameraTop camera sensor_element",
+                "CameraTop_frame",
+                "CameraTop_optical_frame",
+                "camera_controller libgazebo_ros_camera.so",
+                "camera_controller plugin_sensor plugin"
+              ]
+            },
+            "sensor_keywords.speaker": {
+              "count": 2,
+              "matches": [
+                "LSpeaker_frame",
+                "RSpeaker_frame"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 70,
+          "rejected_conditions": [
+            "morph_service.all[0].capability_true: can_navigate is False, expected True"
+          ],
+          "rule_id": "morph_service"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "capability.can_transport": false,
+            "link_keywords.payload": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 78,
+          "rejected_conditions": [
+            "morph_warehouse.any_link_keyword: no payload matches in link",
+            "morph_warehouse.capability_true: can_transport is False, expected True"
+          ],
+          "rule_id": "morph_warehouse"
+        },
+        {
+          "confidence": 0.88,
+          "evidence": {
+            "end_effector_keywords.medical_tool": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 88,
+          "rejected_conditions": [
+            "morph_medical.any_end_effector_keyword: no medical_tool matches in end_effector"
+          ],
+          "rule_id": "morph_medical"
+        },
+        {
+          "confidence": 0.7,
+          "evidence": {
+            "sensor_keywords.inspection_probe": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.lidar": {
+              "count": 9,
+              "matches": [
+                "ShovelLaser_frame",
+                "SurroundingFrontLaser_device_frame",
+                "SurroundingFrontLaser_frame",
+                "SurroundingLeftLaser_device_frame",
+                "SurroundingLeftLaser_frame",
+                "SurroundingRightLaser_device_frame",
+                "SurroundingRightLaser_frame",
+                "VerticalLeftLaser_frame",
+                "VerticalRightLaser_frame"
+              ]
+            },
+            "sensor_keywords.rgb_camera": {
+              "count": 13,
+              "matches": [
+                "CameraBottom camera sensor_element",
+                "CameraBottom_frame",
+                "CameraBottom_optical_frame",
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame",
+                "CameraTop camera sensor_element",
+                "CameraTop_frame",
+                "CameraTop_optical_frame",
+                "camera_controller libgazebo_ros_camera.so",
+                "camera_controller plugin_sensor plugin"
+              ]
+            },
+            "sensor_keywords.thermal_camera": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": true,
+          "outputs": {
+            "robot_types": [
+              "inspection"
+            ]
+          },
+          "priority": 72,
+          "rejected_conditions": [],
+          "rule_id": "morph_inspection"
+        },
+        {
+          "confidence": 0.76,
+          "evidence": {
+            "end_effector_keywords.polishing_tool": {
+              "count": 0,
+              "matches": []
+            },
+            "end_effector_keywords.sprayer": {
+              "count": 0,
+              "matches": []
+            },
+            "end_effector_keywords.vacuum_gripper": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 84,
+          "rejected_conditions": [
+            "morph_cleaning.any_end_effector_keyword: no sprayer matches in end_effector",
+            "morph_cleaning.any_end_effector_keyword: no vacuum_gripper matches in end_effector",
+            "morph_cleaning.any_end_effector_keyword: no polishing_tool matches in end_effector"
+          ],
+          "rule_id": "morph_cleaning"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "link_keywords.wheel": {
+              "count": 3,
+              "matches": [
+                "WheelB_link",
+                "WheelFL_link",
+                "WheelFR_link"
+              ]
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": true,
+          "outputs": {
+            "can_move": true,
+            "can_navigate": true,
+            "movement_type": [
+              "rolling"
+            ],
+            "supported_locomotion": [
+              "wheeled"
+            ]
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "loc_wheeled"
+        },
+        {
+          "confidence": 0.98,
+          "evidence": {
+            "controller_keywords.diff_drive": {
+              "count": 1,
+              "matches": [
+                "differential_drive_controller libgazebo_ros_diff_drive.so"
+              ]
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": true,
+          "outputs": {
+            "can_move": true,
+            "can_navigate": true,
+            "can_rotate": true,
+            "drive_type": "differential_drive",
+            "movement_type": [
+              "rolling"
+            ]
+          },
+          "priority": 95,
+          "rejected_conditions": [],
+          "rule_id": "loc_diff_drive"
+        },
+        {
+          "confidence": 0.96,
+          "evidence": {
+            "controller_keywords.ackermann": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 94,
+          "rejected_conditions": [
+            "loc_ackermann.any_controller_keyword: no ackermann matches in controller"
+          ],
+          "rule_id": "loc_ackermann"
+        },
+        {
+          "confidence": 0.95,
+          "evidence": {
+            "controller_keywords.mecanum": {
+              "count": 0,
+              "matches": []
+            },
+            "controller_keywords.omni_drive": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 94,
+          "rejected_conditions": [
+            "loc_holonomic.any_controller_keyword: no omni_drive matches in controller",
+            "loc_holonomic.any_controller_keyword: no mecanum matches in controller"
+          ],
+          "rule_id": "loc_holonomic"
+        },
+        {
+          "confidence": 0.88,
+          "evidence": {
+            "link_keywords.track": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 90,
+          "rejected_conditions": [
+            "loc_tracked.min_link_keyword_count: track count 0 < 1"
+          ],
+          "rule_id": "loc_tracked"
+        },
+        {
+          "confidence": 0.88,
+          "evidence": {
+            "joint_keywords.hip": {
+              "count": 2,
+              "matches": [
+                "HipPitch revolute",
+                "HipRoll revolute"
+              ]
+            },
+            "link_keywords.leg": {
+              "count": 1,
+              "matches": [
+                "base_footprint"
+              ]
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 88,
+          "rejected_conditions": [
+            "loc_walking.min_link_keyword_count: leg count 1 < 2"
+          ],
+          "rule_id": "loc_walking"
+        },
+        {
+          "confidence": 0.62,
+          "evidence": {
+            "capability.can_walk": false,
+            "joint_keywords.knee": {
+              "count": 1,
+              "matches": [
+                "KneePitch revolute"
+              ]
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 70,
+          "rejected_conditions": [
+            "loc_running.capability_true: can_walk is False, expected True",
+            "loc_running.min_joint_keyword_count: knee count 1 < 2"
+          ],
+          "rule_id": "loc_running"
+        },
+        {
+          "confidence": 0.65,
+          "evidence": {
+            "capability.can_walk": false,
+            "link_keywords.finger": {
+              "count": 29,
+              "matches": [
+                "HeadTouchMiddle_frame",
+                "LFinger11_link",
+                "LFinger12_link",
+                "LFinger13_link",
+                "LFinger21_link",
+                "LFinger22_link",
+                "LFinger23_link",
+                "LFinger31_link",
+                "LFinger32_link",
+                "LFinger33_link",
+                "LFinger41_link",
+                "LFinger42_link",
+                "LFinger43_link",
+                "LThumb1_link",
+                "LThumb2_link",
+                "RFinger11_link",
+                "RFinger12_link",
+                "RFinger13_link",
+                "RFinger21_link",
+                "RFinger22_link",
+                "RFinger23_link",
+                "RFinger31_link",
+                "RFinger32_link",
+                "RFinger33_link",
+                "RFinger41_link",
+                "RFinger42_link",
+                "RFinger43_link",
+                "RThumb1_link",
+                "RThumb2_link"
+              ]
+            },
+            "link_keywords.gripper": {
+              "count": 4,
+              "matches": [
+                "LHandTouchBack_frame",
+                "RHandTouchBack_frame",
+                "l_gripper",
+                "r_gripper"
+              ]
+            },
+            "link_keywords.track": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 72,
+          "rejected_conditions": [
+            "loc_climbing.all[0].capability_true: can_walk is False, expected True"
+          ],
+          "rule_id": "loc_climbing"
+        },
+        {
+          "confidence": 0.97,
+          "evidence": {
+            "link_keywords.propeller": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 98,
+          "rejected_conditions": [
+            "loc_flying_multirotor.min_link_keyword_count: propeller count 0 < 3"
+          ],
+          "rule_id": "loc_flying_multirotor"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "link_keywords.wing": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 96,
+          "rejected_conditions": [
+            "loc_flying_fixed_wing.any_link_keyword: no wing matches in link"
+          ],
+          "rule_id": "loc_flying_fixed_wing"
+        },
+        {
+          "confidence": 0.93,
+          "evidence": {
+            "link_keywords.thruster": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 96,
+          "rejected_conditions": [
+            "loc_swimming.min_link_keyword_count: thruster count 0 < 1"
+          ],
+          "rule_id": "loc_swimming"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "loc_crawling.morphology_in": [
+              "differential_drive",
+              "humanoid",
+              "inspection",
+              "mobile"
+            ]
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 80,
+          "rejected_conditions": [
+            "loc_crawling.morphology_in: no membership match"
+          ],
+          "rule_id": "loc_crawling"
+        },
+        {
+          "confidence": 0.45,
+          "evidence": {
+            "joint_keywords.prismatic": {
+              "count": 0,
+              "matches": []
+            },
+            "link_keywords.leg": {
+              "count": 1,
+              "matches": [
+                "base_footprint"
+              ]
+            }
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 55,
+          "rejected_conditions": [
+            "loc_hopping.min_joint_keyword_count: prismatic count 0 < 1"
+          ],
+          "rule_id": "loc_hopping"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "capability.can_manipulate": false,
+            "capability.can_move": true
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 89,
+          "rejected_conditions": [
+            "loc_hybrid_mobile_manipulator.all[1].capability_true: can_manipulate is False, expected True"
+          ],
+          "rule_id": "loc_hybrid_mobile_manipulator"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "link_keywords.arm": {
+              "count": 2,
+              "matches": [
+                "LForeArm",
+                "RForeArm"
+              ]
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 88,
+          "rejected_conditions": [
+            "manip_arm_present.min_link_keyword_count: arm count 2 < 3"
+          ],
+          "rule_id": "manip_arm_present"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "count.arm": {
+              "count": 1,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 92,
+          "rejected_conditions": [
+            "manip_dual_arm.min_count: arm count 1 is not >= 2"
+          ],
+          "rule_id": "manip_dual_arm"
+        },
+        {
+          "confidence": 0.96,
+          "evidence": {
+            "end_effector_keywords.parallel_gripper": {
+              "count": 1,
+              "matches": [
+                "l_gripper"
+              ]
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": true,
+          "outputs": {
+            "can_grasp": true,
+            "can_manipulate": true,
+            "can_pick": true,
+            "can_place": true,
+            "end_effector_types": [
+              "parallel_gripper"
+            ]
+          },
+          "priority": 94,
+          "rejected_conditions": [],
+          "rule_id": "manip_parallel_gripper"
+        },
+        {
+          "confidence": 0.94,
+          "evidence": {
+            "end_effector_keywords.vacuum_gripper": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 93,
+          "rejected_conditions": [
+            "manip_vacuum_gripper.any_end_effector_keyword: no vacuum_gripper matches in end_effector"
+          ],
+          "rule_id": "manip_vacuum_gripper"
+        },
+        {
+          "confidence": 0.92,
+          "evidence": {
+            "end_effector_keywords.magnetic_gripper": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 93,
+          "rejected_conditions": [
+            "manip_magnetic_gripper.any_end_effector_keyword: no magnetic_gripper matches in end_effector"
+          ],
+          "rule_id": "manip_magnetic_gripper"
+        },
+        {
+          "confidence": 0.95,
+          "evidence": {
+            "end_effector_keywords.robot_hand": {
+              "count": 2,
+              "matches": [
+                "LHandTouchBack_frame",
+                "RHandTouchBack_frame"
+              ]
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": true,
+          "outputs": {
+            "can_dexterous_manipulate": true,
+            "can_grasp": true,
+            "can_handover": true,
+            "can_manipulate": true,
+            "can_pick": true,
+            "can_place": true,
+            "end_effector_types": [
+              "robot_hand"
+            ]
+          },
+          "priority": 96,
+          "rejected_conditions": [],
+          "rule_id": "manip_dexterous_hand"
+        },
+        {
+          "confidence": 0.72,
+          "evidence": {
+            "link_keywords.tool": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 82,
+          "rejected_conditions": [
+            "manip_tool_changer.any_link_keyword: no tool matches in link"
+          ],
+          "rule_id": "manip_tool_changer"
+        },
+        {
+          "confidence": 0.98,
+          "evidence": {
+            "end_effector_keywords.welder": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 96,
+          "rejected_conditions": [
+            "manip_welding.any_end_effector_keyword: no welder matches in end_effector"
+          ],
+          "rule_id": "manip_welding"
+        },
+        {
+          "confidence": 0.98,
+          "evidence": {
+            "end_effector_keywords.screwdriver": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 96,
+          "rejected_conditions": [
+            "manip_screwing.any_end_effector_keyword: no screwdriver matches in end_effector"
+          ],
+          "rule_id": "manip_screwing"
+        },
+        {
+          "confidence": 0.98,
+          "evidence": {
+            "end_effector_keywords.drill": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 96,
+          "rejected_conditions": [
+            "manip_drilling.any_end_effector_keyword: no drill matches in end_effector"
+          ],
+          "rule_id": "manip_drilling"
+        },
+        {
+          "confidence": 0.98,
+          "evidence": {
+            "end_effector_keywords.cutting_tool": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 96,
+          "rejected_conditions": [
+            "manip_cutting.any_end_effector_keyword: no cutting_tool matches in end_effector"
+          ],
+          "rule_id": "manip_cutting"
+        },
+        {
+          "confidence": 0.95,
+          "evidence": {
+            "end_effector_keywords.paint_gun": {
+              "count": 0,
+              "matches": []
+            },
+            "end_effector_keywords.sprayer": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 94,
+          "rejected_conditions": [
+            "manip_painting.any_end_effector_keyword: no paint_gun matches in end_effector",
+            "manip_painting.any_end_effector_keyword: no sprayer matches in end_effector"
+          ],
+          "rule_id": "manip_painting"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "link_keywords.payload": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "manipulation_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 74,
+          "rejected_conditions": [
+            "manip_transport_payload.any_link_keyword: no payload matches in link"
+          ],
+          "rule_id": "manip_transport_payload"
+        },
+        {
+          "confidence": 0.85,
+          "evidence": {
+            "sensor_keywords.rgb_camera": {
+              "count": 13,
+              "matches": [
+                "CameraBottom camera sensor_element",
+                "CameraBottom_frame",
+                "CameraBottom_optical_frame",
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame",
+                "CameraTop camera sensor_element",
+                "CameraTop_frame",
+                "CameraTop_optical_frame",
+                "camera_controller libgazebo_ros_camera.so",
+                "camera_controller plugin_sensor plugin"
+              ]
+            }
+          },
+          "group": "perception_rules",
+          "matched": true,
+          "outputs": {
+            "can_detect_humans": true,
+            "can_detect_objects": true,
+            "has_visual_perception": true,
+            "perception_modalities": [
+              "2d_vision"
+            ]
+          },
+          "priority": 85,
+          "rejected_conditions": [],
+          "rule_id": "perc_2d_vision"
+        },
+        {
+          "confidence": 0.92,
+          "evidence": {
+            "sensor_keywords.stereo_camera": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "perception_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 92,
+          "rejected_conditions": [
+            "perc_stereo_3d.any_sensor_keyword: no stereo_camera matches in sensor"
+          ],
+          "rule_id": "perc_stereo_3d"
+        },
+        {
+          "confidence": 0.94,
+          "evidence": {
+            "sensor_keywords.depth_camera": {
+              "count": 5,
+              "matches": [
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame"
+              ]
+            },
+            "sensor_keywords.rgbd_camera": {
+              "count": 1,
+              "matches": [
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so"
+              ]
+            }
+          },
+          "group": "perception_rules",
+          "matched": true,
+          "outputs": {
+            "can_detect_obstacles": true,
+            "can_estimate_range": true,
+            "has_depth_perception": true,
+            "has_visual_perception": true,
+            "perception_modalities": [
+              "depth_perception",
+              "3d_vision"
+            ]
+          },
+          "priority": 93,
+          "rejected_conditions": [],
+          "rule_id": "perc_depth_camera"
+        },
+        {
+          "confidence": 0.95,
+          "evidence": {
+            "sensor_keywords.lidar": {
+              "count": 9,
+              "matches": [
+                "ShovelLaser_frame",
+                "SurroundingFrontLaser_device_frame",
+                "SurroundingFrontLaser_frame",
+                "SurroundingLeftLaser_device_frame",
+                "SurroundingLeftLaser_frame",
+                "SurroundingRightLaser_device_frame",
+                "SurroundingRightLaser_frame",
+                "VerticalLeftLaser_frame",
+                "VerticalRightLaser_frame"
+              ]
+            }
+          },
+          "group": "perception_rules",
+          "matched": true,
+          "outputs": {
+            "can_detect_obstacles": true,
+            "can_estimate_range": true,
+            "perception_modalities": [
+              "lidar"
+            ],
+            "supports_localization": true,
+            "supports_slam": true
+          },
+          "priority": 94,
+          "rejected_conditions": [],
+          "rule_id": "perc_lidar"
+        },
+        {
+          "confidence": 0.85,
+          "evidence": {
+            "sensor_keywords.radar": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "perception_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 82,
+          "rejected_conditions": [
+            "perc_radar.any_sensor_keyword: no radar matches in sensor"
+          ],
+          "rule_id": "perc_radar"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "sensor_keywords.sonar": {
+              "count": 4,
+              "matches": [
+                "SonarBack ray sensor_element",
+                "SonarBack_frame",
+                "SonarFront ray sensor_element",
+                "SonarFront_frame"
+              ]
+            },
+            "sensor_keywords.ultrasonic": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "perception_rules",
+          "matched": true,
+          "outputs": {
+            "can_detect_obstacles": true,
+            "can_estimate_range": true,
+            "perception_modalities": [
+              "sonar"
+            ]
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "perc_sonar_ultrasonic"
+        },
+        {
+          "confidence": 0.88,
+          "evidence": {
+            "sensor_keywords.imu": {
+              "count": 3,
+              "matches": [
+                "ImuBaseAccelerometer_frame",
+                "ImuTorsoAccelerometer_frame",
+                "ImuTorsoGyrometer_frame"
+              ]
+            }
+          },
+          "group": "perception_rules",
+          "matched": true,
+          "outputs": {
+            "perception_modalities": [
+              "inertial"
+            ],
+            "supports_localization": true,
+            "supports_state_estimation": true
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "perc_imu"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "sensor_keywords.gps": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "perception_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 86,
+          "rejected_conditions": [
+            "perc_gps.any_sensor_keyword: no gps matches in sensor"
+          ],
+          "rule_id": "perc_gps"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "sensor_keywords.force_torque": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.touch": {
+              "count": 8,
+              "matches": [
+                "BumperB_frame",
+                "BumperFL_frame",
+                "BumperFR_frame",
+                "HeadTouchFront_frame",
+                "HeadTouchMiddle_frame",
+                "HeadTouchRear_frame",
+                "LHandTouchBack_frame",
+                "RHandTouchBack_frame"
+              ]
+            }
+          },
+          "group": "perception_rules",
+          "matched": true,
+          "outputs": {
+            "can_contact_interact": true,
+            "has_force_feedback": true,
+            "has_touch_sensing": true,
+            "perception_modalities": [
+              "force_touch"
+            ]
+          },
+          "priority": 90,
+          "rejected_conditions": [],
+          "rule_id": "perc_force_touch"
+        },
+        {
+          "confidence": 0.93,
+          "evidence": {
+            "sensor_keywords.thermal_camera": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "perception_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 92,
+          "rejected_conditions": [
+            "perc_thermal.any_sensor_keyword: no thermal_camera matches in sensor"
+          ],
+          "rule_id": "perc_thermal"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "sensor_keywords.microphone": {
+              "count": 28,
+              "matches": [
+                "LThumb1 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "LThumb2 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "RThumb1 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "RThumb2 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger11 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger12 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger13 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger21 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger22 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger23 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger31 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger32 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger33 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger41 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger42 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger43 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger11 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger12 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger13 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger21 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger22 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger23 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger31 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger32 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger33 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger41 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger42 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger43 libroboticsgroup_gazebo_mimic_joint_plugin.so"
+              ]
+            }
+          },
+          "group": "perception_rules",
+          "matched": true,
+          "outputs": {
+            "has_audio_input": true,
+            "perception_modalities": [
+              "audio"
+            ],
+            "supports_voice_interaction": true
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "perc_audio"
+        },
+        {
+          "confidence": 0.75,
+          "evidence": {
+            "sensor_keywords.beacon_receiver": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.infrared": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.magnetometer": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.pressure": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "perception_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 76,
+          "rejected_conditions": [
+            "perc_environmental.any_sensor_keyword: no pressure matches in sensor",
+            "perc_environmental.any_sensor_keyword: no magnetometer matches in sensor",
+            "perc_environmental.any_sensor_keyword: no infrared matches in sensor",
+            "perc_environmental.any_sensor_keyword: no beacon_receiver matches in sensor"
+          ],
+          "rule_id": "perc_environmental"
+        },
+        {
+          "confidence": 0.75,
+          "evidence": {
+            "capability.can_move": true
+          },
+          "group": "navigation_rules",
+          "matched": true,
+          "outputs": {
+            "can_follow_path": true,
+            "can_navigate": true
+          },
+          "priority": 75,
+          "rejected_conditions": [],
+          "rule_id": "nav_basic"
+        },
+        {
+          "confidence": 0.88,
+          "evidence": {
+            "capability.can_detect_obstacles": true
+          },
+          "group": "navigation_rules",
+          "matched": true,
+          "outputs": {
+            "supports_obstacle_avoidance": true
+          },
+          "priority": 88,
+          "rejected_conditions": [],
+          "rule_id": "nav_obstacle_avoidance"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "capability.supports_slam": true
+          },
+          "group": "navigation_rules",
+          "matched": true,
+          "outputs": {
+            "supports_autonomous_navigation": true,
+            "supports_map_building": true
+          },
+          "priority": 90,
+          "rejected_conditions": [],
+          "rule_id": "nav_slam"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "capability.can_navigate": true,
+            "sensor_keywords.beacon_receiver": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.depth_camera": {
+              "count": 5,
+              "matches": [
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame"
+              ]
+            },
+            "sensor_keywords.lidar": {
+              "count": 9,
+              "matches": [
+                "ShovelLaser_frame",
+                "SurroundingFrontLaser_device_frame",
+                "SurroundingFrontLaser_frame",
+                "SurroundingLeftLaser_device_frame",
+                "SurroundingLeftLaser_frame",
+                "SurroundingRightLaser_device_frame",
+                "SurroundingRightLaser_frame",
+                "VerticalLeftLaser_frame",
+                "VerticalRightLaser_frame"
+              ]
+            },
+            "sensor_keywords.rgbd_camera": {
+              "count": 1,
+              "matches": [
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so"
+              ]
+            }
+          },
+          "group": "navigation_rules",
+          "matched": true,
+          "outputs": {
+            "can_follow_waypoints": true,
+            "supported_environments": [
+              "indoor"
+            ],
+            "supports_indoor_navigation": true
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "nav_indoor"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "capability.can_navigate": true,
+            "sensor_keywords.gps": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.imu": {
+              "count": 3,
+              "matches": [
+                "ImuBaseAccelerometer_frame",
+                "ImuTorsoAccelerometer_frame",
+                "ImuTorsoGyrometer_frame"
+              ]
+            },
+            "sensor_keywords.lidar": {
+              "count": 9,
+              "matches": [
+                "ShovelLaser_frame",
+                "SurroundingFrontLaser_device_frame",
+                "SurroundingFrontLaser_frame",
+                "SurroundingLeftLaser_device_frame",
+                "SurroundingLeftLaser_frame",
+                "SurroundingRightLaser_device_frame",
+                "SurroundingRightLaser_frame",
+                "VerticalLeftLaser_frame",
+                "VerticalRightLaser_frame"
+              ]
+            },
+            "sensor_keywords.radar": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "navigation_rules",
+          "matched": true,
+          "outputs": {
+            "can_follow_waypoints": true,
+            "supported_environments": [
+              "outdoor"
+            ],
+            "supports_outdoor_navigation": true
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "nav_outdoor"
+        },
+        {
+          "confidence": 0.83,
+          "evidence": {
+            "capability.can_navigate": true,
+            "capability.supports_localization": true
+          },
+          "group": "navigation_rules",
+          "matched": true,
+          "outputs": {
+            "can_follow_waypoints": true
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "nav_waypoints"
+        },
+        {
+          "confidence": 0.76,
+          "evidence": {
+            "capability.can_manipulate": true
+          },
+          "group": "interaction_rules",
+          "matched": true,
+          "outputs": {
+            "can_press_button": true
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "int_button_press"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "capability.can_grasp": true,
+            "capability.can_move": true
+          },
+          "group": "interaction_rules",
+          "matched": true,
+          "outputs": {
+            "can_open_door": true,
+            "can_open_drawer": true
+          },
+          "priority": 86,
+          "rejected_conditions": [],
+          "rule_id": "int_door_opening"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_grasp": true,
+            "capability.has_force_feedback": true
+          },
+          "group": "interaction_rules",
+          "matched": true,
+          "outputs": {
+            "can_handover": true,
+            "human_robot_interaction": true
+          },
+          "priority": 86,
+          "rejected_conditions": [],
+          "rule_id": "int_handover"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "capability.can_detect_humans": true,
+            "capability.can_navigate": true
+          },
+          "group": "interaction_rules",
+          "matched": true,
+          "outputs": {
+            "can_follow_person": true
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "int_person_follow"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "capability.has_audio_input": true
+          },
+          "group": "interaction_rules",
+          "matched": true,
+          "outputs": {
+            "human_robot_interaction": true,
+            "supports_voice_interaction": true
+          },
+          "priority": 86,
+          "rejected_conditions": [],
+          "rule_id": "int_voice"
+        },
+        {
+          "confidence": 0.83,
+          "evidence": {
+            "sensor_keywords.speaker": {
+              "count": 2,
+              "matches": [
+                "LSpeaker_frame",
+                "RSpeaker_frame"
+              ]
+            }
+          },
+          "group": "interaction_rules",
+          "matched": true,
+          "outputs": {
+            "human_robot_interaction": true,
+            "supports_speech_output": true
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "int_speech_output"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "capability.can_exchange_tools": false
+          },
+          "group": "interaction_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 84,
+          "rejected_conditions": [
+            "int_tool_exchange.capability_true: can_exchange_tools is False, expected True"
+          ],
+          "rule_id": "int_tool_exchange"
+        },
+        {
+          "confidence": 0.68,
+          "evidence": {
+            "capability.can_navigate": true,
+            "capability.can_press_button": true
+          },
+          "group": "interaction_rules",
+          "matched": true,
+          "outputs": {
+            "can_use_elevator": true
+          },
+          "priority": 72,
+          "rejected_conditions": [],
+          "rule_id": "int_elevator"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "capability.has_visual_perception": true
+          },
+          "group": "inspection_rules",
+          "matched": true,
+          "outputs": {
+            "can_inspect": true,
+            "inspection_types": [
+              "visual"
+            ]
+          },
+          "priority": 85,
+          "rejected_conditions": [],
+          "rule_id": "insp_visual"
+        },
+        {
+          "confidence": 0.94,
+          "evidence": {
+            "capability.can_thermal_inspect": false
+          },
+          "group": "inspection_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 92,
+          "rejected_conditions": [
+            "insp_thermal.capability_true: can_thermal_inspect is False, expected True"
+          ],
+          "rule_id": "insp_thermal"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "capability.can_inspect": true,
+            "capability.can_move": true
+          },
+          "group": "inspection_rules",
+          "matched": true,
+          "outputs": {
+            "inspection_types": [
+              "infrastructure",
+              "remote"
+            ]
+          },
+          "priority": 80,
+          "rejected_conditions": [],
+          "rule_id": "insp_infrastructure"
+        },
+        {
+          "confidence": 0.74,
+          "evidence": {
+            "capability.can_inspect": true,
+            "insp_warehouse.morphology_in": [
+              "differential_drive",
+              "humanoid",
+              "inspection",
+              "mobile"
+            ]
+          },
+          "group": "inspection_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 76,
+          "rejected_conditions": [
+            "insp_warehouse.morphology_in: no membership match"
+          ],
+          "rule_id": "insp_warehouse"
+        },
+        {
+          "confidence": 0.72,
+          "evidence": {
+            "insp_pipeline.locomotion_in": [
+              "differential_drive",
+              "rolling",
+              "wheeled"
+            ]
+          },
+          "group": "inspection_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 80,
+          "rejected_conditions": [
+            "insp_pipeline.locomotion_in: no membership match"
+          ],
+          "rule_id": "insp_pipeline"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "sensor_keywords.force_torque": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.lidar": {
+              "count": 9,
+              "matches": [
+                "ShovelLaser_frame",
+                "SurroundingFrontLaser_device_frame",
+                "SurroundingFrontLaser_frame",
+                "SurroundingLeftLaser_device_frame",
+                "SurroundingLeftLaser_frame",
+                "SurroundingRightLaser_device_frame",
+                "SurroundingRightLaser_frame",
+                "VerticalLeftLaser_frame",
+                "VerticalRightLaser_frame"
+              ]
+            },
+            "sensor_keywords.rgb_camera": {
+              "count": 13,
+              "matches": [
+                "CameraBottom camera sensor_element",
+                "CameraBottom_frame",
+                "CameraBottom_optical_frame",
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame",
+                "CameraTop camera sensor_element",
+                "CameraTop_frame",
+                "CameraTop_optical_frame",
+                "camera_controller libgazebo_ros_camera.so",
+                "camera_controller plugin_sensor plugin"
+              ]
+            },
+            "sensor_keywords.thermal_camera": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "inspection_rules",
+          "matched": true,
+          "outputs": {
+            "can_monitor_equipment": true,
+            "inspection_types": [
+              "equipment_monitoring"
+            ]
+          },
+          "priority": 78,
+          "rejected_conditions": [],
+          "rule_id": "insp_equipment_monitoring"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "capability.has_audio_input": true
+          },
+          "group": "communication_rules",
+          "matched": true,
+          "outputs": {
+            "communication_modes": [
+              "speech_input"
+            ],
+            "supports_human_robot_communication": true
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "comm_audio_in"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "sensor_keywords.speaker": {
+              "count": 2,
+              "matches": [
+                "LSpeaker_frame",
+                "RSpeaker_frame"
+              ]
+            }
+          },
+          "group": "communication_rules",
+          "matched": true,
+          "outputs": {
+            "communication_modes": [
+              "speech_output"
+            ],
+            "supports_human_robot_communication": true
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "comm_audio_out"
+        },
+        {
+          "confidence": 0.68,
+          "evidence": {
+            "sensor_keywords.gps": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.imu": {
+              "count": 3,
+              "matches": [
+                "ImuBaseAccelerometer_frame",
+                "ImuTorsoAccelerometer_frame",
+                "ImuTorsoGyrometer_frame"
+              ]
+            },
+            "sensor_keywords.lidar": {
+              "count": 9,
+              "matches": [
+                "ShovelLaser_frame",
+                "SurroundingFrontLaser_device_frame",
+                "SurroundingFrontLaser_frame",
+                "SurroundingLeftLaser_device_frame",
+                "SurroundingLeftLaser_frame",
+                "SurroundingRightLaser_device_frame",
+                "SurroundingRightLaser_frame",
+                "VerticalLeftLaser_frame",
+                "VerticalRightLaser_frame"
+              ]
+            },
+            "sensor_keywords.rgb_camera": {
+              "count": 13,
+              "matches": [
+                "CameraBottom camera sensor_element",
+                "CameraBottom_frame",
+                "CameraBottom_optical_frame",
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame",
+                "CameraTop camera sensor_element",
+                "CameraTop_frame",
+                "CameraTop_optical_frame",
+                "camera_controller libgazebo_ros_camera.so",
+                "camera_controller plugin_sensor plugin"
+              ]
+            }
+          },
+          "group": "communication_rules",
+          "matched": true,
+          "outputs": {
+            "communication_modes": [
+              "telemetry"
+            ],
+            "supports_remote_operation": true
+          },
+          "priority": 72,
+          "rejected_conditions": [],
+          "rule_id": "comm_remote_operation"
+        },
+        {
+          "confidence": 0.55,
+          "evidence": {
+            "capability.can_navigate": true
+          },
+          "group": "communication_rules",
+          "matched": true,
+          "outputs": {
+            "supports_fleet_communication": true
+          },
+          "priority": 65,
+          "rejected_conditions": [],
+          "rule_id": "comm_fleet"
+        },
+        {
+          "confidence": 0.76,
+          "evidence": {
+            "capability.supports_indoor_navigation": true
+          },
+          "group": "environment_rules",
+          "matched": true,
+          "outputs": {
+            "supported_environments": [
+              "indoor",
+              "office",
+              "home",
+              "hospital",
+              "factory",
+              "warehouse"
+            ]
+          },
+          "priority": 75,
+          "rejected_conditions": [],
+          "rule_id": "env_indoor"
+        },
+        {
+          "confidence": 0.76,
+          "evidence": {
+            "capability.supports_outdoor_navigation": true
+          },
+          "group": "environment_rules",
+          "matched": true,
+          "outputs": {
+            "supported_environments": [
+              "outdoor",
+              "construction",
+              "agriculture"
+            ]
+          },
+          "priority": 76,
+          "rejected_conditions": [],
+          "rule_id": "env_outdoor"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_assemble": false,
+            "env_factory.morphology_in": [
+              "differential_drive",
+              "humanoid",
+              "inspection",
+              "mobile"
+            ]
+          },
+          "group": "environment_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 82,
+          "rejected_conditions": [
+            "env_factory.morphology_in: no membership match",
+            "env_factory.capability_true: can_assemble is False, expected True"
+          ],
+          "rule_id": "env_factory"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_transport": false
+          },
+          "group": "environment_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 82,
+          "rejected_conditions": [
+            "env_warehouse.capability_true: can_transport is False, expected True"
+          ],
+          "rule_id": "env_warehouse"
+        },
+        {
+          "confidence": 0.94,
+          "evidence": {
+            "capability.can_swim": false
+          },
+          "group": "environment_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 95,
+          "rejected_conditions": [
+            "env_underwater.capability_true: can_swim is False, expected True"
+          ],
+          "rule_id": "env_underwater"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_fly": false
+          },
+          "group": "environment_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 88,
+          "rejected_conditions": [
+            "env_aerial.capability_true: can_fly is False, expected True"
+          ],
+          "rule_id": "env_aerial"
+        },
+        {
+          "confidence": 0.7,
+          "evidence": {
+            "env_confined.locomotion_in": [
+              "differential_drive",
+              "rolling",
+              "wheeled"
+            ]
+          },
+          "group": "environment_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 72,
+          "rejected_conditions": [
+            "env_confined.locomotion_in: no membership match"
+          ],
+          "rule_id": "env_confined"
+        },
+        {
+          "confidence": 0.25,
+          "evidence": {
+            "link_keywords.payload": {
+              "count": 0,
+              "matches": []
+            },
+            "sensor_keywords.imu": {
+              "count": 3,
+              "matches": [
+                "ImuBaseAccelerometer_frame",
+                "ImuTorsoAccelerometer_frame",
+                "ImuTorsoGyrometer_frame"
+              ]
+            }
+          },
+          "group": "environment_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 60,
+          "rejected_conditions": [
+            "env_space_unknown.any_link_keyword: no payload matches in link"
+          ],
+          "rule_id": "env_space_unknown"
+        },
+        {
+          "confidence": 0.7,
+          "evidence": {
+            "capability.supports_remote_operation": true
+          },
+          "group": "autonomy_rules",
+          "matched": true,
+          "outputs": {
+            "autonomy_modes": [
+              "teleoperation"
+            ]
+          },
+          "priority": 60,
+          "rejected_conditions": [],
+          "rule_id": "auto_teleop"
+        },
+        {
+          "confidence": 0.76,
+          "evidence": {
+            "capability.can_follow_path": true,
+            "capability.supports_localization": true
+          },
+          "group": "autonomy_rules",
+          "matched": true,
+          "outputs": {
+            "autonomy_modes": [
+              "semi_autonomous"
+            ]
+          },
+          "priority": 76,
+          "rejected_conditions": [],
+          "rule_id": "auto_semi"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.supports_autonomous_navigation": true,
+            "capability.supports_obstacle_avoidance": true
+          },
+          "group": "autonomy_rules",
+          "matched": true,
+          "outputs": {
+            "autonomy_modes": [
+              "fully_autonomous"
+            ],
+            "can_execute_mission": true
+          },
+          "priority": 84,
+          "rejected_conditions": [],
+          "rule_id": "auto_full"
+        },
+        {
+          "confidence": 0.72,
+          "evidence": {
+            "capability.can_manipulate": true,
+            "capability.human_robot_interaction": true
+          },
+          "group": "autonomy_rules",
+          "matched": true,
+          "outputs": {
+            "autonomy_modes": [
+              "shared_autonomy"
+            ]
+          },
+          "priority": 78,
+          "rejected_conditions": [],
+          "rule_id": "auto_shared"
+        },
+        {
+          "confidence": 0.62,
+          "evidence": {
+            "capability.can_navigate": true,
+            "capability.supports_fleet_communication": true
+          },
+          "group": "autonomy_rules",
+          "matched": true,
+          "outputs": {
+            "fleet_capable": true
+          },
+          "priority": 70,
+          "rejected_conditions": [],
+          "rule_id": "auto_fleet"
+        },
+        {
+          "confidence": 0.7,
+          "evidence": {
+            "link_keywords.battery": {
+              "count": 0,
+              "matches": []
+            },
+            "link_keywords.dock": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "power_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 80,
+          "rejected_conditions": [
+            "power_battery_named.any_link_keyword: no battery matches in link",
+            "power_battery_named.any_link_keyword: no dock matches in link"
+          ],
+          "rule_id": "power_battery_named"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "link_keywords.dock": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "power_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 86,
+          "rejected_conditions": [
+            "power_recharge_dock.any_link_keyword: no dock matches in link"
+          ],
+          "rule_id": "power_recharge_dock"
+        },
+        {
+          "confidence": 0.45,
+          "evidence": {
+            "capability.can_swim": false,
+            "capability.supports_remote_operation": true
+          },
+          "group": "power_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 66,
+          "rejected_conditions": [
+            "power_tethered_underwater.all[0].capability_true: can_swim is False, expected True"
+          ],
+          "rule_id": "power_tethered_underwater"
+        },
+        {
+          "confidence": 0.3,
+          "evidence": {
+            "capability.can_manipulate": true,
+            "capability.can_move": true
+          },
+          "group": "power_rules",
+          "matched": true,
+          "outputs": {
+            "power_source_candidate": "hybrid"
+          },
+          "priority": 50,
+          "rejected_conditions": [],
+          "rule_id": "power_hybrid_mobile_manipulator"
+        },
+        {
+          "confidence": 0.75,
+          "evidence": {
+            "capability.can_navigate": true,
+            "sensor_keywords.depth_camera": {
+              "count": 5,
+              "matches": [
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame"
+              ]
+            },
+            "sensor_keywords.microphone": {
+              "count": 28,
+              "matches": [
+                "LThumb1 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "LThumb2 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "RThumb1 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "RThumb2 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger11 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger12 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger13 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger21 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger22 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger23 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger31 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger32 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger33 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger41 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger42 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_LFinger43 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger11 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger12 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger13 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger21 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger22 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger23 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger31 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger32 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger33 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger41 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger42 libroboticsgroup_gazebo_mimic_joint_plugin.so",
+                "mimic_RFinger43 libroboticsgroup_gazebo_mimic_joint_plugin.so"
+              ]
+            },
+            "sensor_keywords.rgb_camera": {
+              "count": 13,
+              "matches": [
+                "CameraBottom camera sensor_element",
+                "CameraBottom_frame",
+                "CameraBottom_optical_frame",
+                "CameraDepth_frame",
+                "CameraDepth_frame_controller libgazebo_ros_openni_kinect.so",
+                "CameraDepth_frame_controller plugin_sensor plugin",
+                "CameraDepth_frame_sensor depth sensor_element",
+                "CameraDepth_optical_frame",
+                "CameraTop camera sensor_element",
+                "CameraTop_frame",
+                "CameraTop_optical_frame",
+                "camera_controller libgazebo_ros_camera.so",
+                "camera_controller plugin_sensor plugin"
+              ]
+            },
+            "sensor_keywords.speaker": {
+              "count": 2,
+              "matches": [
+                "LSpeaker_frame",
+                "RSpeaker_frame"
+              ]
+            }
+          },
+          "group": "morphology_rules",
+          "matched": true,
+          "outputs": {
+            "robot_types": [
+              "service"
+            ]
+          },
+          "priority": 70,
+          "rejected_conditions": [],
+          "rule_id": "morph_service"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "loc_crawling.morphology_in": [
+              "differential_drive",
+              "humanoid",
+              "inspection",
+              "mobile",
+              "service"
+            ]
+          },
+          "group": "locomotion_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 80,
+          "rejected_conditions": [
+            "loc_crawling.morphology_in: no membership match"
+          ],
+          "rule_id": "loc_crawling"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "capability.can_manipulate": true,
+            "capability.can_move": true
+          },
+          "group": "locomotion_rules",
+          "matched": true,
+          "outputs": {
+            "can_transport": true,
+            "movement_type": [
+              "hybrid_mobile_manipulation"
+            ]
+          },
+          "priority": 89,
+          "rejected_conditions": [],
+          "rule_id": "loc_hybrid_mobile_manipulator"
+        },
+        {
+          "confidence": 0.74,
+          "evidence": {
+            "capability.can_inspect": true,
+            "insp_warehouse.morphology_in": [
+              "differential_drive",
+              "humanoid",
+              "inspection",
+              "mobile",
+              "service"
+            ]
+          },
+          "group": "inspection_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 76,
+          "rejected_conditions": [
+            "insp_warehouse.morphology_in: no membership match"
+          ],
+          "rule_id": "insp_warehouse"
+        },
+        {
+          "confidence": 0.72,
+          "evidence": {
+            "insp_pipeline.locomotion_in": [
+              "differential_drive",
+              "hybrid_mobile_manipulation",
+              "rolling",
+              "wheeled"
+            ]
+          },
+          "group": "inspection_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 80,
+          "rejected_conditions": [
+            "insp_pipeline.locomotion_in: no membership match"
+          ],
+          "rule_id": "insp_pipeline"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_assemble": false,
+            "env_factory.morphology_in": [
+              "differential_drive",
+              "humanoid",
+              "inspection",
+              "mobile",
+              "service"
+            ]
+          },
+          "group": "environment_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 82,
+          "rejected_conditions": [
+            "env_factory.morphology_in: no membership match",
+            "env_factory.capability_true: can_assemble is False, expected True"
+          ],
+          "rule_id": "env_factory"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_transport": true
+          },
+          "group": "environment_rules",
+          "matched": true,
+          "outputs": {
+            "supported_environments": [
+              "warehouse"
+            ]
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "env_warehouse"
+        },
+        {
+          "confidence": 0.7,
+          "evidence": {
+            "env_confined.locomotion_in": [
+              "differential_drive",
+              "hybrid_mobile_manipulation",
+              "rolling",
+              "wheeled"
+            ]
+          },
+          "group": "environment_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 72,
+          "rejected_conditions": [
+            "env_confined.locomotion_in: no membership match"
+          ],
+          "rule_id": "env_confined"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "capability.can_transport": true,
+            "link_keywords.payload": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "morphology_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 78,
+          "rejected_conditions": [
+            "morph_warehouse.any_link_keyword: no payload matches in link"
+          ],
+          "rule_id": "morph_warehouse"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_navigate": true,
+            "capability.can_transport": true
+          },
+          "group": "inference_rules",
+          "matched": true,
+          "outputs": {
+            "high_level_capabilities": [
+              "delivery",
+              "object_transportation"
+            ]
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "inf_delivery"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "capability.can_inspect": true,
+            "capability.can_move": true
+          },
+          "group": "inference_rules",
+          "matched": true,
+          "outputs": {
+            "high_level_capabilities": [
+              "inspection",
+              "monitoring"
+            ]
+          },
+          "priority": 84,
+          "rejected_conditions": [],
+          "rule_id": "inf_inspection"
+        },
+        {
+          "confidence": 0.72,
+          "evidence": {
+            "capability.can_move": true,
+            "end_effector_keywords.polishing_tool": {
+              "count": 0,
+              "matches": []
+            },
+            "end_effector_keywords.sprayer": {
+              "count": 0,
+              "matches": []
+            },
+            "end_effector_keywords.vacuum_gripper": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "inference_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 82,
+          "rejected_conditions": [
+            "inf_cleaning.any_end_effector_keyword: no sprayer matches in end_effector",
+            "inf_cleaning.any_end_effector_keyword: no polishing_tool matches in end_effector",
+            "inf_cleaning.any_end_effector_keyword: no vacuum_gripper matches in end_effector"
+          ],
+          "rule_id": "inf_cleaning"
+        },
+        {
+          "confidence": 0.78,
+          "evidence": {
+            "capability.can_navigate": true,
+            "capability.has_visual_perception": true
+          },
+          "group": "inference_rules",
+          "matched": true,
+          "outputs": {
+            "high_level_capabilities": [
+              "patrolling",
+              "surveillance"
+            ]
+          },
+          "priority": 78,
+          "rejected_conditions": [],
+          "rule_id": "inf_patrolling"
+        },
+        {
+          "confidence": 0.88,
+          "evidence": {
+            "capability.can_assemble": false
+          },
+          "group": "inference_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 88,
+          "rejected_conditions": [
+            "inf_assembly.capability_true: can_assemble is False, expected True"
+          ],
+          "rule_id": "inf_assembly"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "capability.can_disassemble": false
+          },
+          "group": "inference_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 86,
+          "rejected_conditions": [
+            "inf_disassembly.capability_true: can_disassemble is False, expected True"
+          ],
+          "rule_id": "inf_disassembly"
+        },
+        {
+          "confidence": 0.84,
+          "evidence": {
+            "capability.can_pick": true,
+            "capability.can_transport": true
+          },
+          "group": "inference_rules",
+          "matched": true,
+          "outputs": {
+            "high_level_capabilities": [
+              "material_handling",
+              "warehouse_logistics"
+            ]
+          },
+          "priority": 84,
+          "rejected_conditions": [],
+          "rule_id": "inf_material_handling"
+        },
+        {
+          "confidence": 0.8,
+          "evidence": {
+            "capability.can_manipulate": true,
+            "capability.human_robot_interaction": true
+          },
+          "group": "inference_rules",
+          "matched": true,
+          "outputs": {
+            "high_level_capabilities": [
+              "human_assistance"
+            ]
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "inf_human_assistance"
+        },
+        {
+          "confidence": 0.86,
+          "evidence": {
+            "inf_medical_assistance.morphology_in": [
+              "differential_drive",
+              "humanoid",
+              "inspection",
+              "mobile",
+              "service"
+            ]
+          },
+          "group": "inference_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 90,
+          "rejected_conditions": [
+            "inf_medical_assistance.morphology_in: no membership match"
+          ],
+          "rule_id": "inf_medical_assistance"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_navigate": true,
+            "capability.supports_map_building": true
+          },
+          "group": "inference_rules",
+          "matched": true,
+          "outputs": {
+            "high_level_capabilities": [
+              "exploration"
+            ]
+          },
+          "priority": 82,
+          "rejected_conditions": [],
+          "rule_id": "inf_exploration"
+        },
+        {
+          "confidence": 0.76,
+          "evidence": {
+            "capability.can_detect_humans": true,
+            "capability.can_navigate": true
+          },
+          "group": "inference_rules",
+          "matched": true,
+          "outputs": {
+            "high_level_capabilities": [
+              "search_and_rescue"
+            ]
+          },
+          "priority": 78,
+          "rejected_conditions": [],
+          "rule_id": "inf_search_rescue"
+        },
+        {
+          "confidence": 0.68,
+          "evidence": {
+            "contains.supported_environments": [
+              "agriculture"
+            ],
+            "end_effector_keywords.cutting_tool": {
+              "count": 0,
+              "matches": []
+            },
+            "end_effector_keywords.sprayer": {
+              "count": 0,
+              "matches": []
+            }
+          },
+          "group": "inference_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 72,
+          "rejected_conditions": [
+            "inf_agriculture.all[1].any_end_effector_keyword: no sprayer matches in end_effector",
+            "inf_agriculture.all[1].any_end_effector_keyword: no cutting_tool matches in end_effector"
+          ],
+          "rule_id": "inf_agriculture"
+        },
+        {
+          "confidence": 0.82,
+          "evidence": {
+            "capability.can_collaborative_manipulate": false
+          },
+          "group": "inference_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 84,
+          "rejected_conditions": [
+            "inf_collaborative_manipulation.capability_true: can_collaborative_manipulate is False, expected True"
+          ],
+          "rule_id": "inf_collaborative_manipulation"
+        },
+        {
+          "confidence": 0.76,
+          "evidence": {
+            "capability.supports_remote_operation": true
+          },
+          "group": "inference_rules",
+          "matched": true,
+          "outputs": {
+            "high_level_capabilities": [
+              "remote_operation"
+            ]
+          },
+          "priority": 76,
+          "rejected_conditions": [],
+          "rule_id": "inf_remote_operation"
+        },
+        {
+          "confidence": 1.0,
+          "evidence": {
+            "capability.can_manipulate": true
+          },
+          "group": "constraint_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 200,
+          "rejected_conditions": [
+            "con_no_manipulator.capability_false: can_manipulate is True, expected False"
+          ],
+          "rule_id": "con_no_manipulator"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "capability.can_grasp": true,
+            "capability.can_manipulate": true
+          },
+          "group": "constraint_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 190,
+          "rejected_conditions": [
+            "con_no_gripper.capability_false: can_grasp is True, expected False"
+          ],
+          "rule_id": "con_no_gripper"
+        },
+        {
+          "confidence": 0.95,
+          "evidence": {
+            "capability.can_move": true
+          },
+          "group": "constraint_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 200,
+          "rejected_conditions": [
+            "con_fixed_base.capability_false: can_move is True, expected False"
+          ],
+          "rule_id": "con_fixed_base"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "capability.can_walk": false
+          },
+          "group": "constraint_rules",
+          "matched": true,
+          "outputs": {
+            "cannot_climb": true,
+            "cannot_walk": true
+          },
+          "priority": 170,
+          "rejected_conditions": [],
+          "rule_id": "con_no_walking"
+        },
+        {
+          "confidence": 0.98,
+          "evidence": {
+            "capability.can_fly": false
+          },
+          "group": "constraint_rules",
+          "matched": true,
+          "outputs": {
+            "cannot_fly": true
+          },
+          "priority": 180,
+          "rejected_conditions": [],
+          "rule_id": "con_no_flight"
+        },
+        {
+          "confidence": 0.98,
+          "evidence": {
+            "capability.can_swim": false
+          },
+          "group": "constraint_rules",
+          "matched": true,
+          "outputs": {
+            "cannot_swim": true
+          },
+          "priority": 180,
+          "rejected_conditions": [],
+          "rule_id": "con_no_swim"
+        },
+        {
+          "confidence": 0.85,
+          "evidence": {
+            "capability.can_manipulate": true,
+            "capability.can_use_two_hands": false
+          },
+          "group": "constraint_rules",
+          "matched": true,
+          "outputs": {
+            "cannot_use_two_hands": true,
+            "single_arm_only": true
+          },
+          "priority": 160,
+          "rejected_conditions": [],
+          "rule_id": "con_single_arm"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "capability.has_depth_perception": true
+          },
+          "group": "constraint_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 160,
+          "rejected_conditions": [
+            "con_no_depth.capability_false: has_depth_perception is True, expected False"
+          ],
+          "rule_id": "con_no_depth"
+        },
+        {
+          "confidence": 0.9,
+          "evidence": {
+            "capability.has_visual_perception": true
+          },
+          "group": "constraint_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 170,
+          "rejected_conditions": [
+            "con_no_vision.capability_false: has_visual_perception is True, expected False"
+          ],
+          "rule_id": "con_no_vision"
+        },
+        {
+          "confidence": 0.85,
+          "evidence": {
+            "capability.has_audio_input": true
+          },
+          "group": "constraint_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 150,
+          "rejected_conditions": [
+            "con_no_audio.capability_false: has_audio_input is True, expected False"
+          ],
+          "rule_id": "con_no_audio"
+        },
+        {
+          "confidence": 0.85,
+          "evidence": {
+            "capability.has_force_feedback": true
+          },
+          "group": "constraint_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 150,
+          "rejected_conditions": [
+            "con_no_force_feedback.capability_false: has_force_feedback is True, expected False"
+          ],
+          "rule_id": "con_no_force_feedback"
+        },
+        {
+          "confidence": 0.6,
+          "evidence": {
+            "numeric.payload": 0.0
+          },
+          "group": "constraint_rules",
+          "matched": true,
+          "outputs": {
+            "limited_payload": true
+          },
+          "priority": 120,
+          "rejected_conditions": [],
+          "rule_id": "con_limited_payload"
+        },
+        {
+          "confidence": 0.55,
+          "evidence": {
+            "capability.can_manipulate": true,
+            "numeric.manipulator_reach": 0.857303
+          },
+          "group": "constraint_rules",
+          "matched": false,
+          "outputs": {},
+          "priority": 120,
+          "rejected_conditions": [
+            "con_limited_reach.numeric_lte: 0.857303 is not <= 0.0"
+          ],
+          "rule_id": "con_limited_reach"
+        }
+      ]
+    },
+    "Constraints": {
+      "ActiveConstraints": [
+        {
+          "confidence": 0.9,
+          "description": "No legged locomotion",
+          "evidence": {
+            "capability.can_walk": false
+          },
+          "id": "con_no_walking",
+          "outputs": {
+            "cannot_climb": true,
+            "cannot_walk": true
+          },
+          "priority": 170,
+          "severity": "medium"
+        },
+        {
+          "confidence": 0.98,
+          "description": "No flight morphology",
+          "evidence": {
+            "capability.can_fly": false
+          },
+          "id": "con_no_flight",
+          "outputs": {
+            "cannot_fly": true
+          },
+          "priority": 180,
+          "severity": "hard"
+        },
+        {
+          "confidence": 0.98,
+          "description": "No marine propulsion",
+          "evidence": {
+            "capability.can_swim": false
+          },
+          "id": "con_no_swim",
+          "outputs": {
+            "cannot_swim": true
+          },
+          "priority": 180,
+          "severity": "hard"
+        },
+        {
+          "confidence": 0.85,
+          "description": "Single arm only",
+          "evidence": {
+            "capability.can_manipulate": true,
+            "capability.can_use_two_hands": false
+          },
+          "id": "con_single_arm",
+          "outputs": {
+            "cannot_use_two_hands": true,
+            "single_arm_only": true
+          },
+          "priority": 160,
+          "severity": "medium"
+        },
+        {
+          "confidence": 0.6,
+          "description": "Payload is limited or unknown",
+          "evidence": {
+            "numeric.payload": 0.0
+          },
+          "id": "con_limited_payload",
+          "outputs": {
+            "limited_payload": true
+          },
+          "priority": 120,
+          "severity": "low"
+        }
+      ],
+      "ConstraintFlags": {
+        "cannot_climb": true,
+        "cannot_fly": true,
+        "cannot_swim": true,
+        "cannot_use_two_hands": true,
+        "cannot_walk": true,
+        "limited_payload": true,
+        "single_arm_only": true
+      }
+    },
+    "Locomotion": {
+      "can_climb": false,
+      "can_crawl": false,
+      "can_fly": false,
+      "can_hop": false,
+      "can_hover": false,
+      "can_move": true,
+      "can_navigate": true,
+      "can_rotate": true,
+      "can_run": false,
+      "can_strafe": false,
+      "can_swim": false,
+      "can_walk": false,
+      "drive_type": "differential_drive",
+      "movement_type": [
+        "rolling",
+        "hybrid_mobile_manipulation"
+      ],
+      "navigation": {
+        "can_follow_path": true,
+        "can_follow_waypoints": true,
+        "supports_autonomous_navigation": true,
+        "supports_indoor_navigation": true,
+        "supports_outdoor_navigation": true
+      },
+      "supported_locomotion": [
+        "wheeled"
+      ]
+    },
+    "Manipulation": {
+      "can_assemble": false,
+      "can_carry": false,
+      "can_collaborative_manipulate": false,
+      "can_cut": false,
+      "can_dexterous_manipulate": true,
+      "can_disassemble": false,
+      "can_drill": false,
+      "can_exchange_tools": false,
+      "can_grasp": true,
+      "can_hold": false,
+      "can_manipulate": true,
+      "can_paint": false,
+      "can_pick": true,
+      "can_place": true,
+      "can_pull": false,
+      "can_push": false,
+      "can_screw": false,
+      "can_spray": false,
+      "can_transport": true,
+      "can_use_two_hands": false,
+      "can_weld": false,
+      "end_effector_types": [
+        "parallel_gripper",
+        "robot_hand"
+      ],
+      "industrial_processes": [],
+      "manipulator_count": 1,
+      "manipulator_count_min": 0,
+      "manipulator_reach": 0.857303,
+      "object_material_constraints": []
+    },
+    "Metadata": {
+      "deterministic": true,
+      "extractor_version": "1.0.0",
+      "parser": "urdfpy_optional_lxml_xml",
+      "robot_name": "JulietteY20MP",
+      "rules_version": "2.0.0",
+      "source_urdf": "/home/sjk/DISSERTATION/robot_dataset/humanoids/pepper_robot/pepper_description/urdf/pepper1.0_generated_urdf/pepper.urdf",
+      "structural_counts": {
+        "actuators": 20,
+        "controllers": 5,
+        "joints": 82,
+        "links": 83,
+        "plugins": 65,
+        "sensors": 8,
+        "transmissions": 20
+      },
+      "urdfpy": {
+        "loaded": false,
+        "reason": "No module named 'urdfpy'"
+      }
+    },
+    "Morphology": {
+      "candidate_environments": [],
+      "end_effectors": [
+        "BumperB_frame",
+        "BumperFL_frame",
+        "BumperFR_frame",
+        "CameraBottom_optical_frame",
+        "CameraDepth_optical_frame",
+        "CameraTop_optical_frame",
+        "ChestButton_frame",
+        "HeadTouchFront_frame",
+        "HeadTouchMiddle_frame",
+        "HeadTouchRear_frame",
+        "ImuBaseAccelerometer_frame",
+        "ImuTorsoAccelerometer_frame",
+        "ImuTorsoGyrometer_frame",
+        "LFinger13_link",
+        "LFinger23_link",
+        "LFinger33_link",
+        "LFinger43_link",
+        "LHandTouchBack_frame",
+        "LSpeaker_frame",
+        "LThumb2_link",
+        "RFinger13_link",
+        "RFinger23_link",
+        "RFinger33_link",
+        "RFinger43_link",
+        "RHandTouchBack_frame",
+        "RSpeaker_frame",
+        "RThumb2_link",
+        "ShovelLaser_frame",
+        "SonarBack_frame",
+        "SonarFront_frame",
+        "SurroundingFrontLaser_device_frame",
+        "SurroundingFrontLaser_frame",
+        "SurroundingLeftLaser_device_frame",
+        "SurroundingLeftLaser_frame",
+        "SurroundingRightLaser_device_frame",
+        "SurroundingRightLaser_frame",
+        "Tablet_frame",
+        "VerticalLeftLaser_frame",
+        "VerticalRightLaser_frame",
+        "WheelB_link",
+        "WheelFL_link",
+        "WheelFR_link",
+        "base_footprint",
+        "l_gripper",
+        "r_gripper"
+      ],
+      "kinematic_chains": [
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "ChestBoard/Button_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.074381,
+          "links": [
+            "base_link",
+            "torso",
+            "ChestButton_frame"
+          ],
+          "root": "base_link",
+          "tip": "ChestButton_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "Bumper/Back_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.850276,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "BumperB_frame"
+          ],
+          "root": "base_link",
+          "tip": "BumperB_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "Bumper/FrontLeft_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.857303,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "BumperFL_frame"
+          ],
+          "root": "base_link",
+          "tip": "BumperFL_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "Bumper/FrontRight_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.857303,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "BumperFR_frame"
+          ],
+          "root": "base_link",
+          "tip": "BumperFR_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "AccelerometerBase_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.749606,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "ImuBaseAccelerometer_frame"
+          ],
+          "root": "base_link",
+          "tip": "ImuBaseAccelerometer_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/Shovel_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.575146,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "ShovelLaser_frame"
+          ],
+          "root": "base_link",
+          "tip": "ShovelLaser_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "Sonar/Back_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.575481,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "SonarBack_frame"
+          ],
+          "root": "base_link",
+          "tip": "SonarBack_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "Sonar/Front_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.6099,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "SonarFront_frame"
+          ],
+          "root": "base_link",
+          "tip": "SonarFront_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/Front_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.575146,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "SurroundingFrontLaser_device_frame"
+          ],
+          "root": "base_link",
+          "tip": "SurroundingFrontLaser_device_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/Front_projected_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.824695,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "SurroundingFrontLaser_frame"
+          ],
+          "root": "base_link",
+          "tip": "SurroundingFrontLaser_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/Left_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.605024,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "SurroundingLeftLaser_device_frame"
+          ],
+          "root": "base_link",
+          "tip": "SurroundingLeftLaser_device_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/Left_projected_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.832355,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "SurroundingLeftLaser_frame"
+          ],
+          "root": "base_link",
+          "tip": "SurroundingLeftLaser_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/Right_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.605024,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "SurroundingRightLaser_device_frame"
+          ],
+          "root": "base_link",
+          "tip": "SurroundingRightLaser_device_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/Right_projected_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.832355,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "SurroundingRightLaser_frame"
+          ],
+          "root": "base_link",
+          "tip": "SurroundingRightLaser_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/VerticalLeft_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.575146,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "VerticalLeftLaser_frame"
+          ],
+          "root": "base_link",
+          "tip": "VerticalLeftLaser_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "LaserSensor/VerticalRight_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.575146,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "VerticalRightLaser_frame"
+          ],
+          "root": "base_link",
+          "tip": "VerticalRightLaser_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "WheelB"
+          ],
+          "length_estimate": 0.8,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "WheelB_link"
+          ],
+          "root": "base_link",
+          "tip": "WheelB_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "WheelFL"
+          ],
+          "length_estimate": 0.805094,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "WheelFL_link"
+          ],
+          "root": "base_link",
+          "tip": "WheelFL_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "WheelFR"
+          ],
+          "length_estimate": 0.805094,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "WheelFR_link"
+          ],
+          "root": "base_link",
+          "tip": "WheelFR_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HipRoll",
+            "HipPitch",
+            "KneePitch",
+            "base_footprint_joint"
+          ],
+          "length_estimate": 0.82,
+          "links": [
+            "base_link",
+            "torso",
+            "Hip",
+            "Pelvis",
+            "Tibia",
+            "base_footprint"
+          ],
+          "root": "base_link",
+          "tip": "base_footprint"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "Accelerometer_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.036373,
+          "links": [
+            "base_link",
+            "torso",
+            "ImuTorsoAccelerometer_frame"
+          ],
+          "root": "base_link",
+          "tip": "ImuTorsoAccelerometer_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "Gyrometer_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.036261,
+          "links": [
+            "base_link",
+            "torso",
+            "ImuTorsoGyrometer_frame"
+          ],
+          "root": "base_link",
+          "tip": "ImuTorsoGyrometer_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "LShoulderPitch",
+            "LShoulderRoll",
+            "LElbowYaw",
+            "LElbowRoll",
+            "LWristYaw",
+            "LFinger11",
+            "LFinger12",
+            "LFinger13"
+          ],
+          "length_estimate": 0.636509,
+          "links": [
+            "base_link",
+            "torso",
+            "LShoulder",
+            "LBicep",
+            "LElbow",
+            "LForeArm",
+            "l_wrist",
+            "LFinger11_link",
+            "LFinger12_link",
+            "LFinger13_link"
+          ],
+          "root": "base_link",
+          "tip": "LFinger13_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "LShoulderPitch",
+            "LShoulderRoll",
+            "LElbowYaw",
+            "LElbowRoll",
+            "LWristYaw",
+            "LFinger21",
+            "LFinger22",
+            "LFinger23"
+          ],
+          "length_estimate": 0.637863,
+          "links": [
+            "base_link",
+            "torso",
+            "LShoulder",
+            "LBicep",
+            "LElbow",
+            "LForeArm",
+            "l_wrist",
+            "LFinger21_link",
+            "LFinger22_link",
+            "LFinger23_link"
+          ],
+          "root": "base_link",
+          "tip": "LFinger23_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "LShoulderPitch",
+            "LShoulderRoll",
+            "LElbowYaw",
+            "LElbowRoll",
+            "LWristYaw",
+            "LFinger31",
+            "LFinger32",
+            "LFinger33"
+          ],
+          "length_estimate": 0.634351,
+          "links": [
+            "base_link",
+            "torso",
+            "LShoulder",
+            "LBicep",
+            "LElbow",
+            "LForeArm",
+            "l_wrist",
+            "LFinger31_link",
+            "LFinger32_link",
+            "LFinger33_link"
+          ],
+          "root": "base_link",
+          "tip": "LFinger33_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "LShoulderPitch",
+            "LShoulderRoll",
+            "LElbowYaw",
+            "LElbowRoll",
+            "LWristYaw",
+            "LFinger41",
+            "LFinger42",
+            "LFinger43"
+          ],
+          "length_estimate": 0.630245,
+          "links": [
+            "base_link",
+            "torso",
+            "LShoulder",
+            "LBicep",
+            "LElbow",
+            "LForeArm",
+            "l_wrist",
+            "LFinger41_link",
+            "LFinger42_link",
+            "LFinger43_link"
+          ],
+          "root": "base_link",
+          "tip": "LFinger43_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "LShoulderPitch",
+            "LShoulderRoll",
+            "LElbowYaw",
+            "LElbowRoll",
+            "LWristYaw",
+            "LHand/Touch/Back_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.574546,
+          "links": [
+            "base_link",
+            "torso",
+            "LShoulder",
+            "LBicep",
+            "LElbow",
+            "LForeArm",
+            "l_wrist",
+            "LHandTouchBack_frame"
+          ],
+          "root": "base_link",
+          "tip": "LHandTouchBack_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "LShoulderPitch",
+            "LShoulderRoll",
+            "LElbowYaw",
+            "LElbowRoll",
+            "LWristYaw",
+            "LThumb1",
+            "LThumb2"
+          ],
+          "length_estimate": 0.599249,
+          "links": [
+            "base_link",
+            "torso",
+            "LShoulder",
+            "LBicep",
+            "LElbow",
+            "LForeArm",
+            "l_wrist",
+            "LThumb1_link",
+            "LThumb2_link"
+          ],
+          "root": "base_link",
+          "tip": "LThumb2_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "LShoulderPitch",
+            "LShoulderRoll",
+            "LElbowYaw",
+            "LElbowRoll",
+            "LWristYaw",
+            "LHand"
+          ],
+          "length_estimate": 0.539053,
+          "links": [
+            "base_link",
+            "torso",
+            "LShoulder",
+            "LBicep",
+            "LElbow",
+            "LForeArm",
+            "l_wrist",
+            "l_gripper"
+          ],
+          "root": "base_link",
+          "tip": "l_gripper"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HeadYaw",
+            "HeadPitch",
+            "CameraBottom_sensor_fixedjoint",
+            "CameraBottom_optical_frame_fixedjoint"
+          ],
+          "length_estimate": 0.285426,
+          "links": [
+            "base_link",
+            "torso",
+            "Neck",
+            "Head",
+            "CameraBottom_frame",
+            "CameraBottom_optical_frame"
+          ],
+          "root": "base_link",
+          "tip": "CameraBottom_optical_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HeadYaw",
+            "HeadPitch",
+            "CameraDepth_sensor_fixedjoint",
+            "CameraDepth_optical_frame_fixedjoint"
+          ],
+          "length_estimate": 0.309808,
+          "links": [
+            "base_link",
+            "torso",
+            "Neck",
+            "Head",
+            "CameraDepth_frame",
+            "CameraDepth_optical_frame"
+          ],
+          "root": "base_link",
+          "tip": "CameraDepth_optical_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HeadYaw",
+            "HeadPitch",
+            "CameraTop_sensor_fixedjoint",
+            "CameraTop_optical_frame_fixedjoint"
+          ],
+          "length_estimate": 0.358257,
+          "links": [
+            "base_link",
+            "torso",
+            "Neck",
+            "Head",
+            "CameraTop_frame",
+            "CameraTop_optical_frame"
+          ],
+          "root": "base_link",
+          "tip": "CameraTop_optical_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HeadYaw",
+            "HeadPitch",
+            "Head/Touch/Front_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.388626,
+          "links": [
+            "base_link",
+            "torso",
+            "Neck",
+            "Head",
+            "HeadTouchFront_frame"
+          ],
+          "root": "base_link",
+          "tip": "HeadTouchFront_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HeadYaw",
+            "HeadPitch",
+            "Head/Touch/Middle_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.390037,
+          "links": [
+            "base_link",
+            "torso",
+            "Neck",
+            "Head",
+            "HeadTouchMiddle_frame"
+          ],
+          "root": "base_link",
+          "tip": "HeadTouchMiddle_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HeadYaw",
+            "HeadPitch",
+            "Head/Touch/Rear_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.387307,
+          "links": [
+            "base_link",
+            "torso",
+            "Neck",
+            "Head",
+            "HeadTouchRear_frame"
+          ],
+          "root": "base_link",
+          "tip": "HeadTouchRear_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HeadYaw",
+            "HeadPitch",
+            "SpeakerLeft_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.174098,
+          "links": [
+            "base_link",
+            "torso",
+            "Neck",
+            "Head",
+            "LSpeaker_frame"
+          ],
+          "root": "base_link",
+          "tip": "LSpeaker_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "HeadYaw",
+            "HeadPitch",
+            "SpeakerRight_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.174098,
+          "links": [
+            "base_link",
+            "torso",
+            "Neck",
+            "Head",
+            "RSpeaker_frame"
+          ],
+          "root": "base_link",
+          "tip": "RSpeaker_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "RShoulderPitch",
+            "RShoulderRoll",
+            "RElbowYaw",
+            "RElbowRoll",
+            "RWristYaw",
+            "RFinger11",
+            "RFinger12",
+            "RFinger13"
+          ],
+          "length_estimate": 0.636509,
+          "links": [
+            "base_link",
+            "torso",
+            "RShoulder",
+            "RBicep",
+            "RElbow",
+            "RForeArm",
+            "r_wrist",
+            "RFinger11_link",
+            "RFinger12_link",
+            "RFinger13_link"
+          ],
+          "root": "base_link",
+          "tip": "RFinger13_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "RShoulderPitch",
+            "RShoulderRoll",
+            "RElbowYaw",
+            "RElbowRoll",
+            "RWristYaw",
+            "RFinger21",
+            "RFinger22",
+            "RFinger23"
+          ],
+          "length_estimate": 0.637863,
+          "links": [
+            "base_link",
+            "torso",
+            "RShoulder",
+            "RBicep",
+            "RElbow",
+            "RForeArm",
+            "r_wrist",
+            "RFinger21_link",
+            "RFinger22_link",
+            "RFinger23_link"
+          ],
+          "root": "base_link",
+          "tip": "RFinger23_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "RShoulderPitch",
+            "RShoulderRoll",
+            "RElbowYaw",
+            "RElbowRoll",
+            "RWristYaw",
+            "RFinger31",
+            "RFinger32",
+            "RFinger33"
+          ],
+          "length_estimate": 0.634351,
+          "links": [
+            "base_link",
+            "torso",
+            "RShoulder",
+            "RBicep",
+            "RElbow",
+            "RForeArm",
+            "r_wrist",
+            "RFinger31_link",
+            "RFinger32_link",
+            "RFinger33_link"
+          ],
+          "root": "base_link",
+          "tip": "RFinger33_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "RShoulderPitch",
+            "RShoulderRoll",
+            "RElbowYaw",
+            "RElbowRoll",
+            "RWristYaw",
+            "RFinger41",
+            "RFinger42",
+            "RFinger43"
+          ],
+          "length_estimate": 0.630245,
+          "links": [
+            "base_link",
+            "torso",
+            "RShoulder",
+            "RBicep",
+            "RElbow",
+            "RForeArm",
+            "r_wrist",
+            "RFinger41_link",
+            "RFinger42_link",
+            "RFinger43_link"
+          ],
+          "root": "base_link",
+          "tip": "RFinger43_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "RShoulderPitch",
+            "RShoulderRoll",
+            "RElbowYaw",
+            "RElbowRoll",
+            "RWristYaw",
+            "RHand/Touch/Back_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.574546,
+          "links": [
+            "base_link",
+            "torso",
+            "RShoulder",
+            "RBicep",
+            "RElbow",
+            "RForeArm",
+            "r_wrist",
+            "RHandTouchBack_frame"
+          ],
+          "root": "base_link",
+          "tip": "RHandTouchBack_frame"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "RShoulderPitch",
+            "RShoulderRoll",
+            "RElbowYaw",
+            "RElbowRoll",
+            "RWristYaw",
+            "RThumb1",
+            "RThumb2"
+          ],
+          "length_estimate": 0.599249,
+          "links": [
+            "base_link",
+            "torso",
+            "RShoulder",
+            "RBicep",
+            "RElbow",
+            "RForeArm",
+            "r_wrist",
+            "RThumb1_link",
+            "RThumb2_link"
+          ],
+          "root": "base_link",
+          "tip": "RThumb2_link"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "RShoulderPitch",
+            "RShoulderRoll",
+            "RElbowYaw",
+            "RElbowRoll",
+            "RWristYaw",
+            "RHand"
+          ],
+          "length_estimate": 0.539053,
+          "links": [
+            "base_link",
+            "torso",
+            "RShoulder",
+            "RBicep",
+            "RElbow",
+            "RForeArm",
+            "r_wrist",
+            "r_gripper"
+          ],
+          "root": "base_link",
+          "tip": "r_gripper"
+        },
+        {
+          "joints": [
+            "base_link_fixedjoint",
+            "Tablet_sensor_fixedjoint"
+          ],
+          "length_estimate": 0.104646,
+          "links": [
+            "base_link",
+            "torso",
+            "Tablet_frame"
+          ],
+          "root": "base_link",
+          "tip": "Tablet_frame"
+        }
+      ],
+      "primary_morphology": "humanoid",
+      "robot_types": [
+        "mobile",
+        "differential_drive",
+        "humanoid",
+        "inspection",
+        "service"
+      ],
+      "structure": {
+        "leaf_links": [
+          "BumperB_frame",
+          "BumperFL_frame",
+          "BumperFR_frame",
+          "CameraBottom_optical_frame",
+          "CameraDepth_optical_frame",
+          "CameraTop_optical_frame",
+          "ChestButton_frame",
+          "HeadTouchFront_frame",
+          "HeadTouchMiddle_frame",
+          "HeadTouchRear_frame",
+          "ImuBaseAccelerometer_frame",
+          "ImuTorsoAccelerometer_frame",
+          "ImuTorsoGyrometer_frame",
+          "LFinger13_link",
+          "LFinger23_link",
+          "LFinger33_link",
+          "LFinger43_link",
+          "LHandTouchBack_frame",
+          "LSpeaker_frame",
+          "LThumb2_link",
+          "RFinger13_link",
+          "RFinger23_link",
+          "RFinger33_link",
+          "RFinger43_link",
+          "RHandTouchBack_frame",
+          "RSpeaker_frame",
+          "RThumb2_link",
+          "ShovelLaser_frame",
+          "SonarBack_frame",
+          "SonarFront_frame",
+          "SurroundingFrontLaser_device_frame",
+          "SurroundingFrontLaser_frame",
+          "SurroundingLeftLaser_device_frame",
+          "SurroundingLeftLaser_frame",
+          "SurroundingRightLaser_device_frame",
+          "SurroundingRightLaser_frame",
+          "Tablet_frame",
+          "VerticalLeftLaser_frame",
+          "VerticalRightLaser_frame",
+          "WheelB_link",
+          "WheelFL_link",
+          "WheelFR_link",
+          "base_footprint",
+          "l_gripper",
+          "r_gripper"
+        ],
+        "materials": [],
+        "root_links": [
+          "base_link"
+        ]
+      },
+      "supported_environments": [
+        "indoor",
+        "outdoor",
+        "office",
+        "home",
+        "hospital",
+        "factory",
+        "warehouse",
+        "construction",
+        "agriculture"
+      ]
+    },
+    "Perception": {
+      "can_detect_humans": true,
+      "can_detect_objects": true,
+      "can_detect_obstacles": true,
+      "can_estimate_range": true,
+      "communication_modes": [
+        "speech_input",
+        "speech_output",
+        "telemetry"
+      ],
+      "environmental_sensing": false,
+      "has_audio_input": true,
+      "has_depth_perception": true,
+      "has_force_feedback": true,
+      "has_touch_sensing": true,
+      "has_visual_perception": true,
+      "inspection_types": [
+        "visual",
+        "infrastructure",
+        "remote",
+        "equipment_monitoring"
+      ],
+      "perception_modalities": [
+        "2d_vision",
+        "depth_perception",
+        "3d_vision",
+        "lidar",
+        "sonar",
+        "inertial",
+        "force_touch",
+        "audio"
+      ],
+      "supports_human_robot_communication": true,
+      "supports_localization": true,
+      "supports_map_building": true,
+      "supports_obstacle_avoidance": true,
+      "supports_remote_operation": true,
+      "supports_slam": true,
+      "supports_speech_output": true,
+      "supports_state_estimation": true,
+      "supports_voice_interaction": true
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import streamlit as st
 from pathlib import Path
+import json
 
-from model_infer import generate_plan
+from model_infer import generate_prompt, infer_model
 
 # from model_manager import search_models
 
@@ -67,11 +68,11 @@ with col1:
 
     selected_model = st.selectbox(
         "Available Models",
-        ["Pick a model", "Qwen/Qwen3.5-4B", "Meta-Llama-3.1-8B-Instruct", "Meta-Llama-3.2-3B-Instruct", "Gemma 3 4B Instruct", "Gemma 4 E4B", "Gemma 4 12B", "Qwen 3 8B Instruct", "Ornith1.0 9B" ],
+        ["Pick a model", "Qwen/Qwen3.5-9B", "deepseek-ai/DeepSeek-R1-Distill-Llama-8B", "google/gemma-4-e4b", "microsoft/Phi-4-reasoning-plus", "NovaSky-AI/Sky-T1-7B-Preview" ],
         label_visibility="collapsed"
     )
 
-Robots = get_json_files("./outputs")
+Robots = get_json_files("./robots")
 Robots.insert(0, "Pick a Robot")
 
 with col2:
@@ -103,7 +104,8 @@ with col4:
 task = st.text_area(
     "Natural Language Task",
     placeholder="Enter a natural language instruction...",
-    height=120,
+    label_visibility="collapsed",
+    height=50
 )
 
 # Generate Button
@@ -119,16 +121,15 @@ st.divider()
 # RESPONSE SECTION
 # --------------------------------------------------
 
-# st.subheader("LLM Response")
+if generate:
 
-response_container = st.container(height=450)
+    if not task:
+        st.warning("Please enter a natural language task.")
 
-with response_container:
+    else:
 
-    # validate other inouts also
-    
-    if generate and task:
-        response = generate_plan(
+        # Generate only once
+        prompt = generate_prompt(
             model_name=selected_model,
             robot_name=robot,
             world_name=world,
@@ -136,22 +137,71 @@ with response_container:
             task=task,
         )
 
-        st.code(
-            response,
-            language="text",
-        )
-    elif generate:
-        st.markdown("NO TASK DEFINED")
+        # --------------------------------------------------
+        # Prompt
+        # --------------------------------------------------
+        # with st.expander("📝 Prompt", expanded=False):
+        #     st.code(prompt, language="json")
 
-    else:
 
-        st.markdown(
-"""
+        # # --------------------------------------------------
+        # # Generated Plan
+        # # --------------------------------------------------
+        # with st.expander("🤖 Generated Plan", expanded=False):
+
+        #     response = infer_model()
+        #     st.code(response, language="json")
+
+        prompt_placeholder = st.empty()
+
+        with prompt_placeholder.container():
+            with st.expander("📝 Prompt", expanded=True):
+                st.code(prompt, language="json")
+
+        st.spinner("Generating plan...")
+        
+        response = infer_model()
+        with st.expander("🤖 Generated Plan", expanded=False):
+
+            st.code(response, language="json")
+
+
+
+
+
+        # --------------------------------------------------
+        # Evaluation
+        # --------------------------------------------------
+        with st.expander("📊 Evaluation", expanded=True):
+
+            st.info("Evaluation results will appear here.")
+
+            # Example metrics
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.metric("Task Success", "92%")
+
+            with col2:
+                st.metric("Logical Score", "9.3 / 10")
+
+            with col3:
+                st.metric("Capability Match", "95%")
+
+            st.divider()
+
+            # Placeholder for future graphs
+            st.write("Graphs will be displayed here.")
+
+else:
+
+    st.markdown(
+        """
 ### No response generated.
 
 Enter a natural language task and click **Generate Plan**.
 """
-        )
+    )
 
 # --------------------------------------------------
 # Footer

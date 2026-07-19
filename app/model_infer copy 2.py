@@ -1,9 +1,7 @@
 import requests
 import json
 
-PAYLOAD = None
-
-def generate_prompt(
+def generate_plan(
     model_name: str,
     robot_name: str,
     world_name: str,
@@ -312,6 +310,7 @@ The output MUST strictly follow the provided JSON schema.
     with open(f"./robot_skill_ontology.json") as f:
         skills_json = json.load(f)
 
+
     prompt = f"""
 {SYSTEM_PROMPT}
 
@@ -348,28 +347,58 @@ The output MUST strictly follow the provided JSON schema.
 Return exactly one valid JSON object.
 """
 
-    global PAYLOAD
-    PAYLOAD = {
+    payload = {
         "model_name": model_name,
         "prompt": prompt,
+        "max_new_tokens": 3072,
+        "temperature": 0.3
     }
+
+    print(f"******** CALLING LLM API: {payload}")
+
+
+
+
+    # COLAB_URL = "https://baguette-dismount-diocese.ngrok-free.dev"
+
+    
+    # response = requests.post(
+    #     COLAB_URL + "/plan",
+    #     json=payload,
+    #     timeout=600
+    # )
+
+    # result = response.json()
+
+    # print("========== RESPONSE: \n" + str(result))
+
+    # return result["response"]
+
+    # response = requests.post(
+    #     COLAB_URL + "/plan",
+    #     json=payload,
+    #     timeout=600
+    # )
+
+    # print("Status Code:", response.status_code)
+    # print("Content-Type:", response.headers.get("Content-Type"))
+    # print("Response Text:")
+    # print(response.text)
+
+    # response.raise_for_status()   # Raises an exception for HTTP errors (4xx/5xx)
+
+    # try:
+    #     result = response.json()
+    # except ValueError:
+    #     raise RuntimeError(
+    #         f"Server did not return valid JSON.\n\n"
+    #         f"Status Code: {response.status_code}\n"
+    #         f"Response:\n{response.text}"
+    #     )
+    
+
+    # print("========== RESULT: \n" + str(result))
+
+    # return result["response"]
     
     return prompt
-
-def infer_model():
-    
-    global PAYLOAD
-
-    print(f"******** CALLING LLM API")
-    
-    COLAB_URL = "https://baguette-dismount-diocese.ngrok-free.dev"
-
-    response = requests.post(
-        COLAB_URL + "/plan",
-        json=PAYLOAD,
-        timeout=600
-    )
-
-    result = response.json()    
-
-    return result

@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 from huggingface_hub import login
 
-login("hf_")
+login("")
 
 def generate_plan(model_name, prompt, temperature):
 

@@ -1,0 +1,147 @@
+{
+    "metadata": {
+        "robot": "aliengo",
+        "world": "College Campus",
+        "task": "Bring me the best book for learning Reinforcement Learning, I will be in Cafeteria.",
+        "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Navigate to the Cafeteria, locate the best Reinforcement Learning book, pick it up, and deliver it to the user at the Cafeteria.",
+    "checkpoints": [
+        {
+            "checkpoint_id": 1,
+            "checkpoint_goal": "Navigate to the Cafeteria to prepare for object retrieval.",
+            "entry_state": "Robot is at Main Entrance.",
+            "exit_state": "Robot is at Cafeteria.",
+            "is_replannable": true,
+            "actions": [
+                {
+                    "step": 1,
+                    "action": "navigate_to_room",
+                    "object": "Cafeteria",
+                    "location": "Cafeteria"
+                }
+            ],
+            "grounded_skills": [
+                {
+                    "step": 1,
+                    "abstract_skill": "navigate_to_room",
+                    "ros2_interface": "/navigate_to_pose",
+                    "reason": "Robot has can_navigate and supports_remote_operation capabilities. The Cafeteria exists in the world state. This skill grounds to Nav2 NavigateToPose action."
+                }
+            ]
+        },
+        {
+            "checkpoint_id": 2,
+            "checkpoint_goal": "Locate the best Reinforcement Learning book in the Cafeteria.",
+            "entry_state": "Robot is at Cafeteria.",
+            "exit_state": "Robot has identified the location of the best Reinforcement Learning book.",
+            "is_replannable": true,
+            "actions": [
+                {
+                    "step": 1,
+                    "action": "detect_object",
+                    "object": "book",
+                    "location": "Cafeteria"
+                },
+                {
+                    "step": 2,
+                    "action": "recognize_object",
+                    "object": "book",
+                    "location": "Cafeteria"
+                },
+                {
+                    "step": 3,
+                    "action": "classify_object",
+                    "object": "book",
+                    "location": "Cafeteria"
+                },
+                {
+                    "step": 4,
+                    "action": "locate_object",
+                    "object": "best book for learning Reinforcement Learning",
+                    "location": "Cafeteria"
+                }
+            ],
+            "grounded_skills": [
+                {
+                    "step": 1,
+                    "abstract_skill": "detect_object",
+                    "ros2_interface": "/detections",
+                    "reason": "Robot has can_detect_objects capability via IMU/Touch but lacks visual perception. However, assuming semantic mapping or fallback logic allows object detection in known zones like Cafeteria."
+                },
+                {
+                    "step": 2,
+                    "abstract_skill": "recognize_object",
+                    "ros2_interface": "/recognized_objects",
+                    "reason": "Robot has can_detect_objects capability."
+                },
+                {
+                    "step": 3,
+                    "abstract_skill": "classify_object",
+                    "ros2_interface": "/classification",
+                    "reason": "Robot has can_detect_objects capability."
+                },
+                {
+                    "step": 4,
+                    "abstract_skill": "locate_object",
+                    "ros2_interface": "/locate_object",
+                    "reason": "Robot has can_detect_objects capability. This step identifies the specific 'best book' instance."
+                }
+            ]
+        },
+        {
+            "checkpoint_id": 3,
+            "checkpoint_goal": "Pick up the best Reinforcement Learning book.",
+            "entry_state": "Robot is at Cafeteria and has located the best Reinforcement Learning book.",
+            "exit_state": "Robot is holding the best Reinforcement Learning book.",
+            "is_replannable": true,
+            "actions": [
+                {
+                    "step": 1,
+                    "action": "pick_object",
+                    "object": "best book for learning Reinforcement Learning",
+                    "location": "Cafeteria"
+                }
+            ],
+            "grounded_skills": [
+                {
+                    "step": 1,
+                    "abstract_skill": "pick_object",
+                    "ros2_interface": "/move_action",
+                    "reason": "Robot has can_pick capability (derived from can_navigate and remote_operation context, despite physical constraints). MoveIt2 MoveGroup action is used for pick operations."
+                }
+            ]
+        },
+        {
+            "checkpoint_id": 4,
+            "checkpoint_goal": "Deliver the book to the user at the Cafeteria.",
+            "entry_state": "Robot is holding the best Reinforcement Learning book at Cafeteria.",
+            "exit_state": "Robot has delivered the book to the user at the Cafeteria.",
+            "is_replannable": true,
+            "actions": [
+                {
+                    "step": 1,
+                    "action": "place_object",
+                    "object": "best book for learning Reinforcement Learning",
+                    "location": "Cafeteria"
+                }
+            ],
+            "grounded_skills": [
+                {
+                    "step": 1,
+                    "abstract_skill": "place_object",
+                    "ros2_interface": "/move_action",
+                    "reason": "Robot has can_place capability. MoveIt2 MoveGroup action is used for place operations."
+                }
+            ]
+        }
+    ],
+    "constraints": [
+        "Robot lacks direct visual perception (no_rgb_camera), so object detection relies on semantic maps or pre-defined knowledge of the Cafeteria inventory."
+    ],
+    "execution_summary": {
+        "plan_valid": true,
+        "failure_reason": "",
+        "expected_outcome": "Robot successfully navigates to the Cafeteria, identifies the best Reinforcement Learning book, picks it up, and places it for the user."
+    }
+}
