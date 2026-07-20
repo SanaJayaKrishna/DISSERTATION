@@ -1,311 +1,434 @@
 {
   "environment": {
-    "name": "Community Playground",
-    "type": "Outdoor",
-    "category": "Recreational",
-    "description": "A public community playground with age-appropriate play equipment, sports courts, walking paths, shaded seating, sanitation facilities and safety infrastructure for children, families and visitors.",
+    "name": "Playground & Sports Complex",
+    "type": "Mixed (Indoor + Outdoor)",
+    "category": "Sports and Recreation",
+    "description": "A large multi-purpose playground and sports complex consisting of outdoor fields, indoor courts, recreational zones, fitness facilities, equipment storage, spectator areas and maintenance facilities.",
     "purpose": [
-      "Children's Play",
-      "Physical Recreation",
       "Sports",
-      "Community Gathering",
-      "Outdoor Exercise",
-      "Family Leisure"
+      "Fitness",
+      "Recreation",
+      "Training",
+      "Community Events"
     ],
     "occupancy": {
-      "typical_people": 80,
-      "maximum_people": 250
+      "typical_people": 100,
+      "maximum_people": 500
     }
   },
 
   "zones": [
-    { "name": "Entrance Zone" },
-    { "name": "Toddler Play Zone" },
-    { "name": "Children's Play Zone" },
-    { "name": "Adventure Play Zone" },
-    { "name": "Swing Zone" },
-    { "name": "Sports Zone" },
-    { "name": "Open Lawn Zone" },
-    { "name": "Walking Path Zone" },
-    { "name": "Picnic and Seating Zone" },
-    { "name": "Fitness Zone" },
-    { "name": "Service Zone" }
+    {
+      "name": "Outdoor Sports Area"
+    },
+    {
+      "name": "Indoor Sports Arena"
+    },
+    {
+      "name": "Athletics Track"
+    },
+    {
+      "name": "Children Play Area"
+    },
+    {
+      "name": "Gym & Fitness Area"
+    },
+    {
+      "name": "Equipment Storage"
+    },
+    {
+      "name": "Administration Area"
+    },
+    {
+      "name": "Medical Room"
+    },
+    {
+      "name": "Parking Area"
+    },
+    {
+      "name": "Food Court"
+    },
+    {
+      "name": "Spectator Seating"
+    }
   ],
 
   "rooms": [
-    { "id": "main_gate", "name": "Main Entrance Gate" },
-    { "id": "information_board", "name": "Information Board Area" },
-    { "id": "toddler_play_area", "name": "Toddler Play Area" },
-    { "id": "play_structure", "name": "Children's Play Structure" },
-    { "id": "swing_area", "name": "Swing Area" },
-    { "id": "sandpit", "name": "Sand Play Area" },
-    { "id": "climbing_area", "name": "Climbing Area" },
-    { "id": "sports_court", "name": "Multi-Sport Court" },
-    { "id": "open_lawn", "name": "Open Lawn" },
-    { "id": "outdoor_gym", "name": "Outdoor Fitness Area" },
-    { "id": "walking_track", "name": "Walking Track" },
-    { "id": "picnic_area", "name": "Picnic Area" },
-    { "id": "gazebo", "name": "Gazebo" },
-    { "id": "restroom", "name": "Public Restroom" },
-    { "id": "first_aid", "name": "First Aid Station" },
-    { "id": "maintenance_store", "name": "Maintenance Store" }
+    {
+      "id": "football_ground",
+      "name": "Football Ground"
+    },
+    {
+      "id": "cricket_ground",
+      "name": "Cricket Ground"
+    },
+    {
+      "id": "basketball_court",
+      "name": "Basketball Court"
+    },
+    {
+      "id": "volleyball_court",
+      "name": "Volleyball Court"
+    },
+    {
+      "id": "badminton_court",
+      "name": "Badminton Court"
+    },
+    {
+      "id": "tennis_court",
+      "name": "Tennis Court"
+    },
+    {
+      "id": "table_tennis_room",
+      "name": "Table Tennis Hall"
+    },
+    {
+      "id": "swimming_pool",
+      "name": "Swimming Pool"
+    },
+    {
+      "id": "running_track",
+      "name": "Athletics Track"
+    },
+    {
+      "id": "gymnasium",
+      "name": "Gymnasium"
+    },
+    {
+      "id": "children_play_area",
+      "name": "Children Play Area"
+    },
+    {
+      "id": "equipment_room",
+      "name": "Equipment Storage Room"
+    },
+    {
+      "id": "locker_room",
+      "name": "Locker Room"
+    },
+    {
+      "id": "medical_room",
+      "name": "Medical Room"
+    },
+    {
+      "id": "canteen",
+      "name": "Food Court"
+    },
+    {
+      "id": "admin_office",
+      "name": "Administration Office"
+    },
+    {
+      "id": "parking",
+      "name": "Parking Area"
+    }
   ],
 
   "static_structures": [
-    "Perimeter Fence",
-    "Entrance Gates",
-    "Accessible Pathways",
-    "Rubber Safety Surface",
-    "Sand Safety Surface",
-    "Concrete Sports Court",
-    "Walking Track",
-    "Drainage Channels",
-    "Shade Sails",
-    "Gazebo",
-    "Benches",
-    "Picnic Tables",
-    "Drinking Water Fountain",
-    "Restroom Building",
-    "Waste Bins",
-    "Park Lighting",
+    "Boundary Wall",
+    "Main Entrance",
+    "Emergency Exit",
+    "Flood Lights",
+    "Score Boards",
+    "Bleachers",
+    "Covered Seating",
+    "Walking Path",
+    "Garden",
+    "Trees",
+    "Water Supply",
+    "Electrical Supply",
+    "Drainage System",
     "CCTV Cameras",
-    "Signage"
+    "Public Announcement System"
   ],
 
-  "play_equipment": {
-    "toddler_play_area": [
-      "Toddler Slide",
-      "Spring Rider",
-      "Playhouse",
-      "Activity Panel",
-      "Mini Climber",
-      "Toddler Swing",
-      "Soft Play Blocks"
-    ],
-    "children_play_structure": [
-      "Slide",
-      "Spiral Slide",
+  "outdoor_facilities": [
+    "Football Ground",
+    "Cricket Ground",
+    "Basketball Court",
+    "Volleyball Court",
+    "Tennis Court",
+    "Athletics Track",
+    "Long Jump Pit",
+    "High Jump Area",
+    "Shot Put Area",
+    "Open Gym",
+    "Cycling Track",
+    "Jogging Track"
+  ],
+
+  "indoor_facilities": [
+    "Badminton Courts",
+    "Table Tennis Hall",
+    "Indoor Basketball Court",
+    "Indoor Volleyball Court",
+    "Gymnasium",
+    "Yoga Hall",
+    "Martial Arts Hall",
+    "Chess Room",
+    "Carrom Room",
+    "Conference Room"
+  ],
+
+  "children_play_area": {
+    "equipment": [
+      "Slides",
+      "Swings",
+      "Seesaw",
+      "Climbing Frame",
       "Monkey Bars",
-      "Climbing Net",
-      "Balance Beam",
-      "Tunnel",
-      "Fireman's Pole",
-      "Play Bridge",
-      "Stepping Stones"
-    ],
-    "swing_area": [
-      "Belt Swings",
-      "Bucket Swings",
-      "Inclusive Swing",
-      "Tire Swing",
-      "Swing Frame"
-    ],
-    "sand_play_area": [
-      "Sandpit",
-      "Sand Table",
-      "Sand Shovels",
-      "Buckets",
-      "Sand Moulds"
-    ],
-    "adventure_play_area": [
-      "Climbing Wall",
-      "Rope Pyramid",
-      "Zip Line",
-      "Cargo Net",
-      "Obstacle Course",
-      "Rope Bridge"
+      "Merry-Go-Round",
+      "Spring Riders",
+      "Sand Pit",
+      "Play Tunnel",
+      "Rope Climbing Net"
     ]
   },
 
-  "sports_facilities": {
-    "court_equipment": [
-      "Basketball Hoops",
-      "Football Goals",
-      "Badminton Net",
-      "Volleyball Net",
-      "Court Markings",
+  "gymnasium": {
+    "equipment": [
+      "Treadmill",
+      "Exercise Bike",
+      "Elliptical Trainer",
+      "Rowing Machine",
+      "Bench Press",
+      "Squat Rack",
+      "Smith Machine",
+      "Cable Machine",
+      "Pull-up Bar",
+      "Leg Press",
+      "Dumbbells",
+      "Barbells",
+      "Weight Plates",
+      "Medicine Balls",
+      "Resistance Bands",
+      "Yoga Mats",
+      "Exercise Balls",
+      "Foam Rollers"
+    ]
+  },
+
+  "sports_equipment": {
+    "football": [
+      "Football",
+      "Goal Posts",
+      "Corner Flags",
+      "Training Cones",
+      "Whistle"
+    ],
+
+    "cricket": [
+      "Cricket Bat",
+      "Cricket Ball",
+      "Stumps",
+      "Bails",
+      "Batting Pads",
+      "Helmet",
+      "Gloves"
+    ],
+
+    "basketball": [
+      "Basketball",
+      "Basketball Hoop",
       "Scoreboard"
     ],
-    "sports_equipment": [
-      "Football",
-      "Basketball",
+
+    "volleyball": [
       "Volleyball",
-      "Badminton Rackets",
-      "Shuttlecocks",
-      "Cones",
-      "Jump Ropes",
-      "Frisbee"
+      "Net",
+      "Posts"
     ],
-    "fitness_equipment": [
-      "Pull-Up Bars",
-      "Parallel Bars",
-      "Elliptical Trainer",
-      "Air Walker",
-      "Stationary Cycle",
-      "Sit-Up Bench",
-      "Stretching Station"
+
+    "badminton": [
+      "Badminton Racket",
+      "Shuttlecock",
+      "Net"
+    ],
+
+    "tennis": [
+      "Tennis Racket",
+      "Tennis Ball",
+      "Net"
+    ],
+
+    "table_tennis": [
+      "Table Tennis Table",
+      "Paddle",
+      "Table Tennis Ball",
+      "Net"
+    ],
+
+    "athletics": [
+      "Relay Baton",
+      "Starting Blocks",
+      "Hurdles",
+      "Javelin",
+      "Discus",
+      "Shot Put",
+      "Measuring Tape"
+    ],
+
+    "swimming": [
+      "Kick Board",
+      "Swimming Float",
+      "Lane Divider",
+      "Life Jacket",
+      "Rescue Tube"
     ]
   },
 
-  "amenities": {
-    "seating": [
-      "Park Benches",
-      "Picnic Tables",
-      "Gazebo Seating",
-      "Accessible Seating"
-    ],
-    "visitor_services": [
-      "Information Board",
-      "Rules Sign",
-      "Drinking Water Fountain",
-      "Bottle Refill Station",
-      "Public Restrooms",
-      "Baby Changing Station",
-      "Bicycle Rack",
-      "Lost and Found Box"
-    ],
-    "maintenance": [
-      "Maintenance Cart",
-      "Leaf Rake",
-      "Broom",
-      "Litter Picker",
-      "Hose Pipe",
-      "Lawn Mower",
-      "Tool Cabinet"
-    ]
-  },
-
-  "natural_features": [
-    "Shade Trees",
-    "Grass Lawn",
-    "Flower Beds",
-    "Shrubs",
-    "Native Plants",
-    "Butterfly Garden"
+  "maintenance_equipment": [
+    "Lawn Mower",
+    "Leaf Blower",
+    "Garden Hose",
+    "Cleaning Cart",
+    "Brooms",
+    "Mops",
+    "Buckets",
+    "Pressure Washer",
+    "Tool Box",
+    "Wheelbarrow"
   ],
 
   "utilities": [
     "Electricity",
-    "Outdoor Lighting",
     "Running Water",
-    "Drainage",
+    "Flood Lighting",
+    "WiFi",
     "Public Address System",
-    "CCTV Monitoring",
-    "WiFi Hotspot",
-    "Irrigation System"
+    "Drinking Water",
+    "Fire Hydrant",
+    "Drainage",
+    "Security System",
+    "First Aid Station"
   ],
 
   "safety_equipment": [
+    "Fire Extinguisher",
     "First Aid Kit",
     "AED",
-    "Fire Extinguisher",
-    "Emergency Contact Sign",
-    "Emergency Exit Gate",
-    "CCTV Cameras",
-    "Safety Surfacing",
-    "Playground Rules Sign",
-    "Hand Sanitizer Station",
-    "Lost Child Meeting Point"
+    "Lifebuoy",
+    "Emergency Exit Sign",
+    "Emergency Alarm",
+    "Safety Cones",
+    "CCTV",
+    "Emergency Lights"
   ],
 
   "interaction_rules": [
     {
-      "object": "Entrance Gate",
-      "actions": ["Open", "Close", "Lock", "Unlock"]
+      "object": "Equipment Locker",
+      "actions": [
+        "Open",
+        "Close",
+        "Store",
+        "Retrieve"
+      ]
     },
     {
-      "object": "Play Equipment",
-      "actions": ["Inspect", "Clean", "Repair", "MarkOutOfService"]
+      "object": "Gym Equipment",
+      "actions": [
+        "Use",
+        "Adjust",
+        "Clean"
+      ]
     },
     {
-      "object": "Swing",
-      "actions": ["Inspect", "Clean", "Repair"]
+      "object": "Swimming Pool Gate",
+      "actions": [
+        "Open",
+        "Close",
+        "Lock",
+        "Unlock"
+      ]
     },
     {
-      "object": "Sports Equipment",
-      "actions": ["Retrieve", "Distribute", "Collect", "Store"]
+      "object": "Football Goal",
+      "actions": [
+        "Inspect",
+        "Maintain"
+      ]
     },
     {
-      "object": "Waste Bin",
-      "actions": ["DisposeWaste", "Empty", "Clean"]
+      "object": "Court Lights",
+      "actions": [
+        "TurnOn",
+        "TurnOff"
+      ]
     },
     {
-      "object": "Drinking Water Fountain",
-      "actions": ["DispenseWater", "Clean", "Inspect"]
-    },
-    {
-      "object": "First Aid Kit",
-      "actions": ["Retrieve", "Restock", "Inspect"]
-    },
-    {
-      "object": "Maintenance Store",
-      "actions": ["Open", "Close", "Store", "Retrieve", "Lock"]
+      "object": "Scoreboard",
+      "actions": [
+        "TurnOn",
+        "TurnOff",
+        "UpdateScore"
+      ]
     }
   ],
 
   "semantic_relations": [
     {
-      "subject": "Toddler Play Area",
-      "relation": "Contains",
-      "object": "Toddler Slide"
+      "subject": "Football",
+      "relation": "UsedIn",
+      "object": "Football Ground"
     },
     {
-      "subject": "Swing Area",
-      "relation": "Contains",
-      "object": "Belt Swings"
+      "subject": "Cricket Bat",
+      "relation": "StoredIn",
+      "object": "Equipment Storage Room"
     },
     {
-      "subject": "Sandpit",
+      "subject": "Basketball",
+      "relation": "UsedIn",
+      "object": "Basketball Court"
+    },
+    {
+      "subject": "Badminton Racket",
+      "relation": "UsedIn",
+      "object": "Badminton Court"
+    },
+    {
+      "subject": "Tennis Ball",
+      "relation": "UsedIn",
+      "object": "Tennis Court"
+    },
+    {
+      "subject": "Gym Equipment",
       "relation": "LocatedIn",
-      "object": "Sand Play Area"
+      "object": "Gymnasium"
     },
     {
-      "subject": "Climbing Wall",
+      "subject": "Slides",
       "relation": "LocatedIn",
-      "object": "Adventure Play Zone"
+      "object": "Children Play Area"
     },
     {
-      "subject": "Basketball Hoops",
+      "subject": "Life Jacket",
+      "relation": "StoredNear",
+      "object": "Swimming Pool"
+    },
+    {
+      "subject": "First Aid Kit",
       "relation": "LocatedIn",
-      "object": "Multi-Sport Court"
+      "object": "Medical Room"
     },
     {
-      "subject": "Outdoor Fitness Area",
-      "relation": "Contains",
-      "object": "Fitness Equipment"
-    },
-    {
-      "subject": "Park Benches",
-      "relation": "LocatedNear",
-      "object": "Play Areas"
-    },
-    {
-      "subject": "Drinking Water Fountain",
-      "relation": "LocatedNear",
-      "object": "Picnic Area"
-    },
-    {
-      "subject": "First Aid Station",
-      "relation": "LocatedNear",
-      "object": "Main Entrance Gate"
-    },
-    {
-      "subject": "Maintenance Store",
-      "relation": "Stores",
-      "object": "Maintenance Equipment"
+      "subject": "Sports Equipment",
+      "relation": "StoredIn",
+      "object": "Equipment Storage Room"
     }
   ],
 
   "default_robot_spawn_locations": [
-    "Main Entrance Gate",
-    "Information Board Area",
-    "Toddler Play Area",
-    "Children's Play Structure",
-    "Swing Area",
-    "Multi-Sport Court",
-    "Outdoor Fitness Area",
-    "Picnic Area",
-    "First Aid Station",
-    "Maintenance Store"
+    "Main Entrance",
+    "Central Walkway",
+    "Football Ground Entrance",
+    "Indoor Arena Entrance",
+    "Equipment Storage Room",
+    "Gymnasium Entrance",
+    "Swimming Pool Entrance",
+    "Medical Room",
+    "Administration Office",
+    "Parking Area"
   ]
 }
