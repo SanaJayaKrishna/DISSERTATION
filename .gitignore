@@ -3,3 +3,4 @@ __pycache__
 .codex
 .vscode
 .streamlit
+*.pkl
