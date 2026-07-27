@@ -409,25 +409,43 @@ if generate:
 
         response = {
   "metadata": {
-    "robot": "JulietteY20MP",
-    "world": "Apartment",
-    "task": "Inspect every room for open windows, open doors, and lights left on, correct each issue, and return to the living room.",
+    "robot": "H2",
+    "world": "Kitchen",
+    "task": "Retrieve the bread, butter, and jam from the refrigerator and pantry, place them on the dining table, and return the unused items to their original locations.",
     "model": "Capability-Aware Robot Task Planner"
   },
-  "goal": "Inspect all rooms (Living Room, Kitchen, Master Bedroom, Bedroom 2, Bedroom 3, Attached Bathroom, Common Bathroom, Balcony, Corridor) for open windows, open doors, and lights left on; close any open doors/windows and turn off any lights; then navigate back to the Living Room.",
+  "goal": "Retrieve bread, butter, and jam from storage (refrigerator/pantry), place them on the dining table, and return unused items to their original locations.",
   "checkpoints": [
     {
       "checkpoint_id": 1,
-      "checkpoint_goal": "Navigate to the Living Room to begin the inspection sequence.",
-      "entry_state": "Robot is at an unspecified initial location (e.g., Main Entrance).",
-      "exit_state": "Robot is located at the Living Room.",
+      "checkpoint_goal": "Navigate to the refrigerator and locate the bread inside.",
+      "entry_state": "Robot is at the Kitchen Entrance. Bread is stored in the Refrigerator.",
+      "exit_state": "Robot is at the Refrigerator. Bread is located and identified.",
       "is_replannable": True,
       "actions": [
         {
           "step": 1,
           "action": "navigate_to_room",
-          "object": "Living Room",
-          "location": "Living Room"
+          "object": "",
+          "location": "Refrigerator"
+        },
+        {
+          "step": 2,
+          "action": "detect_object",
+          "object": "Bread",
+          "location": "Refrigerator"
+        },
+        {
+          "step": 3,
+          "action": "recognize_object",
+          "object": "Bread",
+          "location": "Refrigerator"
+        },
+        {
+          "step": 4,
+          "action": "estimate_object_pose",
+          "object": "Bread",
+          "location": "Refrigerator"
         }
       ],
       "grounded_skills": [
@@ -435,141 +453,123 @@ if generate:
           "step": 1,
           "abstract_skill": "navigate_to_room",
           "ros2_interface": "/navigate_to_pose",
-          "reason": "The robot requires navigation to the Living Room to start the inspection. The skill 'navigate_to_room' maps to the Nav2 'navigate_to_pose' action, which is supported by the robot's capabilities (can_navigate, supports_indoor_navigation)."
+          "reason": "Robot must navigate to the Refrigerator room to access the bread."
+        },
+        {
+          "step": 2,
+          "abstract_skill": "detect_object",
+          "ros2_interface": "/detections",
+          "reason": "Robot must detect the bread object within the refrigerator scene."
+        },
+        {
+          "step": 3,
+          "abstract_skill": "recognize_object",
+          "ros2_interface": "/recognized_objects",
+          "reason": "Robot must recognize the detected object as 'Bread'."
+        },
+        {
+          "step": 4,
+          "abstract_skill": "estimate_object_pose",
+          "ros2_interface": "/object_poses",
+          "reason": "Robot must estimate the 3D pose of the bread to enable grasping."
         }
       ]
     },
     {
       "checkpoint_id": 2,
-      "checkpoint_goal": "Inspect the Living Room for open windows, open doors, and lights left on, and correct any issues found.",
-      "entry_state": "Robot is at the Living Room.",
-      "exit_state": "Robot is at the Living Room; all windows, doors, and lights in the Living Room are in their correct state (closed/off).",
+      "checkpoint_goal": "Retrieve the bread from the refrigerator and place it on the dining table.",
+      "entry_state": "Robot is at the Refrigerator. Bread is located and its pose is estimated.",
+      "exit_state": "Robot is at the Dining Table. Bread is placed on the table.",
       "is_replannable": True,
       "actions": [
         {
           "step": 1,
-          "action": "detect_door",
-          "object": "Door",
-          "location": "Living Room"
+          "action": "pick_object",
+          "object": "Bread",
+          "location": "Refrigerator"
         },
         {
           "step": 2,
-          "action": "detect_window",
-          "object": "Window",
-          "location": "Living Room"
+          "action": "navigate_to_object",
+          "object": "Dining Table",
+          "location": "Dining Table"
         },
         {
           "step": 3,
-          "action": "detect_light",
-          "object": "Light",
-          "location": "Living Room"
-        },
-        {
-          "step": 4,
-          "action": "close_door",
-          "object": "Door",
-          "location": "Living Room"
-        },
-        {
-          "step": 5,
-          "action": "close_window",
-          "object": "Window",
-          "location": "Living Room"
-        },
-        {
-          "step": 6,
-          "action": "turn_off_light",
-          "object": "Light",
-          "location": "Living Room"
+          "action": "place_object",
+          "object": "Bread",
+          "location": "Dining Table"
         }
       ],
       "grounded_skills": [
         {
           "step": 1,
-          "abstract_skill": "detect_door",
-          "ros2_interface": "/doors",
-          "reason": "Detects doors in the current view to identify potential open doors."
+          "abstract_skill": "pick_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must grasp the bread from the refrigerator."
         },
         {
           "step": 2,
-          "abstract_skill": "detect_window",
-          "ros2_interface": "/windows",
-          "reason": "Detects windows in the current view to identify potential open windows."
+          "abstract_skill": "navigate_to_object",
+          "ros2_interface": "/navigate_to_pose",
+          "reason": "Robot must navigate to the Dining Table to place the bread."
         },
         {
           "step": 3,
-          "abstract_skill": "detect_light",
-          "ros2_interface": "/lights",
-          "reason": "Detects lights in the current view to identify potential lights left on."
-        },
-        {
-          "step": 4,
-          "abstract_skill": "close_door",
-          "ros2_interface": "/close_door",
-          "reason": "Closes any detected open doors."
-        },
-        {
-          "step": 5,
-          "abstract_skill": "close_window",
-          "ros2_interface": "/close_window",
-          "reason": "Closes any detected open windows."
-        },
-        {
-          "step": 6,
-          "abstract_skill": "turn_off_light",
-          "ros2_interface": "/turn_off_light",
-          "reason": "Turns off any detected lights left on."
+          "abstract_skill": "place_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must place the bread on the dining table."
         }
       ]
     },
     {
       "checkpoint_id": 3,
-      "checkpoint_goal": "Inspect the Kitchen for open windows, open doors, and lights left on, and correct any issues found.",
-      "entry_state": "Robot is at the Living Room.",
-      "exit_state": "Robot is at the Kitchen; all windows, doors, and lights in the Kitchen are in their correct state (closed/off).",
+      "checkpoint_goal": "Navigate to the pantry and locate the butter and jam inside.",
+      "entry_state": "Robot is at the Dining Table. Bread is placed on the table.",
+      "exit_state": "Robot is at the Pantry. Butter and Jam are located and identified.",
       "is_replannable": True,
       "actions": [
         {
           "step": 1,
           "action": "navigate_to_room",
-          "object": "Kitchen",
-          "location": "Kitchen"
+          "object": "",
+          "location": "Pantry"
         },
         {
           "step": 2,
-          "action": "detect_door",
-          "object": "Door",
-          "location": "Kitchen"
+          "action": "detect_object",
+          "object": "Butter",
+          "location": "Pantry"
         },
         {
           "step": 3,
-          "action": "detect_window",
-          "object": "Window",
-          "location": "Kitchen"
+          "action": "recognize_object",
+          "object": "Butter",
+          "location": "Pantry"
         },
         {
           "step": 4,
-          "action": "detect_light",
-          "object": "Light",
-          "location": "Kitchen"
+          "action": "estimate_object_pose",
+          "object": "Butter",
+          "location": "Pantry"
         },
         {
           "step": 5,
-          "action": "close_door",
-          "object": "Door",
-          "location": "Kitchen"
+          "action": "detect_object",
+          "object": "Jam",
+          "location": "Pantry"
         },
         {
           "step": 6,
-          "action": "close_window",
-          "object": "Window",
-          "location": "Kitchen"
+          "action": "recognize_object",
+          "object": "Jam",
+          "location": "Pantry"
         },
         {
           "step": 7,
-          "action": "turn_off_light",
-          "object": "Light",
-          "location": "Kitchen"
+          "action": "estimate_object_pose",
+          "object": "Jam",
+          "location": "Pantry"
         }
       ],
       "grounded_skills": [
@@ -577,206 +577,202 @@ if generate:
           "step": 1,
           "abstract_skill": "navigate_to_room",
           "ros2_interface": "/navigate_to_pose",
-          "reason": "Navigates to the Kitchen."
+          "reason": "Robot must navigate to the Pantry room to access butter and jam."
         },
         {
           "step": 2,
-          "abstract_skill": "detect_door",
-          "ros2_interface": "/doors",
-          "reason": "Detects doors in the Kitchen."
+          "abstract_skill": "detect_object",
+          "ros2_interface": "/detections",
+          "reason": "Robot must detect the butter object within the pantry scene."
         },
         {
           "step": 3,
-          "abstract_skill": "detect_window",
-          "ros2_interface": "/windows",
-          "reason": "Detects windows in the Kitchen."
+          "abstract_skill": "recognize_object",
+          "ros2_interface": "/recognized_objects",
+          "reason": "Robot must recognize the detected object as 'Butter'."
         },
         {
           "step": 4,
-          "abstract_skill": "detect_light",
-          "ros2_interface": "/lights",
-          "reason": "Detects lights in the Kitchen."
+          "abstract_skill": "estimate_object_pose",
+          "ros2_interface": "/object_poses",
+          "reason": "Robot must estimate the 3D pose of the butter to enable grasping."
         },
         {
           "step": 5,
-          "abstract_skill": "close_door",
-          "ros2_interface": "/close_door",
-          "reason": "Closes any detected open doors in the Kitchen."
+          "abstract_skill": "detect_object",
+          "ros2_interface": "/detections",
+          "reason": "Robot must detect the jam object within the pantry scene."
         },
         {
           "step": 6,
-          "abstract_skill": "close_window",
-          "ros2_interface": "/close_window",
-          "reason": "Closes any detected open windows in the Kitchen."
+          "abstract_skill": "recognize_object",
+          "ros2_interface": "/recognized_objects",
+          "reason": "Robot must recognize the detected object as 'Jam'."
         },
         {
           "step": 7,
-          "abstract_skill": "turn_off_light",
-          "ros2_interface": "/turn_off_light",
-          "reason": "Turns off any detected lights left on in the Kitchen."
+          "abstract_skill": "estimate_object_pose",
+          "ros2_interface": "/object_poses",
+          "reason": "Robot must estimate the 3D pose of the jam to enable grasping."
         }
       ]
     },
     {
       "checkpoint_id": 4,
-      "checkpoint_goal": "Inspect the Master Bedroom for open windows, open doors, and lights left on, and correct any issues found.",
-      "entry_state": "Robot is at the Kitchen.",
-      "exit_state": "Robot is at the Master Bedroom; all windows, doors, and lights in the Master Bedroom are in their correct state (closed/off).",
+      "checkpoint_goal": "Retrieve the butter and jam from the pantry and place them on the dining table.",
+      "entry_state": "Robot is at the Pantry. Butter and Jam are located and their poses are estimated.",
+      "exit_state": "Robot is at the Dining Table. Bread, Butter, and Jam are all placed on the table.",
       "is_replannable": True,
       "actions": [
         {
           "step": 1,
-          "action": "navigate_to_room",
-          "object": "Master Bedroom",
-          "location": "Master Bedroom"
+          "action": "pick_object",
+          "object": "Butter",
+          "location": "Pantry"
         },
         {
           "step": 2,
-          "action": "detect_door",
-          "object": "Door",
-          "location": "Master Bedroom"
+          "action": "pick_object",
+          "object": "Jam",
+          "location": "Pantry"
         },
         {
           "step": 3,
-          "action": "detect_window",
-          "object": "Window",
-          "location": "Master Bedroom"
+          "action": "navigate_to_object",
+          "object": "Dining Table",
+          "location": "Dining Table"
         },
         {
           "step": 4,
-          "action": "detect_light",
-          "object": "Light",
-          "location": "Master Bedroom"
+          "action": "place_object",
+          "object": "Butter",
+          "location": "Dining Table"
         },
         {
           "step": 5,
-          "action": "close_door",
-          "object": "Door",
-          "location": "Master Bedroom"
-        },
-        {
-          "step": 6,
-          "action": "close_window",
-          "object": "Window",
-          "location": "Master Bedroom"
-        },
-        {
-          "step": 7,
-          "action": "turn_off_light",
-          "object": "Light",
-          "location": "Master Bedroom"
+          "action": "place_object",
+          "object": "Jam",
+          "location": "Dining Table"
         }
       ],
       "grounded_skills": [
         {
           "step": 1,
-          "abstract_skill": "navigate_to_room",
-          "ros2_interface": "/navigate_to_pose",
-          "reason": "Navigates to the Master Bedroom."
+          "abstract_skill": "pick_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must grasp the butter from the pantry."
         },
         {
           "step": 2,
-          "abstract_skill": "detect_door",
-          "ros2_interface": "/doors",
-          "reason": "Detects doors in the Master Bedroom."
+          "abstract_skill": "pick_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must grasp the jam from the pantry."
         },
         {
           "step": 3,
-          "abstract_skill": "detect_window",
-          "ros2_interface": "/windows",
-          "reason": "Detects windows in the Master Bedroom."
+          "abstract_skill": "navigate_to_object",
+          "ros2_interface": "/navigate_to_pose",
+          "reason": "Robot must navigate to the Dining Table to place the items."
         },
         {
           "step": 4,
-          "abstract_skill": "detect_light",
-          "ros2_interface": "/lights",
-          "reason": "Detects lights in the Master Bedroom."
+          "abstract_skill": "place_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must place the butter on the dining table."
         },
         {
           "step": 5,
-          "abstract_skill": "close_door",
-          "ros2_interface": "/close_door",
-          "reason": "Closes any detected open doors in the Master Bedroom."
-        },
-        {
-          "step": 6,
-          "abstract_skill": "close_window",
-          "ros2_interface": "/close_window",
-          "reason": "Closes any detected open windows in the Master Bedroom."
-        },
-        {
-          "step": 7,
-          "abstract_skill": "turn_off_light",
-          "ros2_interface": "/turn_off_light",
-          "reason": "Turns off any detected lights left on in the Master Bedroom."
+          "abstract_skill": "place_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must place the jam on the dining table."
         }
       ]
     },
     {
       "checkpoint_id": 5,
-      "checkpoint_goal": "Inspect Bedroom 2 for open windows, open doors, and lights left on, and correct any issues found.",
-      "entry_state": "Robot is at the Master Bedroom.",
-      "exit_state": "Robot is at Bedroom 2; all windows, doors, and lights in Bedroom 2 are in their correct state (closed/off).",
+      "checkpoint_goal": "Return the unused items (butter and jam) to their original locations.",
+      "entry_state": "Robot is at the Dining Table. Bread, Butter, and Jam are all placed on the table.",
+      "exit_state": "Robot is at the Pantry. Bread is on the table; Butter and Jam are returned to the pantry.",
       "is_replannable": True,
       "actions": [
         {
           "step": 1,
-          "action": "navigate_to_room",
-          "object": "Bedroom 2",
-          "location": "Bedroom 2"
+          "action": "pick_object",
+          "object": "Butter",
+          "location": "Dining Table"
         },
         {
           "step": 2,
-          "action": "detect_door",
-          "object": "Door",
-          "location": "Bedroom 2"
+          "action": "navigate_to_object",
+          "object": "Pantry",
+          "location": "Pantry"
         },
         {
           "step": 3,
-          "action": "detect_window",
-          "object": "Window",
-          "location": "Bedroom 2"
+          "action": "place_object",
+          "object": "Butter",
+          "location": "Pantry"
         },
         {
           "step": 4,
-          "action": "detect_light",
-          "object": "Light",
-          "location": "Bedroom 2"
+          "action": "pick_object",
+          "object": "Jam",
+          "location": "Dining Table"
         },
         {
           "step": 5,
-          "action": "close_door",
-          "object": "Door",
-          "location": "Bedroom 2"
+          "action": "navigate_to_object",
+          "object": "Pantry",
+          "location": "Pantry"
         },
         {
           "step": 6,
-          "action": "close_window",
-          "object": "Window",
-          "location": "Bedroom 2"
-        },
-        {
-          "step": 7,
-          "action": "turn_off_light",
-          "object": "Light",
-          "location": "Bedroom 2"
+          "action": "place_object",
+          "object": "Jam",
+          "location": "Pantry"
         }
       ],
       "grounded_skills": [
         {
           "step": 1,
-          "abstract_skill": "navigate_to_room",
-          "ros2_interface": "/navigate_to_pose",
-          "reason": "Navigates to Bedroom 2."
+          "abstract_skill": "pick_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must pick up the butter from the dining table."
         },
         {
           "step": 2,
-          "abstract_skill": "detect_door",
-          "ros2_interface": "/doors",
-          "reason": "Detects"
-        }]
-    }]
+          "abstract_skill": "navigate_to_object",
+          "ros2_interface": "/navigate_to_pose",
+          "reason": "Robot must navigate to the pantry to return the butter."
+        },
+        {
+          "step": 3,
+          "abstract_skill": "place_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must place the butter back in the pantry."
+        },
+        {
+          "step": 4,
+          "abstract_skill": "pick_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must pick up the jam from the dining table."
+        },
+        {
+          "step": 5,
+          "abstract_skill": "navigate_to_object",
+          "ros2_interface": "/navigate_to_pose",
+          "reason": "Robot must navigate to the pantry to return the jam."
+        },
+        {
+          "step": 6,
+          "abstract_skill": "place_object",
+          "ros2_interface": "/move_action",
+          "reason": "Robot must place the jam back in the pantry."
         }
+      ]
+    }
+  ]}
+
 
         from json import dumps
 

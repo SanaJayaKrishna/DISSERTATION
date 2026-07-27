@@ -1,0 +1,2850 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "H2",
+      "world": "Kitchen",
+      "task": "Retrieve the bread, butter, and jam from the refrigerator and pantry, place them on the dining table, and return the unused items to their original locations.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Retrieve bread, butter, and jam from storage (refrigerator/pantry), place them on the dining table, and return unused items to their original locations.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the refrigerator and locate the bread inside.",
+        "entry_state": "Robot is at the Kitchen Entrance. Bread is stored in the Refrigerator.",
+        "exit_state": "Robot is at the Refrigerator. Bread is located and identified.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Refrigerator"
+          },
+          {
+            "step": 2,
+            "action": "detect_object",
+            "object": "Bread",
+            "location": "Refrigerator"
+          },
+          {
+            "step": 3,
+            "action": "recognize_object",
+            "object": "Bread",
+            "location": "Refrigerator"
+          },
+          {
+            "step": 4,
+            "action": "estimate_object_pose",
+            "object": "Bread",
+            "location": "Refrigerator"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the Refrigerator room to access the bread."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot must detect the bread object within the refrigerator scene."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "recognize_object",
+            "ros2_interface": "/recognized_objects",
+            "reason": "Robot must recognize the detected object as 'Bread'."
+          },
+          {
+            "step": 4,
+            "abstract_skill": "estimate_object_pose",
+            "ros2_interface": "/object_poses",
+            "reason": "Robot must estimate the 3D pose of the bread to enable grasping."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Retrieve the bread from the refrigerator and place it on the dining table.",
+        "entry_state": "Robot is at the Refrigerator. Bread is located and its pose is estimated.",
+        "exit_state": "Robot is at the Dining Table. Bread is placed on the table.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "Bread",
+            "location": "Refrigerator"
+          },
+          {
+            "step": 2,
+            "action": "navigate_to_object",
+            "object": "Dining Table",
+            "location": "Dining Table"
+          },
+          {
+            "step": 3,
+            "action": "place_object",
+            "object": "Bread",
+            "location": "Dining Table"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must grasp the bread from the refrigerator."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the Dining Table to place the bread."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must place the bread on the dining table."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Navigate to the pantry and locate the butter and jam inside.",
+        "entry_state": "Robot is at the Dining Table. Bread is placed on the table.",
+        "exit_state": "Robot is at the Pantry. Butter and Jam are located and identified.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Pantry"
+          },
+          {
+            "step": 2,
+            "action": "detect_object",
+            "object": "Butter",
+            "location": "Pantry"
+          },
+          {
+            "step": 3,
+            "action": "recognize_object",
+            "object": "Butter",
+            "location": "Pantry"
+          },
+          {
+            "step": 4,
+            "action": "estimate_object_pose",
+            "object": "Butter",
+            "location": "Pantry"
+          },
+          {
+            "step": 5,
+            "action": "detect_object",
+            "object": "Jam",
+            "location": "Pantry"
+          },
+          {
+            "step": 6,
+            "action": "recognize_object",
+            "object": "Jam",
+            "location": "Pantry"
+          },
+          {
+            "step": 7,
+            "action": "estimate_object_pose",
+            "object": "Jam",
+            "location": "Pantry"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the Pantry room to access butter and jam."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot must detect the butter object within the pantry scene."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "recognize_object",
+            "ros2_interface": "/recognized_objects",
+            "reason": "Robot must recognize the detected object as 'Butter'."
+          },
+          {
+            "step": 4,
+            "abstract_skill": "estimate_object_pose",
+            "ros2_interface": "/object_poses",
+            "reason": "Robot must estimate the 3D pose of the butter to enable grasping."
+          },
+          {
+            "step": 5,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot must detect the jam object within the pantry scene."
+          },
+          {
+            "step": 6,
+            "abstract_skill": "recognize_object",
+            "ros2_interface": "/recognized_objects",
+            "reason": "Robot must recognize the detected object as 'Jam'."
+          },
+          {
+            "step": 7,
+            "abstract_skill": "estimate_object_pose",
+            "ros2_interface": "/object_poses",
+            "reason": "Robot must estimate the 3D pose of the jam to enable grasping."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Retrieve the butter and jam from the pantry and place them on the dining table.",
+        "entry_state": "Robot is at the Pantry. Butter and Jam are located and their poses are estimated.",
+        "exit_state": "Robot is at the Dining Table. Bread, Butter, and Jam are all placed on the table.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "Butter",
+            "location": "Pantry"
+          },
+          {
+            "step": 2,
+            "action": "pick_object",
+            "object": "Jam",
+            "location": "Pantry"
+          },
+          {
+            "step": 3,
+            "action": "navigate_to_object",
+            "object": "Dining Table",
+            "location": "Dining Table"
+          },
+          {
+            "step": 4,
+            "action": "place_object",
+            "object": "Butter",
+            "location": "Dining Table"
+          },
+          {
+            "step": 5,
+            "action": "place_object",
+            "object": "Jam",
+            "location": "Dining Table"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must grasp the butter from the pantry."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must grasp the jam from the pantry."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the Dining Table to place the items."
+          },
+          {
+            "step": 4,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must place the butter on the dining table."
+          },
+          {
+            "step": 5,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must place the jam on the dining table."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 5,
+        "checkpoint_goal": "Return the unused items (butter and jam) to their original locations.",
+        "entry_state": "Robot is at the Dining Table. Bread, Butter, and Jam are all placed on the table.",
+        "exit_state": "Robot is at the Pantry. Bread is on the table; Butter and Jam are returned to the pantry.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "Butter",
+            "location": "Dining Table"
+          },
+          {
+            "step": 2,
+            "action": "navigate_to_object",
+            "object": "Pantry",
+            "location": "Pantry"
+          },
+          {
+            "step": 3,
+            "action": "place_object",
+            "object": "Butter",
+            "location": "Pantry"
+          },
+          {
+            "step": 4,
+            "action": "pick_object",
+            "object": "Jam",
+            "location": "Dining Table"
+          },
+          {
+            "step": 5,
+            "action": "navigate_to_object",
+            "object": "Pantry",
+            "location": "Pantry"
+          },
+          {
+            "step": 6,
+            "action": "place_object",
+            "object": "Jam",
+            "location": "Pantry"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must pick up the butter from the dining table."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the pantry to return the butter."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must place the butter back in the pantry."
+          },
+          {
+            "step": 4,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must pick up the jam from the dining table."
+          },
+          {
+            "step": 5,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the pantry to return the jam."
+          },
+          {
+            "step": 6,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must place the jam back in the pantry."
+          }
+        ]
+      }
+    ]
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T11:31:30.342029+00:00",
+    "plan_metadata": {
+      "robot": "H2",
+      "world": "Kitchen",
+      "task": "Retrieve the bread, butter, and jam from the refrigerator and pantry, place them on the dining table, and return the unused items to their original locations.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Retrieve bread, butter, and jam from storage (refrigerator/pantry), place them on the dining table, and return unused items to their original locations.",
+      "total_actions": 25,
+      "total_checkpoints": 5
+    },
+    "task_success": false,
+    "overall_score": 0.6472,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.4,
+        "status": "FAIL",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 0.7273,
+        "status": "WARNING",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.6957,
+        "status": "WARNING",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 0.9167,
+        "status": "WARNING",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 0.6,
+        "status": "WARNING",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Refrigerator' in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in world 'Kitchen'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Refrigerator"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Refrigerator' in action 'detect_object' (checkpoint 1, step 2) does not exist in world 'Kitchen'.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Refrigerator"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Refrigerator' in action 'recognize_object' (checkpoint 1, step 3) does not exist in world 'Kitchen'.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Refrigerator"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Refrigerator' in action 'estimate_object_pose' (checkpoint 1, step 4) does not exist in world 'Kitchen'.",
+        "action_index": 3,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Refrigerator"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Refrigerator' in action 'pick_object' (checkpoint 2, step 1) does not exist in world 'Kitchen'.",
+        "action_index": 4,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Refrigerator"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'navigate_to_object' (checkpoint 2, step 2) does not exist in world 'Kitchen'.",
+        "action_index": 5,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'place_object' (checkpoint 2, step 3) does not exist in world 'Kitchen'.",
+        "action_index": 6,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'navigate_to_room' (checkpoint 3, step 1) does not exist in world 'Kitchen'.",
+        "action_index": 7,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'detect_object' (checkpoint 3, step 2) does not exist in world 'Kitchen'.",
+        "action_index": 8,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'recognize_object' (checkpoint 3, step 3) does not exist in world 'Kitchen'.",
+        "action_index": 9,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'estimate_object_pose' (checkpoint 3, step 4) does not exist in world 'Kitchen'.",
+        "action_index": 10,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'detect_object' (checkpoint 3, step 5) does not exist in world 'Kitchen'.",
+        "action_index": 11,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'recognize_object' (checkpoint 3, step 6) does not exist in world 'Kitchen'.",
+        "action_index": 12,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'estimate_object_pose' (checkpoint 3, step 7) does not exist in world 'Kitchen'.",
+        "action_index": 13,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'pick_object' (checkpoint 4, step 1) does not exist in world 'Kitchen'.",
+        "action_index": 14,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'pick_object' (checkpoint 4, step 2) does not exist in world 'Kitchen'.",
+        "action_index": 15,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'navigate_to_object' (checkpoint 4, step 3) does not exist in world 'Kitchen'.",
+        "action_index": 16,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'place_object' (checkpoint 4, step 4) does not exist in world 'Kitchen'.",
+        "action_index": 17,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'place_object' (checkpoint 4, step 5) does not exist in world 'Kitchen'.",
+        "action_index": 18,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'pick_object' (checkpoint 5, step 1) does not exist in world 'Kitchen'.",
+        "action_index": 19,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'navigate_to_object' (checkpoint 5, step 2) does not exist in world 'Kitchen'.",
+        "action_index": 20,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'place_object' (checkpoint 5, step 3) does not exist in world 'Kitchen'.",
+        "action_index": 21,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'pick_object' (checkpoint 5, step 4) does not exist in world 'Kitchen'.",
+        "action_index": 22,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'navigate_to_object' (checkpoint 5, step 5) does not exist in world 'Kitchen'.",
+        "action_index": 23,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Pantry' in action 'place_object' (checkpoint 5, step 6) does not exist in world 'Kitchen'.",
+        "action_index": 24,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Pantry"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_room' (checkpoint 1, step 1) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "required_skill": "navigate_to_room"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'detect_object' (checkpoint 1, step 2) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "required_skill": "detect_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'recognize_object' (checkpoint 1, step 3) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "required_skill": "recognize_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'estimate_object_pose' (checkpoint 1, step 4) requires capabilities [can_detect_objects, can_estimate_range] that the robot does not have.",
+        "action_index": 3,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, can_estimate_range] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "required_skill": "estimate_object_pose"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_object' (checkpoint 2, step 2) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+        "action_index": 5,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "required_skill": "navigate_to_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_room' (checkpoint 3, step 1) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+        "action_index": 7,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "required_skill": "navigate_to_room"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'detect_object' (checkpoint 3, step 2) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+        "action_index": 8,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "required_skill": "detect_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'recognize_object' (checkpoint 3, step 3) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+        "action_index": 9,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "required_skill": "recognize_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'estimate_object_pose' (checkpoint 3, step 4) requires capabilities [can_detect_objects, can_estimate_range] that the robot does not have.",
+        "action_index": 10,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, can_estimate_range] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "required_skill": "estimate_object_pose"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'detect_object' (checkpoint 3, step 5) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+        "action_index": 11,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "required_skill": "detect_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'recognize_object' (checkpoint 3, step 6) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+        "action_index": 12,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "required_skill": "recognize_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'estimate_object_pose' (checkpoint 3, step 7) requires capabilities [can_detect_objects, can_estimate_range] that the robot does not have.",
+        "action_index": 13,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_objects, can_estimate_range] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "required_skill": "estimate_object_pose"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_object' (checkpoint 4, step 3) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+        "action_index": 16,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "required_skill": "navigate_to_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_object' (checkpoint 5, step 2) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+        "action_index": 20,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "required_skill": "navigate_to_object"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_object' (checkpoint 5, step 5) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+        "action_index": 23,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "required_skill": "navigate_to_object"
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'detect_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'recognize_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'detect_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+        "action_index": 8,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'recognize_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+        "action_index": 9,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'detect_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+        "action_index": 11,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'recognize_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+        "action_index": 12,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Illegal backward transition: 'place_object' (idx=18) → 'pick_object' (idx=19). Expected phase 5 → 3.",
+        "action_index": 19,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Move 'pick_object' to before 'place_object', or insert a navigate step between them."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Illegal backward transition: 'place_object' (idx=21) → 'pick_object' (idx=22). Expected phase 5 → 3.",
+        "action_index": 22,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Move 'pick_object' to before 'place_object', or insert a navigate step between them."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Jam' referenced in action 'detect_object' (checkpoint 3, step 5) does not exist in the world 'Kitchen'.",
+        "action_index": 11,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Jam"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Jam' referenced in action 'recognize_object' (checkpoint 3, step 6) does not exist in the world 'Kitchen'.",
+        "action_index": 12,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Jam"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Jam' referenced in action 'estimate_object_pose' (checkpoint 3, step 7) does not exist in the world 'Kitchen'.",
+        "action_index": 13,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Jam"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Jam' referenced in action 'pick_object' (checkpoint 4, step 2) does not exist in the world 'Kitchen'.",
+        "action_index": 15,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Jam"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Jam' referenced in action 'place_object' (checkpoint 4, step 5) does not exist in the world 'Kitchen'.",
+        "action_index": 18,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Jam"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Jam' referenced in action 'pick_object' (checkpoint 5, step 4) does not exist in the world 'Kitchen'.",
+        "action_index": 22,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Jam"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Jam' referenced in action 'place_object' (checkpoint 5, step 6) does not exist in the world 'Kitchen'.",
+        "action_index": 24,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Jam"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+        "action_index": 5,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'place_object' → 'navigate_to_room' (phase 5 → 1).",
+        "action_index": 7,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+        "action_index": 16,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+        "action_index": 20,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+        "action_index": 23,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "REDUNDANT_ACTION",
+        "message": "Consecutive duplicate action 'pick_object' at indices 14 and 15.",
+        "action_index": 15,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Remove the duplicate action or merge the steps."
+      },
+      {
+        "code": "REDUNDANT_ACTION",
+        "message": "Consecutive duplicate action 'place_object' at indices 17 and 18.",
+        "action_index": 18,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Remove the duplicate action or merge the steps."
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 100%, task-to-exit-state coverage: 29%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "bread",
+          "butter",
+          "dining",
+          "from",
+          "items",
+          "jam",
+          "locations",
+          "original",
+          "pantry",
+          "place",
+          "refrigerator",
+          "retrieve",
+          "return",
+          "table",
+          "their",
+          "them",
+          "unused"
+        ],
+        "goal_keywords": [
+          "bread",
+          "butter",
+          "dining",
+          "from",
+          "items",
+          "jam",
+          "locations",
+          "original",
+          "pantry",
+          "place",
+          "refrigerator",
+          "retrieve",
+          "return",
+          "storage",
+          "table",
+          "their",
+          "them",
+          "unused"
+        ],
+        "matched_goal_keywords": [
+          "bread",
+          "butter",
+          "dining",
+          "from",
+          "items",
+          "jam",
+          "locations",
+          "original",
+          "pantry",
+          "place",
+          "refrigerator",
+          "retrieve",
+          "return",
+          "table",
+          "their",
+          "them",
+          "unused"
+        ],
+        "matched_exit_keywords": [
+          "bread",
+          "butter",
+          "jam",
+          "pantry",
+          "table"
+        ]
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'dining table': visited at action index 5 and again at 16.",
+        "action_index": 16,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'dining table' into a single trip, or reorder actions to avoid backtracking."
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'pantry': visited at action index 7 and again at 20.",
+        "action_index": 20,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'pantry' into a single trip, or reorder actions to avoid backtracking."
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'pantry': visited at action index 20 and again at 23.",
+        "action_index": 23,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'pantry' into a single trip, or reorder actions to avoid backtracking."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "supports_indoor_navigation": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, supports_indoor_navigation"
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "has_visual_perception": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 1,
+        "step": 3,
+        "action_name": "recognize_object",
+        "required_skill": "recognize_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "has_visual_perception": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 1,
+        "step": 4,
+        "action_name": "estimate_object_pose",
+        "required_skill": "estimate_object_pose",
+        "required_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "can_estimate_range": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, can_estimate_range"
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 2,
+        "step": 2,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "can_detect_objects": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 2,
+        "step": 3,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 7,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "supports_indoor_navigation": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, supports_indoor_navigation"
+      },
+      {
+        "global_index": 8,
+        "checkpoint_id": 3,
+        "step": 2,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "has_visual_perception": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+      },
+      {
+        "global_index": 9,
+        "checkpoint_id": 3,
+        "step": 3,
+        "action_name": "recognize_object",
+        "required_skill": "recognize_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "has_visual_perception": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+      },
+      {
+        "global_index": 10,
+        "checkpoint_id": 3,
+        "step": 4,
+        "action_name": "estimate_object_pose",
+        "required_skill": "estimate_object_pose",
+        "required_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "can_estimate_range": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, can_estimate_range"
+      },
+      {
+        "global_index": 11,
+        "checkpoint_id": 3,
+        "step": 5,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "has_visual_perception": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+      },
+      {
+        "global_index": 12,
+        "checkpoint_id": 3,
+        "step": 6,
+        "action_name": "recognize_object",
+        "required_skill": "recognize_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "has_visual_perception": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+      },
+      {
+        "global_index": 13,
+        "checkpoint_id": 3,
+        "step": 7,
+        "action_name": "estimate_object_pose",
+        "required_skill": "estimate_object_pose",
+        "required_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": false,
+          "can_estimate_range": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, can_estimate_range"
+      },
+      {
+        "global_index": 14,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 15,
+        "checkpoint_id": 4,
+        "step": 2,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 16,
+        "checkpoint_id": 4,
+        "step": 3,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "can_detect_objects": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+      },
+      {
+        "global_index": 17,
+        "checkpoint_id": 4,
+        "step": 4,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 18,
+        "checkpoint_id": 4,
+        "step": 5,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 19,
+        "checkpoint_id": 5,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 20,
+        "checkpoint_id": 5,
+        "step": 2,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "can_detect_objects": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+      },
+      {
+        "global_index": 21,
+        "checkpoint_id": 5,
+        "step": 3,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 22,
+        "checkpoint_id": 5,
+        "step": 4,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 23,
+        "checkpoint_id": 5,
+        "step": 5,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "can_detect_objects": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+      },
+      {
+        "global_index": 24,
+        "checkpoint_id": 5,
+        "step": 6,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "25/25 actions are valid. Score: 100.00%.",
+        "valid_actions": 25,
+        "total_actions": 25
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.6957,
+        "normalised_score": 0.6957,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Jam' referenced in action 'detect_object' (checkpoint 3, step 5) does not exist in the world 'Kitchen'.",
+            "action_index": 11,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Jam"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Jam' referenced in action 'recognize_object' (checkpoint 3, step 6) does not exist in the world 'Kitchen'.",
+            "action_index": 12,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Jam"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Jam' referenced in action 'estimate_object_pose' (checkpoint 3, step 7) does not exist in the world 'Kitchen'.",
+            "action_index": 13,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Jam"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Jam' referenced in action 'pick_object' (checkpoint 4, step 2) does not exist in the world 'Kitchen'.",
+            "action_index": 15,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Jam"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Jam' referenced in action 'place_object' (checkpoint 4, step 5) does not exist in the world 'Kitchen'.",
+            "action_index": 18,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Jam"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Jam' referenced in action 'pick_object' (checkpoint 5, step 4) does not exist in the world 'Kitchen'.",
+            "action_index": 22,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Jam"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Jam' referenced in action 'place_object' (checkpoint 5, step 6) does not exist in the world 'Kitchen'.",
+            "action_index": 24,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Jam' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Jam"
+          }
+        ],
+        "comments": "16/23 object references are valid. Score: 69.57%.",
+        "valid_objects": 16,
+        "total_object_refs": 23
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Refrigerator' in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in world 'Kitchen'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Refrigerator"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Refrigerator' in action 'detect_object' (checkpoint 1, step 2) does not exist in world 'Kitchen'.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Refrigerator"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Refrigerator' in action 'recognize_object' (checkpoint 1, step 3) does not exist in world 'Kitchen'.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Refrigerator"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Refrigerator' in action 'estimate_object_pose' (checkpoint 1, step 4) does not exist in world 'Kitchen'.",
+            "action_index": 3,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Refrigerator"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Refrigerator' in action 'pick_object' (checkpoint 2, step 1) does not exist in world 'Kitchen'.",
+            "action_index": 4,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Refrigerator"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'navigate_to_object' (checkpoint 2, step 2) does not exist in world 'Kitchen'.",
+            "action_index": 5,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'place_object' (checkpoint 2, step 3) does not exist in world 'Kitchen'.",
+            "action_index": 6,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'navigate_to_room' (checkpoint 3, step 1) does not exist in world 'Kitchen'.",
+            "action_index": 7,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'detect_object' (checkpoint 3, step 2) does not exist in world 'Kitchen'.",
+            "action_index": 8,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'recognize_object' (checkpoint 3, step 3) does not exist in world 'Kitchen'.",
+            "action_index": 9,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'estimate_object_pose' (checkpoint 3, step 4) does not exist in world 'Kitchen'.",
+            "action_index": 10,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'detect_object' (checkpoint 3, step 5) does not exist in world 'Kitchen'.",
+            "action_index": 11,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'recognize_object' (checkpoint 3, step 6) does not exist in world 'Kitchen'.",
+            "action_index": 12,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'estimate_object_pose' (checkpoint 3, step 7) does not exist in world 'Kitchen'.",
+            "action_index": 13,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'pick_object' (checkpoint 4, step 1) does not exist in world 'Kitchen'.",
+            "action_index": 14,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'pick_object' (checkpoint 4, step 2) does not exist in world 'Kitchen'.",
+            "action_index": 15,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'navigate_to_object' (checkpoint 4, step 3) does not exist in world 'Kitchen'.",
+            "action_index": 16,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'place_object' (checkpoint 4, step 4) does not exist in world 'Kitchen'.",
+            "action_index": 17,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'place_object' (checkpoint 4, step 5) does not exist in world 'Kitchen'.",
+            "action_index": 18,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'pick_object' (checkpoint 5, step 1) does not exist in world 'Kitchen'.",
+            "action_index": 19,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'navigate_to_object' (checkpoint 5, step 2) does not exist in world 'Kitchen'.",
+            "action_index": 20,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'place_object' (checkpoint 5, step 3) does not exist in world 'Kitchen'.",
+            "action_index": 21,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'pick_object' (checkpoint 5, step 4) does not exist in world 'Kitchen'.",
+            "action_index": 22,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'navigate_to_object' (checkpoint 5, step 5) does not exist in world 'Kitchen'.",
+            "action_index": 23,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Pantry' in action 'place_object' (checkpoint 5, step 6) does not exist in world 'Kitchen'.",
+            "action_index": 24,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Pantry' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Pantry"
+          }
+        ],
+        "comments": "0/25 location references are valid. Score: 0.00%.",
+        "valid_locations": 0,
+        "total_location_refs": 25
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "25/25 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 25,
+        "total_actions": 25
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.4,
+        "normalised_score": 0.4,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_room' (checkpoint 1, step 1) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "required_skill": "navigate_to_room"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'detect_object' (checkpoint 1, step 2) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "required_skill": "detect_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'recognize_object' (checkpoint 1, step 3) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "required_skill": "recognize_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'estimate_object_pose' (checkpoint 1, step 4) requires capabilities [can_detect_objects, can_estimate_range] that the robot does not have.",
+            "action_index": 3,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, can_estimate_range] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "required_skill": "estimate_object_pose"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_object' (checkpoint 2, step 2) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+            "action_index": 5,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "required_skill": "navigate_to_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_room' (checkpoint 3, step 1) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+            "action_index": 7,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "required_skill": "navigate_to_room"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'detect_object' (checkpoint 3, step 2) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+            "action_index": 8,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "required_skill": "detect_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'recognize_object' (checkpoint 3, step 3) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+            "action_index": 9,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "required_skill": "recognize_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'estimate_object_pose' (checkpoint 3, step 4) requires capabilities [can_detect_objects, can_estimate_range] that the robot does not have.",
+            "action_index": 10,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, can_estimate_range] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "required_skill": "estimate_object_pose"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'detect_object' (checkpoint 3, step 5) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+            "action_index": 11,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "required_skill": "detect_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'recognize_object' (checkpoint 3, step 6) requires capabilities [can_detect_objects, has_visual_perception] that the robot does not have.",
+            "action_index": 12,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, has_visual_perception] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "required_skill": "recognize_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'estimate_object_pose' (checkpoint 3, step 7) requires capabilities [can_detect_objects, can_estimate_range] that the robot does not have.",
+            "action_index": 13,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_objects, can_estimate_range] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "required_skill": "estimate_object_pose"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_object' (checkpoint 4, step 3) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+            "action_index": 16,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "required_skill": "navigate_to_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_object' (checkpoint 5, step 2) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+            "action_index": 20,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "required_skill": "navigate_to_object"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_object' (checkpoint 5, step 5) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+            "action_index": 23,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "required_skill": "navigate_to_object"
+          }
+        ],
+        "comments": "10/25 actions are capability-compatible with robot 'h2'. Score: 40.00%.",
+        "compatible_actions": 10,
+        "total_actions": 25,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "supports_indoor_navigation": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, supports_indoor_navigation"
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "has_visual_perception": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 1,
+            "step": 3,
+            "action_name": "recognize_object",
+            "required_skill": "recognize_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "has_visual_perception": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 1,
+            "step": 4,
+            "action_name": "estimate_object_pose",
+            "required_skill": "estimate_object_pose",
+            "required_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "can_estimate_range": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, can_estimate_range"
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 2,
+            "step": 2,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "can_detect_objects": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 2,
+            "step": 3,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 7,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "supports_indoor_navigation": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, supports_indoor_navigation"
+          },
+          {
+            "global_index": 8,
+            "checkpoint_id": 3,
+            "step": 2,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "has_visual_perception": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+          },
+          {
+            "global_index": 9,
+            "checkpoint_id": 3,
+            "step": 3,
+            "action_name": "recognize_object",
+            "required_skill": "recognize_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "has_visual_perception": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+          },
+          {
+            "global_index": 10,
+            "checkpoint_id": 3,
+            "step": 4,
+            "action_name": "estimate_object_pose",
+            "required_skill": "estimate_object_pose",
+            "required_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "can_estimate_range": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, can_estimate_range"
+          },
+          {
+            "global_index": 11,
+            "checkpoint_id": 3,
+            "step": 5,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "has_visual_perception": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+          },
+          {
+            "global_index": 12,
+            "checkpoint_id": 3,
+            "step": 6,
+            "action_name": "recognize_object",
+            "required_skill": "recognize_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "has_visual_perception": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, has_visual_perception"
+          },
+          {
+            "global_index": 13,
+            "checkpoint_id": 3,
+            "step": 7,
+            "action_name": "estimate_object_pose",
+            "required_skill": "estimate_object_pose",
+            "required_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": false,
+              "can_estimate_range": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_detect_objects, can_estimate_range"
+          },
+          {
+            "global_index": 14,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 15,
+            "checkpoint_id": 4,
+            "step": 2,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 16,
+            "checkpoint_id": 4,
+            "step": 3,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "can_detect_objects": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+          },
+          {
+            "global_index": 17,
+            "checkpoint_id": 4,
+            "step": 4,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 18,
+            "checkpoint_id": 4,
+            "step": 5,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 19,
+            "checkpoint_id": 5,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 20,
+            "checkpoint_id": 5,
+            "step": 2,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "can_detect_objects": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+          },
+          {
+            "global_index": 21,
+            "checkpoint_id": 5,
+            "step": 3,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 22,
+            "checkpoint_id": 5,
+            "step": 4,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 23,
+            "checkpoint_id": 5,
+            "step": 5,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "can_detect_objects": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+          },
+          {
+            "global_index": 24,
+            "checkpoint_id": 5,
+            "step": 6,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 0.7273,
+        "normalised_score": 0.7273,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'detect_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'recognize_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'detect_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+            "action_index": 8,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'recognize_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+            "action_index": 9,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'detect_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+            "action_index": 11,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'recognize_object' requires visual perception / object detection capability which robot 'h2' lacks.",
+            "action_index": 12,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add a vision sensor to the robot, or use a pre-mapped semantic knowledge base as a fallback."
+          }
+        ],
+        "comments": "16/22 constraint checks satisfied. Score: 72.73%.",
+        "satisfied_constraints": 16,
+        "total_constraints": 22
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "25/25 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 25,
+        "total_actions": 25
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 0.9167,
+        "normalised_score": 0.9167,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+            "action_index": 5,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'place_object' → 'navigate_to_room' (phase 5 → 1).",
+            "action_index": 7,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+            "action_index": 16,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Illegal backward transition: 'place_object' (idx=18) → 'pick_object' (idx=19). Expected phase 5 → 3.",
+            "action_index": 19,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Move 'pick_object' to before 'place_object', or insert a navigate step between them."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+            "action_index": 20,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Illegal backward transition: 'place_object' (idx=21) → 'pick_object' (idx=22). Expected phase 5 → 3.",
+            "action_index": 22,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Move 'pick_object' to before 'place_object', or insert a navigate step between them."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+            "action_index": 23,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "REDUNDANT_ACTION",
+            "message": "Consecutive duplicate action 'pick_object' at indices 14 and 15.",
+            "action_index": 15,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Remove the duplicate action or merge the steps."
+          },
+          {
+            "code": "REDUNDANT_ACTION",
+            "message": "Consecutive duplicate action 'place_object' at indices 17 and 18.",
+            "action_index": 18,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Remove the duplicate action or merge the steps."
+          }
+        ],
+        "comments": "22/24 action transitions are logically ordered. Score: 91.67%.",
+        "good_transitions": 22,
+        "total_transitions": 24
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 100%, task-to-exit-state coverage: 29%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "bread",
+              "butter",
+              "dining",
+              "from",
+              "items",
+              "jam",
+              "locations",
+              "original",
+              "pantry",
+              "place",
+              "refrigerator",
+              "retrieve",
+              "return",
+              "table",
+              "their",
+              "them",
+              "unused"
+            ],
+            "goal_keywords": [
+              "bread",
+              "butter",
+              "dining",
+              "from",
+              "items",
+              "jam",
+              "locations",
+              "original",
+              "pantry",
+              "place",
+              "refrigerator",
+              "retrieve",
+              "return",
+              "storage",
+              "table",
+              "their",
+              "them",
+              "unused"
+            ],
+            "matched_goal_keywords": [
+              "bread",
+              "butter",
+              "dining",
+              "from",
+              "items",
+              "jam",
+              "locations",
+              "original",
+              "pantry",
+              "place",
+              "refrigerator",
+              "retrieve",
+              "return",
+              "table",
+              "their",
+              "them",
+              "unused"
+            ],
+            "matched_exit_keywords": [
+              "bread",
+              "butter",
+              "jam",
+              "pantry",
+              "table"
+            ]
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 29%.",
+        "goal_satisfied": false,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.2941,
+        "llm_self_reported_valid": null
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 0.6,
+        "normalised_score": 0.6,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'dining table': visited at action index 5 and again at 16.",
+            "action_index": 16,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'dining table' into a single trip, or reorder actions to avoid backtracking."
+          },
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'pantry': visited at action index 7 and again at 20.",
+            "action_index": 20,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'pantry' into a single trip, or reorder actions to avoid backtracking."
+          },
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'pantry': visited at action index 20 and again at 23.",
+            "action_index": 23,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'pantry' into a single trip, or reorder actions to avoid backtracking."
+          }
+        ],
+        "comments": "Efficiency: 60.00% (ideal=15, actual=25). Redundant navigations: 3. Repeated actions: 18.",
+        "total_actions": 25,
+        "ideal_steps": 15,
+        "efficiency_score": 0.6,
+        "redundancy_score": 0.16,
+        "repeated_actions": 18,
+        "redundant_navigations": 3
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

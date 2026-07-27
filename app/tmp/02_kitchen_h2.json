@@ -1,0 +1,387 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "H2",
+      "world": "Kitchen",
+      "task": "Open the refrigerator door.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Open the refrigerator door.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the refrigerator and position the arm to interact with the door handle.",
+        "entry_state": "Robot is at a generic spawn location (e.g., Kitchen Entrance) and the refrigerator is in a closed state.",
+        "exit_state": "Robot is positioned adjacent to the refrigerator with the manipulator arm extended towards the refrigerator door handle.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_object",
+            "object": "Refrigerator",
+            "location": "Kitchen"
+          },
+          {
+            "step": 2,
+            "action": "reach_pose",
+            "object": "Refrigerator Door Handle",
+            "location": "Kitchen"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Skill NAV_001 allows the robot to navigate to the pose of a detected or named object. This is required to reach the refrigerator."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "reach_pose",
+            "ros2_interface": "/move_action",
+            "reason": "Skill MAN_008 allows the robot to move the manipulator to a specific Cartesian pose (the handle location) without necessarily grasping yet, positioning the arm for the next step."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot is fixed-base and cannot navigate globally; relies on local arm movement once near the object.",
+      "Robot lacks visual perception (no cameras), so object detection and pose estimation rely on pre-existing semantic maps or manual intervention not modeled here."
+    ],
+    "execution_summary": {
+      "plan_valid": false,
+      "failure_reason": "The task requires 'can_navigate' and 'can_detect_objects' capabilities which are explicitly disabled in the robot's capabilities (fixed_base, no_visual_perception). The robot cannot autonomously find or navigate to the refrigerator.",
+      "expected_outcome": "Task cannot be completed autonomously."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T10:23:55.113607+00:00",
+    "plan_metadata": {
+      "robot": "H2",
+      "world": "Kitchen",
+      "task": "Open the refrigerator door.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Open the refrigerator door.",
+      "total_actions": 2,
+      "total_checkpoints": 1
+    },
+    "task_success": false,
+    "overall_score": 0.855,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.5,
+        "status": "FAIL",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_object' (checkpoint 1, step 1) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "required_skill": "navigate_to_object"
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "ERROR",
+        "suggestion": "Re-plan with corrected capabilities or a different robot."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'navigate_to_object' navigates to an indoor location 'Kitchen' but robot 'h2' does not explicitly support indoor navigation.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify indoor clearance heights and obstacle density are compatible with this robot platform."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "can_detect_objects": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "reach_pose",
+        "required_skill": "reach_pose",
+        "required_capabilities": [
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 actions are valid. Score: 100.00%.",
+        "valid_actions": 2,
+        "total_actions": 2
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 object references are valid. Score: 100.00%.",
+        "valid_objects": 2,
+        "total_object_refs": 2
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 location references are valid. Score: 100.00%.",
+        "valid_locations": 2,
+        "total_location_refs": 2
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 2,
+        "total_actions": 2
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.5,
+        "normalised_score": 0.5,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_object' (checkpoint 1, step 1) requires capabilities [can_navigate, can_detect_objects] that the robot does not have.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, can_detect_objects] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "required_skill": "navigate_to_object"
+          }
+        ],
+        "comments": "1/2 actions are capability-compatible with robot 'h2'. Score: 50.00%.",
+        "compatible_actions": 1,
+        "total_actions": 2,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "can_detect_objects": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, can_detect_objects"
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "reach_pose",
+            "required_skill": "reach_pose",
+            "required_capabilities": [
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'navigate_to_object' navigates to an indoor location 'Kitchen' but robot 'h2' does not explicitly support indoor navigation.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify indoor clearance heights and obstacle density are compatible with this robot platform."
+          }
+        ],
+        "comments": "1/1 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 1,
+        "total_constraints": 1
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 2,
+        "total_actions": 2
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 1,
+        "total_transitions": 1
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "ERROR",
+            "suggestion": "Re-plan with corrected capabilities or a different robot."
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 67%.",
+        "goal_satisfied": false,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.6667,
+        "llm_self_reported_valid": false
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=2, actual=2). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 2,
+        "ideal_steps": 2,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

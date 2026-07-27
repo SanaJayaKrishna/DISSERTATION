@@ -403,9 +403,9 @@ if generate:
 
                 prompt_placeholder = st.empty()
 
-                with prompt_placeholder.container():
-                    with st.expander("📝 Prompt", expanded=True):
-                        st.code(prompt, language="json")
+                # with prompt_placeholder.container():
+                #     with st.expander("📝 Prompt", expanded=False):
+                #         st.code(prompt, language="json")
 
 
                 # st.spinner("Generating plan...")
