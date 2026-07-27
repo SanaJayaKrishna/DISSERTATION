@@ -49,7 +49,7 @@ def _status_badge(status: str) -> str:
     return {"PASS": "✅", "WARNING": "⚠️", "FAIL": "❌", "MISSING": "❓"}.get(status, "❓")
 
 
-def _render_evaluation(plan_response: str, robot_name: str, world_name: str) -> None:
+def _render_evaluation(plan_response: str, robot_name: str, world_name: str, task_number: str) -> None:
     """Run the evaluation pipeline and render all metrics in Streamlit.
 
     Args:
@@ -111,7 +111,7 @@ def _render_evaluation(plan_response: str, robot_name: str, world_name: str) -> 
     # ----------------------------------------------------------------
     _tmp_dir = Path(__file__).resolve().parent / "tmp"
     _tmp_dir.mkdir(exist_ok=True)
-    _raw_report_path = _tmp_dir / f"{world_name}_{robot_name}.json"
+    _raw_report_path = _tmp_dir / f"{task_number}_{world_name}_{robot_name}.json"
     _output = {"plan": plan_dict, "evaluation": report}
     with open(_raw_report_path, "w", encoding="utf-8") as _f:
         json.dump(_output, _f, indent=2, ensure_ascii=False)
@@ -228,7 +228,7 @@ def _render_evaluation(plan_response: str, robot_name: str, world_name: str) -> 
                 "Failure Reason": failure or "—",
             })
 
-        st.dataframe(rows, use_container_width=True, hide_index=True)
+        st.dataframe(rows, width=True, hide_index=True)
         st.divider()
 
     # ================================================================
@@ -294,22 +294,22 @@ def _render_evaluation(plan_response: str, robot_name: str, world_name: str) -> 
     # ================================================================
     # SECTION 6: Download Report
     # ================================================================
-    st.subheader("📥 Download Evaluation Report")
-    report_json = json.dumps(report, indent=2, ensure_ascii=False)
-    st.download_button(
-        label="⬇️ Download evaluation_report.json",
-        data=report_json,
-        file_name="evaluation_report.json",
-        mime="application/json",
-        use_container_width=True,
-    )
+    # st.subheader("📥 Download Evaluation Report")
+    # report_json = json.dumps(report, indent=2, ensure_ascii=False)
+    # st.download_button(
+    #     label="⬇️ Download evaluation_report.json",
+    #     data=report_json,
+    #     file_name="evaluation_report.json",
+    #     mime="application/json",
+    #     use_container_width=True,
+    # )
 
 
 # --------------------------------------------------
 # Header
 # --------------------------------------------------
 
-st.title("🤖 Capability-Aware Robot Task Planning Framework")
+st.title("AUTOMATE: 🤖 Capability-Aware Robot Task Planning Framework")
 
 st.caption("M.Tech Dissertation Demonstration Platform")
 
@@ -357,7 +357,7 @@ with col4:
 
     )
 
-task = st.text_area(
+task_area = st.text_area(
     "Natural Language Task",
     placeholder="Enter a natural language instruction...",
     label_visibility="collapsed",
@@ -379,38 +379,54 @@ st.divider()
 
 if generate:
 
-    if not task:
+    if not task_area:
         st.warning("Please enter a natural language task.")
 
     else:
+        # print(_ROOT)
 
-        # Generate only once
-        prompt = generate_prompt(
-            model_name=selected_model,
-            robot_name=robot,
-            world_name=world,
-            workspace_name=workspace,
-            task=task,
-        )
+        with open(str(_ROOT)+"/app/tasks/"+world+".task") as taskFile:
+            for eachTask in taskFile.readlines():
+                task_number = eachTask[:2].strip()
+                task = eachTask[3:].strip() 
+                st.write(task_number)
+                st.write(task)
 
-        prompt_placeholder = st.empty()
+                # Generate only once
+                prompt = generate_prompt(
+                    model_name=selected_model,
+                    robot_name=robot,
+                    world_name=world,
+                    workspace_name=workspace,
+                    task=task,
+                )
 
-        with prompt_placeholder.container():
-            with st.expander("📝 Prompt", expanded=True):
-                st.code(prompt, language="json")
+                prompt_placeholder = st.empty()
 
-        st.spinner("Generating plan...")
-        
-        response = infer_model()
-        with st.expander("🤖 Generated Plan", expanded=False):
+                with prompt_placeholder.container():
+                    with st.expander("📝 Prompt", expanded=True):
+                        st.code(prompt, language="json")
 
-            st.code(response, language="json")
 
-        # --------------------------------------------------
-        # Evaluation
-        # --------------------------------------------------
-        with st.expander("📊 Evaluation", expanded=True):
-            _render_evaluation(response, robot, world)
+                # st.spinner("Generating plan...")
+
+                # st.write(f"{task_number} : {task}")
+
+                response = infer_model()
+                with st.expander("🤖 Generated Plan", expanded=False):
+
+                    st.code(response, language="json")
+
+                # --------------------------------------------------
+                # Evaluation
+                # --------------------------------------------------
+                with st.expander("📊 Evaluation", expanded=True):
+                    _render_evaluation(response, robot, world, task_number)
+                    
+                with st.spinner("Sleeping for 2 seconds..."):
+                    from time import sleep
+                    sleep(2)
+
 
 else:
 

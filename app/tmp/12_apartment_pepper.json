@@ -1,0 +1,388 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "Close the bedroom window after opening the curtains.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Close the bedroom window after opening the curtains.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Open the curtains in the Master Bedroom.",
+        "entry_state": "Robots is at Main Entrance. Curtains in Master Bedroom are closed.",
+        "exit_state": "Robots is at Master Bedroom. Curtains in Master Bedroom are open.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "Navigate to Master Bedroom",
+            "object": "",
+            "location": "Master Bedroom"
+          },
+          {
+            "step": 2,
+            "action": "Open Curtains",
+            "object": "Curtains",
+            "location": "Master Bedroom"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the room containing the target object (Curtains) before interacting with it."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "open_door_with_manipulator",
+            "ros2_interface": "/open_door",
+            "reason": "The skill 'open_door_with_manipulator' is used to open the curtains (treated as a door-like barrier) in the Master Bedroom. This aligns with the robot's capability to open doors and manipulate objects."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot cannot climb stairs; assumes flat corridor access to bedrooms.",
+      "Robot has single arm; cannot use two hands simultaneously."
+    ],
+    "execution_summary": {
+      "plan_valid": false,
+      "failure_reason": "The task requires closing a window, but the robot lacks the capability to interact with windows directly ('can_open_window' is not listed in capabilities). The closest available capability is 'can_open_door'. Additionally, the world state lists 'Curtains' but not 'Window' as a distinct manipulatable object in the Master Bedroom. While curtains were opened, the specific action to close the window cannot be performed with the provided skills library.",
+      "expected_outcome": "Unable to complete the full task due to missing capability for window interaction."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-26T17:57:39.368853+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "Close the bedroom window after opening the curtains.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Close the bedroom window after opening the curtains.",
+      "total_actions": 2,
+      "total_checkpoints": 1
+    },
+    "task_success": false,
+    "overall_score": 0.48,
+    "overall_status": "FAIL",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Master Bedroom' (checkpoint 1, step 1) is not in the skill ontology.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Master Bedroom' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Open Curtains' (checkpoint 1, step 2) is not in the skill ontology.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Open Curtains' or add a new ontology entry."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Master Bedroom' (checkpoint 1, step 1).",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Master Bedroom' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Open Curtains' (checkpoint 1, step 2).",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Open Curtains' or a matching alias."
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "ERROR",
+        "suggestion": "Re-plan with corrected capabilities or a different robot."
+      }
+    ],
+    "warnings": [],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "Navigate to Master Bedroom",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Master Bedroom' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "Open Curtains",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Open Curtains' has no matching skill in the ontology; capability check skipped."
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Master Bedroom' (checkpoint 1, step 1) is not in the skill ontology.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Master Bedroom' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Open Curtains' (checkpoint 1, step 2) is not in the skill ontology.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Open Curtains' or add a new ontology entry."
+          }
+        ],
+        "comments": "0/2 actions are valid. Score: 0.00%.",
+        "valid_actions": 0,
+        "total_actions": 2
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 object references are valid. Score: 100.00%.",
+        "valid_objects": 1,
+        "total_object_refs": 1
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 location references are valid. Score: 100.00%.",
+        "valid_locations": 2,
+        "total_location_refs": 2
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Master Bedroom' (checkpoint 1, step 1).",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Master Bedroom' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Open Curtains' (checkpoint 1, step 2).",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Open Curtains' or a matching alias."
+          }
+        ],
+        "comments": "0/2 actions map to valid skills. Score: 0.00%.",
+        "mapped_actions": 0,
+        "total_actions": 2
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/2 actions are capability-compatible with robot 'pepper'. Score: 0.00%.",
+        "compatible_actions": 0,
+        "total_actions": 2,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "Navigate to Master Bedroom",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Master Bedroom' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "Open Curtains",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Open Curtains' has no matching skill in the ontology; capability check skipped."
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 1,
+        "total_constraints": 1
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 2,
+        "total_actions": 2
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 1,
+        "total_transitions": 1
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "ERROR",
+            "suggestion": "Re-plan with corrected capabilities or a different robot."
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 33%.",
+        "goal_satisfied": false,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.3333,
+        "llm_self_reported_valid": false
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=2, actual=2). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 2,
+        "ideal_steps": 2,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

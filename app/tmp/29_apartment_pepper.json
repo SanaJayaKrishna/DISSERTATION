@@ -1,0 +1,839 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "If the water bottle is on the dining table, place it inside the refrigerator; otherwise leave it on the counter.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Locate the water bottle, determine its position (dining table vs. elsewhere), and if found on the dining table, transport it to the refrigerator. If not on the dining table, do nothing.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Locate the water bottle and determine its current position relative to the dining table.",
+        "entry_state": "Robot is at an initial location (e.g., Main Entrance). Water bottle location is unknown.",
+        "exit_state": "Robot has identified the location of the water bottle and determined if it is on the dining table.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "Navigate to the dining table.",
+            "object": "Dining Table",
+            "location": "Living Room"
+          },
+          {
+            "step": 2,
+            "action": "Detect the water bottle.",
+            "object": "Water Bottle",
+            "location": "Dining Table"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot needs to move to the Living Room where the Dining Table is located."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot needs to perceive the water bottle to confirm its existence and location."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Verify the water bottle is on the dining table and navigate to the refrigerator.",
+        "entry_state": "Robot knows the water bottle is on the dining table.",
+        "exit_state": "Robot has navigated to the refrigerator.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "Navigate to the refrigerator.",
+            "object": "Refrigerator",
+            "location": "Kitchen"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot needs to move from the Living Room to the Kitchen to access the refrigerator."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Pick up the water bottle from the dining table.",
+        "entry_state": "Robot is at the refrigerator with the water bottle on the dining table.",
+        "exit_state": "Robot is holding the water bottle.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "Pick the water bottle.",
+            "object": "Water Bottle",
+            "location": "Dining Table"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot needs to grasp the water bottle to transport it."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Place the water bottle inside the refrigerator.",
+        "entry_state": "Robot is holding the water bottle at the refrigerator.",
+        "exit_state": "Water bottle is inside the refrigerator.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "Open the refrigerator.",
+            "object": "Refrigerator",
+            "location": "Kitchen"
+          },
+          {
+            "step": 2,
+            "action": "Place the water bottle inside the refrigerator.",
+            "object": "Water Bottle",
+            "location": "Inside Refrigerator"
+          },
+          {
+            "step": 3,
+            "action": "Close the refrigerator.",
+            "object": "Refrigerator",
+            "location": "Kitchen"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "open_door_with_manipulator",
+            "ros2_interface": "/open_door",
+            "reason": "Robot needs to open the refrigerator door to insert the bottle."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot needs to place the water bottle inside the refrigerator."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "close_door_with_manipulator",
+            "ros2_interface": "/close_door",
+            "reason": "Robot needs to close the refrigerator door after placing the bottle."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot can only manipulate one object at a time (single arm)."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "The water bottle is successfully placed inside the refrigerator."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-26T18:34:05.866698+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "If the water bottle is on the dining table, place it inside the refrigerator; otherwise leave it on the counter.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Locate the water bottle, determine its position (dining table vs. elsewhere), and if found on the dining table, transport it to the refrigerator. If not on the dining table, do nothing.",
+      "total_actions": 7,
+      "total_checkpoints": 4
+    },
+    "task_success": true,
+    "overall_score": 0.4657,
+    "overall_status": "FAIL",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.5714,
+        "status": "FAIL",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to the dining table.' (checkpoint 1, step 1) is not in the skill ontology.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to the dining table.' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Detect the water bottle.' (checkpoint 1, step 2) is not in the skill ontology.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Detect the water bottle.' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to the refrigerator.' (checkpoint 2, step 1) is not in the skill ontology.",
+        "action_index": 2,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to the refrigerator.' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Pick the water bottle.' (checkpoint 3, step 1) is not in the skill ontology.",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Pick the water bottle.' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Open the refrigerator.' (checkpoint 4, step 1) is not in the skill ontology.",
+        "action_index": 4,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Open the refrigerator.' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Place the water bottle inside the refrigerator.' (checkpoint 4, step 2) is not in the skill ontology.",
+        "action_index": 5,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Place the water bottle inside the refrigerator.' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Close the refrigerator.' (checkpoint 4, step 3) is not in the skill ontology.",
+        "action_index": 6,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Close the refrigerator.' or add a new ontology entry."
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'Detect the water bottle.' (checkpoint 1, step 2) does not exist in world 'Apartment'.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Dining Table' in action 'Pick the water bottle.' (checkpoint 3, step 1) does not exist in world 'Apartment'.",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Dining Table"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Inside Refrigerator' in action 'Place the water bottle inside the refrigerator.' (checkpoint 4, step 2) does not exist in world 'Apartment'.",
+        "action_index": 5,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Inside Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Inside Refrigerator"
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to the dining table.' (checkpoint 1, step 1).",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to the dining table.' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Detect the water bottle.' (checkpoint 1, step 2).",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Detect the water bottle.' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to the refrigerator.' (checkpoint 2, step 1).",
+        "action_index": 2,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to the refrigerator.' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Pick the water bottle.' (checkpoint 3, step 1).",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Pick the water bottle.' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Open the refrigerator.' (checkpoint 4, step 1).",
+        "action_index": 4,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Open the refrigerator.' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Place the water bottle inside the refrigerator.' (checkpoint 4, step 2).",
+        "action_index": 5,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Place the water bottle inside the refrigerator.' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Close the refrigerator.' (checkpoint 4, step 3).",
+        "action_index": 6,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Close the refrigerator.' or a matching alias."
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Pick action on 'water bottle' at 'dining table' but robot has not navigated there yet.",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Reorder actions to satisfy preconditions first."
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Action 'Place the water bottle inside the refrigerator.' on 'water bottle' requires a prior pick action, but none was found.",
+        "action_index": 5,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Reorder actions to satisfy preconditions first."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Detect the water bottle.' → 'Navigate to the refrigerator.' (phase 2 → 1).",
+        "action_index": 2,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "Navigate to the dining table.",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to the dining table.' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "Detect the water bottle.",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Detect the water bottle.' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "Navigate to the refrigerator.",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to the refrigerator.' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "Pick the water bottle.",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Pick the water bottle.' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "Open the refrigerator.",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Open the refrigerator.' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 4,
+        "step": 2,
+        "action_name": "Place the water bottle inside the refrigerator.",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Place the water bottle inside the refrigerator.' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 4,
+        "step": 3,
+        "action_name": "Close the refrigerator.",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Close the refrigerator.' has no matching skill in the ontology; capability check skipped."
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to the dining table.' (checkpoint 1, step 1) is not in the skill ontology.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to the dining table.' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Detect the water bottle.' (checkpoint 1, step 2) is not in the skill ontology.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Detect the water bottle.' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to the refrigerator.' (checkpoint 2, step 1) is not in the skill ontology.",
+            "action_index": 2,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to the refrigerator.' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Pick the water bottle.' (checkpoint 3, step 1) is not in the skill ontology.",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Pick the water bottle.' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Open the refrigerator.' (checkpoint 4, step 1) is not in the skill ontology.",
+            "action_index": 4,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Open the refrigerator.' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Place the water bottle inside the refrigerator.' (checkpoint 4, step 2) is not in the skill ontology.",
+            "action_index": 5,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Place the water bottle inside the refrigerator.' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Close the refrigerator.' (checkpoint 4, step 3) is not in the skill ontology.",
+            "action_index": 6,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Close the refrigerator.' or add a new ontology entry."
+          }
+        ],
+        "comments": "0/7 actions are valid. Score: 0.00%.",
+        "valid_actions": 0,
+        "total_actions": 7
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 object references are valid. Score: 100.00%.",
+        "valid_objects": 7,
+        "total_object_refs": 7
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.5714,
+        "normalised_score": 0.5714,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'Detect the water bottle.' (checkpoint 1, step 2) does not exist in world 'Apartment'.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Dining Table' in action 'Pick the water bottle.' (checkpoint 3, step 1) does not exist in world 'Apartment'.",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Dining Table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Dining Table"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Inside Refrigerator' in action 'Place the water bottle inside the refrigerator.' (checkpoint 4, step 2) does not exist in world 'Apartment'.",
+            "action_index": 5,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Inside Refrigerator' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Inside Refrigerator"
+          }
+        ],
+        "comments": "4/7 location references are valid. Score: 57.14%.",
+        "valid_locations": 4,
+        "total_location_refs": 7
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to the dining table.' (checkpoint 1, step 1).",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to the dining table.' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Detect the water bottle.' (checkpoint 1, step 2).",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Detect the water bottle.' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to the refrigerator.' (checkpoint 2, step 1).",
+            "action_index": 2,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to the refrigerator.' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Pick the water bottle.' (checkpoint 3, step 1).",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Pick the water bottle.' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Open the refrigerator.' (checkpoint 4, step 1).",
+            "action_index": 4,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Open the refrigerator.' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Place the water bottle inside the refrigerator.' (checkpoint 4, step 2).",
+            "action_index": 5,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Place the water bottle inside the refrigerator.' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Close the refrigerator.' (checkpoint 4, step 3).",
+            "action_index": 6,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Close the refrigerator.' or a matching alias."
+          }
+        ],
+        "comments": "0/7 actions map to valid skills. Score: 0.00%.",
+        "mapped_actions": 0,
+        "total_actions": 7
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/7 actions are capability-compatible with robot 'pepper'. Score: 0.00%.",
+        "compatible_actions": 0,
+        "total_actions": 7,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "Navigate to the dining table.",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to the dining table.' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "Detect the water bottle.",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Detect the water bottle.' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "Navigate to the refrigerator.",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to the refrigerator.' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "Pick the water bottle.",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Pick the water bottle.' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "Open the refrigerator.",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Open the refrigerator.' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 4,
+            "step": 2,
+            "action_name": "Place the water bottle inside the refrigerator.",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Place the water bottle inside the refrigerator.' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 4,
+            "step": 3,
+            "action_name": "Close the refrigerator.",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Close the refrigerator.' has no matching skill in the ontology; capability check skipped."
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "4/4 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 4,
+        "total_constraints": 4
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 0.7143,
+        "normalised_score": 0.7143,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Pick action on 'water bottle' at 'dining table' but robot has not navigated there yet.",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Reorder actions to satisfy preconditions first."
+          },
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Action 'Place the water bottle inside the refrigerator.' on 'water bottle' requires a prior pick action, but none was found.",
+            "action_index": 5,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Reorder actions to satisfy preconditions first."
+          }
+        ],
+        "comments": "5/7 actions satisfy their dependencies. Score: 71.43%.",
+        "satisfied_dependencies": 5,
+        "total_actions": 7
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Detect the water bottle.' → 'Navigate to the refrigerator.' (phase 2 → 1).",
+            "action_index": 2,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "6/6 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 6,
+        "total_transitions": 6
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 50%. Task-to-final-state match: 40%.",
+        "goal_satisfied": true,
+        "goal_coverage": 0.5,
+        "exit_coverage": 0.4,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=7, actual=7). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 7,
+        "ideal_steps": 7,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

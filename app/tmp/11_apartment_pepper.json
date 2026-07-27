@@ -1,0 +1,723 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "Pick up the newspaper and place it on the coffee table.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Pick up the newspaper from its current location and place it on the coffee table.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the living room to access the coffee table and newspaper.",
+        "entry_state": "Robot is at an unspecified initial location (e.g., Main Entrance).",
+        "exit_state": "Robot is located at the coffee table in the living room.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "Living Room",
+            "location": "Living Room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot needs to move to the semantic location 'Living Room' where the coffee table and newspaper are located. This requires the 'can_navigate' and 'supports_indoor_navigation' capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Locate the newspaper and the coffee table within the living room.",
+        "entry_state": "Robot is in the living room but unaware of specific object poses.",
+        "exit_state": "Robot has identified the pose of the 'newspaper' and the 'coffee table'.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_object",
+            "object": "newspaper",
+            "location": "Living Room"
+          },
+          {
+            "step": 2,
+            "action": "detect_table",
+            "object": "coffee table",
+            "location": "Living Room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "The robot uses its visual perception to find the 'newspaper' object in the current scene."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "detect_table",
+            "ros2_interface": "/planes",
+            "reason": "The robot uses depth perception to identify the 'coffee table' surface for placement."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Navigate to the pose of the newspaper to prepare for grasping.",
+        "entry_state": "Robot knows the location of the newspaper but is not yet positioned to pick it up.",
+        "exit_state": "Robot is positioned directly above or adjacent to the newspaper, ready to grasp.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_object",
+            "object": "newspaper",
+            "location": "Living Room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot moves to a pose near the detected newspaper to enable the subsequent pick action."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Grasp the newspaper.",
+        "entry_state": "Robot is positioned at the newspaper.",
+        "exit_state": "Robot is holding the newspaper.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "newspaper",
+            "location": "Living Room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "The robot uses MoveIt2 to plan and execute a trajectory to grasp the newspaper."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 5,
+        "checkpoint_goal": "Navigate to the coffee table with the newspaper held.",
+        "entry_state": "Robot is holding the newspaper but is not at the coffee table.",
+        "exit_state": "Robot is positioned at the coffee table, holding the newspaper.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_object",
+            "object": "coffee table",
+            "location": "Living Room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot moves to the location of the coffee table to prepare for placing the object."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 6,
+        "checkpoint_goal": "Place the newspaper on the coffee table.",
+        "entry_state": "Robot is at the coffee table holding the newspaper.",
+        "exit_state": "Robot has released the newspaper on the coffee table.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "newspaper",
+            "location": "coffee table"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "The robot executes a MoveIt2 trajectory to move the held newspaper to the pose of the coffee table and release it."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot must have can_navigate capability.",
+      "Robot must have can_pick and can_place capabilities.",
+      "Robot must have can_detect_objects and can_detect_obstacles capabilities.",
+      "Newspaper must exist in the world state.",
+      "Coffee table must exist in the world state.",
+      "Living room must exist in the world state."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "The robot successfully navigates to the living room, detects the newspaper and coffee table, picks up the newspaper, moves to the coffee table, and places the newspaper on it."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-26T17:56:23.960352+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "Pick up the newspaper and place it on the coffee table.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Pick up the newspaper from its current location and place it on the coffee table.",
+      "total_actions": 7,
+      "total_checkpoints": 6
+    },
+    "task_success": true,
+    "overall_score": 0.97,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.8571,
+        "status": "WARNING",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.8571,
+        "status": "WARNING",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 0.8571,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'coffee table' in action 'place_object' (checkpoint 6, step 1) does not exist in world 'Apartment'.",
+        "action_index": 6,
+        "checkpoint_id": 6,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'coffee table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "coffee table"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Living Room' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Apartment'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Living Room' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Living Room"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'detect_table' → 'navigate_to_object' (phase 2 → 1).",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+        "action_index": 5,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'living room': visited at action index 0 and again at 3.",
+        "action_index": 3,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'living room' into a single trip, or reorder actions to avoid backtracking."
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'living room': visited at action index 3 and again at 5.",
+        "action_index": 5,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'living room' into a single trip, or reorder actions to avoid backtracking."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 2,
+        "step": 2,
+        "action_name": "detect_table",
+        "required_skill": "detect_table",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "can_detect_objects": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 5,
+        "step": 1,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "can_detect_objects": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 6,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions are valid. Score: 100.00%.",
+        "valid_actions": 7,
+        "total_actions": 7
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.8571,
+        "normalised_score": 0.8571,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Living Room' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Apartment'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Living Room' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Living Room"
+          }
+        ],
+        "comments": "6/7 object references are valid. Score: 85.71%.",
+        "valid_objects": 6,
+        "total_object_refs": 7
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.8571,
+        "normalised_score": 0.8571,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'coffee table' in action 'place_object' (checkpoint 6, step 1) does not exist in world 'Apartment'.",
+            "action_index": 6,
+            "checkpoint_id": 6,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'coffee table' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "coffee table"
+          }
+        ],
+        "comments": "6/7 location references are valid. Score: 85.71%.",
+        "valid_locations": 6,
+        "total_location_refs": 7
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 7,
+        "total_actions": 7
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions are capability-compatible with robot 'pepper'. Score: 100.00%.",
+        "compatible_actions": 7,
+        "total_actions": 7,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 2,
+            "step": 2,
+            "action_name": "detect_table",
+            "required_skill": "detect_table",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "can_detect_objects": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 5,
+            "step": 1,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "can_detect_objects": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 6,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "6/6 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 6,
+        "total_constraints": 6
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 7,
+        "total_actions": 7
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'detect_table' → 'navigate_to_object' (phase 2 → 1).",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_object' (phase 3 → 1).",
+            "action_index": 5,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "6/6 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 6,
+        "total_transitions": 6
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 60%.",
+        "goal_satisfied": true,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.6,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 0.8571,
+        "normalised_score": 0.8571,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'living room': visited at action index 0 and again at 3.",
+            "action_index": 3,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'living room' into a single trip, or reorder actions to avoid backtracking."
+          },
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'living room': visited at action index 3 and again at 5.",
+            "action_index": 5,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'living room' into a single trip, or reorder actions to avoid backtracking."
+          }
+        ],
+        "comments": "Efficiency: 85.71% (ideal=6, actual=7). Redundant navigations: 2. Repeated actions: 1.",
+        "total_actions": 7,
+        "ideal_steps": 6,
+        "efficiency_score": 0.8571,
+        "redundancy_score": 0.5714,
+        "repeated_actions": 1,
+        "redundant_navigations": 2
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

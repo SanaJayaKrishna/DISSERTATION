@@ -1,0 +1,553 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "If the apartment entrance door is open, close it before returning to the living room.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Close the apartment entrance door if it is open, then navigate to the living room.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Verify the state of the apartment entrance door (open or closed).",
+        "entry_state": "Robot at Main Entrance; Door state unknown.",
+        "exit_state": "Robot at Main Entrance; Door state determined (open or closed).",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_door",
+            "object": "Door",
+            "location": "Main Entrance"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_door",
+            "ros2_interface": "/doors",
+            "reason": "Skill PER_023 detects doors and their state (open/closed) using visual perception."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Close the apartment entrance door if it is open.",
+        "entry_state": "Robot at Main Entrance; Door state is Open.",
+        "exit_state": "Robot at Main Entrance; Door state is Closed.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "close_door",
+            "object": "Door",
+            "location": "Main Entrance"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "close_door_with_manipulator",
+            "ros2_interface": "/close_door",
+            "reason": "Skill MAN_014 closes a hinged door using manipulation capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Navigate to the living room.",
+        "entry_state": "Robot at Main Entrance; Door is Closed.",
+        "exit_state": "Robot at Living Room.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "Living Room",
+            "location": "Living Room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Skill NAV_015 navigates the robot to a specific named room using the navigation stack."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot must have can_open_door capability (True)."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "The robot will detect the door state. If open, it will close it. Then it will navigate to the living room."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-26T18:37:27.416144+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "If the apartment entrance door is open, close it before returning to the living room.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Close the apartment entrance door if it is open, then navigate to the living room.",
+      "total_actions": 3,
+      "total_checkpoints": 3
+    },
+    "task_success": false,
+    "overall_score": 0.8933,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.6667,
+        "status": "WARNING",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.3333,
+        "status": "FAIL",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Main Entrance' in action 'detect_door' (checkpoint 1, step 1) does not exist in world 'Apartment'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Main Entrance' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Main Entrance"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Main Entrance' in action 'close_door' (checkpoint 2, step 1) does not exist in world 'Apartment'.",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Main Entrance' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Main Entrance"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Living Room' referenced in action 'navigate_to_room' (checkpoint 3, step 1) does not exist in the world 'Apartment'.",
+        "action_index": 2,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Living Room' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Living Room"
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "Skill mismatch for 'close_door' at checkpoint 2 step 1: ontology resolves to 'close_door' but LLM grounded to 'close_door_with_manipulator'.",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Review whether the LLM grounding is semantically correct.",
+        "ontology_skill": "close_door",
+        "llm_skill": "close_door_with_manipulator"
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 78%, task-to-exit-state coverage: 22%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "apartment",
+          "before",
+          "close",
+          "door",
+          "entrance",
+          "living",
+          "open",
+          "returning",
+          "room"
+        ],
+        "goal_keywords": [
+          "apartment",
+          "close",
+          "door",
+          "entrance",
+          "living",
+          "navigate",
+          "open",
+          "room",
+          "then"
+        ],
+        "matched_goal_keywords": [
+          "apartment",
+          "close",
+          "door",
+          "entrance",
+          "living",
+          "open",
+          "room"
+        ],
+        "matched_exit_keywords": [
+          "living",
+          "room"
+        ]
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "detect_door",
+        "required_skill": "detect_door",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "close_door",
+        "required_skill": "close_door",
+        "required_capabilities": [
+          "can_open_door"
+        ],
+        "robot_capabilities_checked": {
+          "can_open_door": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 actions are valid. Score: 100.00%.",
+        "valid_actions": 3,
+        "total_actions": 3
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.6667,
+        "normalised_score": 0.6667,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Living Room' referenced in action 'navigate_to_room' (checkpoint 3, step 1) does not exist in the world 'Apartment'.",
+            "action_index": 2,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Living Room' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Living Room"
+          }
+        ],
+        "comments": "2/3 object references are valid. Score: 66.67%.",
+        "valid_objects": 2,
+        "total_object_refs": 3
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.3333,
+        "normalised_score": 0.3333,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Main Entrance' in action 'detect_door' (checkpoint 1, step 1) does not exist in world 'Apartment'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Main Entrance' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Main Entrance"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Main Entrance' in action 'close_door' (checkpoint 2, step 1) does not exist in world 'Apartment'.",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Main Entrance' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Main Entrance"
+          }
+        ],
+        "comments": "1/3 location references are valid. Score: 33.33%.",
+        "valid_locations": 1,
+        "total_location_refs": 3
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "Skill mismatch for 'close_door' at checkpoint 2 step 1: ontology resolves to 'close_door' but LLM grounded to 'close_door_with_manipulator'.",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Review whether the LLM grounding is semantically correct.",
+            "ontology_skill": "close_door",
+            "llm_skill": "close_door_with_manipulator"
+          }
+        ],
+        "comments": "3/3 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 3,
+        "total_actions": 3
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 actions are capability-compatible with robot 'pepper'. Score: 100.00%.",
+        "compatible_actions": 3,
+        "total_actions": 3,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "detect_door",
+            "required_skill": "detect_door",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "close_door",
+            "required_skill": "close_door",
+            "required_capabilities": [
+              "can_open_door"
+            ],
+            "robot_capabilities_checked": {
+              "can_open_door": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 1,
+        "total_constraints": 1
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 3,
+        "total_actions": 3
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 2,
+        "total_transitions": 2
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 78%, task-to-exit-state coverage: 22%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "apartment",
+              "before",
+              "close",
+              "door",
+              "entrance",
+              "living",
+              "open",
+              "returning",
+              "room"
+            ],
+            "goal_keywords": [
+              "apartment",
+              "close",
+              "door",
+              "entrance",
+              "living",
+              "navigate",
+              "open",
+              "room",
+              "then"
+            ],
+            "matched_goal_keywords": [
+              "apartment",
+              "close",
+              "door",
+              "entrance",
+              "living",
+              "open",
+              "room"
+            ],
+            "matched_exit_keywords": [
+              "living",
+              "room"
+            ]
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 78%. Task-to-final-state match: 22%.",
+        "goal_satisfied": false,
+        "goal_coverage": 0.7778,
+        "exit_coverage": 0.2222,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=3, actual=3). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 3,
+        "ideal_steps": 3,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

@@ -1,0 +1,3212 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "Organize the apartment by collecting misplaced shoes, books, and magazines, returning each item to its designated location, and inspecting every room before finishing.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Organize the apartment by collecting misplaced shoes, books, and magazines, returning each item to its designated location, and inspecting every room before finishing.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Locate all misplaced items (shoes, books, magazines) in the Living Room and collect them.",
+        "entry_state": "Robot is at Main Entrance. Misplaced items exist in Living Room.",
+        "exit_state": "Robot has collected all misplaced items from the Living Room.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "Navigate to Living Room",
+            "object": "",
+            "location": "Living Room"
+          },
+          {
+            "step": 2,
+            "action": "Detect misplaced items",
+            "object": "Shoes, Books, Magazines",
+            "location": "Living Room"
+          },
+          {
+            "step": 3,
+            "action": "Pick up Shoes",
+            "object": "Shoes",
+            "location": "Living Room"
+          },
+          {
+            "step": 4,
+            "action": "Pick up Books",
+            "object": "Books",
+            "location": "Living Room"
+          },
+          {
+            "step": 5,
+            "action": "Pick up Magazines",
+            "object": "Magazines",
+            "location": "Living Room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot needs to move from Main Entrance to Living Room."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot must perceive the location of misplaced items."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must grasp the shoes."
+          },
+          {
+            "step": 4,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must grasp the books."
+          },
+          {
+            "step": 5,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must grasp the magazines."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Transport collected items to their respective storage locations (Corridor for shoes, Bookshelf for books/magazines).",
+        "entry_state": "Robot holds Shoes, Books, Magazines in Living Room.",
+        "exit_state": "Robot has placed Shoes in Corridor and Books/Magazines in Bookshelf.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "Navigate to Corridor",
+            "object": "",
+            "location": "Corridor"
+          },
+          {
+            "step": 2,
+            "action": "Place Shoes",
+            "object": "Shoes",
+            "location": "Corridor"
+          },
+          {
+            "step": 3,
+            "action": "Navigate to Bookshelf",
+            "object": "",
+            "location": "Bookshelf"
+          },
+          {
+            "step": 4,
+            "action": "Place Books",
+            "object": "Books",
+            "location": "Bookshelf"
+          },
+          {
+            "step": 5,
+            "action": "Place Magazines",
+            "object": "Magazines",
+            "location": "Bookshelf"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Corridor to place shoes."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must release shoes at the corridor location."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Bookshelf to place books."
+          },
+          {
+            "step": 4,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must release books at the bookshelf location."
+          },
+          {
+            "step": 5,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must release magazines at the bookshelf location."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Inspect all rooms (Living Room, Kitchen, Master Bedroom, Bedroom 2, Bedroom 3, Attached Bathroom, Common Bathroom, Balcony, Corridor) to ensure organization is complete.",
+        "entry_state": "Items organized. Robot is at Corridor.",
+        "exit_state": "All rooms inspected and confirmed organized.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "Navigate to Living Room",
+            "object": "",
+            "location": "Living Room"
+          },
+          {
+            "step": 2,
+            "action": "Inspect Living Room",
+            "object": "",
+            "location": "Living Room"
+          },
+          {
+            "step": 3,
+            "action": "Navigate to Kitchen",
+            "object": "",
+            "location": "Kitchen"
+          },
+          {
+            "step": 4,
+            "action": "Inspect Kitchen",
+            "object": "",
+            "location": "Kitchen"
+          },
+          {
+            "step": 5,
+            "action": "Navigate to Master Bedroom",
+            "object": "",
+            "location": "Master Bedroom"
+          },
+          {
+            "step": 6,
+            "action": "Inspect Master Bedroom",
+            "object": "",
+            "location": "Master Bedroom"
+          },
+          {
+            "step": 7,
+            "action": "Navigate to Bedroom 2",
+            "object": "",
+            "location": "Bedroom 2"
+          },
+          {
+            "step": 8,
+            "action": "Inspect Bedroom 2",
+            "object": "",
+            "location": "Bedroom 2"
+          },
+          {
+            "step": 9,
+            "action": "Navigate to Bedroom 3",
+            "object": "",
+            "location": "Bedroom 3"
+          },
+          {
+            "step": 10,
+            "action": "Inspect Bedroom 3",
+            "object": "",
+            "location": "Bedroom 3"
+          },
+          {
+            "step": 11,
+            "action": "Navigate to Attached Bathroom",
+            "object": "",
+            "location": "Attached Bathroom"
+          },
+          {
+            "step": 12,
+            "action": "Inspect Attached Bathroom",
+            "object": "",
+            "location": "Attached Bathroom"
+          },
+          {
+            "step": 13,
+            "action": "Navigate to Common Bathroom",
+            "object": "",
+            "location": "Common Bathroom"
+          },
+          {
+            "step": 14,
+            "action": "Inspect Common Bathroom",
+            "object": "",
+            "location": "Common Bathroom"
+          },
+          {
+            "step": 15,
+            "action": "Navigate to Balcony",
+            "object": "",
+            "location": "Balcony"
+          },
+          {
+            "step": 16,
+            "action": "Inspect Balcony",
+            "object": "",
+            "location": "Balcony"
+          },
+          {
+            "step": 17,
+            "action": "Navigate to Corridor",
+            "object": "",
+            "location": "Corridor"
+          },
+          {
+            "step": 18,
+            "action": "Inspect Corridor",
+            "object": "",
+            "location": "Corridor"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Living Room."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect the Living Room."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Kitchen."
+          },
+          {
+            "step": 4,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect the Kitchen."
+          },
+          {
+            "step": 5,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Master Bedroom."
+          },
+          {
+            "step": 6,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect the Master Bedroom."
+          },
+          {
+            "step": 7,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Bedroom 2."
+          },
+          {
+            "step": 8,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect Bedroom 2."
+          },
+          {
+            "step": 9,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Bedroom 3."
+          },
+          {
+            "step": 10,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect Bedroom 3."
+          },
+          {
+            "step": 11,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Attached Bathroom."
+          },
+          {
+            "step": 12,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect Attached Bathroom."
+          },
+          {
+            "step": 13,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Common Bathroom."
+          },
+          {
+            "step": 14,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect Common Bathroom."
+          },
+          {
+            "step": 15,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Balcony."
+          },
+          {
+            "step": 16,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect Balcony."
+          },
+          {
+            "step": 17,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to Corridor."
+          },
+          {
+            "step": 18,
+            "abstract_skill": "inspect_surface",
+            "ros2_interface": "/surface_inspection",
+            "reason": "Robot must visually inspect Corridor."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot has single arm only; cannot use two hands simultaneously.",
+      "Robot cannot climb stairs; assumes flat floor navigation between"
+    ]
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T07:13:44.646996+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "Organize the apartment by collecting misplaced shoes, books, and magazines, returning each item to its designated location, and inspecting every room before finishing.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Organize the apartment by collecting misplaced shoes, books, and magazines, returning each item to its designated location, and inspecting every room before finishing.",
+      "total_actions": 28,
+      "total_checkpoints": 3
+    },
+    "task_success": false,
+    "overall_score": 0.2598,
+    "overall_status": "FAIL",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 0.6667,
+        "status": "WARNING",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.2857,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 0.9286,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Living Room' (checkpoint 1, step 1) is not in the skill ontology.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Living Room' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Detect misplaced items' (checkpoint 1, step 2) is not in the skill ontology.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Detect misplaced items' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Pick up Shoes' (checkpoint 1, step 3) is not in the skill ontology.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Pick up Shoes' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Pick up Books' (checkpoint 1, step 4) is not in the skill ontology.",
+        "action_index": 3,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Pick up Books' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Pick up Magazines' (checkpoint 1, step 5) is not in the skill ontology.",
+        "action_index": 4,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Pick up Magazines' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Corridor' (checkpoint 2, step 1) is not in the skill ontology.",
+        "action_index": 5,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Corridor' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Place Shoes' (checkpoint 2, step 2) is not in the skill ontology.",
+        "action_index": 6,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Place Shoes' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Bookshelf' (checkpoint 2, step 3) is not in the skill ontology.",
+        "action_index": 7,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Bookshelf' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Place Books' (checkpoint 2, step 4) is not in the skill ontology.",
+        "action_index": 8,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Place Books' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Place Magazines' (checkpoint 2, step 5) is not in the skill ontology.",
+        "action_index": 9,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Place Magazines' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Living Room' (checkpoint 3, step 1) is not in the skill ontology.",
+        "action_index": 10,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Living Room' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Living Room' (checkpoint 3, step 2) is not in the skill ontology.",
+        "action_index": 11,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Living Room' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Kitchen' (checkpoint 3, step 3) is not in the skill ontology.",
+        "action_index": 12,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Kitchen' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Kitchen' (checkpoint 3, step 4) is not in the skill ontology.",
+        "action_index": 13,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Kitchen' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Master Bedroom' (checkpoint 3, step 5) is not in the skill ontology.",
+        "action_index": 14,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Master Bedroom' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Master Bedroom' (checkpoint 3, step 6) is not in the skill ontology.",
+        "action_index": 15,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Master Bedroom' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Bedroom 2' (checkpoint 3, step 7) is not in the skill ontology.",
+        "action_index": 16,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Bedroom 2' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Bedroom 2' (checkpoint 3, step 8) is not in the skill ontology.",
+        "action_index": 17,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Bedroom 2' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Bedroom 3' (checkpoint 3, step 9) is not in the skill ontology.",
+        "action_index": 18,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Bedroom 3' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Bedroom 3' (checkpoint 3, step 10) is not in the skill ontology.",
+        "action_index": 19,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Bedroom 3' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Attached Bathroom' (checkpoint 3, step 11) is not in the skill ontology.",
+        "action_index": 20,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Attached Bathroom' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Attached Bathroom' (checkpoint 3, step 12) is not in the skill ontology.",
+        "action_index": 21,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Attached Bathroom' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Common Bathroom' (checkpoint 3, step 13) is not in the skill ontology.",
+        "action_index": 22,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Common Bathroom' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Common Bathroom' (checkpoint 3, step 14) is not in the skill ontology.",
+        "action_index": 23,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Common Bathroom' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Balcony' (checkpoint 3, step 15) is not in the skill ontology.",
+        "action_index": 24,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Balcony' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Balcony' (checkpoint 3, step 16) is not in the skill ontology.",
+        "action_index": 25,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Balcony' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Navigate to Corridor' (checkpoint 3, step 17) is not in the skill ontology.",
+        "action_index": 26,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Corridor' or add a new ontology entry."
+      },
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'Inspect Corridor' (checkpoint 3, step 18) is not in the skill ontology.",
+        "action_index": 27,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Corridor' or add a new ontology entry."
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Living Room' in action 'Navigate to Living Room' (checkpoint 1, step 1) does not exist in world 'College Campus'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Living Room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Living Room' in action 'Detect misplaced items' (checkpoint 1, step 2) does not exist in world 'College Campus'.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Living Room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Living Room' in action 'Pick up Shoes' (checkpoint 1, step 3) does not exist in world 'College Campus'.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Living Room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Living Room' in action 'Pick up Books' (checkpoint 1, step 4) does not exist in world 'College Campus'.",
+        "action_index": 3,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Living Room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Living Room' in action 'Pick up Magazines' (checkpoint 1, step 5) does not exist in world 'College Campus'.",
+        "action_index": 4,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Living Room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Corridor' in action 'Navigate to Corridor' (checkpoint 2, step 1) does not exist in world 'College Campus'.",
+        "action_index": 5,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Corridor"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Corridor' in action 'Place Shoes' (checkpoint 2, step 2) does not exist in world 'College Campus'.",
+        "action_index": 6,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Corridor"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Bookshelf' in action 'Navigate to Bookshelf' (checkpoint 2, step 3) does not exist in world 'College Campus'.",
+        "action_index": 7,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Bookshelf' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Bookshelf"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Bookshelf' in action 'Place Books' (checkpoint 2, step 4) does not exist in world 'College Campus'.",
+        "action_index": 8,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Bookshelf' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Bookshelf"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Bookshelf' in action 'Place Magazines' (checkpoint 2, step 5) does not exist in world 'College Campus'.",
+        "action_index": 9,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Bookshelf' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Bookshelf"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Living Room' in action 'Navigate to Living Room' (checkpoint 3, step 1) does not exist in world 'College Campus'.",
+        "action_index": 10,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Living Room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Living Room' in action 'Inspect Living Room' (checkpoint 3, step 2) does not exist in world 'College Campus'.",
+        "action_index": 11,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Living Room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Kitchen' in action 'Navigate to Kitchen' (checkpoint 3, step 3) does not exist in world 'College Campus'.",
+        "action_index": 12,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Kitchen' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Kitchen"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Kitchen' in action 'Inspect Kitchen' (checkpoint 3, step 4) does not exist in world 'College Campus'.",
+        "action_index": 13,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Kitchen' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Kitchen"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Master Bedroom' in action 'Navigate to Master Bedroom' (checkpoint 3, step 5) does not exist in world 'College Campus'.",
+        "action_index": 14,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Master Bedroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Master Bedroom"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Master Bedroom' in action 'Inspect Master Bedroom' (checkpoint 3, step 6) does not exist in world 'College Campus'.",
+        "action_index": 15,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Master Bedroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Master Bedroom"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Bedroom 2' in action 'Navigate to Bedroom 2' (checkpoint 3, step 7) does not exist in world 'College Campus'.",
+        "action_index": 16,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Bedroom 2' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Bedroom 2"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Bedroom 2' in action 'Inspect Bedroom 2' (checkpoint 3, step 8) does not exist in world 'College Campus'.",
+        "action_index": 17,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Bedroom 2' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Bedroom 2"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Bedroom 3' in action 'Navigate to Bedroom 3' (checkpoint 3, step 9) does not exist in world 'College Campus'.",
+        "action_index": 18,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Bedroom 3' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Bedroom 3"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Bedroom 3' in action 'Inspect Bedroom 3' (checkpoint 3, step 10) does not exist in world 'College Campus'.",
+        "action_index": 19,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Bedroom 3' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Bedroom 3"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Attached Bathroom' in action 'Navigate to Attached Bathroom' (checkpoint 3, step 11) does not exist in world 'College Campus'.",
+        "action_index": 20,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Attached Bathroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Attached Bathroom"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Attached Bathroom' in action 'Inspect Attached Bathroom' (checkpoint 3, step 12) does not exist in world 'College Campus'.",
+        "action_index": 21,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Attached Bathroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Attached Bathroom"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Common Bathroom' in action 'Navigate to Common Bathroom' (checkpoint 3, step 13) does not exist in world 'College Campus'.",
+        "action_index": 22,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Common Bathroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Common Bathroom"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Common Bathroom' in action 'Inspect Common Bathroom' (checkpoint 3, step 14) does not exist in world 'College Campus'.",
+        "action_index": 23,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Common Bathroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Common Bathroom"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Balcony' in action 'Navigate to Balcony' (checkpoint 3, step 15) does not exist in world 'College Campus'.",
+        "action_index": 24,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Balcony' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Balcony"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Balcony' in action 'Inspect Balcony' (checkpoint 3, step 16) does not exist in world 'College Campus'.",
+        "action_index": 25,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Balcony' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Balcony"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Corridor' in action 'Navigate to Corridor' (checkpoint 3, step 17) does not exist in world 'College Campus'.",
+        "action_index": 26,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Corridor"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Corridor' in action 'Inspect Corridor' (checkpoint 3, step 18) does not exist in world 'College Campus'.",
+        "action_index": 27,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Corridor"
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Living Room' (checkpoint 1, step 1).",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Living Room' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Detect misplaced items' (checkpoint 1, step 2).",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Detect misplaced items' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Pick up Shoes' (checkpoint 1, step 3).",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Pick up Shoes' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Pick up Books' (checkpoint 1, step 4).",
+        "action_index": 3,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Pick up Books' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Pick up Magazines' (checkpoint 1, step 5).",
+        "action_index": 4,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Pick up Magazines' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Corridor' (checkpoint 2, step 1).",
+        "action_index": 5,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Corridor' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Place Shoes' (checkpoint 2, step 2).",
+        "action_index": 6,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Place Shoes' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Bookshelf' (checkpoint 2, step 3).",
+        "action_index": 7,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Bookshelf' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Place Books' (checkpoint 2, step 4).",
+        "action_index": 8,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Place Books' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Place Magazines' (checkpoint 2, step 5).",
+        "action_index": 9,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Place Magazines' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Living Room' (checkpoint 3, step 1).",
+        "action_index": 10,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Living Room' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Living Room' (checkpoint 3, step 2).",
+        "action_index": 11,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Living Room' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Kitchen' (checkpoint 3, step 3).",
+        "action_index": 12,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Kitchen' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Kitchen' (checkpoint 3, step 4).",
+        "action_index": 13,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Kitchen' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Master Bedroom' (checkpoint 3, step 5).",
+        "action_index": 14,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Master Bedroom' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Master Bedroom' (checkpoint 3, step 6).",
+        "action_index": 15,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Master Bedroom' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Bedroom 2' (checkpoint 3, step 7).",
+        "action_index": 16,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Bedroom 2' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Bedroom 2' (checkpoint 3, step 8).",
+        "action_index": 17,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Bedroom 2' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Bedroom 3' (checkpoint 3, step 9).",
+        "action_index": 18,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Bedroom 3' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Bedroom 3' (checkpoint 3, step 10).",
+        "action_index": 19,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Bedroom 3' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Attached Bathroom' (checkpoint 3, step 11).",
+        "action_index": 20,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Attached Bathroom' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Attached Bathroom' (checkpoint 3, step 12).",
+        "action_index": 21,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Attached Bathroom' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Common Bathroom' (checkpoint 3, step 13).",
+        "action_index": 22,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Common Bathroom' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Common Bathroom' (checkpoint 3, step 14).",
+        "action_index": 23,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Common Bathroom' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Balcony' (checkpoint 3, step 15).",
+        "action_index": 24,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Balcony' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Balcony' (checkpoint 3, step 16).",
+        "action_index": 25,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Balcony' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Navigate to Corridor' (checkpoint 3, step 17).",
+        "action_index": 26,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Corridor' or a matching alias."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'Inspect Corridor' (checkpoint 3, step 18).",
+        "action_index": 27,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Corridor' or a matching alias."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'Pick up Shoes' requires picking capability (can_pick or can_grasp) which robot 'a1' lacks.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with a manipulator arm, or remove pick step."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'Pick up Books' requires picking capability (can_pick or can_grasp) which robot 'a1' lacks.",
+        "action_index": 3,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with a manipulator arm, or remove pick step."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'Pick up Magazines' requires picking capability (can_pick or can_grasp) which robot 'a1' lacks.",
+        "action_index": 4,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with a manipulator arm, or remove pick step."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'Place Shoes' requires place capability which robot 'a1' lacks.",
+        "action_index": 6,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with can_place capability."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'Place Books' requires place capability which robot 'a1' lacks.",
+        "action_index": 8,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with can_place capability."
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'Place Magazines' requires place capability which robot 'a1' lacks.",
+        "action_index": 9,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with can_place capability."
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Action 'Detect misplaced items' on 'shoes, books, magazines' requires a prior pick action, but none was found.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Reorder actions to satisfy preconditions first."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Shoes, Books, Magazines' referenced in action 'Detect misplaced items' (checkpoint 1, step 2) does not exist in the world 'College Campus'.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Shoes, Books, Magazines' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Shoes, Books, Magazines"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Shoes' referenced in action 'Pick up Shoes' (checkpoint 1, step 3) does not exist in the world 'College Campus'.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Shoes' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Shoes"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Magazines' referenced in action 'Pick up Magazines' (checkpoint 1, step 5) does not exist in the world 'College Campus'.",
+        "action_index": 4,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Magazines' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Magazines"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Shoes' referenced in action 'Place Shoes' (checkpoint 2, step 2) does not exist in the world 'College Campus'.",
+        "action_index": 6,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Shoes' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Shoes"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Magazines' referenced in action 'Place Magazines' (checkpoint 2, step 5) does not exist in the world 'College Campus'.",
+        "action_index": 9,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Magazines' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Magazines"
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Action 'Pick up Shoes' (idx=2): picking 'shoes' without a prior locate/detect step.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Add a detect_object or locate_object step for 'shoes' before picking it."
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Action 'Pick up Books' (idx=3): picking 'books' without a prior locate/detect step.",
+        "action_index": 3,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Add a detect_object or locate_object step for 'books' before picking it."
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Action 'Pick up Magazines' (idx=4): picking 'magazines' without a prior locate/detect step.",
+        "action_index": 4,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Add a detect_object or locate_object step for 'magazines' before picking it."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Pick up Magazines' → 'Navigate to Corridor' (phase 3 → 1).",
+        "action_index": 5,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Place Shoes' → 'Navigate to Bookshelf' (phase 5 → 1).",
+        "action_index": 7,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Place Magazines' → 'Navigate to Living Room' (phase 5 → 1).",
+        "action_index": 10,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Inspect Living Room' → 'Navigate to Kitchen' (phase 6 → 1).",
+        "action_index": 12,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Inspect Kitchen' → 'Navigate to Master Bedroom' (phase 6 → 1).",
+        "action_index": 14,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Inspect Master Bedroom' → 'Navigate to Bedroom 2' (phase 6 → 1).",
+        "action_index": 16,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Inspect Bedroom 2' → 'Navigate to Bedroom 3' (phase 6 → 1).",
+        "action_index": 18,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Inspect Bedroom 3' → 'Navigate to Attached Bathroom' (phase 6 → 1).",
+        "action_index": 20,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Inspect Attached Bathroom' → 'Navigate to Common Bathroom' (phase 6 → 1).",
+        "action_index": 22,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Inspect Common Bathroom' → 'Navigate to Balcony' (phase 6 → 1).",
+        "action_index": 24,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'Inspect Balcony' → 'Navigate to Corridor' (phase 6 → 1).",
+        "action_index": 26,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 100%, task-to-exit-state coverage: 0%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "apartment",
+          "before",
+          "books",
+          "collecting",
+          "designated",
+          "each",
+          "every",
+          "finishing",
+          "inspecting",
+          "item",
+          "its",
+          "location",
+          "magazines",
+          "misplaced",
+          "organize",
+          "returning",
+          "room",
+          "shoes"
+        ],
+        "goal_keywords": [
+          "apartment",
+          "before",
+          "books",
+          "collecting",
+          "designated",
+          "each",
+          "every",
+          "finishing",
+          "inspecting",
+          "item",
+          "its",
+          "location",
+          "magazines",
+          "misplaced",
+          "organize",
+          "returning",
+          "room",
+          "shoes"
+        ],
+        "matched_goal_keywords": [
+          "apartment",
+          "before",
+          "books",
+          "collecting",
+          "designated",
+          "each",
+          "every",
+          "finishing",
+          "inspecting",
+          "item",
+          "its",
+          "location",
+          "magazines",
+          "misplaced",
+          "organize",
+          "returning",
+          "room",
+          "shoes"
+        ],
+        "matched_exit_keywords": []
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'living room': visited at action index 0 and again at 10.",
+        "action_index": 10,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'living room' into a single trip, or reorder actions to avoid backtracking."
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'corridor': visited at action index 5 and again at 26.",
+        "action_index": 26,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'corridor' into a single trip, or reorder actions to avoid backtracking."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "Navigate to Living Room",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Living Room' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "Detect misplaced items",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Detect misplaced items' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 1,
+        "step": 3,
+        "action_name": "Pick up Shoes",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Pick up Shoes' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 1,
+        "step": 4,
+        "action_name": "Pick up Books",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Pick up Books' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 1,
+        "step": 5,
+        "action_name": "Pick up Magazines",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Pick up Magazines' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "Navigate to Corridor",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Corridor' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 2,
+        "step": 2,
+        "action_name": "Place Shoes",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Place Shoes' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 7,
+        "checkpoint_id": 2,
+        "step": 3,
+        "action_name": "Navigate to Bookshelf",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Bookshelf' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 8,
+        "checkpoint_id": 2,
+        "step": 4,
+        "action_name": "Place Books",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Place Books' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 9,
+        "checkpoint_id": 2,
+        "step": 5,
+        "action_name": "Place Magazines",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Place Magazines' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 10,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "Navigate to Living Room",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Living Room' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 11,
+        "checkpoint_id": 3,
+        "step": 2,
+        "action_name": "Inspect Living Room",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Living Room' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 12,
+        "checkpoint_id": 3,
+        "step": 3,
+        "action_name": "Navigate to Kitchen",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Kitchen' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 13,
+        "checkpoint_id": 3,
+        "step": 4,
+        "action_name": "Inspect Kitchen",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Kitchen' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 14,
+        "checkpoint_id": 3,
+        "step": 5,
+        "action_name": "Navigate to Master Bedroom",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Master Bedroom' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 15,
+        "checkpoint_id": 3,
+        "step": 6,
+        "action_name": "Inspect Master Bedroom",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Master Bedroom' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 16,
+        "checkpoint_id": 3,
+        "step": 7,
+        "action_name": "Navigate to Bedroom 2",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Bedroom 2' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 17,
+        "checkpoint_id": 3,
+        "step": 8,
+        "action_name": "Inspect Bedroom 2",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Bedroom 2' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 18,
+        "checkpoint_id": 3,
+        "step": 9,
+        "action_name": "Navigate to Bedroom 3",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Bedroom 3' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 19,
+        "checkpoint_id": 3,
+        "step": 10,
+        "action_name": "Inspect Bedroom 3",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Bedroom 3' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 20,
+        "checkpoint_id": 3,
+        "step": 11,
+        "action_name": "Navigate to Attached Bathroom",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Attached Bathroom' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 21,
+        "checkpoint_id": 3,
+        "step": 12,
+        "action_name": "Inspect Attached Bathroom",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Attached Bathroom' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 22,
+        "checkpoint_id": 3,
+        "step": 13,
+        "action_name": "Navigate to Common Bathroom",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Common Bathroom' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 23,
+        "checkpoint_id": 3,
+        "step": 14,
+        "action_name": "Inspect Common Bathroom",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Common Bathroom' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 24,
+        "checkpoint_id": 3,
+        "step": 15,
+        "action_name": "Navigate to Balcony",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Balcony' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 25,
+        "checkpoint_id": 3,
+        "step": 16,
+        "action_name": "Inspect Balcony",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Balcony' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 26,
+        "checkpoint_id": 3,
+        "step": 17,
+        "action_name": "Navigate to Corridor",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Navigate to Corridor' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 27,
+        "checkpoint_id": 3,
+        "step": 18,
+        "action_name": "Inspect Corridor",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'Inspect Corridor' has no matching skill in the ontology; capability check skipped."
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Living Room' (checkpoint 1, step 1) is not in the skill ontology.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Living Room' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Detect misplaced items' (checkpoint 1, step 2) is not in the skill ontology.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Detect misplaced items' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Pick up Shoes' (checkpoint 1, step 3) is not in the skill ontology.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Pick up Shoes' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Pick up Books' (checkpoint 1, step 4) is not in the skill ontology.",
+            "action_index": 3,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Pick up Books' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Pick up Magazines' (checkpoint 1, step 5) is not in the skill ontology.",
+            "action_index": 4,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Pick up Magazines' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Corridor' (checkpoint 2, step 1) is not in the skill ontology.",
+            "action_index": 5,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Corridor' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Place Shoes' (checkpoint 2, step 2) is not in the skill ontology.",
+            "action_index": 6,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Place Shoes' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Bookshelf' (checkpoint 2, step 3) is not in the skill ontology.",
+            "action_index": 7,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Bookshelf' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Place Books' (checkpoint 2, step 4) is not in the skill ontology.",
+            "action_index": 8,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Place Books' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Place Magazines' (checkpoint 2, step 5) is not in the skill ontology.",
+            "action_index": 9,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Place Magazines' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Living Room' (checkpoint 3, step 1) is not in the skill ontology.",
+            "action_index": 10,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Living Room' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Living Room' (checkpoint 3, step 2) is not in the skill ontology.",
+            "action_index": 11,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Living Room' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Kitchen' (checkpoint 3, step 3) is not in the skill ontology.",
+            "action_index": 12,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Kitchen' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Kitchen' (checkpoint 3, step 4) is not in the skill ontology.",
+            "action_index": 13,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Kitchen' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Master Bedroom' (checkpoint 3, step 5) is not in the skill ontology.",
+            "action_index": 14,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Master Bedroom' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Master Bedroom' (checkpoint 3, step 6) is not in the skill ontology.",
+            "action_index": 15,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Master Bedroom' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Bedroom 2' (checkpoint 3, step 7) is not in the skill ontology.",
+            "action_index": 16,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Bedroom 2' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Bedroom 2' (checkpoint 3, step 8) is not in the skill ontology.",
+            "action_index": 17,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Bedroom 2' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Bedroom 3' (checkpoint 3, step 9) is not in the skill ontology.",
+            "action_index": 18,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Bedroom 3' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Bedroom 3' (checkpoint 3, step 10) is not in the skill ontology.",
+            "action_index": 19,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Bedroom 3' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Attached Bathroom' (checkpoint 3, step 11) is not in the skill ontology.",
+            "action_index": 20,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Attached Bathroom' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Attached Bathroom' (checkpoint 3, step 12) is not in the skill ontology.",
+            "action_index": 21,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Attached Bathroom' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Common Bathroom' (checkpoint 3, step 13) is not in the skill ontology.",
+            "action_index": 22,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Common Bathroom' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Common Bathroom' (checkpoint 3, step 14) is not in the skill ontology.",
+            "action_index": 23,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Common Bathroom' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Balcony' (checkpoint 3, step 15) is not in the skill ontology.",
+            "action_index": 24,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Balcony' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Balcony' (checkpoint 3, step 16) is not in the skill ontology.",
+            "action_index": 25,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Balcony' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Navigate to Corridor' (checkpoint 3, step 17) is not in the skill ontology.",
+            "action_index": 26,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Navigate to Corridor' or add a new ontology entry."
+          },
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'Inspect Corridor' (checkpoint 3, step 18) is not in the skill ontology.",
+            "action_index": 27,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'Inspect Corridor' or add a new ontology entry."
+          }
+        ],
+        "comments": "0/28 actions are valid. Score: 0.00%.",
+        "valid_actions": 0,
+        "total_actions": 28
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.2857,
+        "normalised_score": 0.2857,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Shoes, Books, Magazines' referenced in action 'Detect misplaced items' (checkpoint 1, step 2) does not exist in the world 'College Campus'.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Shoes, Books, Magazines' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Shoes, Books, Magazines"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Shoes' referenced in action 'Pick up Shoes' (checkpoint 1, step 3) does not exist in the world 'College Campus'.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Shoes' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Shoes"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Magazines' referenced in action 'Pick up Magazines' (checkpoint 1, step 5) does not exist in the world 'College Campus'.",
+            "action_index": 4,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Magazines' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Magazines"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Shoes' referenced in action 'Place Shoes' (checkpoint 2, step 2) does not exist in the world 'College Campus'.",
+            "action_index": 6,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Shoes' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Shoes"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Magazines' referenced in action 'Place Magazines' (checkpoint 2, step 5) does not exist in the world 'College Campus'.",
+            "action_index": 9,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Magazines' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Magazines"
+          }
+        ],
+        "comments": "2/7 object references are valid. Score: 28.57%.",
+        "valid_objects": 2,
+        "total_object_refs": 7
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Living Room' in action 'Navigate to Living Room' (checkpoint 1, step 1) does not exist in world 'College Campus'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Living Room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Living Room' in action 'Detect misplaced items' (checkpoint 1, step 2) does not exist in world 'College Campus'.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Living Room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Living Room' in action 'Pick up Shoes' (checkpoint 1, step 3) does not exist in world 'College Campus'.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Living Room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Living Room' in action 'Pick up Books' (checkpoint 1, step 4) does not exist in world 'College Campus'.",
+            "action_index": 3,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Living Room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Living Room' in action 'Pick up Magazines' (checkpoint 1, step 5) does not exist in world 'College Campus'.",
+            "action_index": 4,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Living Room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Corridor' in action 'Navigate to Corridor' (checkpoint 2, step 1) does not exist in world 'College Campus'.",
+            "action_index": 5,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Corridor"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Corridor' in action 'Place Shoes' (checkpoint 2, step 2) does not exist in world 'College Campus'.",
+            "action_index": 6,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Corridor"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Bookshelf' in action 'Navigate to Bookshelf' (checkpoint 2, step 3) does not exist in world 'College Campus'.",
+            "action_index": 7,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Bookshelf' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Bookshelf"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Bookshelf' in action 'Place Books' (checkpoint 2, step 4) does not exist in world 'College Campus'.",
+            "action_index": 8,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Bookshelf' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Bookshelf"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Bookshelf' in action 'Place Magazines' (checkpoint 2, step 5) does not exist in world 'College Campus'.",
+            "action_index": 9,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Bookshelf' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Bookshelf"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Living Room' in action 'Navigate to Living Room' (checkpoint 3, step 1) does not exist in world 'College Campus'.",
+            "action_index": 10,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Living Room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Living Room' in action 'Inspect Living Room' (checkpoint 3, step 2) does not exist in world 'College Campus'.",
+            "action_index": 11,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Living Room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Living Room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Kitchen' in action 'Navigate to Kitchen' (checkpoint 3, step 3) does not exist in world 'College Campus'.",
+            "action_index": 12,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Kitchen' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Kitchen"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Kitchen' in action 'Inspect Kitchen' (checkpoint 3, step 4) does not exist in world 'College Campus'.",
+            "action_index": 13,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Kitchen' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Kitchen"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Master Bedroom' in action 'Navigate to Master Bedroom' (checkpoint 3, step 5) does not exist in world 'College Campus'.",
+            "action_index": 14,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Master Bedroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Master Bedroom"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Master Bedroom' in action 'Inspect Master Bedroom' (checkpoint 3, step 6) does not exist in world 'College Campus'.",
+            "action_index": 15,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Master Bedroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Master Bedroom"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Bedroom 2' in action 'Navigate to Bedroom 2' (checkpoint 3, step 7) does not exist in world 'College Campus'.",
+            "action_index": 16,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Bedroom 2' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Bedroom 2"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Bedroom 2' in action 'Inspect Bedroom 2' (checkpoint 3, step 8) does not exist in world 'College Campus'.",
+            "action_index": 17,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Bedroom 2' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Bedroom 2"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Bedroom 3' in action 'Navigate to Bedroom 3' (checkpoint 3, step 9) does not exist in world 'College Campus'.",
+            "action_index": 18,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Bedroom 3' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Bedroom 3"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Bedroom 3' in action 'Inspect Bedroom 3' (checkpoint 3, step 10) does not exist in world 'College Campus'.",
+            "action_index": 19,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Bedroom 3' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Bedroom 3"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Attached Bathroom' in action 'Navigate to Attached Bathroom' (checkpoint 3, step 11) does not exist in world 'College Campus'.",
+            "action_index": 20,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Attached Bathroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Attached Bathroom"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Attached Bathroom' in action 'Inspect Attached Bathroom' (checkpoint 3, step 12) does not exist in world 'College Campus'.",
+            "action_index": 21,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Attached Bathroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Attached Bathroom"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Common Bathroom' in action 'Navigate to Common Bathroom' (checkpoint 3, step 13) does not exist in world 'College Campus'.",
+            "action_index": 22,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Common Bathroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Common Bathroom"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Common Bathroom' in action 'Inspect Common Bathroom' (checkpoint 3, step 14) does not exist in world 'College Campus'.",
+            "action_index": 23,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Common Bathroom' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Common Bathroom"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Balcony' in action 'Navigate to Balcony' (checkpoint 3, step 15) does not exist in world 'College Campus'.",
+            "action_index": 24,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Balcony' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Balcony"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Balcony' in action 'Inspect Balcony' (checkpoint 3, step 16) does not exist in world 'College Campus'.",
+            "action_index": 25,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Balcony' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Balcony"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Corridor' in action 'Navigate to Corridor' (checkpoint 3, step 17) does not exist in world 'College Campus'.",
+            "action_index": 26,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Corridor"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Corridor' in action 'Inspect Corridor' (checkpoint 3, step 18) does not exist in world 'College Campus'.",
+            "action_index": 27,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Corridor"
+          }
+        ],
+        "comments": "0/28 location references are valid. Score: 0.00%.",
+        "valid_locations": 0,
+        "total_location_refs": 28
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Living Room' (checkpoint 1, step 1).",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Living Room' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Detect misplaced items' (checkpoint 1, step 2).",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Detect misplaced items' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Pick up Shoes' (checkpoint 1, step 3).",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Pick up Shoes' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Pick up Books' (checkpoint 1, step 4).",
+            "action_index": 3,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Pick up Books' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Pick up Magazines' (checkpoint 1, step 5).",
+            "action_index": 4,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Pick up Magazines' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Corridor' (checkpoint 2, step 1).",
+            "action_index": 5,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Corridor' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Place Shoes' (checkpoint 2, step 2).",
+            "action_index": 6,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Place Shoes' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Bookshelf' (checkpoint 2, step 3).",
+            "action_index": 7,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Bookshelf' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Place Books' (checkpoint 2, step 4).",
+            "action_index": 8,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Place Books' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Place Magazines' (checkpoint 2, step 5).",
+            "action_index": 9,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Place Magazines' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Living Room' (checkpoint 3, step 1).",
+            "action_index": 10,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Living Room' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Living Room' (checkpoint 3, step 2).",
+            "action_index": 11,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Living Room' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Kitchen' (checkpoint 3, step 3).",
+            "action_index": 12,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Kitchen' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Kitchen' (checkpoint 3, step 4).",
+            "action_index": 13,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Kitchen' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Master Bedroom' (checkpoint 3, step 5).",
+            "action_index": 14,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Master Bedroom' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Master Bedroom' (checkpoint 3, step 6).",
+            "action_index": 15,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Master Bedroom' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Bedroom 2' (checkpoint 3, step 7).",
+            "action_index": 16,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Bedroom 2' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Bedroom 2' (checkpoint 3, step 8).",
+            "action_index": 17,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Bedroom 2' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Bedroom 3' (checkpoint 3, step 9).",
+            "action_index": 18,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Bedroom 3' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Bedroom 3' (checkpoint 3, step 10).",
+            "action_index": 19,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Bedroom 3' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Attached Bathroom' (checkpoint 3, step 11).",
+            "action_index": 20,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Attached Bathroom' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Attached Bathroom' (checkpoint 3, step 12).",
+            "action_index": 21,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Attached Bathroom' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Common Bathroom' (checkpoint 3, step 13).",
+            "action_index": 22,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Common Bathroom' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Common Bathroom' (checkpoint 3, step 14).",
+            "action_index": 23,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Common Bathroom' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Balcony' (checkpoint 3, step 15).",
+            "action_index": 24,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Balcony' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Balcony' (checkpoint 3, step 16).",
+            "action_index": 25,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Balcony' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Navigate to Corridor' (checkpoint 3, step 17).",
+            "action_index": 26,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Navigate to Corridor' or a matching alias."
+          },
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'Inspect Corridor' (checkpoint 3, step 18).",
+            "action_index": 27,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='Inspect Corridor' or a matching alias."
+          }
+        ],
+        "comments": "0/28 actions map to valid skills. Score: 0.00%.",
+        "mapped_actions": 0,
+        "total_actions": 28
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/28 actions are capability-compatible with robot 'a1'. Score: 0.00%.",
+        "compatible_actions": 0,
+        "total_actions": 28,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "Navigate to Living Room",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Living Room' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "Detect misplaced items",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Detect misplaced items' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 1,
+            "step": 3,
+            "action_name": "Pick up Shoes",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Pick up Shoes' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 1,
+            "step": 4,
+            "action_name": "Pick up Books",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Pick up Books' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 1,
+            "step": 5,
+            "action_name": "Pick up Magazines",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Pick up Magazines' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "Navigate to Corridor",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Corridor' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 2,
+            "step": 2,
+            "action_name": "Place Shoes",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Place Shoes' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 7,
+            "checkpoint_id": 2,
+            "step": 3,
+            "action_name": "Navigate to Bookshelf",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Bookshelf' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 8,
+            "checkpoint_id": 2,
+            "step": 4,
+            "action_name": "Place Books",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Place Books' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 9,
+            "checkpoint_id": 2,
+            "step": 5,
+            "action_name": "Place Magazines",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Place Magazines' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 10,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "Navigate to Living Room",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Living Room' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 11,
+            "checkpoint_id": 3,
+            "step": 2,
+            "action_name": "Inspect Living Room",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Living Room' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 12,
+            "checkpoint_id": 3,
+            "step": 3,
+            "action_name": "Navigate to Kitchen",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Kitchen' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 13,
+            "checkpoint_id": 3,
+            "step": 4,
+            "action_name": "Inspect Kitchen",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Kitchen' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 14,
+            "checkpoint_id": 3,
+            "step": 5,
+            "action_name": "Navigate to Master Bedroom",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Master Bedroom' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 15,
+            "checkpoint_id": 3,
+            "step": 6,
+            "action_name": "Inspect Master Bedroom",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Master Bedroom' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 16,
+            "checkpoint_id": 3,
+            "step": 7,
+            "action_name": "Navigate to Bedroom 2",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Bedroom 2' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 17,
+            "checkpoint_id": 3,
+            "step": 8,
+            "action_name": "Inspect Bedroom 2",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Bedroom 2' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 18,
+            "checkpoint_id": 3,
+            "step": 9,
+            "action_name": "Navigate to Bedroom 3",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Bedroom 3' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 19,
+            "checkpoint_id": 3,
+            "step": 10,
+            "action_name": "Inspect Bedroom 3",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Bedroom 3' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 20,
+            "checkpoint_id": 3,
+            "step": 11,
+            "action_name": "Navigate to Attached Bathroom",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Attached Bathroom' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 21,
+            "checkpoint_id": 3,
+            "step": 12,
+            "action_name": "Inspect Attached Bathroom",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Attached Bathroom' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 22,
+            "checkpoint_id": 3,
+            "step": 13,
+            "action_name": "Navigate to Common Bathroom",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Common Bathroom' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 23,
+            "checkpoint_id": 3,
+            "step": 14,
+            "action_name": "Inspect Common Bathroom",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Common Bathroom' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 24,
+            "checkpoint_id": 3,
+            "step": 15,
+            "action_name": "Navigate to Balcony",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Balcony' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 25,
+            "checkpoint_id": 3,
+            "step": 16,
+            "action_name": "Inspect Balcony",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Balcony' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 26,
+            "checkpoint_id": 3,
+            "step": 17,
+            "action_name": "Navigate to Corridor",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Navigate to Corridor' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 27,
+            "checkpoint_id": 3,
+            "step": 18,
+            "action_name": "Inspect Corridor",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'Inspect Corridor' has no matching skill in the ontology; capability check skipped."
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 0.6667,
+        "normalised_score": 0.6667,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'Pick up Shoes' requires picking capability (can_pick or can_grasp) which robot 'a1' lacks.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with a manipulator arm, or remove pick step."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'Pick up Books' requires picking capability (can_pick or can_grasp) which robot 'a1' lacks.",
+            "action_index": 3,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with a manipulator arm, or remove pick step."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'Pick up Magazines' requires picking capability (can_pick or can_grasp) which robot 'a1' lacks.",
+            "action_index": 4,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with a manipulator arm, or remove pick step."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'Place Shoes' requires place capability which robot 'a1' lacks.",
+            "action_index": 6,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with can_place capability."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'Place Books' requires place capability which robot 'a1' lacks.",
+            "action_index": 8,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with can_place capability."
+          },
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'Place Magazines' requires place capability which robot 'a1' lacks.",
+            "action_index": 9,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with can_place capability."
+          }
+        ],
+        "comments": "12/18 constraint checks satisfied. Score: 66.67%.",
+        "satisfied_constraints": 12,
+        "total_constraints": 18
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 0.9643,
+        "normalised_score": 0.9643,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Action 'Detect misplaced items' on 'shoes, books, magazines' requires a prior pick action, but none was found.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Reorder actions to satisfy preconditions first."
+          },
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Action 'Pick up Shoes' (idx=2): picking 'shoes' without a prior locate/detect step.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Add a detect_object or locate_object step for 'shoes' before picking it."
+          },
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Action 'Pick up Books' (idx=3): picking 'books' without a prior locate/detect step.",
+            "action_index": 3,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Add a detect_object or locate_object step for 'books' before picking it."
+          },
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Action 'Pick up Magazines' (idx=4): picking 'magazines' without a prior locate/detect step.",
+            "action_index": 4,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Add a detect_object or locate_object step for 'magazines' before picking it."
+          }
+        ],
+        "comments": "27/28 actions satisfy their dependencies. Score: 96.43%.",
+        "satisfied_dependencies": 27,
+        "total_actions": 28
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Pick up Magazines' → 'Navigate to Corridor' (phase 3 → 1).",
+            "action_index": 5,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Place Shoes' → 'Navigate to Bookshelf' (phase 5 → 1).",
+            "action_index": 7,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Place Magazines' → 'Navigate to Living Room' (phase 5 → 1).",
+            "action_index": 10,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Inspect Living Room' → 'Navigate to Kitchen' (phase 6 → 1).",
+            "action_index": 12,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Inspect Kitchen' → 'Navigate to Master Bedroom' (phase 6 → 1).",
+            "action_index": 14,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Inspect Master Bedroom' → 'Navigate to Bedroom 2' (phase 6 → 1).",
+            "action_index": 16,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Inspect Bedroom 2' → 'Navigate to Bedroom 3' (phase 6 → 1).",
+            "action_index": 18,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Inspect Bedroom 3' → 'Navigate to Attached Bathroom' (phase 6 → 1).",
+            "action_index": 20,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Inspect Attached Bathroom' → 'Navigate to Common Bathroom' (phase 6 → 1).",
+            "action_index": 22,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Inspect Common Bathroom' → 'Navigate to Balcony' (phase 6 → 1).",
+            "action_index": 24,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'Inspect Balcony' → 'Navigate to Corridor' (phase 6 → 1).",
+            "action_index": 26,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "27/27 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 27,
+        "total_transitions": 27
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 100%, task-to-exit-state coverage: 0%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "apartment",
+              "before",
+              "books",
+              "collecting",
+              "designated",
+              "each",
+              "every",
+              "finishing",
+              "inspecting",
+              "item",
+              "its",
+              "location",
+              "magazines",
+              "misplaced",
+              "organize",
+              "returning",
+              "room",
+              "shoes"
+            ],
+            "goal_keywords": [
+              "apartment",
+              "before",
+              "books",
+              "collecting",
+              "designated",
+              "each",
+              "every",
+              "finishing",
+              "inspecting",
+              "item",
+              "its",
+              "location",
+              "magazines",
+              "misplaced",
+              "organize",
+              "returning",
+              "room",
+              "shoes"
+            ],
+            "matched_goal_keywords": [
+              "apartment",
+              "before",
+              "books",
+              "collecting",
+              "designated",
+              "each",
+              "every",
+              "finishing",
+              "inspecting",
+              "item",
+              "its",
+              "location",
+              "magazines",
+              "misplaced",
+              "organize",
+              "returning",
+              "room",
+              "shoes"
+            ],
+            "matched_exit_keywords": []
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 0%.",
+        "goal_satisfied": false,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.0,
+        "llm_self_reported_valid": null
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 0.9286,
+        "normalised_score": 0.9286,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'living room': visited at action index 0 and again at 10.",
+            "action_index": 10,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'living room' into a single trip, or reorder actions to avoid backtracking."
+          },
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'corridor': visited at action index 5 and again at 26.",
+            "action_index": 26,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'corridor' into a single trip, or reorder actions to avoid backtracking."
+          }
+        ],
+        "comments": "Efficiency: 92.86% (ideal=26, actual=28). Redundant navigations: 2. Repeated actions: 2.",
+        "total_actions": 28,
+        "ideal_steps": 26,
+        "efficiency_score": 0.9286,
+        "redundancy_score": 0.8571,
+        "repeated_actions": 2,
+        "redundant_navigations": 2
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

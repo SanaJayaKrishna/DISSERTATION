@@ -59,6 +59,8 @@ MODELS = [
     "NovaSky-AI/Sky-T1-7B-Preview",
 ]
 
+MODELS = ["Qwen/Qwen3.5-9B"]   
+
 ROBOTS = ["pepper", "g1", "h1", "nao"]
 
 WORKSPACE_NAME = "DEFAULT WORKSPACE"   # matches the Streamlit app
@@ -535,7 +537,10 @@ def infer_model():
         timeout=600
     )
 
-    result = response.json()    
+    # Use response.text (raw string) instead of response.json()
+    # so that malformed LLM output (markdown fences, trailing commas, etc.)
+    # is passed to repair_json_response() instead of crashing here.
+    result = response.text
 
     return result
 

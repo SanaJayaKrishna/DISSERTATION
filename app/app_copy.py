@@ -401,10 +401,386 @@ if generate:
 
         st.spinner("Generating plan...")
         
-        response = infer_model()
-        with st.expander("🤖 Generated Plan", expanded=False):
+        # # response = infer_model()
+        # with st.expander("🤖 Generated Plan", expanded=False):
 
-            st.code(response, language="json")
+        #     st.code(response, language="json")
+    
+
+        response = {
+  "metadata": {
+    "robot": "JulietteY20MP",
+    "world": "Apartment",
+    "task": "Inspect every room for open windows, open doors, and lights left on, correct each issue, and return to the living room.",
+    "model": "Capability-Aware Robot Task Planner"
+  },
+  "goal": "Inspect all rooms (Living Room, Kitchen, Master Bedroom, Bedroom 2, Bedroom 3, Attached Bathroom, Common Bathroom, Balcony, Corridor) for open windows, open doors, and lights left on; close any open doors/windows and turn off any lights; then navigate back to the Living Room.",
+  "checkpoints": [
+    {
+      "checkpoint_id": 1,
+      "checkpoint_goal": "Navigate to the Living Room to begin the inspection sequence.",
+      "entry_state": "Robot is at an unspecified initial location (e.g., Main Entrance).",
+      "exit_state": "Robot is located at the Living Room.",
+      "is_replannable": True,
+      "actions": [
+        {
+          "step": 1,
+          "action": "navigate_to_room",
+          "object": "Living Room",
+          "location": "Living Room"
+        }
+      ],
+      "grounded_skills": [
+        {
+          "step": 1,
+          "abstract_skill": "navigate_to_room",
+          "ros2_interface": "/navigate_to_pose",
+          "reason": "The robot requires navigation to the Living Room to start the inspection. The skill 'navigate_to_room' maps to the Nav2 'navigate_to_pose' action, which is supported by the robot's capabilities (can_navigate, supports_indoor_navigation)."
+        }
+      ]
+    },
+    {
+      "checkpoint_id": 2,
+      "checkpoint_goal": "Inspect the Living Room for open windows, open doors, and lights left on, and correct any issues found.",
+      "entry_state": "Robot is at the Living Room.",
+      "exit_state": "Robot is at the Living Room; all windows, doors, and lights in the Living Room are in their correct state (closed/off).",
+      "is_replannable": True,
+      "actions": [
+        {
+          "step": 1,
+          "action": "detect_door",
+          "object": "Door",
+          "location": "Living Room"
+        },
+        {
+          "step": 2,
+          "action": "detect_window",
+          "object": "Window",
+          "location": "Living Room"
+        },
+        {
+          "step": 3,
+          "action": "detect_light",
+          "object": "Light",
+          "location": "Living Room"
+        },
+        {
+          "step": 4,
+          "action": "close_door",
+          "object": "Door",
+          "location": "Living Room"
+        },
+        {
+          "step": 5,
+          "action": "close_window",
+          "object": "Window",
+          "location": "Living Room"
+        },
+        {
+          "step": 6,
+          "action": "turn_off_light",
+          "object": "Light",
+          "location": "Living Room"
+        }
+      ],
+      "grounded_skills": [
+        {
+          "step": 1,
+          "abstract_skill": "detect_door",
+          "ros2_interface": "/doors",
+          "reason": "Detects doors in the current view to identify potential open doors."
+        },
+        {
+          "step": 2,
+          "abstract_skill": "detect_window",
+          "ros2_interface": "/windows",
+          "reason": "Detects windows in the current view to identify potential open windows."
+        },
+        {
+          "step": 3,
+          "abstract_skill": "detect_light",
+          "ros2_interface": "/lights",
+          "reason": "Detects lights in the current view to identify potential lights left on."
+        },
+        {
+          "step": 4,
+          "abstract_skill": "close_door",
+          "ros2_interface": "/close_door",
+          "reason": "Closes any detected open doors."
+        },
+        {
+          "step": 5,
+          "abstract_skill": "close_window",
+          "ros2_interface": "/close_window",
+          "reason": "Closes any detected open windows."
+        },
+        {
+          "step": 6,
+          "abstract_skill": "turn_off_light",
+          "ros2_interface": "/turn_off_light",
+          "reason": "Turns off any detected lights left on."
+        }
+      ]
+    },
+    {
+      "checkpoint_id": 3,
+      "checkpoint_goal": "Inspect the Kitchen for open windows, open doors, and lights left on, and correct any issues found.",
+      "entry_state": "Robot is at the Living Room.",
+      "exit_state": "Robot is at the Kitchen; all windows, doors, and lights in the Kitchen are in their correct state (closed/off).",
+      "is_replannable": True,
+      "actions": [
+        {
+          "step": 1,
+          "action": "navigate_to_room",
+          "object": "Kitchen",
+          "location": "Kitchen"
+        },
+        {
+          "step": 2,
+          "action": "detect_door",
+          "object": "Door",
+          "location": "Kitchen"
+        },
+        {
+          "step": 3,
+          "action": "detect_window",
+          "object": "Window",
+          "location": "Kitchen"
+        },
+        {
+          "step": 4,
+          "action": "detect_light",
+          "object": "Light",
+          "location": "Kitchen"
+        },
+        {
+          "step": 5,
+          "action": "close_door",
+          "object": "Door",
+          "location": "Kitchen"
+        },
+        {
+          "step": 6,
+          "action": "close_window",
+          "object": "Window",
+          "location": "Kitchen"
+        },
+        {
+          "step": 7,
+          "action": "turn_off_light",
+          "object": "Light",
+          "location": "Kitchen"
+        }
+      ],
+      "grounded_skills": [
+        {
+          "step": 1,
+          "abstract_skill": "navigate_to_room",
+          "ros2_interface": "/navigate_to_pose",
+          "reason": "Navigates to the Kitchen."
+        },
+        {
+          "step": 2,
+          "abstract_skill": "detect_door",
+          "ros2_interface": "/doors",
+          "reason": "Detects doors in the Kitchen."
+        },
+        {
+          "step": 3,
+          "abstract_skill": "detect_window",
+          "ros2_interface": "/windows",
+          "reason": "Detects windows in the Kitchen."
+        },
+        {
+          "step": 4,
+          "abstract_skill": "detect_light",
+          "ros2_interface": "/lights",
+          "reason": "Detects lights in the Kitchen."
+        },
+        {
+          "step": 5,
+          "abstract_skill": "close_door",
+          "ros2_interface": "/close_door",
+          "reason": "Closes any detected open doors in the Kitchen."
+        },
+        {
+          "step": 6,
+          "abstract_skill": "close_window",
+          "ros2_interface": "/close_window",
+          "reason": "Closes any detected open windows in the Kitchen."
+        },
+        {
+          "step": 7,
+          "abstract_skill": "turn_off_light",
+          "ros2_interface": "/turn_off_light",
+          "reason": "Turns off any detected lights left on in the Kitchen."
+        }
+      ]
+    },
+    {
+      "checkpoint_id": 4,
+      "checkpoint_goal": "Inspect the Master Bedroom for open windows, open doors, and lights left on, and correct any issues found.",
+      "entry_state": "Robot is at the Kitchen.",
+      "exit_state": "Robot is at the Master Bedroom; all windows, doors, and lights in the Master Bedroom are in their correct state (closed/off).",
+      "is_replannable": True,
+      "actions": [
+        {
+          "step": 1,
+          "action": "navigate_to_room",
+          "object": "Master Bedroom",
+          "location": "Master Bedroom"
+        },
+        {
+          "step": 2,
+          "action": "detect_door",
+          "object": "Door",
+          "location": "Master Bedroom"
+        },
+        {
+          "step": 3,
+          "action": "detect_window",
+          "object": "Window",
+          "location": "Master Bedroom"
+        },
+        {
+          "step": 4,
+          "action": "detect_light",
+          "object": "Light",
+          "location": "Master Bedroom"
+        },
+        {
+          "step": 5,
+          "action": "close_door",
+          "object": "Door",
+          "location": "Master Bedroom"
+        },
+        {
+          "step": 6,
+          "action": "close_window",
+          "object": "Window",
+          "location": "Master Bedroom"
+        },
+        {
+          "step": 7,
+          "action": "turn_off_light",
+          "object": "Light",
+          "location": "Master Bedroom"
+        }
+      ],
+      "grounded_skills": [
+        {
+          "step": 1,
+          "abstract_skill": "navigate_to_room",
+          "ros2_interface": "/navigate_to_pose",
+          "reason": "Navigates to the Master Bedroom."
+        },
+        {
+          "step": 2,
+          "abstract_skill": "detect_door",
+          "ros2_interface": "/doors",
+          "reason": "Detects doors in the Master Bedroom."
+        },
+        {
+          "step": 3,
+          "abstract_skill": "detect_window",
+          "ros2_interface": "/windows",
+          "reason": "Detects windows in the Master Bedroom."
+        },
+        {
+          "step": 4,
+          "abstract_skill": "detect_light",
+          "ros2_interface": "/lights",
+          "reason": "Detects lights in the Master Bedroom."
+        },
+        {
+          "step": 5,
+          "abstract_skill": "close_door",
+          "ros2_interface": "/close_door",
+          "reason": "Closes any detected open doors in the Master Bedroom."
+        },
+        {
+          "step": 6,
+          "abstract_skill": "close_window",
+          "ros2_interface": "/close_window",
+          "reason": "Closes any detected open windows in the Master Bedroom."
+        },
+        {
+          "step": 7,
+          "abstract_skill": "turn_off_light",
+          "ros2_interface": "/turn_off_light",
+          "reason": "Turns off any detected lights left on in the Master Bedroom."
+        }
+      ]
+    },
+    {
+      "checkpoint_id": 5,
+      "checkpoint_goal": "Inspect Bedroom 2 for open windows, open doors, and lights left on, and correct any issues found.",
+      "entry_state": "Robot is at the Master Bedroom.",
+      "exit_state": "Robot is at Bedroom 2; all windows, doors, and lights in Bedroom 2 are in their correct state (closed/off).",
+      "is_replannable": True,
+      "actions": [
+        {
+          "step": 1,
+          "action": "navigate_to_room",
+          "object": "Bedroom 2",
+          "location": "Bedroom 2"
+        },
+        {
+          "step": 2,
+          "action": "detect_door",
+          "object": "Door",
+          "location": "Bedroom 2"
+        },
+        {
+          "step": 3,
+          "action": "detect_window",
+          "object": "Window",
+          "location": "Bedroom 2"
+        },
+        {
+          "step": 4,
+          "action": "detect_light",
+          "object": "Light",
+          "location": "Bedroom 2"
+        },
+        {
+          "step": 5,
+          "action": "close_door",
+          "object": "Door",
+          "location": "Bedroom 2"
+        },
+        {
+          "step": 6,
+          "action": "close_window",
+          "object": "Window",
+          "location": "Bedroom 2"
+        },
+        {
+          "step": 7,
+          "action": "turn_off_light",
+          "object": "Light",
+          "location": "Bedroom 2"
+        }
+      ],
+      "grounded_skills": [
+        {
+          "step": 1,
+          "abstract_skill": "navigate_to_room",
+          "ros2_interface": "/navigate_to_pose",
+          "reason": "Navigates to Bedroom 2."
+        },
+        {
+          "step": 2,
+          "abstract_skill": "detect_door",
+          "ros2_interface": "/doors",
+          "reason": "Detects"
+        }]
+    }]
+        }
+
+        from json import dumps
+
+        response=dumps(response)
 
         # --------------------------------------------------
         # Evaluation

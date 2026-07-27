@@ -370,6 +370,9 @@ def infer_model():
         timeout=600
     )
 
-    result = response.json()    
+    try:
+      result = response.json()    
+    except Exception as e:
+      result = response.text()
 
     return result

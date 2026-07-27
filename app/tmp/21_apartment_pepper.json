@@ -1,0 +1,895 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "Go to the study room, retrieve the laptop charger, and place it on the desk.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Navigate to the study room (bedroom_3), pick up the laptop charger, and place it on the study desk.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the study room (bedroom_3).",
+        "entry_state": "Robot is at an unspecified initial location (e.g., Main Entrance or Living Room).",
+        "exit_state": "Robot has successfully reached the study room (bedroom_3) and is localized there.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "study room",
+            "location": "bedroom_3"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot has the capability to navigate indoors (supports_indoor_navigation: True) and can follow waypoints. The study room (bedroom_3) exists in the world state. This skill grounds to Nav2's NavigateToPose action."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Detect and locate the laptop charger in the study room.",
+        "entry_state": "Robot is in the study room (bedroom_3).",
+        "exit_state": "Robot has detected the laptop charger and estimated its pose on the desk.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_object",
+            "object": "laptop charger",
+            "location": "study room"
+          },
+          {
+            "step": 2,
+            "action": "recognize_object",
+            "object": "laptop charger",
+            "location": "study room"
+          },
+          {
+            "step": 3,
+            "action": "estimate_object_pose",
+            "object": "laptop charger",
+            "location": "study room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot has can_detect_objects and has_visual_perception. It uses the perception stack to find objects in the current view."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "recognize_object",
+            "ros2_interface": "/recognized_objects",
+            "reason": "Robot needs to confirm the detected object is a 'laptop charger' using a recognition model."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "estimate_object_pose",
+            "ros2_interface": "/object_poses",
+            "reason": "Robot needs the 3D pose of the charger to plan the pick action. It has depth perception and lidar."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Pick up the laptop charger from the desk.",
+        "entry_state": "Robot is in the study room and knows the pose of the laptop charger.",
+        "exit_state": "Robot is holding the laptop charger.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "move_arm",
+            "object": "laptop charger",
+            "location": "study room"
+          },
+          {
+            "step": 2,
+            "action": "grasp_object",
+            "object": "laptop charger",
+            "location": "study room"
+          },
+          {
+            "step": 3,
+            "action": "pick_object",
+            "object": "laptop charger",
+            "location": "study room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "move_arm",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_manipulate and a single arm. It moves the arm to the charger's pose."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "grasp_object",
+            "ros2_interface": "/gripper_controller/gripper_cmd",
+            "reason": "Robot has can_grasp and a parallel gripper. It closes the gripper to secure the object."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot executes the full pick trajectory to lift the object. It has can_pick."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Place the laptop charger on the desk in the study room.",
+        "entry_state": "Robot is holding the laptop charger in the study room.",
+        "exit_state": "Robot has placed the laptop charger on the desk and released it.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "move_arm",
+            "object": "laptop charger",
+            "location": "desk"
+          },
+          {
+            "step": 2,
+            "action": "place_object",
+            "object": "laptop charger",
+            "location": "desk"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "move_arm",
+            "ros2_interface": "/move_action",
+            "reason": "Robot moves the arm to the target pose on the desk."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot executes the placement trajectory and opens the gripper to release the object. It has can_place."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot is single-arm only (cannot use two hands).",
+      "Robot cannot climb stairs (cannot_climb: True). Assumes desk is reachable via wheels.",
+      "Robot has limited payload (0.0 kg nominal, but capable of transport)."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "Robot successfully navigates to bedroom_3, detects and picks up the laptop charger, and places it on the desk."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-26T18:16:44.779877+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Apartment",
+      "task": "Go to the study room, retrieve the laptop charger, and place it on the desk.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Navigate to the study room (bedroom_3), pick up the laptop charger, and place it on the study desk.",
+      "total_actions": 9,
+      "total_checkpoints": 4
+    },
+    "task_success": true,
+    "overall_score": 0.9178,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.8889,
+        "status": "WARNING",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.1111,
+        "status": "FAIL",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'study room' in action 'detect_object' (checkpoint 2, step 1) does not exist in world 'Apartment'.",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "study room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'study room' in action 'recognize_object' (checkpoint 2, step 2) does not exist in world 'Apartment'.",
+        "action_index": 2,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "study room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'study room' in action 'estimate_object_pose' (checkpoint 2, step 3) does not exist in world 'Apartment'.",
+        "action_index": 3,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "study room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'study room' in action 'move_arm' (checkpoint 3, step 1) does not exist in world 'Apartment'.",
+        "action_index": 4,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "study room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'study room' in action 'grasp_object' (checkpoint 3, step 2) does not exist in world 'Apartment'.",
+        "action_index": 5,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "study room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'study room' in action 'pick_object' (checkpoint 3, step 3) does not exist in world 'Apartment'.",
+        "action_index": 6,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "study room"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'desk' in action 'move_arm' (checkpoint 4, step 1) does not exist in world 'Apartment'.",
+        "action_index": 7,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'desk' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "desk"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'desk' in action 'place_object' (checkpoint 4, step 2) does not exist in world 'Apartment'.",
+        "action_index": 8,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'desk' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "desk"
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Pick action on 'laptop charger' at 'study room' but robot has not navigated there yet.",
+        "action_index": 5,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Reorder actions to satisfy preconditions first."
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Pick action on 'laptop charger' at 'study room' but robot has not navigated there yet.",
+        "action_index": 6,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Reorder actions to satisfy preconditions first."
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Action 'place_object' on 'laptop charger' requires a prior pick action, but none was found.",
+        "action_index": 8,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Reorder actions to satisfy preconditions first."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'study room' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Apartment'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'study room' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "study room"
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 2,
+        "step": 2,
+        "action_name": "recognize_object",
+        "required_skill": "recognize_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 2,
+        "step": 3,
+        "action_name": "estimate_object_pose",
+        "required_skill": "estimate_object_pose",
+        "required_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "can_estimate_range": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "move_arm",
+        "required_skill": "move_arm",
+        "required_capabilities": [
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 3,
+        "step": 2,
+        "action_name": "grasp_object",
+        "required_skill": "grasp_object",
+        "required_capabilities": [
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 3,
+        "step": 3,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 7,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "move_arm",
+        "required_skill": "move_arm",
+        "required_capabilities": [
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 8,
+        "checkpoint_id": 4,
+        "step": 2,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "9/9 actions are valid. Score: 100.00%.",
+        "valid_actions": 9,
+        "total_actions": 9
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.8889,
+        "normalised_score": 0.8889,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'study room' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Apartment'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'study room' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "study room"
+          }
+        ],
+        "comments": "8/9 object references are valid. Score: 88.89%.",
+        "valid_objects": 8,
+        "total_object_refs": 9
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.1111,
+        "normalised_score": 0.1111,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'study room' in action 'detect_object' (checkpoint 2, step 1) does not exist in world 'Apartment'.",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "study room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'study room' in action 'recognize_object' (checkpoint 2, step 2) does not exist in world 'Apartment'.",
+            "action_index": 2,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "study room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'study room' in action 'estimate_object_pose' (checkpoint 2, step 3) does not exist in world 'Apartment'.",
+            "action_index": 3,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "study room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'study room' in action 'move_arm' (checkpoint 3, step 1) does not exist in world 'Apartment'.",
+            "action_index": 4,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "study room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'study room' in action 'grasp_object' (checkpoint 3, step 2) does not exist in world 'Apartment'.",
+            "action_index": 5,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "study room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'study room' in action 'pick_object' (checkpoint 3, step 3) does not exist in world 'Apartment'.",
+            "action_index": 6,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'study room' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "study room"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'desk' in action 'move_arm' (checkpoint 4, step 1) does not exist in world 'Apartment'.",
+            "action_index": 7,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'desk' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "desk"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'desk' in action 'place_object' (checkpoint 4, step 2) does not exist in world 'Apartment'.",
+            "action_index": 8,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'desk' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "desk"
+          }
+        ],
+        "comments": "1/9 location references are valid. Score: 11.11%.",
+        "valid_locations": 1,
+        "total_location_refs": 9
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "9/9 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 9,
+        "total_actions": 9
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "9/9 actions are capability-compatible with robot 'pepper'. Score: 100.00%.",
+        "compatible_actions": 9,
+        "total_actions": 9,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 2,
+            "step": 2,
+            "action_name": "recognize_object",
+            "required_skill": "recognize_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 2,
+            "step": 3,
+            "action_name": "estimate_object_pose",
+            "required_skill": "estimate_object_pose",
+            "required_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "can_estimate_range": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "move_arm",
+            "required_skill": "move_arm",
+            "required_capabilities": [
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 3,
+            "step": 2,
+            "action_name": "grasp_object",
+            "required_skill": "grasp_object",
+            "required_capabilities": [
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 3,
+            "step": 3,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 7,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "move_arm",
+            "required_skill": "move_arm",
+            "required_capabilities": [
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 8,
+            "checkpoint_id": 4,
+            "step": 2,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "6/6 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 6,
+        "total_constraints": 6
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 0.6667,
+        "normalised_score": 0.6667,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Pick action on 'laptop charger' at 'study room' but robot has not navigated there yet.",
+            "action_index": 5,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Reorder actions to satisfy preconditions first."
+          },
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Pick action on 'laptop charger' at 'study room' but robot has not navigated there yet.",
+            "action_index": 6,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Reorder actions to satisfy preconditions first."
+          },
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Action 'place_object' on 'laptop charger' requires a prior pick action, but none was found.",
+            "action_index": 8,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Reorder actions to satisfy preconditions first."
+          }
+        ],
+        "comments": "6/9 actions satisfy their dependencies. Score: 66.67%.",
+        "satisfied_dependencies": 6,
+        "total_actions": 9
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "8/8 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 8,
+        "total_transitions": 8
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 86%. Task-to-final-state match: 43%.",
+        "goal_satisfied": true,
+        "goal_coverage": 0.8571,
+        "exit_coverage": 0.4286,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=9, actual=9). Redundant navigations: 0. Repeated actions: 1.",
+        "total_actions": 9,
+        "ideal_steps": 9,
+        "efficiency_score": 1.0,
+        "redundancy_score": 0.8889,
+        "repeated_actions": 1,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}
