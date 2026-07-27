@@ -1,0 +1,509 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "g1_29dof",
+      "world": "Multi-Speciality Hospital",
+      "task": "Move the wheelchair through the corridor without colliding with patients or furniture.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Navigate the robot through the hospital corridor to a safe location without colliding with static structures (furniture) or dynamic entities (patients).",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Verify the robot's initial localization state and confirm the existence of the target corridor and any potential obstacles (patients/furniture) within the planned path.",
+        "entry_state": "Robot is at a default spawn location (e.g., Main Entrance or Reception). No active navigation goal. World state includes static structures and potentially dynamic patients in corridors.",
+        "exit_state": "Robot is localized. A valid path to the corridor has been computed. Obstacles (patients/furniture) have been detected or the path has been validated against the costmap.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "localization",
+            "object": "",
+            "location": "current_robot_pose"
+          },
+          {
+            "step": 2,
+            "action": "detect_obstacle",
+            "object": "corridor_region",
+            "location": "hospital_corridor"
+          },
+          {
+            "step": 3,
+            "action": "navigate_to_room",
+            "object": "corridor",
+            "location": "hospital_corridor"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "localization",
+            "ros2_interface": "/initialpose",
+            "reason": "Robot requires a valid pose estimate to execute navigation. The robot has IMU but lacks visual/depth sensors for autonomous SLAM; manual initialization or map-based localization is required."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "detect_obstacle",
+            "ros2_interface": "/local_costmap/costmap",
+            "reason": "The robot lacks active range sensors (Lidar/Depth) to dynamically detect obstacles like patients or furniture. The planner must rely on the pre-existing occupancy grid (costmap) of the hospital to identify static obstacles and assume dynamic obstacles are accounted for in the costmap or require teleoperated avoidance."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot is fixed-base and relies on remote operation. Navigation to the 'corridor' (a semantic location) is the primary motion primitive. Since the robot cannot fly or walk, 'navigate_to_room' implies moving the base to the specified coordinates within the map."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot is fixed-base (cannot move independently). All motion commands must be executed via remote operation (teleoperation)."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "The robot will be localized, the corridor path will be planned based on the static map (avoiding furniture), and the robot will be teleoperated to the corridor. Collision with patients is mitigated by the assumption that the costmap includes dynamic obstacles or that the operator manually avoids them during teleoperation."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T08:19:09.794549+00:00",
+    "plan_metadata": {
+      "robot": "g1_29dof",
+      "world": "Multi-Speciality Hospital",
+      "task": "Move the wheelchair through the corridor without colliding with patients or furniture.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Navigate the robot through the hospital corridor to a safe location without colliding with static structures (furniture) or dynamic entities (patients).",
+      "total_actions": 3,
+      "total_checkpoints": 1
+    },
+    "task_success": true,
+    "overall_score": 0.7033,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.3333,
+        "status": "FAIL",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.5,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'current_robot_pose' in action 'localization' (checkpoint 1, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'current_robot_pose' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "current_robot_pose"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'hospital_corridor' in action 'detect_obstacle' (checkpoint 1, step 2) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'hospital_corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "hospital_corridor"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'hospital_corridor' in action 'navigate_to_room' (checkpoint 1, step 3) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'hospital_corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "hospital_corridor"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'detect_obstacle' (checkpoint 1, step 2) requires capabilities [can_detect_obstacles] that the robot does not have.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_detect_obstacles] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_detect_obstacles"
+        ],
+        "required_skill": "detect_obstacle"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_room' (checkpoint 1, step 3) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "required_skill": "navigate_to_room"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'corridor_region' referenced in action 'detect_obstacle' (checkpoint 1, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'corridor_region' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "corridor_region"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'detect_obstacle' → 'navigate_to_room' (phase 2 → 1).",
+        "action_index": 2,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "localization",
+        "required_skill": "localization",
+        "required_capabilities": [
+          "supports_localization"
+        ],
+        "robot_capabilities_checked": {
+          "supports_localization": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "detect_obstacle",
+        "required_skill": "detect_obstacle",
+        "required_capabilities": [
+          "can_detect_obstacles"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_obstacles": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'g1' lacks required capabilities: can_detect_obstacles"
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 1,
+        "step": 3,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "supports_indoor_navigation": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'g1' lacks required capabilities: can_navigate, supports_indoor_navigation"
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 actions are valid. Score: 100.00%.",
+        "valid_actions": 3,
+        "total_actions": 3
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.5,
+        "normalised_score": 0.5,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'corridor_region' referenced in action 'detect_obstacle' (checkpoint 1, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'corridor_region' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "corridor_region"
+          }
+        ],
+        "comments": "1/2 object references are valid. Score: 50.00%.",
+        "valid_objects": 1,
+        "total_object_refs": 2
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'current_robot_pose' in action 'localization' (checkpoint 1, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'current_robot_pose' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "current_robot_pose"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'hospital_corridor' in action 'detect_obstacle' (checkpoint 1, step 2) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'hospital_corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "hospital_corridor"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'hospital_corridor' in action 'navigate_to_room' (checkpoint 1, step 3) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'hospital_corridor' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "hospital_corridor"
+          }
+        ],
+        "comments": "0/3 location references are valid. Score: 0.00%.",
+        "valid_locations": 0,
+        "total_location_refs": 3
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 3,
+        "total_actions": 3
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.3333,
+        "normalised_score": 0.3333,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'detect_obstacle' (checkpoint 1, step 2) requires capabilities [can_detect_obstacles] that the robot does not have.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_detect_obstacles] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_detect_obstacles"
+            ],
+            "required_skill": "detect_obstacle"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_room' (checkpoint 1, step 3) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "required_skill": "navigate_to_room"
+          }
+        ],
+        "comments": "1/3 actions are capability-compatible with robot 'g1'. Score: 33.33%.",
+        "compatible_actions": 1,
+        "total_actions": 3,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "localization",
+            "required_skill": "localization",
+            "required_capabilities": [
+              "supports_localization"
+            ],
+            "robot_capabilities_checked": {
+              "supports_localization": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "detect_obstacle",
+            "required_skill": "detect_obstacle",
+            "required_capabilities": [
+              "can_detect_obstacles"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_obstacles": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'g1' lacks required capabilities: can_detect_obstacles"
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 1,
+            "step": 3,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "supports_indoor_navigation": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'g1' lacks required capabilities: can_navigate, supports_indoor_navigation"
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 1,
+        "total_constraints": 1
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 3,
+        "total_actions": 3
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'detect_obstacle' → 'navigate_to_room' (phase 2 → 1).",
+            "action_index": 2,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "2/2 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 2,
+        "total_transitions": 2
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 75%. Task-to-final-state match: 38%.",
+        "goal_satisfied": true,
+        "goal_coverage": 0.75,
+        "exit_coverage": 0.375,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=3, actual=3). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 3,
+        "ideal_steps": 3,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

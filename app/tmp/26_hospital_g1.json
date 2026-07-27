@@ -1,0 +1,384 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "g1_29dof",
+      "world": "Multi-Speciality Hospital",
+      "task": "If the medicine cabinet is open, close it before leaving the pharmacy.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Close the medicine cabinet if it is open, then leave the pharmacy.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Verify the state of the medicine cabinet and close it if open.",
+        "entry_state": "Robot is at the Pharmacy. The state of the medicine cabinet (open/closed) is unknown.",
+        "exit_state": "Robot is at the Pharmacy. The medicine cabinet is confirmed to be closed.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_door",
+            "object": "medicine cabinet",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 2,
+            "action": "press_button",
+            "object": "medicine cabinet",
+            "location": "Pharmacy"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_door",
+            "ros2_interface": "/doors",
+            "reason": "Skill PER_023 detects doors; required to determine if the medicine cabinet is open."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "press_button",
+            "ros2_interface": "/press_button",
+            "reason": "Skill ENV_005 presses a button. Since the robot lacks force feedback and cannot manipulate drawers directly, it uses the button press abstraction to attempt closure via an associated actuator."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot is fixed-base and cannot navigate to other zones.",
+      "Robot lacks visual perception and force feedback; relies on remote operation and button press abstraction."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "The medicine cabinet will be closed (via button press) if it was open. The robot remains at the pharmacy."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T08:10:19.362903+00:00",
+    "plan_metadata": {
+      "robot": "g1_29dof",
+      "world": "Multi-Speciality Hospital",
+      "task": "If the medicine cabinet is open, close it before leaving the pharmacy.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Close the medicine cabinet if it is open, then leave the pharmacy.",
+      "total_actions": 2,
+      "total_checkpoints": 1
+    },
+    "task_success": true,
+    "overall_score": 0.775,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.5,
+        "status": "FAIL",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'detect_door' (checkpoint 1, step 1) requires capabilities [has_visual_perception] that the robot does not have.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [has_visual_perception] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "has_visual_perception"
+        ],
+        "required_skill": "detect_door"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'medicine cabinet' referenced in action 'detect_door' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'medicine cabinet' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "medicine cabinet"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'medicine cabinet' referenced in action 'press_button' (checkpoint 1, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'medicine cabinet' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "medicine cabinet"
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "detect_door",
+        "required_skill": "detect_door",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'g1' lacks required capabilities: has_visual_perception"
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "press_button",
+        "required_skill": "press_button",
+        "required_capabilities": [
+          "can_press_button"
+        ],
+        "robot_capabilities_checked": {
+          "can_press_button": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 actions are valid. Score: 100.00%.",
+        "valid_actions": 2,
+        "total_actions": 2
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'medicine cabinet' referenced in action 'detect_door' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'medicine cabinet' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "medicine cabinet"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'medicine cabinet' referenced in action 'press_button' (checkpoint 1, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'medicine cabinet' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "medicine cabinet"
+          }
+        ],
+        "comments": "0/2 object references are valid. Score: 0.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 2
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 location references are valid. Score: 100.00%.",
+        "valid_locations": 2,
+        "total_location_refs": 2
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 2,
+        "total_actions": 2
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.5,
+        "normalised_score": 0.5,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'detect_door' (checkpoint 1, step 1) requires capabilities [has_visual_perception] that the robot does not have.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [has_visual_perception] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "has_visual_perception"
+            ],
+            "required_skill": "detect_door"
+          }
+        ],
+        "comments": "1/2 actions are capability-compatible with robot 'g1'. Score: 50.00%.",
+        "compatible_actions": 1,
+        "total_actions": 2,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "detect_door",
+            "required_skill": "detect_door",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'g1' lacks required capabilities: has_visual_perception"
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "press_button",
+            "required_skill": "press_button",
+            "required_capabilities": [
+              "can_press_button"
+            ],
+            "robot_capabilities_checked": {
+              "can_press_button": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 0,
+        "total_constraints": 0
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 2,
+        "total_actions": 2
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 1,
+        "total_transitions": 1
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 71%. Task-to-final-state match: 43%.",
+        "goal_satisfied": true,
+        "goal_coverage": 0.7143,
+        "exit_coverage": 0.4286,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=2, actual=2). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 2,
+        "ideal_steps": 2,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}
