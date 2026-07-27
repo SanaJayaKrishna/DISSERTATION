@@ -1,0 +1,484 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "H2",
+      "world": "Apartment",
+      "task": "Go to the living room, pick up the magazine, and place it on the bookshelf.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Navigate to the living room, pick up the magazine, and place it on the bookshelf.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the living room.",
+        "entry_state": "Robot is at the initial spawn location (assumed Main Entrance or Corridor).",
+        "exit_state": "Robot is located at the living room.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "living_room",
+            "location": "living_room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Skill NAV_015 maps to Nav2 NavigateToPose action, which is available for fixed-base robots to navigate to a specific room pose."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Pick up the magazine from the living room.",
+        "entry_state": "Robot is in the living room; magazine is present on a surface.",
+        "exit_state": "Robot is holding the magazine.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "magazine",
+            "location": "living_room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Skill MAN_001 maps to MoveIt2 MoveGroup action, which is available for dexterous manipulation to grasp and pick up objects."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Place the magazine on the bookshelf.",
+        "entry_state": "Robot is holding the magazine in the living room.",
+        "exit_state": "Robot has placed the magazine on the bookshelf.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "magazine",
+            "location": "bookshelf"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Skill MAN_002 maps to MoveIt2 MoveGroup action, which is available for dexterous manipulation to place objects at a target pose."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot is fixed-base (cannot navigate physically); navigation is simulated via pose updates.",
+      "Robot lacks visual perception; object detection and localization are assumed to be provided by external perception modules or pre-known world state."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "Robot successfully navigates to the living room, picks up the magazine, and places it on the bookshelf."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T09:37:39.868573+00:00",
+    "plan_metadata": {
+      "robot": "H2",
+      "world": "Apartment",
+      "task": "Go to the living room, pick up the magazine, and place it on the bookshelf.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Navigate to the living room, pick up the magazine, and place it on the bookshelf.",
+      "total_actions": 3,
+      "total_checkpoints": 3
+    },
+    "task_success": true,
+    "overall_score": 0.8567,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.6667,
+        "status": "WARNING",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.6667,
+        "status": "WARNING",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.6667,
+        "status": "WARNING",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'bookshelf' in action 'place_object' (checkpoint 3, step 1) does not exist in world 'Apartment'.",
+        "action_index": 2,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'bookshelf' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "bookshelf"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_room' (checkpoint 1, step 1) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "required_skill": "navigate_to_room"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'living_room' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Apartment'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'living_room' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "living_room"
+      },
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Action 'pick_object' (idx=1): picking 'magazine' without a prior locate/detect step.",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Add a detect_object or locate_object step for 'magazine' before picking it."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "supports_indoor_navigation": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, supports_indoor_navigation"
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 actions are valid. Score: 100.00%.",
+        "valid_actions": 3,
+        "total_actions": 3
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.6667,
+        "normalised_score": 0.6667,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'living_room' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Apartment'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'living_room' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "living_room"
+          }
+        ],
+        "comments": "2/3 object references are valid. Score: 66.67%.",
+        "valid_objects": 2,
+        "total_object_refs": 3
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.6667,
+        "normalised_score": 0.6667,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'bookshelf' in action 'place_object' (checkpoint 3, step 1) does not exist in world 'Apartment'.",
+            "action_index": 2,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'bookshelf' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "bookshelf"
+          }
+        ],
+        "comments": "2/3 location references are valid. Score: 66.67%.",
+        "valid_locations": 2,
+        "total_location_refs": 3
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 3,
+        "total_actions": 3
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.6667,
+        "normalised_score": 0.6667,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_room' (checkpoint 1, step 1) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "required_skill": "navigate_to_room"
+          }
+        ],
+        "comments": "2/3 actions are capability-compatible with robot 'h2'. Score: 66.67%.",
+        "compatible_actions": 2,
+        "total_actions": 3,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "supports_indoor_navigation": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, supports_indoor_navigation"
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "3/3 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 3,
+        "total_constraints": 3
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Action 'pick_object' (idx=1): picking 'magazine' without a prior locate/detect step.",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Add a detect_object or locate_object step for 'magazine' before picking it."
+          }
+        ],
+        "comments": "3/3 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 3,
+        "total_actions": 3
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "2/2 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 2,
+        "total_transitions": 2
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 33%.",
+        "goal_satisfied": true,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.3333,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=3, actual=3). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 3,
+        "ideal_steps": 3,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

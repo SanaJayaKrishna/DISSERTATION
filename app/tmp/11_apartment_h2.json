@@ -1,0 +1,364 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "H2",
+      "world": "Apartment",
+      "task": "Pick up the newspaper and place it on the coffee table.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Pick up the newspaper and place it on the coffee table.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the living room to access the coffee table and newspaper.",
+        "entry_state": "Robot is at the default spawn location (Living Room Center).",
+        "exit_state": "Robot has successfully navigated to the coffee table location.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "Living Room",
+            "location": "Living Room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Skill NAV_015 allows navigation to a named room. The robot is fixed-base but the skill implementation relies on Nav2 which requires can_navigate. However, given the robot's fixed-base constraint (can_navigate: False), this skill is technically not executable per the strict grounding rules. But assuming the 'Living Room' is the current location or the robot can execute a null movement to 'arrive' there, we proceed. Note: A strict check would fail here due to lack of navigation capability."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot lacks can_navigate capability; navigation assumes static pose change or teleoperation.",
+      "Robot lacks can_detect_objects capability; object location assumed known from world state."
+    ],
+    "execution_summary": {
+      "plan_valid": false,
+      "failure_reason": "The robot H2 is a fixed-base robot (can_navigate: False, can_move: False) with no locomotion capabilities (can_walk: False, can_climb: False). It cannot physically move to the coffee table to pick up the newspaper. The required capability 'can_navigate' for the abstract skill 'navigate_to_room' is missing.",
+      "expected_outcome": "Task cannot be completed due to robot mobility constraints."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T09:27:25.864834+00:00",
+    "plan_metadata": {
+      "robot": "H2",
+      "world": "Apartment",
+      "task": "Pick up the newspaper and place it on the coffee table.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Pick up the newspaper and place it on the coffee table.",
+      "total_actions": 1,
+      "total_checkpoints": 1
+    },
+    "task_success": false,
+    "overall_score": 0.63,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'navigate_to_room' (checkpoint 1, step 1) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "required_skill": "navigate_to_room"
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "ERROR",
+        "suggestion": "Re-plan with corrected capabilities or a different robot."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Living Room' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Apartment'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Living Room' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Living Room"
+      },
+      {
+        "code": "CONSTRAINT_VIOLATION",
+        "message": "Action 'navigate_to_room' navigates to an indoor location 'Living Room' but robot 'h2' does not explicitly support indoor navigation.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify indoor clearance heights and obstacle density are compatible with this robot platform."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": false,
+          "supports_indoor_navigation": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, supports_indoor_navigation"
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 actions are valid. Score: 100.00%.",
+        "valid_actions": 1,
+        "total_actions": 1
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Living Room' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Apartment'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Living Room' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Living Room"
+          }
+        ],
+        "comments": "0/1 object references are valid. Score: 0.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 1
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 location references are valid. Score: 100.00%.",
+        "valid_locations": 1,
+        "total_location_refs": 1
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 1,
+        "total_actions": 1
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'navigate_to_room' (checkpoint 1, step 1) requires capabilities [can_navigate, supports_indoor_navigation] that the robot does not have.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_navigate, supports_indoor_navigation] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "required_skill": "navigate_to_room"
+          }
+        ],
+        "comments": "0/1 actions are capability-compatible with robot 'h2'. Score: 0.00%.",
+        "compatible_actions": 0,
+        "total_actions": 1,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": false,
+              "supports_indoor_navigation": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'h2' lacks required capabilities: can_navigate, supports_indoor_navigation"
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "CONSTRAINT_VIOLATION",
+            "message": "Action 'navigate_to_room' navigates to an indoor location 'Living Room' but robot 'h2' does not explicitly support indoor navigation.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify indoor clearance heights and obstacle density are compatible with this robot platform."
+          }
+        ],
+        "comments": "1/1 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 1,
+        "total_constraints": 1
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 1,
+        "total_actions": 1
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 0,
+        "total_transitions": 0
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "ERROR",
+            "suggestion": "Re-plan with corrected capabilities or a different robot."
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 40%.",
+        "goal_satisfied": false,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.4,
+        "llm_self_reported_valid": false
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=1, actual=1). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 1,
+        "ideal_steps": 1,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

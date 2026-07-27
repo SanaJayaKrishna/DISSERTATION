@@ -1,0 +1,404 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "H2",
+      "world": "Apartment",
+      "task": "If the laundry basket contains clothes, move it to the laundry room; otherwise leave it in place.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Verify the presence of clothes in the laundry basket and relocate the basket to the Laundry Area if clothes are present.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Detect the laundry basket and determine if it contains clothes.",
+        "entry_state": "Robot is at initial spawn location (Living Room Center). Laundry basket is located in the Living Room. Robot has no visual perception.",
+        "exit_state": "Robot has identified the laundry basket location and determined that it does not contain clothes.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_laundry_basket",
+            "object": "laundry basket",
+            "location": "living_room"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Skill PER_001 detects objects in sensor data. Although the robot lacks visual perception (no_visual_perception), this is the standard abstraction for object detection. Given the fixed-base constraint and lack of sensors, the planner infers the state based on the static world state provided."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot is fixed base (cannot navigate).",
+      "Robot has no visual perception (cannot detect objects dynamically).",
+      "Robot has no audio input.",
+      "Robot has no depth perception.",
+      "Robot has no force feedback."
+    ],
+    "execution_summary": {
+      "plan_valid": false,
+      "failure_reason": "The task requires dynamic perception to verify if the laundry basket contains clothes. The robot H2 is a fixed-base manipulator with no visual perception, no depth perception, and no audio input. It cannot detect the contents of the laundry basket. Therefore, the condition 'if the laundry basket contains clothes' cannot be evaluated, making the task impossible to execute autonomously.",
+      "expected_outcome": "Task cannot be completed due to lack of required perception capabilities."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T09:46:21.590645+00:00",
+    "plan_metadata": {
+      "robot": "H2",
+      "world": "Apartment",
+      "task": "If the laundry basket contains clothes, move it to the laundry room; otherwise leave it in place.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Verify the presence of clothes in the laundry basket and relocate the basket to the Laundry Area if clothes are present.",
+      "total_actions": 1,
+      "total_checkpoints": 1
+    },
+    "task_success": false,
+    "overall_score": 0.48,
+    "overall_status": "FAIL",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'detect_laundry_basket' (checkpoint 1, step 1) is not in the skill ontology.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'detect_laundry_basket' or add a new ontology entry."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'detect_laundry_basket' (checkpoint 1, step 1).",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='detect_laundry_basket' or a matching alias."
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "ERROR",
+        "suggestion": "Re-plan with corrected capabilities or a different robot."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 33%, task-to-exit-state coverage: 33%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "basket",
+          "clothes",
+          "contains",
+          "laundry",
+          "leave",
+          "move",
+          "otherwise",
+          "place",
+          "room"
+        ],
+        "goal_keywords": [
+          "area",
+          "basket",
+          "clothes",
+          "laundry",
+          "presence",
+          "present",
+          "relocate",
+          "verify"
+        ],
+        "matched_goal_keywords": [
+          "basket",
+          "clothes",
+          "laundry"
+        ],
+        "matched_exit_keywords": [
+          "basket",
+          "clothes",
+          "laundry"
+        ]
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "detect_laundry_basket",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'detect_laundry_basket' has no matching skill in the ontology; capability check skipped."
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'detect_laundry_basket' (checkpoint 1, step 1) is not in the skill ontology.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'detect_laundry_basket' or add a new ontology entry."
+          }
+        ],
+        "comments": "0/1 actions are valid. Score: 0.00%.",
+        "valid_actions": 0,
+        "total_actions": 1
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 object references are valid. Score: 100.00%.",
+        "valid_objects": 1,
+        "total_object_refs": 1
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 location references are valid. Score: 100.00%.",
+        "valid_locations": 1,
+        "total_location_refs": 1
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'detect_laundry_basket' (checkpoint 1, step 1).",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='detect_laundry_basket' or a matching alias."
+          }
+        ],
+        "comments": "0/1 actions map to valid skills. Score: 0.00%.",
+        "mapped_actions": 0,
+        "total_actions": 1
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/1 actions are capability-compatible with robot 'h2'. Score: 0.00%.",
+        "compatible_actions": 0,
+        "total_actions": 1,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "detect_laundry_basket",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'detect_laundry_basket' has no matching skill in the ontology; capability check skipped."
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 0,
+        "total_constraints": 0
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "1/1 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 1,
+        "total_actions": 1
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 0,
+        "total_transitions": 0
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 33%, task-to-exit-state coverage: 33%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "basket",
+              "clothes",
+              "contains",
+              "laundry",
+              "leave",
+              "move",
+              "otherwise",
+              "place",
+              "room"
+            ],
+            "goal_keywords": [
+              "area",
+              "basket",
+              "clothes",
+              "laundry",
+              "presence",
+              "present",
+              "relocate",
+              "verify"
+            ],
+            "matched_goal_keywords": [
+              "basket",
+              "clothes",
+              "laundry"
+            ],
+            "matched_exit_keywords": [
+              "basket",
+              "clothes",
+              "laundry"
+            ]
+          },
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "ERROR",
+            "suggestion": "Re-plan with corrected capabilities or a different robot."
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 33%. Task-to-final-state match: 33%.",
+        "goal_satisfied": false,
+        "goal_coverage": 0.3333,
+        "exit_coverage": 0.3333,
+        "llm_self_reported_valid": false
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=1, actual=1). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 1,
+        "ideal_steps": 1,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}
