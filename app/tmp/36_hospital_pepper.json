@@ -1,0 +1,649 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Place the oxygen cylinder in the designated area without blocking the emergency exit.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Place the oxygen cylinder in the designated area without blocking the emergency exit.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the Emergency Department to locate the oxygen cylinder and the emergency exit.",
+        "entry_state": "Robot is at Main Entrance.",
+        "exit_state": "Robot is at the Emergency Department, having located the oxygen cylinder and the emergency exit.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "Emergency Department",
+            "location": "Emergency Department"
+          },
+          {
+            "step": 2,
+            "action": "detect_object",
+            "object": "oxygen cylinder",
+            "location": "Emergency Department"
+          },
+          {
+            "step": 3,
+            "action": "detect_door",
+            "object": "emergency exit",
+            "location": "Emergency Department"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot needs to move from Main Entrance to Emergency Department."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot must perceive the oxygen cylinder to interact with it."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "detect_door",
+            "ros2_interface": "/doors",
+            "reason": "Robot must perceive the emergency exit to avoid blocking it."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Navigate to the designated area (near the emergency exit) and pick up the oxygen cylinder.",
+        "entry_state": "Robot is at the Emergency Department, oxygen cylinder and emergency exit are detected.",
+        "exit_state": "Robot is at the designated area, holding the oxygen cylinder.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_pose",
+            "object": "designated area",
+            "location": "designated area"
+          },
+          {
+            "step": 2,
+            "action": "pick_object",
+            "object": "oxygen cylinder",
+            "location": "designated area"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_pose",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must move to the specific pose near the emergency exit."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must grasp the oxygen cylinder to transport it."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Place the oxygen cylinder in the designated area without blocking the emergency exit.",
+        "entry_state": "Robot is at the designated area, holding the oxygen cylinder.",
+        "exit_state": "Robot is at the designated area, oxygen cylinder is placed, emergency exit is clear.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "oxygen cylinder",
+            "location": "designated area"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must release the oxygen cylinder at the target pose."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot cannot climb stairs; must use elevators or ramps.",
+      "Robot must not block the emergency exit during placement."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "Oxygen cylinder is successfully placed in the designated area without obstructing the emergency exit."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T14:00:32.338728+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Place the oxygen cylinder in the designated area without blocking the emergency exit.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Place the oxygen cylinder in the designated area without blocking the emergency exit.",
+      "total_actions": 6,
+      "total_checkpoints": 3
+    },
+    "task_success": true,
+    "overall_score": 0.9267,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.6667,
+        "status": "WARNING",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.5,
+        "status": "FAIL",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'designated area' in action 'navigate_to_pose' (checkpoint 2, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 3,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'designated area' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "designated area"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'designated area' in action 'pick_object' (checkpoint 2, step 2) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 4,
+        "checkpoint_id": 2,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'designated area' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "designated area"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'designated area' in action 'place_object' (checkpoint 3, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 5,
+        "checkpoint_id": 3,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'designated area' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "designated area"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Emergency Department' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Emergency Department' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Emergency Department"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'designated area' referenced in action 'navigate_to_pose' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 3,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'designated area' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "designated area"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'detect_door' → 'navigate_to_pose' (phase 2 → 1).",
+        "action_index": 3,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 1,
+        "step": 3,
+        "action_name": "detect_door",
+        "required_skill": "detect_door",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "navigate_to_pose",
+        "required_skill": "navigate_to_pose",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_localization",
+          "supports_obstacle_avoidance"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_localization": true,
+          "supports_obstacle_avoidance": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 2,
+        "step": 2,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "6/6 actions are valid. Score: 100.00%.",
+        "valid_actions": 6,
+        "total_actions": 6
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.6667,
+        "normalised_score": 0.6667,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Emergency Department' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Emergency Department' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Emergency Department"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'designated area' referenced in action 'navigate_to_pose' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 3,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'designated area' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "designated area"
+          }
+        ],
+        "comments": "4/6 object references are valid. Score: 66.67%.",
+        "valid_objects": 4,
+        "total_object_refs": 6
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.5,
+        "normalised_score": 0.5,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'designated area' in action 'navigate_to_pose' (checkpoint 2, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 3,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'designated area' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "designated area"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'designated area' in action 'pick_object' (checkpoint 2, step 2) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 4,
+            "checkpoint_id": 2,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'designated area' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "designated area"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'designated area' in action 'place_object' (checkpoint 3, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 5,
+            "checkpoint_id": 3,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'designated area' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "designated area"
+          }
+        ],
+        "comments": "3/6 location references are valid. Score: 50.00%.",
+        "valid_locations": 3,
+        "total_location_refs": 6
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "6/6 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 6,
+        "total_actions": 6
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "6/6 actions are capability-compatible with robot 'pepper'. Score: 100.00%.",
+        "compatible_actions": 6,
+        "total_actions": 6,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 1,
+            "step": 3,
+            "action_name": "detect_door",
+            "required_skill": "detect_door",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "navigate_to_pose",
+            "required_skill": "navigate_to_pose",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_localization",
+              "supports_obstacle_avoidance"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_localization": true,
+              "supports_obstacle_avoidance": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 2,
+            "step": 2,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "5/5 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 5,
+        "total_constraints": 5
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "6/6 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 6,
+        "total_actions": 6
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'detect_door' → 'navigate_to_pose' (phase 2 → 1).",
+            "action_index": 3,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "5/5 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 5,
+        "total_transitions": 5
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 67%.",
+        "goal_satisfied": true,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.6667,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=6, actual=6). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 6,
+        "ideal_steps": 6,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

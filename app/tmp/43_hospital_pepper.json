@@ -1,0 +1,967 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Collect used meal trays from all occupied patient rooms, deliver them to the collection area, sanitize the collection cart, and return it to storage.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Collect used meal trays from all occupied patient rooms, deliver them to the collection area, sanitize the collection cart, and return it to storage.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the General Ward (occupied patient room zone) to locate meal trays.",
+        "entry_state": "Robot at Main Entrance.",
+        "exit_state": "Robot at General Ward, having detected meal trays.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "General Ward",
+            "location": "General Ward"
+          },
+          {
+            "step": 2,
+            "action": "detect_object",
+            "object": "meal tray",
+            "location": "General Ward"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the General Ward to access patient rooms."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot must detect meal trays in the General Ward to proceed with collection."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Pick up meal trays from the General Ward.",
+        "entry_state": "Robot at General Ward, meal trays detected.",
+        "exit_state": "Robot holding meal trays.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "meal tray",
+            "location": "General Ward"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must grasp and pick up the detected meal trays."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Navigate to the Housekeeping zone (collection area) to deposit trays.",
+        "entry_state": "Robot holding meal trays at General Ward.",
+        "exit_state": "Robot at Housekeeping zone, meal trays deposited.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "Housekeeping",
+            "location": "Housekeeping"
+          },
+          {
+            "step": 2,
+            "action": "place_object",
+            "object": "meal tray",
+            "location": "Housekeeping"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the Housekeeping zone to access the collection area."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must place the meal trays onto the collection cart in the Housekeeping zone."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Sanitize the collection cart in the Housekeeping zone.",
+        "entry_state": "Robot at Housekeeping zone, meal trays deposited.",
+        "exit_state": "Collection cart sanitized.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "clean_surface",
+            "object": "collection cart",
+            "location": "Housekeeping"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "clean_surface",
+            "ros2_interface": "/clean_surface",
+            "reason": "Robot must clean the collection cart surface to sanitize it."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 5,
+        "checkpoint_goal": "Navigate to the Medical Supply Store (storage) to return the cart.",
+        "entry_state": "Robot at Housekeeping zone, collection cart sanitized.",
+        "exit_state": "Robot at Medical Supply Store, cart returned.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "Medical Supply Store",
+            "location": "Medical Supply Store"
+          },
+          {
+            "step": 2,
+            "action": "place_object",
+            "object": "collection cart",
+            "location": "Medical Supply Store"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot must navigate to the Medical Supply Store to return the cart."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot must place the sanitized collection cart into the storage area."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot cannot climb stairs; must use elevators or ramps.",
+      "Robot has limited payload capacity; ensure meal trays fit within limits.",
+      "Robot is single-arm only; cannot use two hands simultaneously."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "Meal trays collected from General Ward, delivered to Housekeeping, cart sanitized, and returned to Medical Supply Store."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T14:19:41.177691+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Collect used meal trays from all occupied patient rooms, deliver them to the collection area, sanitize the collection cart, and return it to storage.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Collect used meal trays from all occupied patient rooms, deliver them to the collection area, sanitize the collection cart, and return it to storage.",
+      "total_actions": 8,
+      "total_checkpoints": 5
+    },
+    "task_success": false,
+    "overall_score": 0.88,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "DEPENDENCY_ERROR",
+        "message": "Action 'place_object' on 'collection cart' requires a prior pick action, but none was found.",
+        "action_index": 7,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Reorder actions to satisfy preconditions first."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'General Ward' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'General Ward' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "General Ward"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'meal tray' referenced in action 'detect_object' (checkpoint 1, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 1,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'meal tray' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "meal tray"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'meal tray' referenced in action 'pick_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 2,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'meal tray' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "meal tray"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Housekeeping' referenced in action 'navigate_to_room' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Housekeeping' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Housekeeping"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'meal tray' referenced in action 'place_object' (checkpoint 3, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 4,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'meal tray' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "meal tray"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'collection cart' referenced in action 'clean_surface' (checkpoint 4, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 5,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'collection cart' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "collection cart"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Medical Supply Store' referenced in action 'navigate_to_room' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 6,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Medical Supply Store' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Medical Supply Store"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'collection cart' referenced in action 'place_object' (checkpoint 5, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 7,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'collection cart' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "collection cart"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 100%, task-to-exit-state coverage: 6%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "all",
+          "area",
+          "cart",
+          "collect",
+          "collection",
+          "deliver",
+          "from",
+          "meal",
+          "occupied",
+          "patient",
+          "return",
+          "rooms",
+          "sanitize",
+          "storage",
+          "them",
+          "trays",
+          "used"
+        ],
+        "goal_keywords": [
+          "all",
+          "area",
+          "cart",
+          "collect",
+          "collection",
+          "deliver",
+          "from",
+          "meal",
+          "occupied",
+          "patient",
+          "return",
+          "rooms",
+          "sanitize",
+          "storage",
+          "them",
+          "trays",
+          "used"
+        ],
+        "matched_goal_keywords": [
+          "all",
+          "area",
+          "cart",
+          "collect",
+          "collection",
+          "deliver",
+          "from",
+          "meal",
+          "occupied",
+          "patient",
+          "return",
+          "rooms",
+          "sanitize",
+          "storage",
+          "them",
+          "trays",
+          "used"
+        ],
+        "matched_exit_keywords": [
+          "cart"
+        ]
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 3,
+        "step": 2,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "clean_surface",
+        "required_skill": "clean_surface",
+        "required_capabilities": [
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 5,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 7,
+        "checkpoint_id": 5,
+        "step": 2,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "8/8 actions are valid. Score: 100.00%.",
+        "valid_actions": 8,
+        "total_actions": 8
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'General Ward' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'General Ward' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "General Ward"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'meal tray' referenced in action 'detect_object' (checkpoint 1, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 1,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'meal tray' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "meal tray"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'meal tray' referenced in action 'pick_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 2,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'meal tray' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "meal tray"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Housekeeping' referenced in action 'navigate_to_room' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Housekeeping' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Housekeeping"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'meal tray' referenced in action 'place_object' (checkpoint 3, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 4,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'meal tray' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "meal tray"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'collection cart' referenced in action 'clean_surface' (checkpoint 4, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 5,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'collection cart' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "collection cart"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Medical Supply Store' referenced in action 'navigate_to_room' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 6,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Medical Supply Store' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Medical Supply Store"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'collection cart' referenced in action 'place_object' (checkpoint 5, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 7,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'collection cart' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "collection cart"
+          }
+        ],
+        "comments": "0/8 object references are valid. Score: 0.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 8
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "8/8 location references are valid. Score: 100.00%.",
+        "valid_locations": 8,
+        "total_location_refs": 8
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "8/8 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 8,
+        "total_actions": 8
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "8/8 actions are capability-compatible with robot 'pepper'. Score: 100.00%.",
+        "compatible_actions": 8,
+        "total_actions": 8,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 3,
+            "step": 2,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "clean_surface",
+            "required_skill": "clean_surface",
+            "required_capabilities": [
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 5,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 7,
+            "checkpoint_id": 5,
+            "step": 2,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 7,
+        "total_constraints": 7
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 0.875,
+        "normalised_score": 0.875,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "DEPENDENCY_ERROR",
+            "message": "Action 'place_object' on 'collection cart' requires a prior pick action, but none was found.",
+            "action_index": 7,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Reorder actions to satisfy preconditions first."
+          }
+        ],
+        "comments": "7/8 actions satisfy their dependencies. Score: 87.50%.",
+        "satisfied_dependencies": 7,
+        "total_actions": 8
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "7/7 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 7,
+        "total_transitions": 7
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 100%, task-to-exit-state coverage: 6%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "all",
+              "area",
+              "cart",
+              "collect",
+              "collection",
+              "deliver",
+              "from",
+              "meal",
+              "occupied",
+              "patient",
+              "return",
+              "rooms",
+              "sanitize",
+              "storage",
+              "them",
+              "trays",
+              "used"
+            ],
+            "goal_keywords": [
+              "all",
+              "area",
+              "cart",
+              "collect",
+              "collection",
+              "deliver",
+              "from",
+              "meal",
+              "occupied",
+              "patient",
+              "return",
+              "rooms",
+              "sanitize",
+              "storage",
+              "them",
+              "trays",
+              "used"
+            ],
+            "matched_goal_keywords": [
+              "all",
+              "area",
+              "cart",
+              "collect",
+              "collection",
+              "deliver",
+              "from",
+              "meal",
+              "occupied",
+              "patient",
+              "return",
+              "rooms",
+              "sanitize",
+              "storage",
+              "them",
+              "trays",
+              "used"
+            ],
+            "matched_exit_keywords": [
+              "cart"
+            ]
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 6%.",
+        "goal_satisfied": false,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.0588,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=8, actual=8). Redundant navigations: 0. Repeated actions: 3.",
+        "total_actions": 8,
+        "ideal_steps": 8,
+        "efficiency_score": 1.0,
+        "redundancy_score": 0.625,
+        "repeated_actions": 3,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

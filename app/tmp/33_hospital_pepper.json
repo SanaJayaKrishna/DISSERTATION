@@ -1,0 +1,754 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Deliver the blood sample container without tilting or dropping it.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Navigate to the Blood Bank, pick up a blood sample container, and deliver it to the Pharmacy without tilting or dropping it.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the Blood Bank zone to locate the blood sample container.",
+        "entry_state": "Robot is at the Main Entrance.",
+        "exit_state": "Robot is at the Blood Bank zone.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Blood Bank"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot needs to move from the Main Entrance to the Blood Bank. The skill 'navigate_to_room' maps to the Nav2 'navigate_to_pose' action, which is supported by the robot's capabilities (can_navigate, supports_indoor_navigation)."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Locate the blood sample container within the Blood Bank.",
+        "entry_state": "Robot is at the Blood Bank zone.",
+        "exit_state": "Robot has detected the blood sample container.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_object",
+            "object": "blood_sample_container",
+            "location": "Blood Bank"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "The robot must detect the blood sample container to proceed with picking it up. The skill 'detect_object' uses the robot's visual perception capabilities (has_visual_perception, can_detect_objects) and publishes detections via the ROS2 topic."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Estimate the precise 3D pose of the blood sample container.",
+        "entry_state": "Robot has detected the blood sample container.",
+        "exit_state": "Robot has the estimated pose of the blood sample container.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "estimate_object_pose",
+            "object": "blood_sample_container",
+            "location": "Blood Bank"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "estimate_object_pose",
+            "ros2_interface": "/object_poses",
+            "reason": "To pick up the object without tilting or dropping it, the robot needs an accurate 3D pose estimate. The skill 'estimate_object_pose' uses depth perception and object detection to provide this pose."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Navigate to the pose of the blood sample container.",
+        "entry_state": "Robot has the estimated pose of the blood sample container.",
+        "exit_state": "Robot is positioned at the blood sample container.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_object",
+            "object": "blood_sample_container",
+            "location": "Blood Bank"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot must move to the location of the blood sample container to perform the pick action. This skill grounds the navigation to the object's pose."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 5,
+        "checkpoint_goal": "Grasp the blood sample container securely.",
+        "entry_state": "Robot is positioned at the blood sample container.",
+        "exit_state": "Robot is holding the blood sample container.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "blood_sample_container",
+            "location": "Blood Bank"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "The robot needs to grasp the object. The skill 'pick_object' uses MoveIt2 to plan and execute a grasp trajectory. The robot has the necessary capabilities (can_pick, can_grasp, can_manipulate)."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 6,
+        "checkpoint_goal": "Navigate to the Pharmacy with the blood sample container.",
+        "entry_state": "Robot is holding the blood sample container at the Blood Bank.",
+        "exit_state": "Robot is at the Pharmacy zone.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Pharmacy"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot must transport the object to the Pharmacy. While carrying, the robot navigates to the destination room. The skill 'navigate_to_room' is used for the transport phase."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 7,
+        "checkpoint_goal": "Place the blood sample container on a stable surface in the Pharmacy.",
+        "entry_state": "Robot is at the Pharmacy holding the blood sample container.",
+        "exit_state": "Robot has placed the blood sample container in the Pharmacy.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "blood_sample_container",
+            "location": "Pharmacy"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "The robot must release the object at the destination. The skill 'place_object' uses MoveIt2 to move the end-effector to a stable pose on a surface and release the gripper."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "The robot must maintain a stable grip during transport to prevent tilting or dropping.",
+      "The robot must navigate carefully to avoid collisions with obstacles in the corridors."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "The robot successfully navigates to the Blood Bank, detects and picks up the blood sample container, transports it to the Pharmacy, and places it safely without tilting or dropping."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T13:54:26.900804+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Deliver the blood sample container without tilting or dropping it.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Navigate to the Blood Bank, pick up a blood sample container, and deliver it to the Pharmacy without tilting or dropping it.",
+      "total_actions": 7,
+      "total_checkpoints": 7
+    },
+    "task_success": true,
+    "overall_score": 0.9,
+    "overall_status": "PASS",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'blood_sample_container' referenced in action 'detect_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "blood_sample_container"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'blood_sample_container' referenced in action 'estimate_object_pose' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 2,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "blood_sample_container"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'blood_sample_container' referenced in action 'navigate_to_object' (checkpoint 4, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 3,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "blood_sample_container"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'blood_sample_container' referenced in action 'pick_object' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 4,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "blood_sample_container"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'blood_sample_container' referenced in action 'place_object' (checkpoint 7, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 6,
+        "checkpoint_id": 7,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "blood_sample_container"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+        "action_index": 5,
+        "checkpoint_id": 6,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'blood bank': visited at action index 0 and again at 3.",
+        "action_index": 3,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'blood bank' into a single trip, or reorder actions to avoid backtracking."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "estimate_object_pose",
+        "required_skill": "estimate_object_pose",
+        "required_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "can_estimate_range": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "can_detect_objects": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 5,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 6,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 7,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions are valid. Score: 100.00%.",
+        "valid_actions": 7,
+        "total_actions": 7
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'blood_sample_container' referenced in action 'detect_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "blood_sample_container"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'blood_sample_container' referenced in action 'estimate_object_pose' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 2,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "blood_sample_container"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'blood_sample_container' referenced in action 'navigate_to_object' (checkpoint 4, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 3,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "blood_sample_container"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'blood_sample_container' referenced in action 'pick_object' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 4,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "blood_sample_container"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'blood_sample_container' referenced in action 'place_object' (checkpoint 7, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 6,
+            "checkpoint_id": 7,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'blood_sample_container' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "blood_sample_container"
+          }
+        ],
+        "comments": "0/5 object references are valid. Score: 0.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 5
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 location references are valid. Score: 100.00%.",
+        "valid_locations": 7,
+        "total_location_refs": 7
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 7,
+        "total_actions": 7
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions are capability-compatible with robot 'pepper'. Score: 100.00%.",
+        "compatible_actions": 7,
+        "total_actions": 7,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "estimate_object_pose",
+            "required_skill": "estimate_object_pose",
+            "required_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "can_estimate_range": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "can_detect_objects": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 5,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 6,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 7,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "6/6 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 6,
+        "total_constraints": 6
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 7,
+        "total_actions": 7
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+            "action_index": 5,
+            "checkpoint_id": 6,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "6/6 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 6,
+        "total_transitions": 6
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 43%.",
+        "goal_satisfied": true,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.4286,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'blood bank': visited at action index 0 and again at 3.",
+            "action_index": 3,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'blood bank' into a single trip, or reorder actions to avoid backtracking."
+          }
+        ],
+        "comments": "Efficiency: 100.00% (ideal=7, actual=7). Redundant navigations: 1. Repeated actions: 1.",
+        "total_actions": 7,
+        "ideal_steps": 7,
+        "efficiency_score": 1.0,
+        "redundancy_score": 0.7143,
+        "repeated_actions": 1,
+        "redundant_navigations": 1
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

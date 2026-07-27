@@ -388,6 +388,9 @@ if generate:
         with open(str(_ROOT)+"/app/tasks/"+world+".task") as taskFile:
             for eachTask in taskFile.readlines():
                 task_number = eachTask[:2].strip()
+                if int(task_number) < 18:
+                    continue
+
                 task = eachTask[3:].strip() 
                 st.write(task_number)
                 st.write(task)

@@ -1,0 +1,786 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "If the wheelchair is available near reception, move it to Room 102; otherwise bring the walking aid.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Transport a mobility aid (wheelchair or walking aid) from the Reception area to Room 102.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Detect and locate the nearest available mobility aid (wheelchair or walking aid) at the Reception zone.",
+        "entry_state": "Robot is at Main Entrance or Reception. No specific mobility aid is held. World state contains Reception zone with potential mobility aids.",
+        "exit_state": "Robot has identified the location and type of the nearest available mobility aid (either a wheelchair or a walking aid) at the Reception zone.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_mobility_aid",
+            "object": "mobility_aid",
+            "location": "Reception"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "The robot uses its visual perception to detect objects in the current scene. This skill identifies the presence of objects like wheelchairs or walking aids."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "recognize_object",
+            "ros2_interface": "/recognized_objects",
+            "reason": "After detecting the object, the robot classifies it to distinguish between a 'wheelchair' and a 'walking aid'."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "locate_object",
+            "ros2_interface": "/locate_object",
+            "reason": "The robot determines the precise pose of the detected mobility aid within the Reception zone to plan the subsequent transport."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Navigate to the location of the detected mobility aid.",
+        "entry_state": "Robot has identified the location of the mobility aid (wheelchair or walking aid) at the Reception zone.",
+        "exit_state": "Robot has successfully navigated to the pose adjacent to the mobility aid at the Reception zone.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_object",
+            "object": "mobility_aid",
+            "location": "Reception"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot navigates to the pose of the detected object (mobility aid) using the Nav2 navigation stack."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Grasp the mobility aid.",
+        "entry_state": "Robot is at the location of the mobility aid (wheelchair or walking aid).",
+        "exit_state": "Robot has successfully grasped the mobility aid.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "mobility_aid",
+            "location": "Reception"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "The robot uses MoveIt2 to plan and execute a grasp trajectory to pick up the mobility aid."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Navigate to Room 102.",
+        "entry_state": "Robot is holding the mobility aid at the Reception zone.",
+        "exit_state": "Robot has navigated to the location of Room 102.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Room 102"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "The robot navigates to the semantic location 'Room 102' using the Nav2 navigation stack."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 5,
+        "checkpoint_goal": "Place the mobility aid in Room 102.",
+        "entry_state": "Robot is holding the mobility aid at Room 102.",
+        "exit_state": "Robot has placed the mobility aid in Room 102 and is free.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "mobility_aid",
+            "location": "Room 102"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "The robot uses MoveIt2 to plan and execute a placement trajectory to release the mobility aid at the target pose in Room 102."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot must have can_pick capability to handle the mobility aid.",
+      "Robot must have can_navigate capability to move between zones.",
+      "Robot must have can_transport capability to carry the object.",
+      "Robot must have can_detect_objects capability to find the aid.",
+      "Robot must have can_detect_humans capability to avoid collisions with staff/patients.",
+      "Robot must have can_grasp capability to secure the object.",
+      "Robot must have can_place capability to deposit the object.",
+      "Robot must have supports_indoor_navigation capability for hospital environment.",
+      "Robot must have supports_obstacle_avoidance capability for crowded hospital corridors.",
+      "Robot must have supports_localization capability for navigation.",
+      "Robot must have single_arm_only constraint (no two hands), but can_pick/can_transport are true.",
+      "Robot must have limited_payload constraint (must ensure mobility aid fits)."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "The robot will detect a mobility aid at Reception, pick it up, navigate to Room 102, and place it there, completing the task."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T13:38:43.235944+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "If the wheelchair is available near reception, move it to Room 102; otherwise bring the walking aid.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Transport a mobility aid (wheelchair or walking aid) from the Reception area to Room 102.",
+      "total_actions": 5,
+      "total_checkpoints": 5
+    },
+    "task_success": false,
+    "overall_score": 0.748,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.8,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 0.8,
+        "status": "WARNING",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.6,
+        "status": "WARNING",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 0.8,
+        "status": "WARNING",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'detect_mobility_aid' (checkpoint 1, step 1) is not in the skill ontology.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'detect_mobility_aid' or add a new ontology entry."
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Room 102' in action 'navigate_to_room' (checkpoint 4, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 3,
+        "checkpoint_id": 4,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Room 102' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Room 102"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Room 102' in action 'place_object' (checkpoint 5, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 4,
+        "checkpoint_id": 5,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Room 102' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Room 102"
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'detect_mobility_aid' (checkpoint 1, step 1).",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='detect_mobility_aid' or a matching alias."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'mobility_aid' referenced in action 'detect_mobility_aid' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'mobility_aid' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "mobility_aid"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'mobility_aid' referenced in action 'navigate_to_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'mobility_aid' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "mobility_aid"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'mobility_aid' referenced in action 'pick_object' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 2,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'mobility_aid' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "mobility_aid"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'mobility_aid' referenced in action 'place_object' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 4,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'mobility_aid' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "mobility_aid"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'detect_mobility_aid' → 'navigate_to_object' (phase 2 → 1).",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+        "action_index": 3,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 56%, task-to-exit-state coverage: 22%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "aid",
+          "available",
+          "move",
+          "near",
+          "otherwise",
+          "reception",
+          "room",
+          "walking",
+          "wheelchair"
+        ],
+        "goal_keywords": [
+          "aid",
+          "area",
+          "from",
+          "mobility",
+          "reception",
+          "room",
+          "transport",
+          "walking",
+          "wheelchair"
+        ],
+        "matched_goal_keywords": [
+          "aid",
+          "reception",
+          "room",
+          "walking",
+          "wheelchair"
+        ],
+        "matched_exit_keywords": [
+          "aid",
+          "room"
+        ]
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "detect_mobility_aid",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'detect_mobility_aid' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "can_detect_objects": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 5,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 0.8,
+        "normalised_score": 0.8,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'detect_mobility_aid' (checkpoint 1, step 1) is not in the skill ontology.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'detect_mobility_aid' or add a new ontology entry."
+          }
+        ],
+        "comments": "4/5 actions are valid. Score: 80.00%.",
+        "valid_actions": 4,
+        "total_actions": 5
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'mobility_aid' referenced in action 'detect_mobility_aid' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'mobility_aid' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "mobility_aid"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'mobility_aid' referenced in action 'navigate_to_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'mobility_aid' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "mobility_aid"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'mobility_aid' referenced in action 'pick_object' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 2,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'mobility_aid' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "mobility_aid"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'mobility_aid' referenced in action 'place_object' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 4,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'mobility_aid' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "mobility_aid"
+          }
+        ],
+        "comments": "0/4 object references are valid. Score: 0.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 4
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.6,
+        "normalised_score": 0.6,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Room 102' in action 'navigate_to_room' (checkpoint 4, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 3,
+            "checkpoint_id": 4,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Room 102' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Room 102"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Room 102' in action 'place_object' (checkpoint 5, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 4,
+            "checkpoint_id": 5,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Room 102' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Room 102"
+          }
+        ],
+        "comments": "3/5 location references are valid. Score: 60.00%.",
+        "valid_locations": 3,
+        "total_location_refs": 5
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 0.8,
+        "normalised_score": 0.8,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'detect_mobility_aid' (checkpoint 1, step 1).",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='detect_mobility_aid' or a matching alias."
+          }
+        ],
+        "comments": "4/5 actions map to valid skills. Score: 80.00%.",
+        "mapped_actions": 4,
+        "total_actions": 5
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.8,
+        "normalised_score": 0.8,
+        "status": "PASS",
+        "issues": [],
+        "comments": "4/5 actions are capability-compatible with robot 'pepper'. Score: 80.00%.",
+        "compatible_actions": 4,
+        "total_actions": 5,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "detect_mobility_aid",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'detect_mobility_aid' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "can_detect_objects": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 5,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "4/4 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 4,
+        "total_constraints": 4
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "5/5 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 5,
+        "total_actions": 5
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'detect_mobility_aid' → 'navigate_to_object' (phase 2 → 1).",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+            "action_index": 3,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "4/4 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 4,
+        "total_transitions": 4
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 56%, task-to-exit-state coverage: 22%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "aid",
+              "available",
+              "move",
+              "near",
+              "otherwise",
+              "reception",
+              "room",
+              "walking",
+              "wheelchair"
+            ],
+            "goal_keywords": [
+              "aid",
+              "area",
+              "from",
+              "mobility",
+              "reception",
+              "room",
+              "transport",
+              "walking",
+              "wheelchair"
+            ],
+            "matched_goal_keywords": [
+              "aid",
+              "reception",
+              "room",
+              "walking",
+              "wheelchair"
+            ],
+            "matched_exit_keywords": [
+              "aid",
+              "room"
+            ]
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 56%. Task-to-final-state match: 22%.",
+        "goal_satisfied": false,
+        "goal_coverage": 0.5556,
+        "exit_coverage": 0.2222,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 100.00% (ideal=5, actual=5). Redundant navigations: 0. Repeated actions: 0.",
+        "total_actions": 5,
+        "ideal_steps": 5,
+        "efficiency_score": 1.0,
+        "redundancy_score": 1.0,
+        "repeated_actions": 0,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

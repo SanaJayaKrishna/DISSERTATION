@@ -1,0 +1,2966 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Inspect the pharmacy, nurse station, waiting area, and examination rooms for open cabinets, misplaced equipment, and missing sanitizer bottles, correct each issue, and return to reception.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Inspect specified zones (Pharmacy, Nurse Station, Waiting Area, Examination Rooms) for open cabinets, misplaced equipment, and missing sanitizer bottles; correct identified issues; return to Reception.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the Pharmacy zone and inspect for open cabinets, misplaced equipment, and missing sanitizer bottles.",
+        "entry_state": "Robot is at Reception.",
+        "exit_state": "Robot is at Pharmacy and has completed inspection of the area.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 2,
+            "action": "capture_image",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 3,
+            "action": "understand_scene",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 4,
+            "action": "detect_door",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 5,
+            "action": "detect_shelf",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 6,
+            "action": "detect_table",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 7,
+            "action": "detect_object",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 8,
+            "action": "recognize_object",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 9,
+            "action": "classify_object",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 10,
+            "action": "count_objects",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 11,
+            "action": "locate_object",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 12,
+            "action": "detect_free_space",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 13,
+            "action": "detect_obstacle",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 14,
+            "action": "detect_humans",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 15,
+            "action": "detect_face",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 16,
+            "action": "detect_marker",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 17,
+            "action": "detect_liquid",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 18,
+            "action": "detect_human_gesture",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 19,
+            "action": "recognize_speech",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 20,
+            "action": "recognize_sound",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 21,
+            "action": "estimate_lighting",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 22,
+            "action": "semantic_mapping",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 23,
+            "action": "understand_scene",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 24,
+            "action": "scan_area",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 25,
+            "action": "inspect_equipment",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 26,
+            "action": "inspect_surface",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 27,
+            "action": "thermal_scan",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 28,
+            "action": "gas_scan",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 29,
+            "action": "radiation_scan",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 30,
+            "action": "measure_distance",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 31,
+            "action": "measure_temperature",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 32,
+            "action": "measure_humidity",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 33,
+            "action": "record_sensor_data",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 34,
+            "action": "generate_inspection_report",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 35,
+            "action": "take_snapshot",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 36,
+            "action": "survey_environment",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 37,
+            "action": "open_door",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 38,
+            "action": "close_door",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 39,
+            "action": "open_drawer",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 40,
+            "action": "close_drawer",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 41,
+            "action": "press_button",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 42,
+            "action": "flip_switch",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 43,
+            "action": "turn_valve",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 44,
+            "action": "operate_elevator",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 45,
+            "action": "use_conveyor",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 46,
+            "action": "use_charging_dock",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 47,
+            "action": "dispose_object",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 48,
+            "action": "pick_waste",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 49,
+            "action": "clean_surface",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 50,
+            "action": "arrange_objects",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 51,
+            "action": "interact_with_appliance",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 52,
+            "action": "initialize",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 53,
+            "action": "shutdown",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 54,
+            "action": "restart",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 55,
+            "action": "reset",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 56,
+            "action": "self_check",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 57,
+            "action": "calibrate_sensors",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 58,
+            "action": "calibrate_arm",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 59,
+            "action": "load_map",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 60,
+            "action": "save_map",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 61,
+            "action": "localization",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 62,
+            "action": "start_recording",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 63,
+            "action": "stop_recording",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 64,
+            "action": "start_logging",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 65,
+            "action": "stop_logging",
+            "object": "",
+            "location": "Pharmacy"
+          },
+          {
+            "step": 66,
+            "action": "update_parameters",
+            "object": "",
+            "location": "Pharmacy"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot needs to travel from Reception to Pharmacy."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "capture_image",
+            "ros2_interface": "/camera/image_raw",
+            "reason": "Visual capture required for subsequent perception tasks."
+          },
+          {
+            "step": 3,
+            "abstract_skill": "understand_scene",
+            "ros2_interface": "/scene_understanding",
+            "reason": "High-level semantic interpretation of the Pharmacy environment."
+          },
+          {
+            "step": 4,
+            "abstract_skill": "detect_door",
+            "ros2_interface": "/doors",
+            "reason": "Identify doors to access cabinets or rooms."
+          },
+          {
+            "step": 5,
+            "abstract_skill": "detect_shelf",
+            "ros2_interface": "/shelves"
+          }
+        ]
+      }
+    ]
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T14:33:30.872703+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Inspect the pharmacy, nurse station, waiting area, and examination rooms for open cabinets, misplaced equipment, and missing sanitizer bottles, correct each issue, and return to reception.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Inspect specified zones (Pharmacy, Nurse Station, Waiting Area, Examination Rooms) for open cabinets, misplaced equipment, and missing sanitizer bottles; correct identified issues; return to Reception.",
+      "total_actions": 66,
+      "total_checkpoints": 1
+    },
+    "task_success": false,
+    "overall_score": 0.9492,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 0.8939,
+        "status": "WARNING",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 0.9848,
+        "status": "WARNING",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 0.9848,
+        "status": "WARNING",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 0.9848,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "ACTION_NOT_FOUND",
+        "message": "Action 'detect_humans' (checkpoint 1, step 14) is not in the skill ontology.",
+        "action_index": 13,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Check the skill ontology for a valid alternative to 'detect_humans' or add a new ontology entry."
+      },
+      {
+        "code": "SKILL_NOT_FOUND",
+        "message": "No skill mapping found for action 'detect_humans' (checkpoint 1, step 14).",
+        "action_index": 13,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Add an entry to the skill ontology with abstract_skill='detect_humans' or a matching alias."
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'thermal_scan' (checkpoint 1, step 27) requires capabilities [can_thermal_inspect] that the robot does not have.",
+        "action_index": 26,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_thermal_inspect] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_thermal_inspect"
+        ],
+        "required_skill": "thermal_scan"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'gas_scan' (checkpoint 1, step 28) requires capabilities [environmental_sensing] that the robot does not have.",
+        "action_index": 27,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [environmental_sensing] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "environmental_sensing"
+        ],
+        "required_skill": "gas_scan"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'radiation_scan' (checkpoint 1, step 29) requires capabilities [environmental_sensing] that the robot does not have.",
+        "action_index": 28,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [environmental_sensing] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "environmental_sensing"
+        ],
+        "required_skill": "radiation_scan"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'measure_temperature' (checkpoint 1, step 31) requires capabilities [can_thermal_inspect] that the robot does not have.",
+        "action_index": 30,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [can_thermal_inspect] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "can_thermal_inspect"
+        ],
+        "required_skill": "measure_temperature"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'measure_humidity' (checkpoint 1, step 32) requires capabilities [environmental_sensing] that the robot does not have.",
+        "action_index": 31,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [environmental_sensing] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "environmental_sensing"
+        ],
+        "required_skill": "measure_humidity"
+      },
+      {
+        "code": "CAPABILITY_MISSING",
+        "message": "Action 'use_charging_dock' (checkpoint 1, step 46) requires capabilities [docking_capable] that the robot does not have.",
+        "action_index": 45,
+        "checkpoint_id": 1,
+        "severity": "ERROR",
+        "suggestion": "Use a robot with [docking_capable] capabilities, or remove this action from the plan.",
+        "missing_capabilities": [
+          "docking_capable"
+        ],
+        "required_skill": "use_charging_dock"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 90%, task-to-exit-state coverage: 10%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "area",
+          "bottles",
+          "cabinets",
+          "correct",
+          "each",
+          "equipment",
+          "examination",
+          "inspect",
+          "issue",
+          "misplaced",
+          "missing",
+          "nurse",
+          "open",
+          "pharmacy",
+          "reception",
+          "return",
+          "rooms",
+          "sanitizer",
+          "station",
+          "waiting"
+        ],
+        "goal_keywords": [
+          "area",
+          "bottles",
+          "cabinets",
+          "correct",
+          "equipment",
+          "examination",
+          "identified",
+          "inspect",
+          "issues",
+          "misplaced",
+          "missing",
+          "nurse",
+          "open",
+          "pharmacy",
+          "reception",
+          "return",
+          "rooms",
+          "sanitizer",
+          "specified",
+          "station",
+          "waiting",
+          "zones"
+        ],
+        "matched_goal_keywords": [
+          "area",
+          "bottles",
+          "cabinets",
+          "correct",
+          "equipment",
+          "examination",
+          "inspect",
+          "misplaced",
+          "missing",
+          "nurse",
+          "open",
+          "pharmacy",
+          "reception",
+          "return",
+          "rooms",
+          "sanitizer",
+          "station",
+          "waiting"
+        ],
+        "matched_exit_keywords": [
+          "area",
+          "pharmacy"
+        ]
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 1,
+        "step": 2,
+        "action_name": "capture_image",
+        "required_skill": "capture_image",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 1,
+        "step": 3,
+        "action_name": "understand_scene",
+        "required_skill": "understand_scene",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 1,
+        "step": 4,
+        "action_name": "detect_door",
+        "required_skill": "detect_door",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 1,
+        "step": 5,
+        "action_name": "detect_shelf",
+        "required_skill": "detect_shelf",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 1,
+        "step": 6,
+        "action_name": "detect_table",
+        "required_skill": "detect_table",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 1,
+        "step": 7,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 7,
+        "checkpoint_id": 1,
+        "step": 8,
+        "action_name": "recognize_object",
+        "required_skill": "recognize_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 8,
+        "checkpoint_id": 1,
+        "step": 9,
+        "action_name": "classify_object",
+        "required_skill": "classify_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 9,
+        "checkpoint_id": 1,
+        "step": 10,
+        "action_name": "count_objects",
+        "required_skill": "count_objects",
+        "required_capabilities": [
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 10,
+        "checkpoint_id": 1,
+        "step": 11,
+        "action_name": "locate_object",
+        "required_skill": "locate_object",
+        "required_capabilities": [
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 11,
+        "checkpoint_id": 1,
+        "step": 12,
+        "action_name": "detect_free_space",
+        "required_skill": "detect_free_space",
+        "required_capabilities": [
+          "can_detect_obstacles",
+          "can_estimate_range"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_obstacles": true,
+          "can_estimate_range": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 12,
+        "checkpoint_id": 1,
+        "step": 13,
+        "action_name": "detect_obstacle",
+        "required_skill": "detect_obstacle",
+        "required_capabilities": [
+          "can_detect_obstacles"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_obstacles": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 13,
+        "checkpoint_id": 1,
+        "step": 14,
+        "action_name": "detect_humans",
+        "required_skill": "UNKNOWN",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "FAIL",
+        "failure_reason": "Action 'detect_humans' has no matching skill in the ontology; capability check skipped."
+      },
+      {
+        "global_index": 14,
+        "checkpoint_id": 1,
+        "step": 15,
+        "action_name": "detect_face",
+        "required_skill": "detect_face",
+        "required_capabilities": [
+          "can_detect_humans",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_humans": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 15,
+        "checkpoint_id": 1,
+        "step": 16,
+        "action_name": "detect_marker",
+        "required_skill": "detect_marker",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 16,
+        "checkpoint_id": 1,
+        "step": 17,
+        "action_name": "detect_liquid",
+        "required_skill": "detect_liquid",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 17,
+        "checkpoint_id": 1,
+        "step": 18,
+        "action_name": "detect_human_gesture",
+        "required_skill": "detect_human_gesture",
+        "required_capabilities": [
+          "can_detect_humans",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_humans": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 18,
+        "checkpoint_id": 1,
+        "step": 19,
+        "action_name": "recognize_speech",
+        "required_skill": "recognize_speech",
+        "required_capabilities": [
+          "has_audio_input",
+          "supports_voice_interaction"
+        ],
+        "robot_capabilities_checked": {
+          "has_audio_input": true,
+          "supports_voice_interaction": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 19,
+        "checkpoint_id": 1,
+        "step": 20,
+        "action_name": "recognize_sound",
+        "required_skill": "recognize_sound",
+        "required_capabilities": [
+          "has_audio_input"
+        ],
+        "robot_capabilities_checked": {
+          "has_audio_input": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 20,
+        "checkpoint_id": 1,
+        "step": 21,
+        "action_name": "estimate_lighting",
+        "required_skill": "estimate_lighting",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 21,
+        "checkpoint_id": 1,
+        "step": 22,
+        "action_name": "semantic_mapping",
+        "required_skill": "semantic_mapping",
+        "required_capabilities": [
+          "supports_slam",
+          "supports_map_building"
+        ],
+        "robot_capabilities_checked": {
+          "supports_slam": true,
+          "supports_map_building": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 22,
+        "checkpoint_id": 1,
+        "step": 23,
+        "action_name": "understand_scene",
+        "required_skill": "understand_scene",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 23,
+        "checkpoint_id": 1,
+        "step": 24,
+        "action_name": "scan_area",
+        "required_skill": "scan_area",
+        "required_capabilities": [
+          "can_inspect"
+        ],
+        "robot_capabilities_checked": {
+          "can_inspect": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 24,
+        "checkpoint_id": 1,
+        "step": 25,
+        "action_name": "inspect_equipment",
+        "required_skill": "inspect_equipment",
+        "required_capabilities": [
+          "can_inspect",
+          "can_monitor_equipment"
+        ],
+        "robot_capabilities_checked": {
+          "can_inspect": true,
+          "can_monitor_equipment": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 25,
+        "checkpoint_id": 1,
+        "step": 26,
+        "action_name": "inspect_surface",
+        "required_skill": "inspect_surface",
+        "required_capabilities": [
+          "can_inspect",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_inspect": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 26,
+        "checkpoint_id": 1,
+        "step": 27,
+        "action_name": "thermal_scan",
+        "required_skill": "thermal_scan",
+        "required_capabilities": [
+          "can_thermal_inspect"
+        ],
+        "robot_capabilities_checked": {
+          "can_thermal_inspect": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'pepper' lacks required capabilities: can_thermal_inspect"
+      },
+      {
+        "global_index": 27,
+        "checkpoint_id": 1,
+        "step": 28,
+        "action_name": "gas_scan",
+        "required_skill": "gas_scan",
+        "required_capabilities": [
+          "can_inspect",
+          "environmental_sensing"
+        ],
+        "robot_capabilities_checked": {
+          "can_inspect": true,
+          "environmental_sensing": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'pepper' lacks required capabilities: environmental_sensing"
+      },
+      {
+        "global_index": 28,
+        "checkpoint_id": 1,
+        "step": 29,
+        "action_name": "radiation_scan",
+        "required_skill": "radiation_scan",
+        "required_capabilities": [
+          "can_inspect",
+          "environmental_sensing"
+        ],
+        "robot_capabilities_checked": {
+          "can_inspect": true,
+          "environmental_sensing": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'pepper' lacks required capabilities: environmental_sensing"
+      },
+      {
+        "global_index": 29,
+        "checkpoint_id": 1,
+        "step": 30,
+        "action_name": "measure_distance",
+        "required_skill": "measure_distance",
+        "required_capabilities": [
+          "can_estimate_range"
+        ],
+        "robot_capabilities_checked": {
+          "can_estimate_range": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 30,
+        "checkpoint_id": 1,
+        "step": 31,
+        "action_name": "measure_temperature",
+        "required_skill": "measure_temperature",
+        "required_capabilities": [
+          "can_thermal_inspect"
+        ],
+        "robot_capabilities_checked": {
+          "can_thermal_inspect": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'pepper' lacks required capabilities: can_thermal_inspect"
+      },
+      {
+        "global_index": 31,
+        "checkpoint_id": 1,
+        "step": 32,
+        "action_name": "measure_humidity",
+        "required_skill": "measure_humidity",
+        "required_capabilities": [
+          "environmental_sensing"
+        ],
+        "robot_capabilities_checked": {
+          "environmental_sensing": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'pepper' lacks required capabilities: environmental_sensing"
+      },
+      {
+        "global_index": 32,
+        "checkpoint_id": 1,
+        "step": 33,
+        "action_name": "record_sensor_data",
+        "required_skill": "record_sensor_data",
+        "required_capabilities": [
+          "can_inspect"
+        ],
+        "robot_capabilities_checked": {
+          "can_inspect": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 33,
+        "checkpoint_id": 1,
+        "step": 34,
+        "action_name": "generate_inspection_report",
+        "required_skill": "generate_inspection_report",
+        "required_capabilities": [
+          "can_inspect"
+        ],
+        "robot_capabilities_checked": {
+          "can_inspect": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 34,
+        "checkpoint_id": 1,
+        "step": 35,
+        "action_name": "take_snapshot",
+        "required_skill": "take_snapshot",
+        "required_capabilities": [
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 35,
+        "checkpoint_id": 1,
+        "step": 36,
+        "action_name": "survey_environment",
+        "required_skill": "survey_environment",
+        "required_capabilities": [
+          "can_inspect",
+          "can_navigate"
+        ],
+        "robot_capabilities_checked": {
+          "can_inspect": true,
+          "can_navigate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 36,
+        "checkpoint_id": 1,
+        "step": 37,
+        "action_name": "open_door",
+        "required_skill": "open_door",
+        "required_capabilities": [
+          "can_open_door"
+        ],
+        "robot_capabilities_checked": {
+          "can_open_door": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 37,
+        "checkpoint_id": 1,
+        "step": 38,
+        "action_name": "close_door",
+        "required_skill": "close_door",
+        "required_capabilities": [
+          "can_open_door"
+        ],
+        "robot_capabilities_checked": {
+          "can_open_door": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 38,
+        "checkpoint_id": 1,
+        "step": 39,
+        "action_name": "open_drawer",
+        "required_skill": "open_drawer",
+        "required_capabilities": [
+          "can_open_drawer"
+        ],
+        "robot_capabilities_checked": {
+          "can_open_drawer": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 39,
+        "checkpoint_id": 1,
+        "step": 40,
+        "action_name": "close_drawer",
+        "required_skill": "close_drawer",
+        "required_capabilities": [
+          "can_open_drawer"
+        ],
+        "robot_capabilities_checked": {
+          "can_open_drawer": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 40,
+        "checkpoint_id": 1,
+        "step": 41,
+        "action_name": "press_button",
+        "required_skill": "press_button",
+        "required_capabilities": [
+          "can_press_button"
+        ],
+        "robot_capabilities_checked": {
+          "can_press_button": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 41,
+        "checkpoint_id": 1,
+        "step": 42,
+        "action_name": "flip_switch",
+        "required_skill": "flip_switch",
+        "required_capabilities": [
+          "can_press_button",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_press_button": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 42,
+        "checkpoint_id": 1,
+        "step": 43,
+        "action_name": "turn_valve",
+        "required_skill": "turn_valve",
+        "required_capabilities": [
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 43,
+        "checkpoint_id": 1,
+        "step": 44,
+        "action_name": "operate_elevator",
+        "required_skill": "operate_elevator",
+        "required_capabilities": [
+          "can_use_elevator"
+        ],
+        "robot_capabilities_checked": {
+          "can_use_elevator": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 44,
+        "checkpoint_id": 1,
+        "step": 45,
+        "action_name": "use_conveyor",
+        "required_skill": "use_conveyor",
+        "required_capabilities": [
+          "can_transport",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_transport": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 45,
+        "checkpoint_id": 1,
+        "step": 46,
+        "action_name": "use_charging_dock",
+        "required_skill": "use_charging_dock",
+        "required_capabilities": [
+          "docking_capable"
+        ],
+        "robot_capabilities_checked": {
+          "docking_capable": false
+        },
+        "result": "FAIL",
+        "failure_reason": "Robot 'pepper' lacks required capabilities: docking_capable"
+      },
+      {
+        "global_index": 46,
+        "checkpoint_id": 1,
+        "step": 47,
+        "action_name": "dispose_object",
+        "required_skill": "dispose_object",
+        "required_capabilities": [
+          "can_place",
+          "can_transport"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_transport": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 47,
+        "checkpoint_id": 1,
+        "step": 48,
+        "action_name": "pick_waste",
+        "required_skill": "pick_waste",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 48,
+        "checkpoint_id": 1,
+        "step": 49,
+        "action_name": "clean_surface",
+        "required_skill": "clean_surface",
+        "required_capabilities": [
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 49,
+        "checkpoint_id": 1,
+        "step": 50,
+        "action_name": "arrange_objects",
+        "required_skill": "arrange_objects",
+        "required_capabilities": [
+          "can_pick",
+          "can_place"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_place": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 50,
+        "checkpoint_id": 1,
+        "step": 51,
+        "action_name": "interact_with_appliance",
+        "required_skill": "interact_with_appliance",
+        "required_capabilities": [
+          "can_press_button",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_press_button": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 51,
+        "checkpoint_id": 1,
+        "step": 52,
+        "action_name": "initialize",
+        "required_skill": "initialize",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 52,
+        "checkpoint_id": 1,
+        "step": 53,
+        "action_name": "shutdown",
+        "required_skill": "shutdown",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 53,
+        "checkpoint_id": 1,
+        "step": 54,
+        "action_name": "restart",
+        "required_skill": "restart",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 54,
+        "checkpoint_id": 1,
+        "step": 55,
+        "action_name": "reset",
+        "required_skill": "reset",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 55,
+        "checkpoint_id": 1,
+        "step": 56,
+        "action_name": "self_check",
+        "required_skill": "self_check",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 56,
+        "checkpoint_id": 1,
+        "step": 57,
+        "action_name": "calibrate_sensors",
+        "required_skill": "calibrate_sensors",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 57,
+        "checkpoint_id": 1,
+        "step": 58,
+        "action_name": "calibrate_arm",
+        "required_skill": "calibrate_arm",
+        "required_capabilities": [
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 58,
+        "checkpoint_id": 1,
+        "step": 59,
+        "action_name": "load_map",
+        "required_skill": "load_map",
+        "required_capabilities": [
+          "supports_localization"
+        ],
+        "robot_capabilities_checked": {
+          "supports_localization": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 59,
+        "checkpoint_id": 1,
+        "step": 60,
+        "action_name": "save_map",
+        "required_skill": "save_map",
+        "required_capabilities": [
+          "supports_map_building"
+        ],
+        "robot_capabilities_checked": {
+          "supports_map_building": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 60,
+        "checkpoint_id": 1,
+        "step": 61,
+        "action_name": "localization",
+        "required_skill": "localization",
+        "required_capabilities": [
+          "supports_localization"
+        ],
+        "robot_capabilities_checked": {
+          "supports_localization": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 61,
+        "checkpoint_id": 1,
+        "step": 62,
+        "action_name": "start_recording",
+        "required_skill": "start_recording",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 62,
+        "checkpoint_id": 1,
+        "step": 63,
+        "action_name": "stop_recording",
+        "required_skill": "stop_recording",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 63,
+        "checkpoint_id": 1,
+        "step": 64,
+        "action_name": "start_logging",
+        "required_skill": "start_logging",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 64,
+        "checkpoint_id": 1,
+        "step": 65,
+        "action_name": "stop_logging",
+        "required_skill": "stop_logging",
+        "required_capabilities": [],
+        "robot_capabilities_checked": {},
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 65,
+        "checkpoint_id": 1,
+        "step": 66,
+        "action_name": "update_parameters",
+        "required_skill": "update_parameters",
+        "required_capabilities": [
+          "supports_remote_operation"
+        ],
+        "robot_capabilities_checked": {
+          "supports_remote_operation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 0.9848,
+        "normalised_score": 0.9848,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "ACTION_NOT_FOUND",
+            "message": "Action 'detect_humans' (checkpoint 1, step 14) is not in the skill ontology.",
+            "action_index": 13,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Check the skill ontology for a valid alternative to 'detect_humans' or add a new ontology entry."
+          }
+        ],
+        "comments": "65/66 actions are valid. Score: 98.48%.",
+        "valid_actions": 65,
+        "total_actions": 66
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 object references are valid. Score: 100.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 0
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "66/66 location references are valid. Score: 100.00%.",
+        "valid_locations": 66,
+        "total_location_refs": 66
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 0.9848,
+        "normalised_score": 0.9848,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "SKILL_NOT_FOUND",
+            "message": "No skill mapping found for action 'detect_humans' (checkpoint 1, step 14).",
+            "action_index": 13,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Add an entry to the skill ontology with abstract_skill='detect_humans' or a matching alias."
+          }
+        ],
+        "comments": "65/66 actions map to valid skills. Score: 98.48%.",
+        "mapped_actions": 65,
+        "total_actions": 66
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 0.8939,
+        "normalised_score": 0.8939,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'thermal_scan' (checkpoint 1, step 27) requires capabilities [can_thermal_inspect] that the robot does not have.",
+            "action_index": 26,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_thermal_inspect] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_thermal_inspect"
+            ],
+            "required_skill": "thermal_scan"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'gas_scan' (checkpoint 1, step 28) requires capabilities [environmental_sensing] that the robot does not have.",
+            "action_index": 27,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [environmental_sensing] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "environmental_sensing"
+            ],
+            "required_skill": "gas_scan"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'radiation_scan' (checkpoint 1, step 29) requires capabilities [environmental_sensing] that the robot does not have.",
+            "action_index": 28,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [environmental_sensing] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "environmental_sensing"
+            ],
+            "required_skill": "radiation_scan"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'measure_temperature' (checkpoint 1, step 31) requires capabilities [can_thermal_inspect] that the robot does not have.",
+            "action_index": 30,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [can_thermal_inspect] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "can_thermal_inspect"
+            ],
+            "required_skill": "measure_temperature"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'measure_humidity' (checkpoint 1, step 32) requires capabilities [environmental_sensing] that the robot does not have.",
+            "action_index": 31,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [environmental_sensing] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "environmental_sensing"
+            ],
+            "required_skill": "measure_humidity"
+          },
+          {
+            "code": "CAPABILITY_MISSING",
+            "message": "Action 'use_charging_dock' (checkpoint 1, step 46) requires capabilities [docking_capable] that the robot does not have.",
+            "action_index": 45,
+            "checkpoint_id": 1,
+            "severity": "ERROR",
+            "suggestion": "Use a robot with [docking_capable] capabilities, or remove this action from the plan.",
+            "missing_capabilities": [
+              "docking_capable"
+            ],
+            "required_skill": "use_charging_dock"
+          }
+        ],
+        "comments": "59/66 actions are capability-compatible with robot 'pepper'. Score: 89.39%.",
+        "compatible_actions": 59,
+        "total_actions": 66,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 1,
+            "step": 2,
+            "action_name": "capture_image",
+            "required_skill": "capture_image",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 1,
+            "step": 3,
+            "action_name": "understand_scene",
+            "required_skill": "understand_scene",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 1,
+            "step": 4,
+            "action_name": "detect_door",
+            "required_skill": "detect_door",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 1,
+            "step": 5,
+            "action_name": "detect_shelf",
+            "required_skill": "detect_shelf",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 1,
+            "step": 6,
+            "action_name": "detect_table",
+            "required_skill": "detect_table",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 1,
+            "step": 7,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 7,
+            "checkpoint_id": 1,
+            "step": 8,
+            "action_name": "recognize_object",
+            "required_skill": "recognize_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 8,
+            "checkpoint_id": 1,
+            "step": 9,
+            "action_name": "classify_object",
+            "required_skill": "classify_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 9,
+            "checkpoint_id": 1,
+            "step": 10,
+            "action_name": "count_objects",
+            "required_skill": "count_objects",
+            "required_capabilities": [
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 10,
+            "checkpoint_id": 1,
+            "step": 11,
+            "action_name": "locate_object",
+            "required_skill": "locate_object",
+            "required_capabilities": [
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 11,
+            "checkpoint_id": 1,
+            "step": 12,
+            "action_name": "detect_free_space",
+            "required_skill": "detect_free_space",
+            "required_capabilities": [
+              "can_detect_obstacles",
+              "can_estimate_range"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_obstacles": true,
+              "can_estimate_range": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 12,
+            "checkpoint_id": 1,
+            "step": 13,
+            "action_name": "detect_obstacle",
+            "required_skill": "detect_obstacle",
+            "required_capabilities": [
+              "can_detect_obstacles"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_obstacles": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 13,
+            "checkpoint_id": 1,
+            "step": 14,
+            "action_name": "detect_humans",
+            "required_skill": "UNKNOWN",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "FAIL",
+            "failure_reason": "Action 'detect_humans' has no matching skill in the ontology; capability check skipped."
+          },
+          {
+            "global_index": 14,
+            "checkpoint_id": 1,
+            "step": 15,
+            "action_name": "detect_face",
+            "required_skill": "detect_face",
+            "required_capabilities": [
+              "can_detect_humans",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_humans": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 15,
+            "checkpoint_id": 1,
+            "step": 16,
+            "action_name": "detect_marker",
+            "required_skill": "detect_marker",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 16,
+            "checkpoint_id": 1,
+            "step": 17,
+            "action_name": "detect_liquid",
+            "required_skill": "detect_liquid",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 17,
+            "checkpoint_id": 1,
+            "step": 18,
+            "action_name": "detect_human_gesture",
+            "required_skill": "detect_human_gesture",
+            "required_capabilities": [
+              "can_detect_humans",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_humans": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 18,
+            "checkpoint_id": 1,
+            "step": 19,
+            "action_name": "recognize_speech",
+            "required_skill": "recognize_speech",
+            "required_capabilities": [
+              "has_audio_input",
+              "supports_voice_interaction"
+            ],
+            "robot_capabilities_checked": {
+              "has_audio_input": true,
+              "supports_voice_interaction": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 19,
+            "checkpoint_id": 1,
+            "step": 20,
+            "action_name": "recognize_sound",
+            "required_skill": "recognize_sound",
+            "required_capabilities": [
+              "has_audio_input"
+            ],
+            "robot_capabilities_checked": {
+              "has_audio_input": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 20,
+            "checkpoint_id": 1,
+            "step": 21,
+            "action_name": "estimate_lighting",
+            "required_skill": "estimate_lighting",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 21,
+            "checkpoint_id": 1,
+            "step": 22,
+            "action_name": "semantic_mapping",
+            "required_skill": "semantic_mapping",
+            "required_capabilities": [
+              "supports_slam",
+              "supports_map_building"
+            ],
+            "robot_capabilities_checked": {
+              "supports_slam": true,
+              "supports_map_building": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 22,
+            "checkpoint_id": 1,
+            "step": 23,
+            "action_name": "understand_scene",
+            "required_skill": "understand_scene",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 23,
+            "checkpoint_id": 1,
+            "step": 24,
+            "action_name": "scan_area",
+            "required_skill": "scan_area",
+            "required_capabilities": [
+              "can_inspect"
+            ],
+            "robot_capabilities_checked": {
+              "can_inspect": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 24,
+            "checkpoint_id": 1,
+            "step": 25,
+            "action_name": "inspect_equipment",
+            "required_skill": "inspect_equipment",
+            "required_capabilities": [
+              "can_inspect",
+              "can_monitor_equipment"
+            ],
+            "robot_capabilities_checked": {
+              "can_inspect": true,
+              "can_monitor_equipment": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 25,
+            "checkpoint_id": 1,
+            "step": 26,
+            "action_name": "inspect_surface",
+            "required_skill": "inspect_surface",
+            "required_capabilities": [
+              "can_inspect",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_inspect": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 26,
+            "checkpoint_id": 1,
+            "step": 27,
+            "action_name": "thermal_scan",
+            "required_skill": "thermal_scan",
+            "required_capabilities": [
+              "can_thermal_inspect"
+            ],
+            "robot_capabilities_checked": {
+              "can_thermal_inspect": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'pepper' lacks required capabilities: can_thermal_inspect"
+          },
+          {
+            "global_index": 27,
+            "checkpoint_id": 1,
+            "step": 28,
+            "action_name": "gas_scan",
+            "required_skill": "gas_scan",
+            "required_capabilities": [
+              "can_inspect",
+              "environmental_sensing"
+            ],
+            "robot_capabilities_checked": {
+              "can_inspect": true,
+              "environmental_sensing": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'pepper' lacks required capabilities: environmental_sensing"
+          },
+          {
+            "global_index": 28,
+            "checkpoint_id": 1,
+            "step": 29,
+            "action_name": "radiation_scan",
+            "required_skill": "radiation_scan",
+            "required_capabilities": [
+              "can_inspect",
+              "environmental_sensing"
+            ],
+            "robot_capabilities_checked": {
+              "can_inspect": true,
+              "environmental_sensing": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'pepper' lacks required capabilities: environmental_sensing"
+          },
+          {
+            "global_index": 29,
+            "checkpoint_id": 1,
+            "step": 30,
+            "action_name": "measure_distance",
+            "required_skill": "measure_distance",
+            "required_capabilities": [
+              "can_estimate_range"
+            ],
+            "robot_capabilities_checked": {
+              "can_estimate_range": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 30,
+            "checkpoint_id": 1,
+            "step": 31,
+            "action_name": "measure_temperature",
+            "required_skill": "measure_temperature",
+            "required_capabilities": [
+              "can_thermal_inspect"
+            ],
+            "robot_capabilities_checked": {
+              "can_thermal_inspect": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'pepper' lacks required capabilities: can_thermal_inspect"
+          },
+          {
+            "global_index": 31,
+            "checkpoint_id": 1,
+            "step": 32,
+            "action_name": "measure_humidity",
+            "required_skill": "measure_humidity",
+            "required_capabilities": [
+              "environmental_sensing"
+            ],
+            "robot_capabilities_checked": {
+              "environmental_sensing": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'pepper' lacks required capabilities: environmental_sensing"
+          },
+          {
+            "global_index": 32,
+            "checkpoint_id": 1,
+            "step": 33,
+            "action_name": "record_sensor_data",
+            "required_skill": "record_sensor_data",
+            "required_capabilities": [
+              "can_inspect"
+            ],
+            "robot_capabilities_checked": {
+              "can_inspect": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 33,
+            "checkpoint_id": 1,
+            "step": 34,
+            "action_name": "generate_inspection_report",
+            "required_skill": "generate_inspection_report",
+            "required_capabilities": [
+              "can_inspect"
+            ],
+            "robot_capabilities_checked": {
+              "can_inspect": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 34,
+            "checkpoint_id": 1,
+            "step": 35,
+            "action_name": "take_snapshot",
+            "required_skill": "take_snapshot",
+            "required_capabilities": [
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 35,
+            "checkpoint_id": 1,
+            "step": 36,
+            "action_name": "survey_environment",
+            "required_skill": "survey_environment",
+            "required_capabilities": [
+              "can_inspect",
+              "can_navigate"
+            ],
+            "robot_capabilities_checked": {
+              "can_inspect": true,
+              "can_navigate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 36,
+            "checkpoint_id": 1,
+            "step": 37,
+            "action_name": "open_door",
+            "required_skill": "open_door",
+            "required_capabilities": [
+              "can_open_door"
+            ],
+            "robot_capabilities_checked": {
+              "can_open_door": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 37,
+            "checkpoint_id": 1,
+            "step": 38,
+            "action_name": "close_door",
+            "required_skill": "close_door",
+            "required_capabilities": [
+              "can_open_door"
+            ],
+            "robot_capabilities_checked": {
+              "can_open_door": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 38,
+            "checkpoint_id": 1,
+            "step": 39,
+            "action_name": "open_drawer",
+            "required_skill": "open_drawer",
+            "required_capabilities": [
+              "can_open_drawer"
+            ],
+            "robot_capabilities_checked": {
+              "can_open_drawer": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 39,
+            "checkpoint_id": 1,
+            "step": 40,
+            "action_name": "close_drawer",
+            "required_skill": "close_drawer",
+            "required_capabilities": [
+              "can_open_drawer"
+            ],
+            "robot_capabilities_checked": {
+              "can_open_drawer": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 40,
+            "checkpoint_id": 1,
+            "step": 41,
+            "action_name": "press_button",
+            "required_skill": "press_button",
+            "required_capabilities": [
+              "can_press_button"
+            ],
+            "robot_capabilities_checked": {
+              "can_press_button": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 41,
+            "checkpoint_id": 1,
+            "step": 42,
+            "action_name": "flip_switch",
+            "required_skill": "flip_switch",
+            "required_capabilities": [
+              "can_press_button",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_press_button": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 42,
+            "checkpoint_id": 1,
+            "step": 43,
+            "action_name": "turn_valve",
+            "required_skill": "turn_valve",
+            "required_capabilities": [
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 43,
+            "checkpoint_id": 1,
+            "step": 44,
+            "action_name": "operate_elevator",
+            "required_skill": "operate_elevator",
+            "required_capabilities": [
+              "can_use_elevator"
+            ],
+            "robot_capabilities_checked": {
+              "can_use_elevator": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 44,
+            "checkpoint_id": 1,
+            "step": 45,
+            "action_name": "use_conveyor",
+            "required_skill": "use_conveyor",
+            "required_capabilities": [
+              "can_transport",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_transport": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 45,
+            "checkpoint_id": 1,
+            "step": 46,
+            "action_name": "use_charging_dock",
+            "required_skill": "use_charging_dock",
+            "required_capabilities": [
+              "docking_capable"
+            ],
+            "robot_capabilities_checked": {
+              "docking_capable": false
+            },
+            "result": "FAIL",
+            "failure_reason": "Robot 'pepper' lacks required capabilities: docking_capable"
+          },
+          {
+            "global_index": 46,
+            "checkpoint_id": 1,
+            "step": 47,
+            "action_name": "dispose_object",
+            "required_skill": "dispose_object",
+            "required_capabilities": [
+              "can_place",
+              "can_transport"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_transport": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 47,
+            "checkpoint_id": 1,
+            "step": 48,
+            "action_name": "pick_waste",
+            "required_skill": "pick_waste",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 48,
+            "checkpoint_id": 1,
+            "step": 49,
+            "action_name": "clean_surface",
+            "required_skill": "clean_surface",
+            "required_capabilities": [
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 49,
+            "checkpoint_id": 1,
+            "step": 50,
+            "action_name": "arrange_objects",
+            "required_skill": "arrange_objects",
+            "required_capabilities": [
+              "can_pick",
+              "can_place"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_place": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 50,
+            "checkpoint_id": 1,
+            "step": 51,
+            "action_name": "interact_with_appliance",
+            "required_skill": "interact_with_appliance",
+            "required_capabilities": [
+              "can_press_button",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_press_button": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 51,
+            "checkpoint_id": 1,
+            "step": 52,
+            "action_name": "initialize",
+            "required_skill": "initialize",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 52,
+            "checkpoint_id": 1,
+            "step": 53,
+            "action_name": "shutdown",
+            "required_skill": "shutdown",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 53,
+            "checkpoint_id": 1,
+            "step": 54,
+            "action_name": "restart",
+            "required_skill": "restart",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 54,
+            "checkpoint_id": 1,
+            "step": 55,
+            "action_name": "reset",
+            "required_skill": "reset",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 55,
+            "checkpoint_id": 1,
+            "step": 56,
+            "action_name": "self_check",
+            "required_skill": "self_check",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 56,
+            "checkpoint_id": 1,
+            "step": 57,
+            "action_name": "calibrate_sensors",
+            "required_skill": "calibrate_sensors",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 57,
+            "checkpoint_id": 1,
+            "step": 58,
+            "action_name": "calibrate_arm",
+            "required_skill": "calibrate_arm",
+            "required_capabilities": [
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 58,
+            "checkpoint_id": 1,
+            "step": 59,
+            "action_name": "load_map",
+            "required_skill": "load_map",
+            "required_capabilities": [
+              "supports_localization"
+            ],
+            "robot_capabilities_checked": {
+              "supports_localization": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 59,
+            "checkpoint_id": 1,
+            "step": 60,
+            "action_name": "save_map",
+            "required_skill": "save_map",
+            "required_capabilities": [
+              "supports_map_building"
+            ],
+            "robot_capabilities_checked": {
+              "supports_map_building": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 60,
+            "checkpoint_id": 1,
+            "step": 61,
+            "action_name": "localization",
+            "required_skill": "localization",
+            "required_capabilities": [
+              "supports_localization"
+            ],
+            "robot_capabilities_checked": {
+              "supports_localization": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 61,
+            "checkpoint_id": 1,
+            "step": 62,
+            "action_name": "start_recording",
+            "required_skill": "start_recording",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 62,
+            "checkpoint_id": 1,
+            "step": 63,
+            "action_name": "stop_recording",
+            "required_skill": "stop_recording",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 63,
+            "checkpoint_id": 1,
+            "step": 64,
+            "action_name": "start_logging",
+            "required_skill": "start_logging",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 64,
+            "checkpoint_id": 1,
+            "step": 65,
+            "action_name": "stop_logging",
+            "required_skill": "stop_logging",
+            "required_capabilities": [],
+            "robot_capabilities_checked": {},
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 65,
+            "checkpoint_id": 1,
+            "step": 66,
+            "action_name": "update_parameters",
+            "required_skill": "update_parameters",
+            "required_capabilities": [
+              "supports_remote_operation"
+            ],
+            "robot_capabilities_checked": {
+              "supports_remote_operation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "5/5 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 5,
+        "total_constraints": 5
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "66/66 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 66,
+        "total_actions": 66
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "65/65 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 65,
+        "total_transitions": 65
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 90%, task-to-exit-state coverage: 10%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "area",
+              "bottles",
+              "cabinets",
+              "correct",
+              "each",
+              "equipment",
+              "examination",
+              "inspect",
+              "issue",
+              "misplaced",
+              "missing",
+              "nurse",
+              "open",
+              "pharmacy",
+              "reception",
+              "return",
+              "rooms",
+              "sanitizer",
+              "station",
+              "waiting"
+            ],
+            "goal_keywords": [
+              "area",
+              "bottles",
+              "cabinets",
+              "correct",
+              "equipment",
+              "examination",
+              "identified",
+              "inspect",
+              "issues",
+              "misplaced",
+              "missing",
+              "nurse",
+              "open",
+              "pharmacy",
+              "reception",
+              "return",
+              "rooms",
+              "sanitizer",
+              "specified",
+              "station",
+              "waiting",
+              "zones"
+            ],
+            "matched_goal_keywords": [
+              "area",
+              "bottles",
+              "cabinets",
+              "correct",
+              "equipment",
+              "examination",
+              "inspect",
+              "misplaced",
+              "missing",
+              "nurse",
+              "open",
+              "pharmacy",
+              "reception",
+              "return",
+              "rooms",
+              "sanitizer",
+              "station",
+              "waiting"
+            ],
+            "matched_exit_keywords": [
+              "area",
+              "pharmacy"
+            ]
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 90%. Task-to-final-state match: 10%.",
+        "goal_satisfied": false,
+        "goal_coverage": 0.9,
+        "exit_coverage": 0.1,
+        "llm_self_reported_valid": null
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 0.9848,
+        "normalised_score": 0.9848,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Efficiency: 98.48% (ideal=65, actual=66). Redundant navigations: 0. Repeated actions: 1.",
+        "total_actions": 66,
+        "ideal_steps": 65,
+        "efficiency_score": 0.9848,
+        "redundancy_score": 0.9848,
+        "repeated_actions": 1,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

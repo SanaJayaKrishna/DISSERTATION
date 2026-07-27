@@ -409,43 +409,415 @@ if generate:
 
         response = {
   "metadata": {
-    "robot": "H2",
-    "world": "Kitchen",
-    "task": "Retrieve the bread, butter, and jam from the refrigerator and pantry, place them on the dining table, and return the unused items to their original locations.",
+    "robot": "JulietteY20MP",
+    "world": "Multi-Speciality Hospital",
+    "task": "Inspect the pharmacy, nurse station, waiting area, and examination rooms for open cabinets, misplaced equipment, and missing sanitizer bottles, correct each issue, and return to reception.",
     "model": "Capability-Aware Robot Task Planner"
   },
-  "goal": "Retrieve bread, butter, and jam from storage (refrigerator/pantry), place them on the dining table, and return unused items to their original locations.",
+  "goal": "Inspect specified zones (Pharmacy, Nurse Station, Waiting Area, Examination Rooms) for open cabinets, misplaced equipment, and missing sanitizer bottles; correct identified issues; return to Reception.",
   "checkpoints": [
     {
       "checkpoint_id": 1,
-      "checkpoint_goal": "Navigate to the refrigerator and locate the bread inside.",
-      "entry_state": "Robot is at the Kitchen Entrance. Bread is stored in the Refrigerator.",
-      "exit_state": "Robot is at the Refrigerator. Bread is located and identified.",
+      "checkpoint_goal": "Navigate to the Pharmacy zone and inspect for open cabinets, misplaced equipment, and missing sanitizer bottles.",
+      "entry_state": "Robot is at Reception.",
+      "exit_state": "Robot is at Pharmacy and has completed inspection of the area.",
       "is_replannable": True,
       "actions": [
         {
           "step": 1,
           "action": "navigate_to_room",
           "object": "",
-          "location": "Refrigerator"
+          "location": "Pharmacy"
         },
         {
           "step": 2,
-          "action": "detect_object",
-          "object": "Bread",
-          "location": "Refrigerator"
+          "action": "capture_image",
+          "object": "",
+          "location": "Pharmacy"
         },
         {
           "step": 3,
-          "action": "recognize_object",
-          "object": "Bread",
-          "location": "Refrigerator"
+          "action": "understand_scene",
+          "object": "",
+          "location": "Pharmacy"
         },
         {
           "step": 4,
-          "action": "estimate_object_pose",
-          "object": "Bread",
-          "location": "Refrigerator"
+          "action": "detect_door",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 5,
+          "action": "detect_shelf",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 6,
+          "action": "detect_table",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 7,
+          "action": "detect_object",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 8,
+          "action": "recognize_object",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 9,
+          "action": "classify_object",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 10,
+          "action": "count_objects",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 11,
+          "action": "locate_object",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 12,
+          "action": "detect_free_space",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 13,
+          "action": "detect_obstacle",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 14,
+          "action": "detect_humans",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 15,
+          "action": "detect_face",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 16,
+          "action": "detect_marker",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 17,
+          "action": "detect_liquid",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 18,
+          "action": "detect_human_gesture",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 19,
+          "action": "recognize_speech",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 20,
+          "action": "recognize_sound",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 21,
+          "action": "estimate_lighting",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 22,
+          "action": "semantic_mapping",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 23,
+          "action": "understand_scene",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 24,
+          "action": "scan_area",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 25,
+          "action": "inspect_equipment",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 26,
+          "action": "inspect_surface",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 27,
+          "action": "thermal_scan",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 28,
+          "action": "gas_scan",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 29,
+          "action": "radiation_scan",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 30,
+          "action": "measure_distance",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 31,
+          "action": "measure_temperature",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 32,
+          "action": "measure_humidity",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 33,
+          "action": "record_sensor_data",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 34,
+          "action": "generate_inspection_report",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 35,
+          "action": "take_snapshot",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 36,
+          "action": "survey_environment",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 37,
+          "action": "open_door",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 38,
+          "action": "close_door",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 39,
+          "action": "open_drawer",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 40,
+          "action": "close_drawer",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 41,
+          "action": "press_button",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 42,
+          "action": "flip_switch",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 43,
+          "action": "turn_valve",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 44,
+          "action": "operate_elevator",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 45,
+          "action": "use_conveyor",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 46,
+          "action": "use_charging_dock",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 47,
+          "action": "dispose_object",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 48,
+          "action": "pick_waste",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 49,
+          "action": "clean_surface",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 50,
+          "action": "arrange_objects",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 51,
+          "action": "interact_with_appliance",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 52,
+          "action": "initialize",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 53,
+          "action": "shutdown",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 54,
+          "action": "restart",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 55,
+          "action": "reset",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 56,
+          "action": "self_check",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 57,
+          "action": "calibrate_sensors",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 58,
+          "action": "calibrate_arm",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 59,
+          "action": "load_map",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 60,
+          "action": "save_map",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 61,
+          "action": "localization",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 62,
+          "action": "start_recording",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 63,
+          "action": "stop_recording",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 64,
+          "action": "start_logging",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 65,
+          "action": "stop_logging",
+          "object": "",
+          "location": "Pharmacy"
+        },
+        {
+          "step": 66,
+          "action": "update_parameters",
+          "object": "",
+          "location": "Pharmacy"
         }
       ],
       "grounded_skills": [
@@ -453,326 +825,32 @@ if generate:
           "step": 1,
           "abstract_skill": "navigate_to_room",
           "ros2_interface": "/navigate_to_pose",
-          "reason": "Robot must navigate to the Refrigerator room to access the bread."
+          "reason": "Robot needs to travel from Reception to Pharmacy."
         },
         {
           "step": 2,
-          "abstract_skill": "detect_object",
-          "ros2_interface": "/detections",
-          "reason": "Robot must detect the bread object within the refrigerator scene."
+          "abstract_skill": "capture_image",
+          "ros2_interface": "/camera/image_raw",
+          "reason": "Visual capture required for subsequent perception tasks."
         },
         {
           "step": 3,
-          "abstract_skill": "recognize_object",
-          "ros2_interface": "/recognized_objects",
-          "reason": "Robot must recognize the detected object as 'Bread'."
+          "abstract_skill": "understand_scene",
+          "ros2_interface": "/scene_understanding",
+          "reason": "High-level semantic interpretation of the Pharmacy environment."
         },
         {
           "step": 4,
-          "abstract_skill": "estimate_object_pose",
-          "ros2_interface": "/object_poses",
-          "reason": "Robot must estimate the 3D pose of the bread to enable grasping."
-        }
-      ]
-    },
-    {
-      "checkpoint_id": 2,
-      "checkpoint_goal": "Retrieve the bread from the refrigerator and place it on the dining table.",
-      "entry_state": "Robot is at the Refrigerator. Bread is located and its pose is estimated.",
-      "exit_state": "Robot is at the Dining Table. Bread is placed on the table.",
-      "is_replannable": True,
-      "actions": [
-        {
-          "step": 1,
-          "action": "pick_object",
-          "object": "Bread",
-          "location": "Refrigerator"
-        },
-        {
-          "step": 2,
-          "action": "navigate_to_object",
-          "object": "Dining Table",
-          "location": "Dining Table"
-        },
-        {
-          "step": 3,
-          "action": "place_object",
-          "object": "Bread",
-          "location": "Dining Table"
-        }
-      ],
-      "grounded_skills": [
-        {
-          "step": 1,
-          "abstract_skill": "pick_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must grasp the bread from the refrigerator."
-        },
-        {
-          "step": 2,
-          "abstract_skill": "navigate_to_object",
-          "ros2_interface": "/navigate_to_pose",
-          "reason": "Robot must navigate to the Dining Table to place the bread."
-        },
-        {
-          "step": 3,
-          "abstract_skill": "place_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must place the bread on the dining table."
-        }
-      ]
-    },
-    {
-      "checkpoint_id": 3,
-      "checkpoint_goal": "Navigate to the pantry and locate the butter and jam inside.",
-      "entry_state": "Robot is at the Dining Table. Bread is placed on the table.",
-      "exit_state": "Robot is at the Pantry. Butter and Jam are located and identified.",
-      "is_replannable": True,
-      "actions": [
-        {
-          "step": 1,
-          "action": "navigate_to_room",
-          "object": "",
-          "location": "Pantry"
-        },
-        {
-          "step": 2,
-          "action": "detect_object",
-          "object": "Butter",
-          "location": "Pantry"
-        },
-        {
-          "step": 3,
-          "action": "recognize_object",
-          "object": "Butter",
-          "location": "Pantry"
-        },
-        {
-          "step": 4,
-          "action": "estimate_object_pose",
-          "object": "Butter",
-          "location": "Pantry"
+          "abstract_skill": "detect_door",
+          "ros2_interface": "/doors",
+          "reason": "Identify doors to access cabinets or rooms."
         },
         {
           "step": 5,
-          "action": "detect_object",
-          "object": "Jam",
-          "location": "Pantry"
-        },
-        {
-          "step": 6,
-          "action": "recognize_object",
-          "object": "Jam",
-          "location": "Pantry"
-        },
-        {
-          "step": 7,
-          "action": "estimate_object_pose",
-          "object": "Jam",
-          "location": "Pantry"
-        }
-      ],
-      "grounded_skills": [
-        {
-          "step": 1,
-          "abstract_skill": "navigate_to_room",
-          "ros2_interface": "/navigate_to_pose",
-          "reason": "Robot must navigate to the Pantry room to access butter and jam."
-        },
-        {
-          "step": 2,
-          "abstract_skill": "detect_object",
-          "ros2_interface": "/detections",
-          "reason": "Robot must detect the butter object within the pantry scene."
-        },
-        {
-          "step": 3,
-          "abstract_skill": "recognize_object",
-          "ros2_interface": "/recognized_objects",
-          "reason": "Robot must recognize the detected object as 'Butter'."
-        },
-        {
-          "step": 4,
-          "abstract_skill": "estimate_object_pose",
-          "ros2_interface": "/object_poses",
-          "reason": "Robot must estimate the 3D pose of the butter to enable grasping."
-        },
-        {
-          "step": 5,
-          "abstract_skill": "detect_object",
-          "ros2_interface": "/detections",
-          "reason": "Robot must detect the jam object within the pantry scene."
-        },
-        {
-          "step": 6,
-          "abstract_skill": "recognize_object",
-          "ros2_interface": "/recognized_objects",
-          "reason": "Robot must recognize the detected object as 'Jam'."
-        },
-        {
-          "step": 7,
-          "abstract_skill": "estimate_object_pose",
-          "ros2_interface": "/object_poses",
-          "reason": "Robot must estimate the 3D pose of the jam to enable grasping."
-        }
-      ]
-    },
-    {
-      "checkpoint_id": 4,
-      "checkpoint_goal": "Retrieve the butter and jam from the pantry and place them on the dining table.",
-      "entry_state": "Robot is at the Pantry. Butter and Jam are located and their poses are estimated.",
-      "exit_state": "Robot is at the Dining Table. Bread, Butter, and Jam are all placed on the table.",
-      "is_replannable": True,
-      "actions": [
-        {
-          "step": 1,
-          "action": "pick_object",
-          "object": "Butter",
-          "location": "Pantry"
-        },
-        {
-          "step": 2,
-          "action": "pick_object",
-          "object": "Jam",
-          "location": "Pantry"
-        },
-        {
-          "step": 3,
-          "action": "navigate_to_object",
-          "object": "Dining Table",
-          "location": "Dining Table"
-        },
-        {
-          "step": 4,
-          "action": "place_object",
-          "object": "Butter",
-          "location": "Dining Table"
-        },
-        {
-          "step": 5,
-          "action": "place_object",
-          "object": "Jam",
-          "location": "Dining Table"
-        }
-      ],
-      "grounded_skills": [
-        {
-          "step": 1,
-          "abstract_skill": "pick_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must grasp the butter from the pantry."
-        },
-        {
-          "step": 2,
-          "abstract_skill": "pick_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must grasp the jam from the pantry."
-        },
-        {
-          "step": 3,
-          "abstract_skill": "navigate_to_object",
-          "ros2_interface": "/navigate_to_pose",
-          "reason": "Robot must navigate to the Dining Table to place the items."
-        },
-        {
-          "step": 4,
-          "abstract_skill": "place_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must place the butter on the dining table."
-        },
-        {
-          "step": 5,
-          "abstract_skill": "place_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must place the jam on the dining table."
-        }
-      ]
-    },
-    {
-      "checkpoint_id": 5,
-      "checkpoint_goal": "Return the unused items (butter and jam) to their original locations.",
-      "entry_state": "Robot is at the Dining Table. Bread, Butter, and Jam are all placed on the table.",
-      "exit_state": "Robot is at the Pantry. Bread is on the table; Butter and Jam are returned to the pantry.",
-      "is_replannable": True,
-      "actions": [
-        {
-          "step": 1,
-          "action": "pick_object",
-          "object": "Butter",
-          "location": "Dining Table"
-        },
-        {
-          "step": 2,
-          "action": "navigate_to_object",
-          "object": "Pantry",
-          "location": "Pantry"
-        },
-        {
-          "step": 3,
-          "action": "place_object",
-          "object": "Butter",
-          "location": "Pantry"
-        },
-        {
-          "step": 4,
-          "action": "pick_object",
-          "object": "Jam",
-          "location": "Dining Table"
-        },
-        {
-          "step": 5,
-          "action": "navigate_to_object",
-          "object": "Pantry",
-          "location": "Pantry"
-        },
-        {
-          "step": 6,
-          "action": "place_object",
-          "object": "Jam",
-          "location": "Pantry"
-        }
-      ],
-      "grounded_skills": [
-        {
-          "step": 1,
-          "abstract_skill": "pick_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must pick up the butter from the dining table."
-        },
-        {
-          "step": 2,
-          "abstract_skill": "navigate_to_object",
-          "ros2_interface": "/navigate_to_pose",
-          "reason": "Robot must navigate to the pantry to return the butter."
-        },
-        {
-          "step": 3,
-          "abstract_skill": "place_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must place the butter back in the pantry."
-        },
-        {
-          "step": 4,
-          "abstract_skill": "pick_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must pick up the jam from the dining table."
-        },
-        {
-          "step": 5,
-          "abstract_skill": "navigate_to_object",
-          "ros2_interface": "/navigate_to_pose",
-          "reason": "Robot must navigate to the pantry to return the jam."
-        },
-        {
-          "step": 6,
-          "abstract_skill": "place_object",
-          "ros2_interface": "/move_action",
-          "reason": "Robot must place the jam back in the pantry."
-        }
-      ]
-    }
-  ]}
-
+          "abstract_skill": "detect_shelf",
+          "ros2_interface": "/shelves"
+        }]
+    }]}
 
         from json import dumps
 

@@ -1,0 +1,828 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Navigate to the patient room, retrieve the patient file, and return it to the reception desk.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Navigate to the patient room, retrieve the patient file, and return it to the reception desk.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate to the General Ward (patient room zone).",
+        "entry_state": "Robot at Main Entrance.",
+        "exit_state": "Robot at General Ward.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "General Ward",
+            "location": "General Ward"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Skill NAV_015 maps to Nav2 NavigateToPose action, utilizing the robot's can_navigate and supports_indoor_navigation capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Detect and locate the patient file on a table within the General Ward.",
+        "entry_state": "Robot at General Ward.",
+        "exit_state": "Robot at General Ward with patient file pose estimated.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_object",
+            "object": "patient file",
+            "location": "General Ward"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Skill PER_001 maps to ROS2 Perception topic /detections, utilizing the robot's can_detect_objects and has_visual_perception capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Estimate the precise 3D pose of the patient file.",
+        "entry_state": "Robot at General Ward with patient file detected.",
+        "exit_state": "Robot at General Ward with patient file pose estimated.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "estimate_object_pose",
+            "object": "patient file",
+            "location": "General Ward"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "estimate_object_pose",
+            "ros2_interface": "/object_poses",
+            "reason": "Skill PER_009 maps to ROS2 Perception topic /object_poses, utilizing the robot's can_detect_objects and can_estimate_range capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Navigate to the estimated pose of the patient file.",
+        "entry_state": "Robot at General Ward with patient file pose estimated.",
+        "exit_state": "Robot at patient file pose.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_object",
+            "object": "patient file",
+            "location": "General Ward"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_object",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Skill NAV_014 maps to Nav2 NavigateToPose action, utilizing the robot's can_navigate and can_detect_objects capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 5,
+        "checkpoint_goal": "Pick up the patient file.",
+        "entry_state": "Robot at patient file pose.",
+        "exit_state": "Robot holding patient file.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "pick_object",
+            "object": "patient file",
+            "location": "General Ward"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Skill MAN_001 maps to MoveIt2 MoveGroup action, utilizing the robot's can_pick, can_grasp, and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 6,
+        "checkpoint_goal": "Navigate to the Reception Desk.",
+        "entry_state": "Robot holding patient file at General Ward.",
+        "exit_state": "Robot holding patient file at Reception Desk.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "Reception Desk",
+            "location": "Reception Desk"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Skill NAV_015 maps to Nav2 NavigateToPose action, utilizing the robot's can_navigate and supports_indoor_navigation capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 7,
+        "checkpoint_goal": "Place the patient file on the Reception Desk.",
+        "entry_state": "Robot holding patient file at Reception Desk.",
+        "exit_state": "Robot at Reception Desk, patient file placed.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "patient file",
+            "location": "Reception Desk"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Skill MAN_002 maps to MoveIt2 MoveGroup action, utilizing the robot's can_place and can_manipulate capabilities."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot cannot climb stairs; assumes elevators or ramps exist between zones.",
+      "Robot has limited payload; assumes patient file fits within payload capacity."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "Robot successfully navigates to the General Ward, detects and picks up the patient file, navigates to the Reception Desk, and places the file there."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T13:22:42.165564+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Navigate to the patient room, retrieve the patient file, and return it to the reception desk.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Navigate to the patient room, retrieve the patient file, and return it to the reception desk.",
+      "total_actions": 7,
+      "total_checkpoints": 7
+    },
+    "task_success": true,
+    "overall_score": 0.8771,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.7143,
+        "status": "WARNING",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Reception Desk' in action 'navigate_to_room' (checkpoint 6, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 5,
+        "checkpoint_id": 6,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Reception Desk' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Reception Desk"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Reception Desk' in action 'place_object' (checkpoint 7, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 6,
+        "checkpoint_id": 7,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Reception Desk' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Reception Desk"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'General Ward' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 0,
+        "checkpoint_id": 1,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'General Ward' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "General Ward"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'patient file' referenced in action 'detect_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "patient file"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'patient file' referenced in action 'estimate_object_pose' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 2,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "patient file"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'patient file' referenced in action 'navigate_to_object' (checkpoint 4, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 3,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "patient file"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'patient file' referenced in action 'pick_object' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 4,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "patient file"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'Reception Desk' referenced in action 'navigate_to_room' (checkpoint 6, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 5,
+        "checkpoint_id": 6,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'Reception Desk' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "Reception Desk"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'patient file' referenced in action 'place_object' (checkpoint 7, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 6,
+        "checkpoint_id": 7,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "patient file"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+        "action_index": 5,
+        "checkpoint_id": 6,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "REDUNDANT_NAVIGATION",
+        "message": "Redundant navigation to 'general ward': visited at action index 0 and again at 3.",
+        "action_index": 3,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Consolidate the two visits to 'general ward' into a single trip, or reorder actions to avoid backtracking."
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "estimate_object_pose",
+        "required_skill": "estimate_object_pose",
+        "required_capabilities": [
+          "can_detect_objects",
+          "can_estimate_range"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "can_estimate_range": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "navigate_to_object",
+        "required_skill": "navigate_to_object",
+        "required_capabilities": [
+          "can_navigate",
+          "can_detect_objects"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "can_detect_objects": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 5,
+        "step": 1,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 6,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 7,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions are valid. Score: 100.00%.",
+        "valid_actions": 7,
+        "total_actions": 7
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'General Ward' referenced in action 'navigate_to_room' (checkpoint 1, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 0,
+            "checkpoint_id": 1,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'General Ward' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "General Ward"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'patient file' referenced in action 'detect_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "patient file"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'patient file' referenced in action 'estimate_object_pose' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 2,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "patient file"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'patient file' referenced in action 'navigate_to_object' (checkpoint 4, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 3,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "patient file"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'patient file' referenced in action 'pick_object' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 4,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "patient file"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'Reception Desk' referenced in action 'navigate_to_room' (checkpoint 6, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 5,
+            "checkpoint_id": 6,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'Reception Desk' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "Reception Desk"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'patient file' referenced in action 'place_object' (checkpoint 7, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 6,
+            "checkpoint_id": 7,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'patient file' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "patient file"
+          }
+        ],
+        "comments": "0/7 object references are valid. Score: 0.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 7
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.7143,
+        "normalised_score": 0.7143,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Reception Desk' in action 'navigate_to_room' (checkpoint 6, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 5,
+            "checkpoint_id": 6,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Reception Desk' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Reception Desk"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Reception Desk' in action 'place_object' (checkpoint 7, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 6,
+            "checkpoint_id": 7,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Reception Desk' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Reception Desk"
+          }
+        ],
+        "comments": "5/7 location references are valid. Score: 71.43%.",
+        "valid_locations": 5,
+        "total_location_refs": 7
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 7,
+        "total_actions": 7
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions are capability-compatible with robot 'pepper'. Score: 100.00%.",
+        "compatible_actions": 7,
+        "total_actions": 7,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "estimate_object_pose",
+            "required_skill": "estimate_object_pose",
+            "required_capabilities": [
+              "can_detect_objects",
+              "can_estimate_range"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "can_estimate_range": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "navigate_to_object",
+            "required_skill": "navigate_to_object",
+            "required_capabilities": [
+              "can_navigate",
+              "can_detect_objects"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "can_detect_objects": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 5,
+            "step": 1,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 6,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 7,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "6/6 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 6,
+        "total_constraints": 6
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "7/7 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 7,
+        "total_actions": 7
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+            "action_index": 5,
+            "checkpoint_id": 6,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          }
+        ],
+        "comments": "6/6 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 6,
+        "total_transitions": 6
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Goal satisfied. Task-to-goal keyword match: 100%. Task-to-final-state match: 50%.",
+        "goal_satisfied": true,
+        "goal_coverage": 1.0,
+        "exit_coverage": 0.5,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "REDUNDANT_NAVIGATION",
+            "message": "Redundant navigation to 'general ward': visited at action index 0 and again at 3.",
+            "action_index": 3,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Consolidate the two visits to 'general ward' into a single trip, or reorder actions to avoid backtracking."
+          }
+        ],
+        "comments": "Efficiency: 100.00% (ideal=7, actual=7). Redundant navigations: 1. Repeated actions: 1.",
+        "total_actions": 7,
+        "ideal_steps": 7,
+        "efficiency_score": 1.0,
+        "redundancy_score": 0.7143,
+        "repeated_actions": 1,
+        "redundant_navigations": 1
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}

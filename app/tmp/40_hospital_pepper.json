@@ -1,0 +1,1610 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Restock the nurse station by collecting gloves, masks, sanitizer, and bandages from the supply room, placing each item in its designated location, and returning to reception.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Restock the nurse station with gloves, masks, sanitizer, and bandages from the supply room and return to reception.",
+    "checkpoints": [
+      {
+        "checkpoint_id": 1,
+        "checkpoint_goal": "Navigate from Reception to Medical Supply Store.",
+        "entry_state": "Robot located at Reception.",
+        "exit_state": "Robot located at Medical Supply Store.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Medical Supply Store"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot has can_navigate and supports_indoor_navigation capabilities. The Medical Supply Store exists in the world state."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 2,
+        "checkpoint_goal": "Locate and pick gloves from the supply room.",
+        "entry_state": "Robot located at Medical Supply Store.",
+        "exit_state": "Robot holding gloves.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_object",
+            "object": "gloves",
+            "location": "Medical Supply Store"
+          },
+          {
+            "step": 2,
+            "action": "pick_object",
+            "object": "gloves",
+            "location": "Medical Supply Store"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot has can_detect_objects and has_visual_perception capabilities."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_pick, can_grasp, and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 3,
+        "checkpoint_goal": "Locate and pick masks from the supply room.",
+        "entry_state": "Robot holding gloves, located at Medical Supply Store.",
+        "exit_state": "Robot holding gloves and masks.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_object",
+            "object": "masks",
+            "location": "Medical Supply Store"
+          },
+          {
+            "step": 2,
+            "action": "pick_object",
+            "object": "masks",
+            "location": "Medical Supply Store"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot has can_detect_objects and has_visual_perception capabilities."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_pick, can_grasp, and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 4,
+        "checkpoint_goal": "Locate and pick sanitizer from the supply room.",
+        "entry_state": "Robot holding gloves and masks, located at Medical Supply Store.",
+        "exit_state": "Robot holding gloves, masks, and sanitizer.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_object",
+            "object": "sanitizer",
+            "location": "Medical Supply Store"
+          },
+          {
+            "step": 2,
+            "action": "pick_object",
+            "object": "sanitizer",
+            "location": "Medical Supply Store"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot has can_detect_objects and has_visual_perception capabilities."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_pick, can_grasp, and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 5,
+        "checkpoint_goal": "Locate and pick bandages from the supply room.",
+        "entry_state": "Robot holding gloves, masks, and sanitizer, located at Medical Supply Store.",
+        "exit_state": "Robot holding gloves, masks, sanitizer, and bandages.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "detect_object",
+            "object": "bandages",
+            "location": "Medical Supply Store"
+          },
+          {
+            "step": 2,
+            "action": "pick_object",
+            "object": "bandages",
+            "location": "Medical Supply Store"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "detect_object",
+            "ros2_interface": "/detections",
+            "reason": "Robot has can_detect_objects and has_visual_perception capabilities."
+          },
+          {
+            "step": 2,
+            "abstract_skill": "pick_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_pick, can_grasp, and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 6,
+        "checkpoint_goal": "Navigate from Medical Supply Store to Nurse Station.",
+        "entry_state": "Robot holding all items, located at Medical Supply Store.",
+        "exit_state": "Robot holding all items, located at Nurse Station.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Nurse Station"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot has can_navigate and supports_indoor_navigation capabilities. The Nurse Station exists in the world state."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 7,
+        "checkpoint_goal": "Place gloves in the Nurse Station.",
+        "entry_state": "Robot holding gloves, located at Nurse Station.",
+        "exit_state": "Robot holding masks, sanitizer, and bandages; gloves placed.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "gloves",
+            "location": "Nurse Station"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_place and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 8,
+        "checkpoint_goal": "Place masks in the Nurse Station.",
+        "entry_state": "Robot holding masks, sanitizer, and bandages; gloves placed.",
+        "exit_state": "Robot holding sanitizer and bandages; masks placed.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "masks",
+            "location": "Nurse Station"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_place and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 9,
+        "checkpoint_goal": "Place sanitizer in the Nurse Station.",
+        "entry_state": "Robot holding sanitizer and bandages; gloves and masks placed.",
+        "exit_state": "Robot holding bandages; sanitizer placed.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "sanitizer",
+            "location": "Nurse Station"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_place and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 10,
+        "checkpoint_goal": "Place bandages in the Nurse Station.",
+        "entry_state": "Robot holding bandages; gloves, masks, and sanitizer placed.",
+        "exit_state": "Robot holding nothing; all items placed.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "place_object",
+            "object": "bandages",
+            "location": "Nurse Station"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "place_object",
+            "ros2_interface": "/move_action",
+            "reason": "Robot has can_place and can_manipulate capabilities."
+          }
+        ]
+      },
+      {
+        "checkpoint_id": 11,
+        "checkpoint_goal": "Navigate from Nurse Station to Reception.",
+        "entry_state": "Robot empty-handed, located at Nurse Station.",
+        "exit_state": "Robot empty-handed, located at Reception.",
+        "is_replannable": true,
+        "actions": [
+          {
+            "step": 1,
+            "action": "navigate_to_room",
+            "object": "",
+            "location": "Reception"
+          }
+        ],
+        "grounded_skills": [
+          {
+            "step": 1,
+            "abstract_skill": "navigate_to_room",
+            "ros2_interface": "/navigate_to_pose",
+            "reason": "Robot has can_navigate and supports_indoor_navigation capabilities. The Reception exists in the world state."
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      "Robot cannot climb stairs (cannot_climb: True). Assumes elevators or ramps exist between zones.",
+      "Robot has limited payload (limited_payload: True). Assumes individual items fit within payload limits."
+    ],
+    "execution_summary": {
+      "plan_valid": true,
+      "failure_reason": "",
+      "expected_outcome": "All items (gloves, masks, sanitizer, bandages) successfully restocked in the Nurse Station, and the robot returns to Reception."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T14:09:14.119229+00:00",
+    "plan_metadata": {
+      "robot": "JulietteY20MP",
+      "world": "Multi-Speciality Hospital",
+      "task": "Restock the nurse station by collecting gloves, masks, sanitizer, and bandages from the supply room, placing each item in its designated location, and returning to reception.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Restock the nurse station with gloves, masks, sanitizer, and bandages from the supply room and return to reception.",
+      "total_actions": 15,
+      "total_checkpoints": 11
+    },
+    "task_success": false,
+    "overall_score": 0.8353,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 0.0,
+        "status": "FAIL",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 0.6667,
+        "status": "WARNING",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 0.4,
+        "status": "FAIL",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Nurse Station' in action 'navigate_to_room' (checkpoint 6, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 9,
+        "checkpoint_id": 6,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Nurse Station"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Nurse Station' in action 'place_object' (checkpoint 7, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 10,
+        "checkpoint_id": 7,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Nurse Station"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Nurse Station' in action 'place_object' (checkpoint 8, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 11,
+        "checkpoint_id": 8,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Nurse Station"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Nurse Station' in action 'place_object' (checkpoint 9, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 12,
+        "checkpoint_id": 9,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Nurse Station"
+      },
+      {
+        "code": "INVALID_LOCATION",
+        "message": "Location 'Nurse Station' in action 'place_object' (checkpoint 10, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+        "action_index": 13,
+        "checkpoint_id": 10,
+        "severity": "ERROR",
+        "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+        "referenced_location": "Nurse Station"
+      }
+    ],
+    "warnings": [
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'gloves' referenced in action 'detect_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 1,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'gloves' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "gloves"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'gloves' referenced in action 'pick_object' (checkpoint 2, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 2,
+        "checkpoint_id": 2,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'gloves' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "gloves"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'masks' referenced in action 'detect_object' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'masks' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "masks"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'masks' referenced in action 'pick_object' (checkpoint 3, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 4,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'masks' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "masks"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'sanitizer' referenced in action 'detect_object' (checkpoint 4, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 5,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'sanitizer' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "sanitizer"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'sanitizer' referenced in action 'pick_object' (checkpoint 4, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 6,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'sanitizer' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "sanitizer"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'bandages' referenced in action 'detect_object' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 7,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'bandages' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "bandages"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'bandages' referenced in action 'pick_object' (checkpoint 5, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 8,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'bandages' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "bandages"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'gloves' referenced in action 'place_object' (checkpoint 7, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 10,
+        "checkpoint_id": 7,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'gloves' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "gloves"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'masks' referenced in action 'place_object' (checkpoint 8, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 11,
+        "checkpoint_id": 8,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'masks' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "masks"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'sanitizer' referenced in action 'place_object' (checkpoint 9, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 12,
+        "checkpoint_id": 9,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'sanitizer' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "sanitizer"
+      },
+      {
+        "code": "OBJECT_NOT_FOUND",
+        "message": "Object 'bandages' referenced in action 'place_object' (checkpoint 10, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+        "action_index": 13,
+        "checkpoint_id": 10,
+        "severity": "WARNING",
+        "suggestion": "Verify that 'bandages' exists in the world JSON or rephrase the object reference to match a known world object.",
+        "referenced_object": "bandages"
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'detect_object' (phase 3 → 2).",
+        "action_index": 3,
+        "checkpoint_id": 3,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'detect_object' (phase 3 → 2).",
+        "action_index": 5,
+        "checkpoint_id": 4,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'detect_object' (phase 3 → 2).",
+        "action_index": 7,
+        "checkpoint_id": 5,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+        "action_index": 9,
+        "checkpoint_id": 6,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "ORDERING_ERROR",
+        "message": "Unexpected phase regression: 'place_object' → 'navigate_to_room' (phase 5 → 1).",
+        "action_index": 14,
+        "checkpoint_id": 11,
+        "severity": "WARNING",
+        "suggestion": "Review whether this action order is intentional."
+      },
+      {
+        "code": "REDUNDANT_ACTION",
+        "message": "Consecutive duplicate action 'place_object' at indices 10 and 11.",
+        "action_index": 11,
+        "checkpoint_id": 8,
+        "severity": "WARNING",
+        "suggestion": "Remove the duplicate action or merge the steps."
+      },
+      {
+        "code": "REDUNDANT_ACTION",
+        "message": "Consecutive duplicate action 'place_object' at indices 11 and 12.",
+        "action_index": 12,
+        "checkpoint_id": 9,
+        "severity": "WARNING",
+        "suggestion": "Remove the duplicate action or merge the steps."
+      },
+      {
+        "code": "REDUNDANT_ACTION",
+        "message": "Consecutive duplicate action 'place_object' at indices 12 and 13.",
+        "action_index": 13,
+        "checkpoint_id": 10,
+        "severity": "WARNING",
+        "suggestion": "Remove the duplicate action or merge the steps."
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 58%, task-to-exit-state coverage: 5%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "bandages",
+          "collecting",
+          "designated",
+          "each",
+          "from",
+          "gloves",
+          "item",
+          "its",
+          "location",
+          "masks",
+          "nurse",
+          "placing",
+          "reception",
+          "restock",
+          "returning",
+          "room",
+          "sanitizer",
+          "station",
+          "supply"
+        ],
+        "goal_keywords": [
+          "bandages",
+          "from",
+          "gloves",
+          "masks",
+          "nurse",
+          "reception",
+          "restock",
+          "return",
+          "room",
+          "sanitizer",
+          "station",
+          "supply"
+        ],
+        "matched_goal_keywords": [
+          "bandages",
+          "from",
+          "gloves",
+          "masks",
+          "nurse",
+          "reception",
+          "restock",
+          "room",
+          "sanitizer",
+          "station",
+          "supply"
+        ],
+        "matched_exit_keywords": [
+          "reception"
+        ]
+      }
+    ],
+    "capability_trace": [
+      {
+        "global_index": 0,
+        "checkpoint_id": 1,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 1,
+        "checkpoint_id": 2,
+        "step": 1,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 2,
+        "checkpoint_id": 2,
+        "step": 2,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 3,
+        "checkpoint_id": 3,
+        "step": 1,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 4,
+        "checkpoint_id": 3,
+        "step": 2,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 5,
+        "checkpoint_id": 4,
+        "step": 1,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 6,
+        "checkpoint_id": 4,
+        "step": 2,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 7,
+        "checkpoint_id": 5,
+        "step": 1,
+        "action_name": "detect_object",
+        "required_skill": "detect_object",
+        "required_capabilities": [
+          "can_detect_objects",
+          "has_visual_perception"
+        ],
+        "robot_capabilities_checked": {
+          "can_detect_objects": true,
+          "has_visual_perception": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 8,
+        "checkpoint_id": 5,
+        "step": 2,
+        "action_name": "pick_object",
+        "required_skill": "pick_object",
+        "required_capabilities": [
+          "can_pick",
+          "can_grasp",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_pick": true,
+          "can_grasp": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 9,
+        "checkpoint_id": 6,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 10,
+        "checkpoint_id": 7,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 11,
+        "checkpoint_id": 8,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 12,
+        "checkpoint_id": 9,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 13,
+        "checkpoint_id": 10,
+        "step": 1,
+        "action_name": "place_object",
+        "required_skill": "place_object",
+        "required_capabilities": [
+          "can_place",
+          "can_manipulate"
+        ],
+        "robot_capabilities_checked": {
+          "can_place": true,
+          "can_manipulate": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      },
+      {
+        "global_index": 14,
+        "checkpoint_id": 11,
+        "step": 1,
+        "action_name": "navigate_to_room",
+        "required_skill": "navigate_to_room",
+        "required_capabilities": [
+          "can_navigate",
+          "supports_indoor_navigation"
+        ],
+        "robot_capabilities_checked": {
+          "can_navigate": true,
+          "supports_indoor_navigation": true
+        },
+        "result": "PASS",
+        "failure_reason": ""
+      }
+    ],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "Schema is valid — all required fields are present."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "15/15 actions are valid. Score: 100.00%.",
+        "valid_actions": 15,
+        "total_actions": 15
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'gloves' referenced in action 'detect_object' (checkpoint 2, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 1,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'gloves' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "gloves"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'gloves' referenced in action 'pick_object' (checkpoint 2, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 2,
+            "checkpoint_id": 2,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'gloves' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "gloves"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'masks' referenced in action 'detect_object' (checkpoint 3, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'masks' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "masks"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'masks' referenced in action 'pick_object' (checkpoint 3, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 4,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'masks' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "masks"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'sanitizer' referenced in action 'detect_object' (checkpoint 4, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 5,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'sanitizer' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "sanitizer"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'sanitizer' referenced in action 'pick_object' (checkpoint 4, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 6,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'sanitizer' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "sanitizer"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'bandages' referenced in action 'detect_object' (checkpoint 5, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 7,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'bandages' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "bandages"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'bandages' referenced in action 'pick_object' (checkpoint 5, step 2) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 8,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'bandages' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "bandages"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'gloves' referenced in action 'place_object' (checkpoint 7, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 10,
+            "checkpoint_id": 7,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'gloves' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "gloves"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'masks' referenced in action 'place_object' (checkpoint 8, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 11,
+            "checkpoint_id": 8,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'masks' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "masks"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'sanitizer' referenced in action 'place_object' (checkpoint 9, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 12,
+            "checkpoint_id": 9,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'sanitizer' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "sanitizer"
+          },
+          {
+            "code": "OBJECT_NOT_FOUND",
+            "message": "Object 'bandages' referenced in action 'place_object' (checkpoint 10, step 1) does not exist in the world 'Multi-Speciality Hospital'.",
+            "action_index": 13,
+            "checkpoint_id": 10,
+            "severity": "WARNING",
+            "suggestion": "Verify that 'bandages' exists in the world JSON or rephrase the object reference to match a known world object.",
+            "referenced_object": "bandages"
+          }
+        ],
+        "comments": "0/12 object references are valid. Score: 0.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 12
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 0.6667,
+        "normalised_score": 0.6667,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Nurse Station' in action 'navigate_to_room' (checkpoint 6, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 9,
+            "checkpoint_id": 6,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Nurse Station"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Nurse Station' in action 'place_object' (checkpoint 7, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 10,
+            "checkpoint_id": 7,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Nurse Station"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Nurse Station' in action 'place_object' (checkpoint 8, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 11,
+            "checkpoint_id": 8,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Nurse Station"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Nurse Station' in action 'place_object' (checkpoint 9, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 12,
+            "checkpoint_id": 9,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Nurse Station"
+          },
+          {
+            "code": "INVALID_LOCATION",
+            "message": "Location 'Nurse Station' in action 'place_object' (checkpoint 10, step 1) does not exist in world 'Multi-Speciality Hospital'.",
+            "action_index": 13,
+            "checkpoint_id": 10,
+            "severity": "ERROR",
+            "suggestion": "Verify that 'Nurse Station' is a valid room/location in the world JSON. Check for spelling differences (e.g. 'Cafeteria' vs 'cafeteria').",
+            "referenced_location": "Nurse Station"
+          }
+        ],
+        "comments": "10/15 location references are valid. Score: 66.67%.",
+        "valid_locations": 10,
+        "total_location_refs": 15
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "15/15 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 15,
+        "total_actions": 15
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "15/15 actions are capability-compatible with robot 'pepper'. Score: 100.00%.",
+        "compatible_actions": 15,
+        "total_actions": 15,
+        "capability_trace": [
+          {
+            "global_index": 0,
+            "checkpoint_id": 1,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 1,
+            "checkpoint_id": 2,
+            "step": 1,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 2,
+            "checkpoint_id": 2,
+            "step": 2,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 3,
+            "checkpoint_id": 3,
+            "step": 1,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 4,
+            "checkpoint_id": 3,
+            "step": 2,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 5,
+            "checkpoint_id": 4,
+            "step": 1,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 6,
+            "checkpoint_id": 4,
+            "step": 2,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 7,
+            "checkpoint_id": 5,
+            "step": 1,
+            "action_name": "detect_object",
+            "required_skill": "detect_object",
+            "required_capabilities": [
+              "can_detect_objects",
+              "has_visual_perception"
+            ],
+            "robot_capabilities_checked": {
+              "can_detect_objects": true,
+              "has_visual_perception": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 8,
+            "checkpoint_id": 5,
+            "step": 2,
+            "action_name": "pick_object",
+            "required_skill": "pick_object",
+            "required_capabilities": [
+              "can_pick",
+              "can_grasp",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_pick": true,
+              "can_grasp": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 9,
+            "checkpoint_id": 6,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 10,
+            "checkpoint_id": 7,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 11,
+            "checkpoint_id": 8,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 12,
+            "checkpoint_id": 9,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 13,
+            "checkpoint_id": 10,
+            "step": 1,
+            "action_name": "place_object",
+            "required_skill": "place_object",
+            "required_capabilities": [
+              "can_place",
+              "can_manipulate"
+            ],
+            "robot_capabilities_checked": {
+              "can_place": true,
+              "can_manipulate": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          },
+          {
+            "global_index": 14,
+            "checkpoint_id": 11,
+            "step": 1,
+            "action_name": "navigate_to_room",
+            "required_skill": "navigate_to_room",
+            "required_capabilities": [
+              "can_navigate",
+              "supports_indoor_navigation"
+            ],
+            "robot_capabilities_checked": {
+              "can_navigate": true,
+              "supports_indoor_navigation": true
+            },
+            "result": "PASS",
+            "failure_reason": ""
+          }
+        ]
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "15/15 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 15,
+        "total_constraints": 15
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "15/15 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 15,
+        "total_actions": 15
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'detect_object' (phase 3 → 2).",
+            "action_index": 3,
+            "checkpoint_id": 3,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'detect_object' (phase 3 → 2).",
+            "action_index": 5,
+            "checkpoint_id": 4,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'detect_object' (phase 3 → 2).",
+            "action_index": 7,
+            "checkpoint_id": 5,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'pick_object' → 'navigate_to_room' (phase 3 → 1).",
+            "action_index": 9,
+            "checkpoint_id": 6,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "ORDERING_ERROR",
+            "message": "Unexpected phase regression: 'place_object' → 'navigate_to_room' (phase 5 → 1).",
+            "action_index": 14,
+            "checkpoint_id": 11,
+            "severity": "WARNING",
+            "suggestion": "Review whether this action order is intentional."
+          },
+          {
+            "code": "REDUNDANT_ACTION",
+            "message": "Consecutive duplicate action 'place_object' at indices 10 and 11.",
+            "action_index": 11,
+            "checkpoint_id": 8,
+            "severity": "WARNING",
+            "suggestion": "Remove the duplicate action or merge the steps."
+          },
+          {
+            "code": "REDUNDANT_ACTION",
+            "message": "Consecutive duplicate action 'place_object' at indices 11 and 12.",
+            "action_index": 12,
+            "checkpoint_id": 9,
+            "severity": "WARNING",
+            "suggestion": "Remove the duplicate action or merge the steps."
+          },
+          {
+            "code": "REDUNDANT_ACTION",
+            "message": "Consecutive duplicate action 'place_object' at indices 12 and 13.",
+            "action_index": 13,
+            "checkpoint_id": 10,
+            "severity": "WARNING",
+            "suggestion": "Remove the duplicate action or merge the steps."
+          }
+        ],
+        "comments": "14/14 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 14,
+        "total_transitions": 14
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 58%, task-to-exit-state coverage: 5%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "bandages",
+              "collecting",
+              "designated",
+              "each",
+              "from",
+              "gloves",
+              "item",
+              "its",
+              "location",
+              "masks",
+              "nurse",
+              "placing",
+              "reception",
+              "restock",
+              "returning",
+              "room",
+              "sanitizer",
+              "station",
+              "supply"
+            ],
+            "goal_keywords": [
+              "bandages",
+              "from",
+              "gloves",
+              "masks",
+              "nurse",
+              "reception",
+              "restock",
+              "return",
+              "room",
+              "sanitizer",
+              "station",
+              "supply"
+            ],
+            "matched_goal_keywords": [
+              "bandages",
+              "from",
+              "gloves",
+              "masks",
+              "nurse",
+              "reception",
+              "restock",
+              "room",
+              "sanitizer",
+              "station",
+              "supply"
+            ],
+            "matched_exit_keywords": [
+              "reception"
+            ]
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 58%. Task-to-final-state match: 5%.",
+        "goal_satisfied": false,
+        "goal_coverage": 0.5789,
+        "exit_coverage": 0.0526,
+        "llm_self_reported_valid": true
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 0.4,
+        "normalised_score": 0.4,
+        "status": "FAIL",
+        "issues": [],
+        "comments": "Efficiency: 40.00% (ideal=6, actual=15). Redundant navigations: 0. Repeated actions: 11.",
+        "total_actions": 15,
+        "ideal_steps": 6,
+        "efficiency_score": 0.4,
+        "redundancy_score": 0.2667,
+        "repeated_actions": 11,
+        "redundant_navigations": 0
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}
