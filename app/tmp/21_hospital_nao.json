@@ -1,0 +1,329 @@
+{
+  "plan": {
+    "metadata": {
+      "robot": "nao",
+      "world": "Multi-Speciality Hospital",
+      "task": "Go to the waiting area, collect the abandoned walking stick, and return it to reception.",
+      "model": "Capability-Aware Robot Task Planner"
+    },
+    "goal": "Navigate to the waiting area, pick up the abandoned walking stick, and deliver it to the reception.",
+    "checkpoints": [],
+    "constraints": [
+      "Robot lacks manipulator (cannot grasp, pick, or place objects).",
+      "Robot lacks navigation capabilities (cannot move or navigate).",
+      "Robot lacks visual perception (cannot detect objects or locate items)."
+    ],
+    "execution_summary": {
+      "plan_valid": false,
+      "failure_reason": "The robot 'nao' is a fixed-base robot with no manipulator, no navigation capabilities, and no visual perception. It cannot navigate to the waiting area, cannot detect the abandoned walking stick, and cannot pick it up or carry it to the reception. All required capabilities (can_navigate, can_pick, can_grasp, has_visual_perception) are disabled.",
+      "expected_outcome": "Task cannot be completed."
+    }
+  },
+  "evaluation": {
+    "report_version": "1.0",
+    "generated_at": "2026-07-27T12:18:45.994367+00:00",
+    "plan_metadata": {
+      "robot": "nao",
+      "world": "Multi-Speciality Hospital",
+      "task": "Go to the waiting area, collect the abandoned walking stick, and return it to reception.",
+      "model": "Capability-Aware Robot Task Planner",
+      "goal": "Navigate to the waiting area, pick up the abandoned walking stick, and deliver it to the reception.",
+      "total_actions": 0,
+      "total_checkpoints": 0
+    },
+    "task_success": false,
+    "overall_score": 0.98,
+    "overall_status": "WARNING",
+    "metrics": {
+      "task_success": {
+        "score": 0.0,
+        "status": "WARNING",
+        "weight": 0.02
+      },
+      "capability": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.25
+      },
+      "constraints": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.2
+      },
+      "action_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "object_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.1
+      },
+      "location_validity": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.08
+      },
+      "skill_mapping": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.15
+      },
+      "sequence": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.07
+      },
+      "efficiency": {
+        "score": 1.0,
+        "status": "PASS",
+        "weight": 0.03
+      }
+    },
+    "errors": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "Plan contains no checkpoints.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "CRITICAL",
+        "suggestion": "The plan must contain at least one checkpoint."
+      },
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "ERROR",
+        "suggestion": "Re-plan with corrected capabilities or a different robot."
+      }
+    ],
+    "warnings": [
+      {
+        "code": "GOAL_NOT_REACHED",
+        "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 75%, task-to-exit-state coverage: 0%.",
+        "action_index": -1,
+        "checkpoint_id": -1,
+        "severity": "WARNING",
+        "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+        "task_keywords": [
+          "abandoned",
+          "area",
+          "collect",
+          "reception",
+          "return",
+          "stick",
+          "waiting",
+          "walking"
+        ],
+        "goal_keywords": [
+          "abandoned",
+          "area",
+          "deliver",
+          "navigate",
+          "pick",
+          "reception",
+          "stick",
+          "waiting",
+          "walking"
+        ],
+        "matched_goal_keywords": [
+          "abandoned",
+          "area",
+          "reception",
+          "stick",
+          "waiting",
+          "walking"
+        ],
+        "matched_exit_keywords": []
+      }
+    ],
+    "capability_trace": [],
+    "validator_details": {
+      "SchemaValidator": {
+        "validator": "SchemaValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "SCHEMA_INVALID",
+            "message": "Plan contains no checkpoints.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "CRITICAL",
+            "suggestion": "The plan must contain at least one checkpoint."
+          }
+        ],
+        "comments": "1 structural error(s) found."
+      },
+      "ActionValidator": {
+        "validator": "ActionValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 actions are valid. Score: 100.00%.",
+        "valid_actions": 0,
+        "total_actions": 0
+      },
+      "ObjectValidator": {
+        "validator": "ObjectValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 object references are valid. Score: 100.00%.",
+        "valid_objects": 0,
+        "total_object_refs": 0
+      },
+      "LocationValidator": {
+        "validator": "LocationValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 location references are valid. Score: 100.00%.",
+        "valid_locations": 0,
+        "total_location_refs": 0
+      },
+      "SkillValidator": {
+        "validator": "SkillValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 actions map to valid skills. Score: 100.00%.",
+        "mapped_actions": 0,
+        "total_actions": 0
+      },
+      "CapabilityValidator": {
+        "validator": "CapabilityValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 actions are capability-compatible with robot 'nao'. Score: 100.00%.",
+        "compatible_actions": 0,
+        "total_actions": 0,
+        "capability_trace": []
+      },
+      "ConstraintValidator": {
+        "validator": "ConstraintValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 constraint checks satisfied. Score: 100.00%.",
+        "satisfied_constraints": 0,
+        "total_constraints": 0
+      },
+      "DependencyValidator": {
+        "validator": "DependencyValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 actions satisfy their dependencies. Score: 100.00%.",
+        "satisfied_dependencies": 0,
+        "total_actions": 0
+      },
+      "SequenceValidator": {
+        "validator": "SequenceValidator",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "0/0 action transitions are logically ordered. Score: 100.00%.",
+        "good_transitions": 0,
+        "total_transitions": 0
+      },
+      "GoalValidator": {
+        "validator": "GoalValidator",
+        "raw_score": 0.0,
+        "normalised_score": 0.0,
+        "status": "WARNING",
+        "issues": [
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "Goal may not be fully satisfied. Task-to-goal keyword coverage: 75%, task-to-exit-state coverage: 0%.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "WARNING",
+            "suggestion": "Review the plan goal and final checkpoint exit_state to ensure they reflect the user's task requirements.",
+            "task_keywords": [
+              "abandoned",
+              "area",
+              "collect",
+              "reception",
+              "return",
+              "stick",
+              "waiting",
+              "walking"
+            ],
+            "goal_keywords": [
+              "abandoned",
+              "area",
+              "deliver",
+              "navigate",
+              "pick",
+              "reception",
+              "stick",
+              "waiting",
+              "walking"
+            ],
+            "matched_goal_keywords": [
+              "abandoned",
+              "area",
+              "reception",
+              "stick",
+              "waiting",
+              "walking"
+            ],
+            "matched_exit_keywords": []
+          },
+          {
+            "code": "GOAL_NOT_REACHED",
+            "message": "The LLM's own execution_summary.plan_valid is False, indicating self-reported plan failure.",
+            "action_index": -1,
+            "checkpoint_id": -1,
+            "severity": "ERROR",
+            "suggestion": "Re-plan with corrected capabilities or a different robot."
+          }
+        ],
+        "comments": "Goal NOT satisfied. Task-to-goal keyword match: 75%. Task-to-final-state match: 0%.",
+        "goal_satisfied": false,
+        "goal_coverage": 0.75,
+        "exit_coverage": 0.0,
+        "llm_self_reported_valid": false
+      },
+      "EfficiencyAnalyser": {
+        "validator": "EfficiencyAnalyser",
+        "raw_score": 1.0,
+        "normalised_score": 1.0,
+        "status": "PASS",
+        "issues": [],
+        "comments": "No actions to evaluate efficiency."
+      }
+    },
+    "config": {
+      "strict_mode": false,
+      "weights": {
+        "task_success": 0.02,
+        "capability": 0.25,
+        "constraints": 0.2,
+        "skill_mapping": 0.15,
+        "action_validity": 0.1,
+        "object_validity": 0.1,
+        "location_validity": 0.08,
+        "sequence": 0.07,
+        "efficiency": 0.03
+      },
+      "thresholds": {
+        "pass": 0.8,
+        "warn": 0.6
+      }
+    }
+  }
+}
