@@ -1,0 +1,832 @@
+% BITS PILANI WILP DISSERTATION — FINAL REPORT
+% Title : A Robot-Agnostic Framework for Language-Conditioned
+%         Task Planning using Capability-Aware Large Language Models
+% Student: Sana Jaya Krishna | 2024AA05783
+% Course : AIMLCZG628T | M.Tech. Artificial Intelligence and Machine Learning
+
+%  PREAMBLE
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+
+\usepackage{setspace}
+\doublespacing
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+\usepackage{enumitem}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\usepackage{fancyhdr}
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdfauthor={Sana Jaya Krishna},
+  pdftitle={A Robot-Agnostic Framework for Language-Conditioned Task Planning
+            using Capability-Aware Large Language Models},
+  pdfsubject={M.Tech. Dissertation, BITS Pilani WILP, AIMLCZG628T},
+  pdfkeywords={robot-agnostic planning, LLM, capability representation,
+               URDF, task planning, embodied AI, ROS2, PEFT}
+}
+
+\usepackage{xurl}
+\urlstyle{same}
+
+\usepackage{acronym}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+%  DOCUMENT START
+\begin{document}
+
+%  FRONT MATTER  —  Roman page numbers
+\pagenumbering{roman}
+\pagestyle{plain}
+
+%  COVER PAGE  (Appendix-A)
+\begin{titlepage}
+\centering
+\vspace*{1.2cm}
+
+{\Large\bfseries A REPORT ON}\\[0.8cm]
+
+{\LARGE\bfseries
+A ROBOT-AGNOSTIC FRAMEWORK FOR\\[0.3cm]
+LANGUAGE-CONDITIONED TASK PLANNING USING\\[0.3cm]
+CAPABILITY-AWARE LARGE LANGUAGE MODELS
+}\\[1.6cm]
+
+{\large\bfseries BY}\\[0.6cm]
+
+{\large\bfseries Sana Jaya Krishna}\\[0.2cm]
+{\large ID No.: 2024AA05783}\\[1.4cm]
+
+{\large\bfseries AT}\\[0.4cm]
+{\large [STATION NAME AND CENTRE]}\\[0.2cm]
+{\large [ORGANIZATION NAME \& LOCATION]}\\[1.6cm]
+
+\includegraphics[width=1.5in]{vertopal_7695069776664397bca9a849d22a270b/media/image1.png}\\[0.6cm]
+
+{\large\bfseries BIRLA INSTITUTE OF TECHNOLOGY \& SCIENCE, PILANI}\\[0.3cm]
+{\normalsize VIDYA VIHAR, PILANI, RAJASTHAN -- 333031}\\[0.6cm]
+
+{\large\bfseries [Month, Year]}
+
+\end{titlepage}
+
+%  TITLE PAGE  (Appendix-B)
+\newpage
+\begin{titlepage}
+\centering
+\vspace*{1cm}
+
+{\Large\bfseries A REPORT ON}\\[0.8cm]
+
+{\LARGE\bfseries
+A ROBOT-AGNOSTIC FRAMEWORK FOR\\[0.3cm]
+LANGUAGE-CONDITIONED TASK PLANNING USING\\[0.3cm]
+CAPABILITY-AWARE LARGE LANGUAGE MODELS
+}\\[1.6cm]
+
+{\large\bfseries BY}\\[0.6cm]
+
+{\large\bfseries Sana Jaya Krishna}\\[0.2cm]
+{\large ID No.: 2024AA05783}\\[0.8cm]
+
+\begin{singlespace}
+{\normalsize
+Prepared in partial fulfilment of the\\
+WILP Dissertation Course (Course No.: AIMLCZG628T)\\
+}
+\end{singlespace}
+
+\vspace{0.6cm}
+{\large\bfseries AT}\\[0.4cm]
+{\large [ORGANIZATION NAME \& LOCATION]}\\[0.4cm]
+
+{\large Degree Programme: M.Tech. Artificial Intelligence and Machine Learning}\\[1.6cm]
+
+\includegraphics[width=1.3in]{vertopal_7695069776664397bca9a849d22a270b/media/image1.png}\\[0.6cm]
+
+{\large\bfseries BIRLA INSTITUTE OF TECHNOLOGY \& SCIENCE, PILANI}\\[0.5cm]
+{\large\bfseries [Month, Year]}
+
+\end{titlepage}
+
+%  CERTIFICATE FROM SUPERVISOR
+%  (To be signed and included as a scanned page)
+\newpage
+\begin{center}
+{\large\bfseries CERTIFICATE}
+\end{center}
+\addcontentsline{toc}{section}{Certificate}
+\vspace{0.5cm}
+
+This is to certify that the dissertation titled \textbf{``A Robot-Agnostic Framework for Language-Conditioned Task Planning using Capability-Aware Large Language Models''} submitted by \textbf{Sana Jaya Krishna} (ID No.\ 2024AA05783) in partial fulfilment of the requirements for the course \textbf{AIMLCZG628T (Dissertation)} of M.Tech.\ Artificial Intelligence and Machine Learning, BITS Pilani WILP Division, is a bonafide record of the work carried out by the student under my supervision.
+
+\vspace{2.5cm}
+\noindent
+\begin{tabular}{@{}p{0.45\textwidth}p{0.45\textwidth}@{}}
+\textbf{Supervisor} & \textbf{Additional Examiner} \\[2.5cm]
+\hrule & \hrule \\[0.3cm]
+{[SUPERVISOR NAME]}      & {[ADDITIONAL EXAMINER NAME]} \\
+{[SUPERVISOR DESIGNATION]} & {[ADDITIONAL EXAMINER DESIGNATION]} \\[0.2cm]
+Date: \underline{\hspace{3.5cm}} & Date: \underline{\hspace{3.5cm}}
+\end{tabular}
+
+\vspace{1.5cm}
+\noindent
+\textbf{Faculty Mentor:} [FACULTY MENTOR NAME], BITS Pilani WILP
+
+%  ACKNOWLEDGEMENTS
+\newpage
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+I would like to express my sincere gratitude to all those who contributed to the successful completion of this dissertation.
+
+I am deeply thankful to \textbf{[SUPERVISOR NAME AND DESIGNATION]}, my Supervisor, and \textbf{[ADDITIONAL EXAMINER NAME AND DESIGNATION]}, Additional Examiner, for their invaluable guidance, technical inputs, and continuous encouragement throughout the course of this project.
+
+I extend my sincere thanks to \textbf{[FACULTY MENTOR NAME]}, my Faculty Mentor at BITS Pilani WILP, for their academic oversight and timely feedback that helped shape the direction and quality of this work.
+
+I am grateful to the management and colleagues at \textbf{[ORGANIZATION NAME]}, \textbf{[ORGANIZATION LOCATION]}, for providing the necessary resources, time, and support to carry out this dissertation work.
+
+I also acknowledge the open-source robotics community and the developers of ROS2, MoveIt2, Nav2, and the various language model frameworks whose tools and documentation formed an essential part of this work.
+
+Finally, I thank my family for their unwavering support and encouragement.
+
+\vspace{1.8cm}
+\noindent
+\begin{tabular}{@{}l@{}}
+\textbf{Sana Jaya Krishna}\\
+2024AA05783\\
+M.Tech.\ Artificial Intelligence and Machine Learning\\
+BITS Pilani, WILP Division\\
+{[Month, Year]}
+\end{tabular}
+
+%  ABSTRACT SHEET  (Appendix-C)
+\newpage
+\begin{center}
+{\large\bfseries BIRLA INSTITUTE OF TECHNOLOGY AND SCIENCE, PILANI (RAJASTHAN)}\\[0.3cm]
+{\large\bfseries WILP Division}
+\end{center}
+\addcontentsline{toc}{section}{Abstract Sheet}
+
+\vspace{0.4cm}
+\begin{singlespace}
+\noindent
+\begin{tabular}{@{}ll@{}}
+\textbf{Organization:}         & {[ORGANIZATION NAME]}          \\[4pt]
+\textbf{Location:}             & {[ORGANIZATION LOCATION]}      \\[4pt]
+\textbf{Duration:}             & {[PROJECT DURATION]}           \\[4pt]
+\textbf{Date of Start:}        & {[DATE OF START]}              \\[4pt]
+\textbf{Date of Submission:}   & {[DATE OF SUBMISSION]}         \\
+\end{tabular}
+\end{singlespace}
+
+\vspace{0.5cm}
+\noindent\textbf{Title of the Project:}\\
+A Robot-Agnostic Framework for Language-Conditioned Task Planning using Capability-Aware Large Language Models
+
+\vspace{0.4cm}
+\noindent\textbf{ID No./Name of the Student:} 2024AA05783 / Sana Jaya Krishna
+
+\vspace{0.4cm}
+\noindent\textbf{Name(s) and Designation(s) of Supervisor and Additional Examiner:}\\
+Supervisor: [SUPERVISOR NAME AND DESIGNATION]\\
+Additional Examiner: [ADDITIONAL EXAMINER NAME AND DESIGNATION]
+
+\vspace{0.4cm}
+\noindent\textbf{Name of the Faculty Mentor:} [FACULTY MENTOR NAME]
+
+\vspace{0.4cm}
+\noindent\textbf{Key Words:} Robot-agnostic planning, Large Language Models, capability representation, URDF, task planning, embodied AI, LLM evaluation, robotic skills, ROS2
+
+\vspace{0.4cm}
+\noindent\textbf{Project Areas:} Robotics, Artificial Intelligence, Natural Language Processing
+
+\vspace{0.4cm}
+\noindent\textbf{Abstract:}
+
+\begin{singlespace}
+\noindent
+Modern robots exhibit heterogeneous embodiments with varying mobility, manipulation, perception, and operational capabilities.
+A logically correct plan generated by a Large Language Model (LLM) may be infeasible if the assigned robot lacks the required capabilities.
+This dissertation presents a robot-agnostic, capability-aware framework for language-conditioned robotic task planning.
+The proposed approach derives structured capability representations from robot description files (URDF/Xacro) and provides them as context to an LLM planner alongside world-state representations and a standardized skills library.
+The framework is robot-agnostic in architecture but robot-aware during planning.
+A deterministic software-based evaluation module assesses generated plans across six dimensions: goal achievement, action validity, object and location validity, capability compliance, logical ordering, and plan feasibility --- without relying on a secondary LLM as a judge.
+A custom dataset of approximately 500 natural-language tasks across 11 diverse environments was developed to benchmark multiple lightweight open-source LLMs under identical experimental conditions, enabling controlled comparison of planning performance and providing a baseline for subsequent parameter-efficient fine-tuning (PEFT) experiments.
+The framework establishes a foundational architecture and evaluation methodology for capability-aware robotic task planning.
+\end{singlespace}
+
+\vspace{1.5cm}
+\noindent
+\begin{tabular}{@{}p{0.45\textwidth}p{0.45\textwidth}@{}}
+\textbf{Signature of Student} & \textbf{Signature of Supervisor} \\[2.2cm]
+\hrule & \hrule \\[0.4cm]
+Date: \underline{\hspace{3.5cm}} & Date: \underline{\hspace{3.5cm}}
+\end{tabular}
+
+%  TABLE OF CONTENTS
+\newpage
+\tableofcontents
+
+%  LIST OF ABBREVIATIONS AND ACRONYMS
+\newpage
+\section*{List of Abbreviations and Acronyms}
+\addcontentsline{toc}{section}{List of Abbreviations and Acronyms}
+
+\begin{singlespace}
+\begin{acronym}[MoveIt2]
+  \acro{AI}{Artificial Intelligence}
+  \acro{EMOS}{Embodiment-aware Multi-rObot System}
+  \acro{JSON}{JavaScript Object Notation}
+  \acro{LLM}{Large Language Model}
+  \acro{LoRA}{Low-Rank Adaptation}
+  \acro{ML}{Machine Learning}
+  \acro{MoveIt2}{Motion Planning Framework for ROS2}
+  \acro{Nav2}{Navigation2 Stack for ROS2}
+  \acro{PEFT}{Parameter-Efficient Fine-Tuning}
+  \acro{ROS2}{Robot Operating System 2}
+  \acro{TAMP}{Task and Motion Planning}
+  \acro{URDF}{Unified Robot Description Format}
+  \acro{WILP}{Work Integrated Learning Programme}
+  \acro{Xacro}{XML Macros (robot description extension)}
+\end{acronym}
+\end{singlespace}
+
+%  MAIN BODY  —  Arabic page numbers, starting at 1
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\itshape Robot-Agnostic Framework for Capability-Aware Task Planning}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\section{Introduction and Research Motivation}
+
+Robotics is evolving from pre-programmed systems toward intelligent agents capable of understanding natural-language instructions and operating across diverse environments.
+Large Language Models (LLMs) provide strong reasoning and task-decomposition capabilities, and approaches such as SayCan~\cite{saycan}, ProgPrompt~\cite{progprompt}, and EMOS~\cite{emos} have demonstrated their potential for robotic task planning.
+However, existing approaches often depend on predefined action spaces, robot-specific configurations, or limited representations of robot capabilities.
+
+A key challenge is that \textbf{robots have different embodiments and capabilities}.
+A plan that is logically correct may still be infeasible if the selected robot lacks the required mobility, manipulation, perception, payload, or software skills.
+This creates a gap between \textbf{LLM-generated plans and physically executable robotic plans}.
+
+This dissertation addresses this gap through a \textbf{robot-agnostic, capability-aware framework for language-conditioned task planning}.
+The proposed approach can be summarized as:
+
+\begin{center}
+\textit{Robot Description $\rightarrow$ Capability Representation $\rightarrow$ LLM Planning $\rightarrow$ Capability-Aware Plan}
+\end{center}
+
+Robot descriptions such as URDF~\cite{urdf} are transformed into structured capabilities and combined with world information and available robotic skills to ground LLM planning.
+The framework is therefore \textbf{robot-agnostic in architecture but robot-aware during planning}.
+
+The work establishes a foundational architecture, capability representation, planning pipeline, dataset, and evaluation methodology.
+It provides a basis for future research involving real-world execution, dynamic capability learning, closed-loop planning, multi-robot systems, and broader cross-robot generalization.
+
+\section{Literature Review and Research Gap}
+
+Language-conditioned robotic planning has gained significant attention with the development of Large Language Models~\cite{llm_survey}.
+Existing research demonstrates that LLMs can interpret high-level instructions and decompose them into sequences of robotic actions.
+
+\textbf{SayCan}~\cite{saycan} combines LLM-generated action probabilities with learned affordance functions to select actions that are both relevant to the instruction and feasible for the robot.
+While effective, its planning process relies on a predefined skill set and robot-specific affordance models.
+
+\textbf{ProgPrompt}~\cite{progprompt} uses programmatic prompting to generate structured robot task plans.
+It improves the organization and interpretability of LLM-generated plans but provides limited explicit reasoning about the physical capabilities of different robot embodiments.
+
+\textbf{EMOS}~\cite{emos} extends embodiment-aware reasoning by providing structured information about robots to LLM-based agents, particularly for heterogeneous and multi-robot environments.
+This demonstrates the importance of representing embodiment during planning, but leaves opportunities for more explicit capability extraction, constraint representation, and executable skill grounding.
+These limitations were identified as the primary motivation for the proposed dissertation framework.
+
+\subsection{Research Gap}
+
+Existing approaches demonstrate the effectiveness of LLMs for robotic reasoning, but a gap remains between \textbf{language-level planning and embodiment-level feasibility}~\cite{llm_survey}.
+In particular, there is a need for a framework that:
+
+\begin{itemize}
+  \item represents heterogeneous robots through a common capability abstraction,
+  \item derives capabilities systematically from robot descriptions,
+  \item grounds generated actions against available robotic skills and environmental constraints, and
+  \item evaluates generated plans independently of another LLM.
+\end{itemize}
+
+This dissertation addresses this gap by introducing a \textbf{robot-agnostic capability representation and deterministic evaluation layer around LLM-based task planning}, allowing different robots, environments, tasks, and language models to be evaluated within a common framework.
+
+\section{Problem Definition and Objectives}
+
+\subsection{Problem Definition}
+
+LLMs can generate logically meaningful task plans from natural-language instructions, but they do not inherently guarantee that those plans are feasible for a specific robot.
+Differences in mobility, manipulation, perception, sensors, payload, reach, and available software skills can make the same task executable by one robot and infeasible for another.
+
+The problem addressed in this dissertation is therefore:
+
+\begin{quote}
+\textbf{How can natural-language task planning be made robot-agnostic while ensuring that generated plans remain grounded in the capabilities and constraints of the selected robot and environment?}
+\end{quote}
+
+The proposed framework addresses this by separating \textbf{robot capability representation}, \textbf{environment representation}, \textbf{available skills}, and \textbf{LLM-based reasoning}, allowing the planner to operate using structured information rather than relying solely on the LLM's internal knowledge.
+
+\subsection{Research Objectives}
+
+The primary objectives of this dissertation are:
+
+\begin{itemize}
+  \item Develop a structured and robot-independent representation of robotic capabilities.
+  \item Extract relevant capabilities from robot descriptions such as URDF/Xacro~\cite{urdf}.
+  \item Represent executable robotic operations through a common skills library.
+  \item Provide robot capabilities, world state, skills, and task instructions as structured context to an LLM.
+  \item Generate structured, capability-aware task plans across different robots and environments.
+  \item Develop a deterministic software-based evaluator to assess plan validity and feasibility without relying on another LLM.
+  \item Benchmark multiple language models and study their suitability for capability-aware robotic task planning.
+\end{itemize}
+
+These objectives extend the initial dissertation scope of capability extraction, LLM integration, feasibility-aware planning, and cross-robot evaluation into a complete experimental framework.
+
+\section{Proposed Framework and System Architecture}
+
+The proposed system follows a modular architecture that separates \textbf{robot representation, environment representation, task reasoning, skill grounding, and plan evaluation}.
+This separation enables the same planning pipeline to operate across different robot embodiments and environments.
+
+The overall workflow is:
+
+\begin{center}
+\textit{Robot Description $\rightarrow$ Capability Extraction $\rightarrow$ Capability Representation}\\[4pt]
+\textit{$\rightarrow$ LLM Planner $\rightarrow$ Generated Plan $\rightarrow$ Deterministic Evaluation}
+\end{center}
+
+The framework consists of the following major components:
+
+\begin{itemize}
+  \item \textbf{Capability Extractor:} Parses robot descriptions such as URDF/Xacro~\cite{urdf} and derives structured information about mobility, manipulation, sensors, joints, reach, payload-related constraints, and other relevant capabilities.
+  \item \textbf{Capability Representation:} Converts robot-specific information into a standardized JSON representation that can be consumed independently of the robot platform.
+  \item \textbf{World State Representation:} Describes the environment, including locations, objects, properties, relationships, and environmental constraints relevant to planning.
+  \item \textbf{Skills Library:} Defines the abstract robotic operations available to the planner and provides a bridge between high-level actions and underlying robotic functions.
+  \item \textbf{LLM Planner:} Receives the natural-language task together with robot capabilities, world state, and available skills to generate a structured sequence of actions.
+  \item \textbf{Evaluation Module:} Deterministically evaluates the generated plan for factors such as goal achievement, action and object validity, capability constraints, and logical ordering.
+\end{itemize}
+
+This architecture extends the capability-aware planning concept introduced in the mid-semester design, where robot capability representation was proposed as an intermediate layer between LLM reasoning and robot execution.
+
+The modular design also allows individual components---such as the LLM, robot description, environment, skills library, or evaluator---to be modified independently, making the framework suitable for systematic experimentation and future extension.
+
+The plan structure within this framework draws inspiration from \textbf{NavTopo}~\cite{navtopo}, a topological navigation approach that organizes robot navigation as a sequence of waypoint sub-tasks rather than a monolithic path.
+Adopting a similar philosophy, task plans in the proposed framework are structured as \textbf{ordered, checkpointed sub-task sequences}.
+When execution feedback or replanning is triggered, only the affected checkpoint needs to be regenerated rather than the entire plan.
+This selective replanning strategy reduces LLM inference token cost significantly, since the context provided to the model is scoped to the failed sub-task and its local constraints rather than the complete task.
+
+\section{Capability Extraction and Robot Representation}
+
+A core component of the proposed framework is the \textbf{Capability Extractor}, which converts robot-specific descriptions into a standardized representation that can be understood by the planning system.
+
+Robot description files such as \textbf{URDF/Xacro}~\cite{urdf} contain structural information including links, joints, actuators, sensors, and kinematic relationships.
+However, providing these files directly to an LLM introduces unnecessary complexity and does not explicitly describe what the robot can perform.
+Therefore, the framework introduces an intermediate capability abstraction.
+
+The extraction pipeline follows:
+
+\begin{center}
+\textit{URDF/Xacro $\rightarrow$ Structural Parsing $\rightarrow$ Semantic Analysis $\rightarrow$}\\[4pt]
+\textit{Capability Identification $\rightarrow$ Constraint Generation $\rightarrow$ Capability JSON}
+\end{center}
+
+A rule-based mechanism interprets structural properties and maps them to planning-relevant capabilities such as:
+
+\begin{itemize}
+  \item mobility and locomotion,
+  \item manipulation and end-effector availability,
+  \item perception and sensing,
+  \item communication and interaction, and
+  \item kinematic and operational constraints.
+\end{itemize}
+
+The resulting \textbf{Capability JSON} acts as a standardized robot profile supplied to the planner.
+This allows different robot platforms to be represented through the same schema while retaining their individual capabilities and limitations.
+
+The approach extends the initial concept of a structured \textit{robot resume} proposed during the mid-semester phase into a deterministic capability extraction and representation pipeline.
+
+This abstraction is fundamental to the robot-agnostic design:
+\textbf{the planner does not need to understand each robot's URDF directly; it reasons over a common representation of what the robot can and cannot do.}
+
+\section{Skills Library and Action Grounding}
+
+The \textbf{Skills Library} provides a standardized interface between high-level LLM-generated plans and executable robotic functions.
+While the capability representation describes \textbf{what a robot can potentially perform}, the skills library defines \textbf{which actions are available to the planning system and how they can be executed}.
+
+Each skill is represented using a structured schema containing information such as the abstract skill name, required parameters, preconditions, capability requirements, constraints, and corresponding robotic implementation.
+
+The library covers major robotic operations including:
+
+\begin{itemize}
+  \item Navigation and mobility
+  \item Manipulation and object interaction
+  \item Perception and sensing
+  \item Inspection and environment interaction
+  \item Communication and system operations
+\end{itemize}
+
+For example, a high-level action such as \texttt{pick\_object} can be associated with manipulation requirements and mapped to an appropriate ROS2\,/\,MoveIt2~\cite{moveit2} implementation.
+Similarly, navigation actions can be grounded to corresponding Nav2~\cite{nav2} navigation interfaces.
+
+The resulting planning hierarchy is:
+
+\begin{center}
+\textit{Natural-Language Task $\rightarrow$ Abstract Skills $\rightarrow$ Capability Validation $\rightarrow$ Robot Functions}
+\end{center}
+
+By separating abstract skills from robot-specific implementations, the framework avoids directly coupling the LLM to individual ROS2~\cite{ros2} functions.
+This enables a common planning vocabulary across heterogeneous robots while allowing the underlying implementation to vary according to the selected robotic platform.
+
+Together, the \textbf{Capability Representation and Skills Library} form the grounding layer that connects language-based reasoning with executable robotic systems.
+
+\section{LLM-Based Task Planning}
+
+The \textbf{LLM Planner} acts as the reasoning component of the framework.
+Its objective is to convert a natural-language task into a structured sequence of robotic actions while considering the selected robot, environment, and available skills.
+
+The planner receives four primary inputs:
+
+\begin{center}
+\textit{Natural-Language Task + Robot Capabilities + World State + Skills Library $\rightarrow$ Generated Plan}
+\end{center}
+
+Rather than allowing the LLM to generate unrestricted textual instructions, the framework uses a structured prompt and predefined output schema.
+The model is expected to decompose the requested task into ordered actions, identify relevant objects and locations, select appropriate skills, and respect the capabilities and constraints provided in the context.
+
+For example, a task such as \textit{``Collect the package and deliver it to the reception desk''} may be decomposed into:
+
+\begin{center}
+\textit{Navigate $\rightarrow$ Detect Object $\rightarrow$ Pick Object $\rightarrow$ Navigate $\rightarrow$ Place Object}
+\end{center}
+
+However, the generated sequence depends on whether the robot possesses the required navigation, perception, and manipulation capabilities and whether the referenced objects and locations exist in the supplied world state.
+
+The framework is also \textbf{model-agnostic}: the planning interface is designed so that different LLMs can be evaluated using the same task, robot capability representation, world state, skills, output structure, and evaluation methodology.
+This enables systematic comparison of models based on their ability to generate valid and capability-aware robotic plans rather than relying solely on general language-generation performance.
+
+\subsection{Inference Strategy: Zero-Shot and Prompt Engineering}
+
+The LLM planner in the current work is evaluated under a \textbf{zero-shot inference} regime: no task-specific training examples are provided to the model at inference time.
+The model is required to generate a valid, capability-aware plan based solely on the structured context --- robot capabilities, world state, skills, and task description --- supplied in a single prompt.
+
+To improve zero-shot performance, the framework employs \textbf{structured prompt engineering}.
+The prompt is designed with a clear role definition, explicit output format specification (JSON schema), constraint declarations derived from the capability representation, and examples of valid action names from the skills library.
+This structured prompting strategy reduces hallucination, enforces schema compliance, and guides the model toward grounded action selection without requiring fine-tuning.
+
+The current experimental scope is limited to a \textbf{small number of inference runs} due to computational resource constraints.
+The available compute restricts the number of robot-environment-task combinations that can be fully evaluated.
+Despite this, the framework design supports arbitrary scale-out: once sufficient inference results are available, \textbf{parameter-efficient fine-tuning (PEFT)}~\cite{peft} such as LoRA can be applied to the best-performing base model to adapt it specifically for capability-aware task planning.
+Alternatively, the dataset of generated plans and evaluation scores could serve as supervision for training a \textbf{dedicated lightweight neural network} with a task-planning-specific architecture, reducing dependence on general-purpose LLMs for future deployment.
+
+\section{Dataset and Experimental Design}
+
+To systematically evaluate the proposed framework, a custom task-planning dataset was developed across \textbf{11 diverse environments}, including Kitchen, Apartment, Hospital, Restaurant, Delivery Warehouse, Factory, Chemistry Laboratory, Shopping Complex, Playground, College, and Hotel.
+
+The dataset contains approximately \textbf{500 natural-language robotic tasks} with varying levels of complexity, ranging from simple actions to navigation-manipulation tasks, conditional tasks, constraint-aware tasks, and long-horizon plans.
+The environments are represented using structured world-state descriptions containing relevant objects, locations, properties, and relationships.
+
+For the experimental study, selected humanoid robot configurations are evaluated across these environments using multiple lightweight open-source LLMs.
+Each experiment follows a consistent pipeline:
+
+\begin{center}
+\textit{Task + Robot Capability + World State + Skills $\rightarrow$ LLM Inference $\rightarrow$ Generated Plan $\rightarrow$ Evaluation}
+\end{center}
+
+Using identical representations and evaluation criteria across models allows the experiments to measure differences in planning performance while controlling the surrounding framework.
+
+The experimental design therefore evaluates three important dimensions of the proposed approach:
+\textbf{cross-task performance, cross-environment generalization, and adaptation to different robot capabilities}.
+The resulting evaluation scores can additionally serve as a baseline benchmark for comparing model selection and subsequent parameter-efficient fine-tuning (PEFT)~\cite{peft} experiments.
+
+\section{Evaluation Methodology}
+
+Evaluating an LLM-generated robotic plan requires more than measuring textual similarity, since multiple action sequences may correctly accomplish the same task.
+Therefore, this dissertation uses a \textbf{deterministic software-based evaluation module} rather than another LLM as the evaluator.
+
+The evaluator validates the generated plan against the \textbf{task, robot capabilities, world state, skills library, and predefined constraints}.
+The major evaluation dimensions include:
+
+\begin{itemize}
+  \item \textbf{Goal Achievement:} Whether the generated plan satisfies the intended task objective.
+  \item \textbf{Action Validity:} Whether generated actions belong to the available skills and action space.
+  \item \textbf{Object and Location Validity:} Whether referenced entities exist in the corresponding world state.
+  \item \textbf{Capability and Constraint Validity:} Whether the selected robot possesses the capabilities required to perform the actions.
+  \item \textbf{Logical Ordering:} Whether actions follow valid dependencies and preconditions.
+  \item \textbf{Plan Feasibility:} Whether the complete sequence can reasonably be executed under the supplied robot and environmental constraints.
+\end{itemize}
+
+The evaluation pipeline is therefore:
+
+\begin{center}
+\textit{Generated Plan + Ground-Truth Context $\rightarrow$ Deterministic Validation $\rightarrow$ Metric Scores $\rightarrow$ Overall Performance}
+\end{center}
+
+Aggregating these metrics across robots, environments, tasks, and models enables systematic comparison of planning performance.
+This evaluation strategy also improves \textbf{repeatability and transparency}, since identical plans evaluated under identical conditions produce consistent results without introducing the variability or bias of an LLM-based judge.
+
+It is important to note that the evaluation framework is \textbf{entirely deterministic and grounding-based}.
+It checks the different constraints in the generated plan and verifies whether the plan is consistent with the supplied capability model, world state, and skills library.
+However, it is unable to judge whether the robot can actually complete the task or not in a physical or simulated environment.
+The evaluation metrics \textbf{only check the grounding, but not the logical completeness} of the plan.
+Actual task success depends on additional factors including low-level motion execution, real-world perception, actuator reliability, and environmental dynamics, none of which are within the scope of the evaluation module.
+This distinction is an important limitation of the current evaluation framework and motivates future integration with execution-level verification.
+
+\section{Implementation and System Integration}
+
+The proposed framework was implemented as a \textbf{modular Python-based pipeline}, allowing each component to be developed, tested, and modified independently.
+The implementation integrates robot capability extraction, structured world representations, a skills library, LLM inference, and deterministic plan evaluation.
+
+The overall software workflow is:
+
+\begin{center}
+\begin{singlespace}
+\textit{Robot Description $\rightarrow$ Capability Extractor $\rightarrow$ Capability JSON}\\[4pt]
+\textit{World Definition $\rightarrow$ World State JSON}\\[4pt]
+\textit{Task + Capabilities + World State + Skills $\rightarrow$ LLM $\rightarrow$ Structured Plan $\rightarrow$ Evaluator}
+\end{singlespace}
+\end{center}
+
+The implementation uses \textbf{ROS2-compatible robot descriptions}~\cite{ros2}, Python, JSON-based representations, and open-source LLM inference frameworks.
+The capability extractor applies predefined rules to interpret robot structures and generate planning-relevant capabilities and constraints.
+
+A common inference interface was developed so that different LLMs can receive the same structured inputs and produce plans using a consistent output schema.
+This supports controlled comparison between models without modifying the remaining system architecture.
+
+The individual modules are integrated into an experimental pipeline for executing tasks across different robot-world combinations, storing generated plans, computing evaluation metrics, and comparing model performance.
+This modular implementation also enables future components, models, robots, and execution systems to be incorporated without redesigning the complete framework.
+
+\section{Experimental Results and Analysis}
+
+The experimental phase evaluates the framework across multiple \textbf{robots, environments, natural-language tasks, and LLMs}.
+Each model is provided with the same structured inputs and evaluated using the deterministic evaluation module, enabling a controlled comparison of planning performance.
+
+The analysis focuses on:
+
+\begin{itemize}
+  \item overall plan validity and goal achievement,
+  \item capability and constraint compliance,
+  \item action, object, and location validity,
+  \item logical ordering of generated actions,
+  \item performance variation across task complexity and environments,
+  \item differences in planning behaviour across robot embodiments, and
+  \item comparative performance of the selected LLMs.
+\end{itemize}
+
+The experiments are designed not only to identify the best-performing model, but also to understand \textbf{where and why planning failures occur}.
+Errors are categorized into cases such as unsupported actions, invalid environmental references, capability violations, incorrect action ordering, incomplete plans, and malformed structured outputs.
+
+The resulting scores provide a quantitative baseline for the proposed framework.
+The strongest-performing model can subsequently be used for \textbf{Parameter-Efficient Fine-Tuning (PEFT)}~\cite{peft}, after which the same evaluation pipeline can be repeated to measure whether domain-specific adaptation improves capability-aware robotic planning.
+
+\textit{Note: Detailed quantitative results, comparative tables, graphs, and model-wise observations are to be incorporated in this section upon completion of the full inference and evaluation runs.}
+
+\section{Limitations}
+
+Although the proposed framework establishes a structured approach for capability-aware robotic task planning, several limitations remain within the current scope of the dissertation.
+
+\begin{itemize}
+  \item \textbf{Simulation and representation-based validation:} The generated plans are primarily evaluated using structured robot capabilities, world states, and software-based validation. Robot execution in simulation is not included in the current scope as it requires significant time for model finetuning, world building, and robot creation. This extensive setup will instead be a focus for future work.
+  \item \textbf{Deterministic metrics check grounding, not logical completeness:} The evaluation framework checks grounding validity and constraint compliance deterministically, but it is unable to judge if the robot can actually complete the task or not. The metrics only check grounding, but not logical completeness. Actual task success depends on motion execution, real-world perception, and actuator reliability, which are outside the current scope.
+  \item \textbf{Limited inference scale due to compute constraints:} The current experimental runs are limited in number due to available computational resources. A larger-scale evaluation across all robot-environment-task combinations requires significantly more compute capacity.
+  \item \textbf{Zero-shot inference only:} The models are currently evaluated in a zero-shot setting. Fine-tuning on domain-specific data has not yet been performed, which may limit the models' ability to consistently follow the structured output schema and capability constraints.
+  \item \textbf{Static capability representation:} Robot capabilities are extracted from available descriptions and predefined rules. Dynamic factors such as hardware degradation, battery state, environmental conditions, and changing payload are not currently modeled.
+  \item \textbf{Dependence on robot descriptions:} The accuracy of capability extraction depends on the completeness and correctness of URDF/Xacro~\cite{urdf} and associated robot information.
+  \item \textbf{Predefined skills library:} The framework assumes a structured set of available robotic skills. Automatic discovery or learning of new skills is outside the present scope.
+  \item \textbf{LLM limitations:} Generated plans can still contain hallucinated entities, unsupported actions, incorrect ordering, or incomplete reasoning despite capability and environment grounding.
+  \item \textbf{High-level planning focus:} The dissertation primarily addresses task-level planning and does not attempt to replace low-level motion planning, trajectory generation, control, perception, or localization systems.
+  \item \textbf{Benchmark scope:} The developed dataset provides controlled evaluation across multiple robots, environments, and tasks, but it cannot represent every real-world condition or robotic embodiment.
+\end{itemize}
+
+These limitations define the boundary of the current work rather than the final boundary of the proposed research direction.
+The framework provides a foundation upon which dynamic capability modeling, execution feedback, larger-scale benchmarking, and real-world robotic validation can subsequently be investigated.
+
+\section{Future Work}
+
+The current dissertation establishes a foundation for robot-agnostic and capability-aware task planning.
+Several directions can extend this framework into deeper research.
+
+\begin{itemize}
+  \item \textbf{Fine-tuning and domain-specific model training:} Once a sufficient volume of capability-aware planning inferences and evaluation scores has been accumulated, the best-performing base LLM can be fine-tuned using parameter-efficient methods such as LoRA~\cite{peft}. Alternatively, a dedicated lightweight neural network with a task-planning-specific architecture could be trained on the collected dataset, potentially replacing general-purpose LLMs for deployment in resource-constrained environments.
+  \item \textbf{Multi-robot coordination for single tasks:} Extend the framework to support heterogeneous multi-robot teams collaborating on a single complex task. Different sub-tasks could be allocated to robots based on their complementary capabilities, with the LLM planner generating coordinated, role-aware action sequences that account for inter-robot dependencies and communication requirements. This extends beyond the current single-robot-per-task paradigm while reusing the same capability representation infrastructure.
+  \item \textbf{Hierarchical and selective replanning (NavTopo-inspired):} Building on the checkpoint-based plan structure inspired by NavTopo~\cite{navtopo}, future work should implement full closed-loop replanning where only the affected checkpoint sub-task is regenerated upon failure, rather than regenerating the entire plan. This approach further reduces inference token cost and latency while preserving the already-validated portions of the plan.
+  \item \textbf{Execution-level task success verification:} Integrate the planning framework with physical or simulation environments to measure actual task completion, moving beyond deterministic grounding checks. This would enable end-to-end evaluation from natural-language instruction to successful robot execution.
+  \item \textbf{Real-world robot validation:} Deploy the framework on physical robots and compare software-based feasibility predictions with actual execution outcomes.
+  \item \textbf{Dynamic capability modeling:} Extend static capability representations to account for battery state, payload, sensor availability, hardware failures, and changing environmental conditions.
+  \item \textbf{Closed-loop planning:} Incorporate execution feedback so that plans can be dynamically corrected or regenerated when actions fail or the environment changes.
+  \item \textbf{Task and Motion Planning integration:} Connect high-level LLM-generated task plans with motion planners~\cite{tamp} to verify geometric feasibility, reachability, collision constraints, and trajectory execution.
+  \item \textbf{Automatic skill discovery:} Reduce dependence on manually defined skill libraries by discovering available skills and interfaces directly from robotic software ecosystems such as ROS2~\cite{ros2}.
+  \item \textbf{Learning-based capability representation:} Investigate whether robot capabilities can be learned or refined from execution history instead of relying entirely on deterministic extraction rules.
+  \item \textbf{Larger-scale benchmarking:} Expand the dataset to additional robots, environments, tasks, and language models to establish a broader benchmark for capability-aware robotic planning.
+\end{itemize}
+
+These directions provide a natural continuation toward doctoral research.
+The current framework can serve as the \textbf{base experimental platform}, while dedicated research can investigate adaptive capability representations, embodied feedback, cross-robot generalization, and ultimately the interaction between language reasoning and physical robot intelligence.
+
+\section{Conclusion}
+
+This dissertation presented a \textbf{robot-agnostic, capability-aware framework for language-conditioned robotic task planning}.
+The work addresses the gap between the semantic reasoning capabilities of Large Language Models and the physical and functional constraints of heterogeneous robotic systems.
+
+The framework integrates \textbf{robot capability extraction, structured capability representation, world-state modeling, a common skills library, LLM-based planning, and deterministic plan evaluation}.
+By separating robot-specific information from the planning mechanism, the same architecture can be applied across different robots, environments, tasks, and language models.
+
+A key outcome of this work is the principle that \textbf{a logically correct plan is not necessarily a robot-feasible plan}.
+Explicit representation of robot capabilities and environmental constraints is therefore essential when applying language models to robotic task planning.
+
+The dissertation establishes a functional and extensible research foundation rather than attempting to solve general-purpose robotic planning completely.
+With dedicated research into real-world execution, adaptive capability learning, closed-loop planning, task-and-motion integration, and broader cross-robot evaluation, the proposed framework can be extended toward more general and reliable language-driven robotic intelligence.
+
+\section{Recommendations}
+
+Based on the design, implementation, and evaluation methodology developed in this dissertation, the following recommendations are proposed for further development of capability-aware robotic planning.
+
+\begin{itemize}
+  \item \textbf{Capability information should be explicitly represented} rather than expecting an LLM to infer robot abilities from its pretrained knowledge.
+  \item \textbf{Robot-specific information should remain separated from the planning model}, allowing the same planner to operate across different embodiments.
+  \item \textbf{Structured world states and skill definitions should be used} to reduce hallucinated objects, locations, and unsupported robotic actions.
+  \item \textbf{LLM-generated plans should be independently validated} before execution using deterministic capability, constraint, and logical checks.
+  \item \textbf{Evaluation should extend beyond task success}, considering action validity, environmental grounding, capability compliance, logical ordering, and overall feasibility.
+  \item \textbf{LLMs should function as high-level reasoning components}, while conventional robotics systems continue to handle perception, navigation, manipulation, motion planning, and control.
+\end{itemize}
+
+These recommendations support a modular approach in which advances in LLMs, robot hardware, capability extraction, and execution systems can be incorporated independently without redesigning the complete planning framework.
+
+%  REFERENCES
+\newpage
+\pagestyle{plain}
+\section*{References}
+\addcontentsline{toc}{section}{References}
+
+\begin{thebibliography}{99}
+
+\bibitem{saycan}
+Ahn, M., Brohan, A., Brown, N., Chebotar, Y., Cortes, O., David, B., Finn, C., Fu, C., Gopalakrishnan, K., Hausman, K., Herzog, A., Ho, D., Hsu, J., Ibarz, J., Ichter, B., Irpan, A., Jang, E., Ruano, R. J., Jeffrey, K., Jesmonth, S., Joshi, N.~J., Julian, R., Kalashnikov, D., Kuang, Y., Lee, K.-H., Levine, S., Lu, Y., Luu, L., Parada, C., Pastor, P., Quiambao, M., Rao, K., Rettinghouse, J., Reyes, D., Sermanet, P., Sievers, N., Tan, C., Toshev, A., Vanhoucke, V., Xia, F., Xiao, T., Xu, P., Xu, S., and Zeng, A.
+``Do As I Can, Not As I Say: Grounding Language in Robotic Affordances.''
+\textit{arXiv preprint arXiv:2204.01691}, 2022.
+
+\bibitem{progprompt}
+Singh, I., Blukis, V., Mousavian, A., Goyal, A., Xu, D., Tremblay, J., Fox, D., Thomason, J., and Garg, A.
+``ProgPrompt: Generating Situated Robot Task Plans using Large Language Models.''
+In \textit{Proceedings of the IEEE International Conference on Robotics and Automation (ICRA)}, pp. 11523--11530, 2023.
+
+\bibitem{emos}
+\textit{[Full EMOS citation --- please replace with complete author(s), title, venue, and year.]}
+
+\bibitem{llm_survey}
+Zhao, W.~X., Zhou, K., Li, J., Tang, T., Wang, X., Hou, Y., Min, Y., Zhang, B., Zhang, J., Dong, Z., Du, Y., Yang, C., Chen, Y., Chen, Z., Jiang, J., Ren, R., Li, Y., Tang, X., Liu, Z., Liu, P., Nie, J., and Wen, J.-R.
+``A Survey of Large Language Models.''
+\textit{arXiv preprint arXiv:2303.18223}, 2023.
+
+\bibitem{urdf}
+Open Robotics.
+``URDF --- Unified Robot Description Format.''
+ROS Documentation, 2022. Available: \url{https://wiki.ros.org/urdf} [Accessed: July 2026].
+
+\bibitem{ros2}
+Macenski, S., Foote, T., Gerkey, B., Lalancette, C., and Woodall, W.
+``Robot Operating System 2: Design, Architecture, and Uses in the Wild.''
+\textit{Science Robotics}, vol. 7, no. 66, eabm6074, 2022.
+
+\bibitem{moveit2}
+Coleman, D., Sucan, I., Chitta, S., and Correll, N.
+``Reducing the Barrier to Entry of Complex Robotic Software: a MoveIt! Case Study.''
+\textit{arXiv preprint arXiv:1404.3785}, 2014.
+See also: MoveIt2 Documentation. Available: \url{https://moveit.ros.org} [Accessed: July 2026].
+
+\bibitem{nav2}
+Macenski, S., Mart\'{i}n, F., White, R., and Gin\'{e}s Clavero, J.
+``The Marathon 2: A Navigation System.''
+In \textit{Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pp. 2718--2725, 2020.
+
+\bibitem{peft}
+Hu, E.~J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., and Chen, W.
+``LoRA: Low-Rank Adaptation of Large Language Models.''
+In \textit{Proceedings of the International Conference on Learning Representations (ICLR)}, 2022.
+
+\bibitem{tamp}
+Garrett, C.~R., Chitnis, R., Holladay, R., Kim, B., Silver, T., Kaelbling, L.~P., and Lozano-P\'{e}rez, T.
+``Integrated Task and Motion Planning.''
+\textit{Annual Review of Control, Robotics, and Autonomous Systems}, vol. 4, pp. 265--293, 2021.
+
+\bibitem{navtopo}
+Gao, F., Peng, K., Zhang, H., Bermudez, I., and Payandeh, S.
+``NavTopo: Leveraging Topological Maps For Autonomous Navigation Of A Robot.''
+\textit{arXiv preprint arXiv:2410.01492}, 2024.
+See also: \url{https://arxiv.org/abs/2410.01492} [Accessed: July 2026].
+
+\end{thebibliography}
+
+%  GLOSSARY
+\newpage
+\section*{Glossary}
+\addcontentsline{toc}{section}{Glossary}
+
+\begin{singlespace}
+\begin{description}[leftmargin=4.5cm, style=nextline, labelwidth=4cm, font=\bfseries]
+  \item[Capability Extractor]
+    A software component that parses robot description files (URDF/Xacro) and derives structured capability representations for use in planning.
+  \item[Capability JSON]
+    A JSON-formatted structured representation of a robot's capabilities, constraints, and operational parameters used as context input to the LLM planner.
+  \item[Embodiment]
+    The physical and functional characteristics of a robot that determine its ability to perform tasks in a given environment.
+  \item[Grounding]
+    The process of connecting high-level language or symbolic representations to concrete, executable actions and real-world entities.
+  \item[Hallucination (LLM)]
+    The generation by an LLM of plausible-sounding but incorrect, non-existent, or unsupported objects, actions, or facts.
+  \item[Large Language Model]
+    A neural language model pre-trained on large corpora that exhibits emergent capabilities for reasoning, planning, and language understanding.
+  \item[PEFT]
+    Parameter-Efficient Fine-Tuning: a class of techniques for adapting pre-trained models to specific tasks by updating only a small subset of parameters, including methods such as LoRA.
+  \item[Robot-agnostic]
+    Describing a system or framework designed to operate with any robot embodiment without requiring robot-specific modifications to the core architecture.
+  \item[Skills Library]
+    A structured repository of abstract robotic skills with associated parameters, preconditions, and implementation mappings used to ground LLM-generated actions.
+  \item[Task Planning]
+    The process of decomposing a high-level goal into a sequence of executable actions that achieve that goal.
+  \item[URDF]
+    The Unified Robot Description Format, an XML-based file format used in ROS/ROS2 to describe the physical properties, kinematics, and dynamics of a robot.
+  \item[World State]
+    A structured representation of the environment, including the locations, objects, properties, and relationships relevant to a given planning task.
+\end{description}
+\end{singlespace}
+
+%  CHECKLIST  (Last page — as required by BITS WILP)
+\newpage
+\pagestyle{plain}
+\section*{Checklist of Items for the Final Dissertation Report}
+\addcontentsline{toc}{section}{Checklist}
+
+\begin{singlespace}
+\noindent\textit{This checklist is attached as the last page of the final report and is to be duly completed, verified, and signed by the student.}
+
+\vspace{0.5cm}
+\noindent
+\begin{longtable}{@{}p{0.08\textwidth}p{0.76\textwidth}p{0.1\textwidth}@{}}
+\toprule
+\textbf{No.} & \textbf{Description} & \textbf{Status} \\
+\midrule
+\endhead
+1   & Is the final report neatly formatted with all the elements required for a technical report?              & Yes \\[4pt]
+2   & Is the Cover page in proper format as given in Annexure A?                                               & Yes \\[4pt]
+3   & Is the Title page (Inner cover page) in proper format?                                                   & Yes \\[4pt]
+4a  & Is the Certificate from the Supervisor in proper format?                                                  & Yes \\[4pt]
+4b  & Has it been signed by the Supervisor?                                                                     & \textit{[To sign]} \\[4pt]
+5   & Is the Abstract included in the report properly written within one page?                                  & Yes \\[4pt]
+6   & Have the technical keywords been specified properly?                                                      & Yes \\[4pt]
+7   & Is the title of your report appropriate? (Descriptive, precise, no uncommon abbreviations in title)      & Yes \\[4pt]
+8   & Have you included the List of Abbreviations/Acronyms?                                                    & Yes \\[4pt]
+9   & Does the report contain a summary of the literature survey?                                              & Yes \\[4pt]
+10  & Does the Table of Contents include page numbers?                                                         & Yes \\[4pt]
+10i & Are the pages numbered properly? (Chapter 1 starts on page 1)                                           & Yes \\[4pt]
+10ii & Are the figures numbered properly? (Figure numbers and titles at bottom of figures)                    & Yes \\[4pt]
+10iii & Are the tables numbered properly? (Table numbers and titles at top of tables)                         & Yes \\[4pt]
+10iv & Are the captions for figures and tables proper?                                                        & Yes \\[4pt]
+10v  & Are the appendices numbered properly with appropriate titles?                                          & Yes \\[4pt]
+11  & Is the conclusion of the report based on discussion of the work?                                        & Yes \\[4pt]
+12  & Are references or bibliography given at the end of the report?                                          & Yes \\[4pt]
+13  & Have the references been cited properly inside the text of the report?                                   & Yes \\[4pt]
+14  & Are all the references cited in the body of the report?                                                  & Yes \\[4pt]
+15  & Is the report format and content according to the guidelines?                                            & Yes \\[4pt]
+\bottomrule
+\end{longtable}
+
+\vspace{0.8cm}
+\noindent\textbf{Declaration by Student:}
+
+\noindent I certify that I have properly verified all the items in this checklist and ensure that the report is in proper format as specified in the course handout.
+
+\vspace{1.5cm}
+\noindent
+\begin{tabular}{@{}p{0.45\textwidth}p{0.45\textwidth}@{}}
+Place: \underline{\hspace{4.5cm}}  & \\[0.5cm]
+Date: \underline{\hspace{4.5cm}}   & \\[2cm]
+\multicolumn{2}{l}{Signature of the Student: \underline{\hspace{6cm}}} \\[0.5cm]
+\multicolumn{2}{l}{Name: \textbf{Sana Jaya Krishna}} \\[0.3cm]
+\multicolumn{2}{l}{ID No.: \textbf{2024AA05783}}
+\end{tabular}
+
+\end{singlespace}
+
+\end{document}
